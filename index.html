@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royal Pastanesi - QR Kontrol</title>
+    <title>Royal Pastanesi - Akıllı Takip</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #fdf5e6; color: #5d4037; }
-        .card { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid #d4af37; text-align: center; width: 340px; }
+        .card { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid #d4af37; text-align: center; width: 350px; }
         h2 { color: #8b4513; margin-bottom: 5px; }
         input { width: 100%; padding: 12px; margin: 15px 0; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; font-size: 16px; text-align: center; }
         button { width: 100%; padding: 12px; background-color: #d4af37; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; font-size: 16px; }
-        #result { margin-top: 25px; font-weight: bold; font-size: 1.1rem; line-height: 1.5; }
+        #result { margin-top: 25px; font-weight: bold; font-size: 1.1rem; line-height: 1.6; }
         .taze { color: #2e7d32; background: #e8f5e9; padding: 15px; border-radius: 8px; border: 1px solid #c8e6c9; }
         .bayat { color: #d32f2f; background: #ffebee; padding: 15px; border-radius: 8px; border: 1px solid #ffcdd2; }
     </style>
@@ -19,26 +19,21 @@
 
 <div class="card">
     <h2>Royal Pastanesi</h2>
-    <div style="font-size:0.8rem; color:#999">Üretim Grubu Kontrol Paneli</div>
+    <div style="font-size:0.8rem; color:#999">Tarih Bazlı Kontrol Sistemi</div>
     <input type="password" id="pwd" placeholder="Şifre Giriniz">
     <button onclick="checkStatus()">KONTROL ET</button>
     <div id="result"></div>
 </div>
 
 <script>
-    // Şifre: "2026royal" (Base64)
-    const GIZLI_ANAHTAR = "MjAyNnJveWFs"; 
+    const GIZLI_ANAHTAR = "MjAyNnJveWFs"; // Şifre: 2026royal
     const gunler = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
 
     function checkStatus() {
         const input = document.getElementById("pwd").value.trim().toLowerCase();
         const resDiv = document.getElementById("result");
         
-        if (!input) {
-            resDiv.innerHTML = "Lütfen şifre girin.";
-            return;
-        }
-
+        if (!input) return;
         if (btoa(input) !== GIZLI_ANAHTAR) {
             resDiv.innerHTML = "<span style='color:red'>Şifre Hatalı!</span>";
             return;
@@ -46,27 +41,45 @@
 
         const urlParams = new URLSearchParams(window.location.search);
         let uretimGunuIndex = parseInt(urlParams.get('gun'));
-        
-        // ÖNEMLİ: Eğer barkoda 7 yazıldıysa bunu 0 (Pazar) olarak düzeltiyoruz
         if (uretimGunuIndex === 7) uretimGunuIndex = 0;
 
-        if (isNaN(uretimGunuIndex) || uretimGunuIndex > 6) {
-            resDiv.innerHTML = "<span style='color:orange'>Geçersiz Gün!</span><br><small>QR linkini kontrol edin.</small>";
+        if (isNaN(uretimGunuIndex)) {
+            resDiv.innerHTML = "Geçersiz QR!";
             return;
         }
 
+        // --- TARİH HESAPLAMA MANTIĞI ---
         const bugun = new Date();
-        const bugunIndex = bugun.getDay(); 
+        const bugunIndex = bugun.getDay(); // 0-6
+
+        // Üretim tarihini bulmak için kaç gün geri gideceğimizi hesapla
+        let fark = bugunIndex - uretimGunuIndex;
+        if (fark < 0) fark += 7; 
+
+        // Bugünün tarihinden 'fark' kadar gün çıkararak üretim tarihini bul
+        const uretimTarihi = new Date();
+        uretimTarihi.setDate(bugun.getDate() - fark);
+
+        // Türkiye formatında tarih (Örn: 29.12.2025)
+        const tarihFormat = uretimTarihi.toLocaleDateString('tr-TR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
+
         const gunAdi = gunler[uretimGunuIndex];
 
-        let fark = bugunIndex - uretimGunuIndex;
-        if (fark < 0) fark += 7;
-
-        // Karar ve üretim günü yazdırma
+        // 5 gün kuralı kontrolü
         if (fark >= 5) {
-            resDiv.innerHTML = `<div class="bayat">${gunAdi} Günü Üretildi<br>⚠️ PASTA BAYAT!</div>`;
+            resDiv.innerHTML = `<div class="bayat">
+                Üretim: ${tarihFormat} ${gunAdi}<br>
+                ⚠️ PASTA BAYAT!
+            </div>`;
         } else {
-            resDiv.innerHTML = `<div class="taze">${gunAdi} Günü Üretildi<br>✅ PASTA TAZE</div>`;
+            resDiv.innerHTML = `<div class="taze">
+                Üretim: ${tarihFormat} ${gunAdi}<br>
+                ✅ PASTA TAZE
+            </div>`;
         }
     }
 
