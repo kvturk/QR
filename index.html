@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Royal Pastanesi QR Kontrol</title>
+</head>
+<body>
+<h2>QR Kontrol</h2>
+<input type="password" id="pwd" placeholder="Şifre">
+<button onclick="check()">Kontrol</button>
+<p id="result"></p>
+
+<script>
+const HASH = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8";
+function check(){
+  const p = document.getElementById("pwd").value;
+  crypto.subtle.digest("SHA-256", new TextEncoder().encode(p)).then(buf=>{
+    const hash = Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
+    document.getElementById("result").innerText =
+      hash===HASH ? "PASTA BAYAT!" : "Şifre Hatalı";
+  });
+}
+</script>
+</body>
+</html>
