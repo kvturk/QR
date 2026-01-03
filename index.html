@@ -26,7 +26,8 @@
 </div>
 
 <script>
-    const GIZLI_ANAHTAR = "MjAyNnJveWFs"; // Şifre: 2026royal
+    // Şifre: 2026royal (Base64)
+    const GIZLI_ANAHTAR = "MjAyNnJveWFs"; 
     const gunler = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
 
     function checkStatus() {
@@ -41,49 +42,39 @@
 
         const urlParams = new URLSearchParams(window.location.search);
         let uretimGunuIndex = parseInt(urlParams.get('gun'));
+
+        // Pazar günü hatasını (undefined) önleme: 7 yazıldıysa 0 yap
         if (uretimGunuIndex === 7) uretimGunuIndex = 0;
 
-        if (isNaN(uretimGunuIndex)) {
+        if (isNaN(uretimGunuIndex) || uretimGunuIndex > 6) {
             resDiv.innerHTML = "Geçersiz QR!";
             return;
         }
 
-        // --- TARİH HESAPLAMA MANTIĞI ---
+        // --- TARİH HESAPLAMA ---
         const bugun = new Date();
-        const bugunIndex = bugun.getDay(); // 0-6
+        const bugunIndex = bugun.getDay(); 
 
-        // Üretim tarihini bulmak için kaç gün geri gideceğimizi hesapla
         let fark = bugunIndex - uretimGunuIndex;
         if (fark < 0) fark += 7; 
 
-        // Bugünün tarihinden 'fark' kadar gün çıkararak üretim tarihini bul
+        // Gerçek üretim tarihini bul
         const uretimTarihi = new Date();
         uretimTarihi.setDate(bugun.getDate() - fark);
 
-        // Türkiye formatında tarih (Örn: 29.12.2025)
-        const tarihFormat = uretimTarihi.toLocaleDateString('tr-TR', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric'
+        const tarihYazi = uretimTarihi.toLocaleDateString('tr-TR', {
+            day: '2-digit', month: '2-digit', year: 'numeric'
         });
 
         const gunAdi = gunler[uretimGunuIndex];
 
-        // 5 gün kuralı kontrolü
+        // Durum Belirleme
         if (fark >= 5) {
-            resDiv.innerHTML = `<div class="bayat">
-                Üretim: ${tarihFormat} ${gunAdi}<br>
-                ⚠️ PASTA BAYAT!
-            </div>`;
+            resDiv.innerHTML = `<div class="bayat">Üretim: ${tarihYazi} ${gunAdi}<br>⚠️ PASTA BAYAT!</div>`;
         } else {
-            resDiv.innerHTML = `<div class="taze">
-                Üretim: ${tarihFormat} ${gunAdi}<br>
-                ✅ PASTA TAZE
-            </div>`;
+            resDiv.innerHTML = `<div class="taze">Üretim: ${tarihYazi} ${gunAdi}<br>✅ PASTA TAZE</div>`;
         }
     }
-
-    document.getElementById("pwd").addEventListener("keypress", (e) => { if(e.key === 'Enter') checkStatus(); });
 </script>
 </body>
 </html>
