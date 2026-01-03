@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royal Pastanesi - Güvenli Kontrol</title>
+    <title>Royal Pastanesi - QR Kontrol</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #fdf5e6; color: #5d4037; }
         .card { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid #d4af37; text-align: center; width: 340px; }
         h2 { color: #8b4513; margin-bottom: 5px; }
         input { width: 100%; padding: 12px; margin: 15px 0; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; font-size: 16px; text-align: center; }
         button { width: 100%; padding: 12px; background-color: #d4af37; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; font-size: 16px; }
-        #result { margin-top: 25px; font-weight: bold; font-size: 1.1rem; }
+        #result { margin-top: 25px; font-weight: bold; font-size: 1.1rem; line-height: 1.5; }
         .taze { color: #2e7d32; background: #e8f5e9; padding: 15px; border-radius: 8px; border: 1px solid #c8e6c9; }
         .bayat { color: #d32f2f; background: #ffebee; padding: 15px; border-radius: 8px; border: 1px solid #ffcdd2; }
     </style>
@@ -26,7 +26,7 @@
 </div>
 
 <script>
-    // Şifre: "2026royal" (Müşterinin doğrudan okuyamaması için Base64 formatında gizlendi)
+    // Şifre: "2026royal" (Base64)
     const GIZLI_ANAHTAR = "MjAyNnJveWFs"; 
     const gunler = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
 
@@ -39,20 +39,19 @@
             return;
         }
 
-        // Girilen şifreyi Base64'e çevirip gizli anahtarla karşılaştırıyoruz
-        const encodedInput = btoa(input);
-
-        if (encodedInput !== GIZLI_ANAHTAR) {
+        if (btoa(input) !== GIZLI_ANAHTAR) {
             resDiv.innerHTML = "<span style='color:red'>Şifre Hatalı!</span>";
             return;
         }
 
-        // URL'den gün bilgisini al
         const urlParams = new URLSearchParams(window.location.search);
-        const uretimGunuIndex = parseInt(urlParams.get('gun'));
+        let uretimGunuIndex = parseInt(urlParams.get('gun'));
         
-        if (isNaN(uretimGunuIndex)) {
-            resDiv.innerHTML = "<span style='color:orange'>Geçersiz QR!</span>";
+        // ÖNEMLİ: Eğer barkoda 7 yazıldıysa bunu 0 (Pazar) olarak düzeltiyoruz
+        if (uretimGunuIndex === 7) uretimGunuIndex = 0;
+
+        if (isNaN(uretimGunuIndex) || uretimGunuIndex > 6) {
+            resDiv.innerHTML = "<span style='color:orange'>Geçersiz Gün!</span><br><small>QR linkini kontrol edin.</small>";
             return;
         }
 
@@ -63,15 +62,14 @@
         let fark = bugunIndex - uretimGunuIndex;
         if (fark < 0) fark += 7;
 
-        // 5 gün kuralı (Pazartesi üretilen Cuma akşamı taze, Cumartesi bayat)
+        // Karar ve üretim günü yazdırma
         if (fark >= 5) {
-            resDiv.innerHTML = `<div class="bayat">${gunAdi} Üretimi<br>⚠️ PASTA BAYAT!</div>`;
+            resDiv.innerHTML = `<div class="bayat">${gunAdi} Günü Üretildi<br>⚠️ PASTA BAYAT!</div>`;
         } else {
-            resDiv.innerHTML = `<div class="taze">${gunAdi} Üretimi<br>✅ TAZE</div>`;
+            resDiv.innerHTML = `<div class="taze">${gunAdi} Günü Üretildi<br>✅ PASTA TAZE</div>`;
         }
     }
 
-    // Enter tuşu desteği
     document.getElementById("pwd").addEventListener("keypress", (e) => { if(e.key === 'Enter') checkStatus(); });
 </script>
 </body>
