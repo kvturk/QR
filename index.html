@@ -2,47 +2,67 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Royal Pastanesi QR Kontrol</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #fdf5e6; color: #5d4037; }
+        .card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 5px solid #d4af37; text-align: center; width: 300px; }
+        h2 { margin-top: 0; color: #8b4513; }
+        input { width: 100%; padding: 10px; margin: 15px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; font-size: 16px; }
+        button { width: 100%; padding: 10px; background-color: #d4af37; border: none; border-radius: 5px; color: white; font-weight: bold; cursor: pointer; font-size: 16px; }
+        button:hover { background-color: #b8962e; }
+        #result { margin-top: 15px; font-weight: bold; min-height: 20px; }
+        .success { color: #d32f2f; font-size: 1.2rem; }
+        .error { color: #757575; font-size: 0.9rem; }
+    </style>
 </head>
 <body>
-    <h2>QR Kontrol</h2>
-    <input type="password" id="pwd" placeholder="Şifre">
-    <button onclick="check()">Kontrol</button>
+
+<div class="card">
+    <h2>Royal Pastanesi</h2>
+    <p>QR Kontrol Sistemi</p>
+    <input type="password" id="pwd" placeholder="Şifreyi Giriniz">
+    <button onclick="check()">Kontrol Et</button>
     <p id="result"></p>
+</div>
 
-    <script>
-        // "royal2026" şifresinin doğru hash değeri:
-        const EXPECTED_HASH = "7f7587884102660d1656f5c531065961e957367339f400755998a6703597d312";
+<script>
+    // "2026royal" şifresinin SHA-256 karşılığı
+    const HASH = "a07297920ecf320760443997f707f781f822834b7931367098e9197022099309";
 
-        async function check() {
-            const input = document.getElementById("pwd").value.trim(); // Boşlukları temizler
-            const msg = document.getElementById("result");
+    async function check() {
+        const inputField = document.getElementById("pwd");
+        const res = document.getElementById("result");
+        
+        // .trim() kullanarak başındaki ve sonundaki boşlukları siliyoruz
+        const cleanPassword = inputField.value.trim();
 
-            if (!input) {
-                msg.innerText = "Lütfen bir şifre girin!";
-                return;
-            }
-
-            // SHA-256 Karma işlemi
-            const encoder = new TextEncoder();
-            const data = encoder.encode(input);
-            const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-            
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            const hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
-
-            // Konsola yazdır (F12 ile bakabilirsin, testten sonra bu satırı silebilirsin)
-            console.log("Girilen şifre hash'i:", hashHex);
-
-            if (hashHex === EXPECTED_HASH) {
-                msg.innerText = "PASTA BAYAT!";
-                msg.style.color = "red";
-                msg.style.fontWeight = "bold";
-            } else {
-                msg.innerText = "Şifre Hatalı! (Girdiğiniz: " + input + ")";
-                msg.style.color = "black";
-            }
+        if (!cleanPassword) {
+            res.innerText = "Lütfen şifre yazın";
+            res.className = "error";
+            return;
         }
-    </script>
+
+        const encoder = new TextEncoder();
+        const data = encoder.encode(cleanPassword);
+        const buf = await crypto.subtle.digest("SHA-256", data);
+        const hash = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+
+        if (hash === HASH) {
+            res.innerText = "⚠️ PASTA BAYAT!";
+            res.className = "success";
+            inputField.value = ""; // Şifreyi temizle
+        } else {
+            res.innerText = "❌ Şifre Hatalı";
+            res.className = "error";
+        }
+    }
+
+    // Enter tuşu desteği
+    document.getElementById("pwd").addEventListener("keypress", function(e) {
+        if (e.key === "Enter") check();
+    });
+</script>
+
 </body>
 </html>
