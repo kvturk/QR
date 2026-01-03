@@ -3,77 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royal Pastanesi Kontrol</title>
+    <title>Royal Pastanesi - Güvenli Kontrol</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #fdf5e6; color: #5d4037; }
+        body { font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #fdf5e6; color: #5d4037; }
         .card { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid #d4af37; text-align: center; width: 340px; }
-        h2 { color: #8b4513; margin-bottom: 10px; font-size: 1.5rem; }
-        .info-text { font-size: 0.9rem; color: #888; margin-bottom: 20px; }
-        input { width: 100%; padding: 12px; margin: 15px 0; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; font-size: 16px; outline: none; transition: 0.3s; }
-        input:focus { border-color: #d4af37; }
-        button { width: 100%; padding: 12px; background-color: #d4af37; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.3s; }
-        button:hover { background-color: #b8962e; transform: translateY(-2px); }
-        #result { margin-top: 25px; font-weight: bold; font-size: 1.1rem; line-height: 1.5; }
-        .taze { color: #2e7d32; background: #e8f5e9; padding: 10px; border-radius: 8px; }
-        .bayat { color: #d32f2f; background: #ffebee; padding: 10px; border-radius: 8px; }
+        h2 { color: #8b4513; margin-bottom: 5px; }
+        input { width: 100%; padding: 12px; margin: 15px 0; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+        button { width: 100%; padding: 12px; background-color: #d4af37; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; font-size: 16px; }
+        #result { margin-top: 25px; font-weight: bold; font-size: 1.1rem; }
+        .taze { color: #2e7d32; background: #e8f5e9; padding: 15px; border-radius: 8px; }
+        .bayat { color: #d32f2f; background: #ffebee; padding: 15px; border-radius: 8px; }
     </style>
 </head>
 <body>
 
 <div class="card">
     <h2>Royal Pastanesi</h2>
-    <div class="info-text">Üretim Grubu Kontrol Paneli</div>
-    <input type="password" id="pwd" placeholder="Personel Şifresi">
-    <button onclick="checkStatus()">DURUMU SORGULA</button>
+    <div style="font-size:0.8rem; color:#999">Güvenli Sorgulama Paneli</div>
+    <input type="password" id="pwd" placeholder="Şifre Giriniz">
+    <button onclick="checkStatus()">KONTROL ET</button>
     <div id="result"></div>
 </div>
 
 <script>
-    // Şifre: 2026royal
-    const HASH = "a07297920ecf320760443997f707f781f822834b7931367098e9197022099309";
+    // Şifre burada GİZLİDİR. (2026royal şifresinin kriptolanmış hali)
+    const SECRET_HASH = "a07297920ecf320760443997f707f781f822834b7931367098e9197022099309";
     const gunler = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
 
-    // URL'den gün bilgisini alıyoruz (?gun=1)
-    const urlParams = new URLSearchParams(window.location.search);
-    const uretimGunuIndex = parseInt(urlParams.get('gun'));
-
     async function checkStatus() {
-        const pass = document.getElementById("pwd").value.trim();
+        const input = document.getElementById("pwd").value.trim().toLowerCase();
         const resDiv = document.getElementById("result");
+        
+        if (!input) return;
 
-        // URL'de gün tanımlı değilse uyarı ver
+        // Şifreyi anlık olarak kriptola
+        const msgBuffer = new TextEncoder().encode(input);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashedInput = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+        // Gizli kodla karşılaştır
+        if (hashedInput !== SECRET_HASH) {
+            resDiv.innerHTML = "<span style='color:red'>Hatalı Şifre!</span>";
+            return;
+        }
+
+        // Tarih Mantığı
+        const urlParams = new URLSearchParams(window.location.search);
+        const uretimGunuIndex = parseInt(urlParams.get('gun'));
+        
         if (isNaN(uretimGunuIndex)) {
-            resDiv.innerHTML = "Geçersiz QR Kod! <br><small>Lütfen gün ayarlı bir QR okutun.</small>";
+            resDiv.innerHTML = "Geçersiz QR!";
             return;
         }
 
-        // Şifre Doğrulama (SHA-256)
-        const encoder = new TextEncoder();
-        const buf = await crypto.subtle.digest("SHA-256", encoder.encode(pass));
-        const hash = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
-
-        if (hash !== HASH) {
-            resDiv.innerHTML = "<span style='color:orange'>Şifre Hatalı!</span>";
-            return;
-        }
-
-        // Tarih ve Tazelik Mantığı
-        const bugun = new Date();
-        const bugunIndex = bugun.getDay(); 
-        const uretimGunuAdi = gunler[uretimGunuIndex];
-
-        // Fark hesaplama (Haftalık döngü dahil)
+        const bugunIndex = new Date().getDay();
         let fark = bugunIndex - uretimGunuIndex;
-        if (fark < 0) fark += 7; 
+        if (fark < 0) fark += 7;
 
-        // Sizin kuralınız: 5. gün (Cuma akşamı) son gün. 
-        // Yani fark 5 veya daha fazlaysa bayat.
+        const gunAdi = gunler[uretimGunuIndex];
+
         if (fark >= 5) {
-            resDiv.innerHTML = `<div class="bayat">${uretimGunuAdi} Günü Üretildi ve<br>⚠️ PASTA BAYAT!</div>`;
+            resDiv.innerHTML = `<div class="bayat">${gunAdi} Üretimi<br>⚠️ PASTA BAYAT!</div>`;
         } else {
-            resDiv.innerHTML = `<div class="taze">${uretimGunuAdi} Günü Üretildi ve<br>✅ TAZE</div>`;
+            resDiv.innerHTML = `<div class="taze">${gunAdi} Üretimi<br>✅ TAZE</div>`;
         }
     }
+
+    document.getElementById("pwd").addEventListener("keypress", (e) => { if(e.key === 'Enter') checkStatus(); });
 </script>
 </body>
 </html>
