@@ -11,26 +11,37 @@
     <p id="result"></p>
 
     <script>
-        // "royal2026" şifresinin SHA-256 hash değeri
-        const HASH = "7f7587884102660d1656f5c531065961e957367339f400755998a6703597d312";
+        // "royal2026" şifresinin doğru hash değeri:
+        const EXPECTED_HASH = "7f7587884102660d1656f5c531065961e957367339f400755998a6703597d312";
 
-        function check() {
-            const p = document.getElementById("pwd").value;
+        async function check() {
+            const input = document.getElementById("pwd").value.trim(); // Boşlukları temizler
+            const msg = document.getElementById("result");
+
+            if (!input) {
+                msg.innerText = "Lütfen bir şifre girin!";
+                return;
+            }
+
+            // SHA-256 Karma işlemi
+            const encoder = new TextEncoder();
+            const data = encoder.encode(input);
+            const hashBuffer = await crypto.subtle.digest("SHA-256", data);
             
-            // Metni hash'e çeviriyoruz
-            crypto.subtle.digest("SHA-256", new TextEncoder().encode(p)).then(buf => {
-                const hash = Array.from(new Uint8Array(buf))
-                    .map(b => b.toString(16).padStart(2, "0"))
-                    .join("");
-                
-                if (hash === HASH) {
-                    document.getElementById("result").innerText = "PASTA BAYAT!";
-                    document.getElementById("result").style.color = "red";
-                } else {
-                    document.getElementById("result").innerText = "Şifre Hatalı";
-                    document.getElementById("result").style.color = "black";
-                }
-            });
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+
+            // Konsola yazdır (F12 ile bakabilirsin, testten sonra bu satırı silebilirsin)
+            console.log("Girilen şifre hash'i:", hashHex);
+
+            if (hashHex === EXPECTED_HASH) {
+                msg.innerText = "PASTA BAYAT!";
+                msg.style.color = "red";
+                msg.style.fontWeight = "bold";
+            } else {
+                msg.innerText = "Şifre Hatalı! (Girdiğiniz: " + input + ")";
+                msg.style.color = "black";
+            }
         }
     </script>
 </body>
