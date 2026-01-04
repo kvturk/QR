@@ -1,1 +1,104 @@
 
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Pastanesi - Akıllı Takip</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #fdf5e6; color: #5d4037; }
+        .card { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid #d4af37; text-align: center; width: 350px; }
+        h2 { color: #8b4513; margin-bottom: 5px; }
+        input { width: 100%; padding: 12px; margin: 15px 0; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; font-size: 16px; text-align: center; }
+        button { width: 100%; padding: 12px; background-color: #d4af37; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; font-size: 16px; }
+        #result { margin-top: 25px; font-weight: bold; font-size: 1.1rem; line-height: 1.6; }
+        .taze { color: #2e7d32; background: #e8f5e9; padding: 15px; border-radius: 8px; border: 1px solid #c8e6c9; }
+        .bayat { color: #d32f2f; background: #ffebee; padding: 15px; border-radius: 8px; border: 1px solid #ffcdd2; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Royal Pastanesi</h2>
+    <div style="font-size:0.8rem; color:#999">Akıllı Denetim Sistemi</div>
+    <input type="password" id="pwd" placeholder="Şifre Giriniz">
+    <button onclick="checkStatus()">KONTROL ET</button>
+    <div id="result"></div>
+</div>
+
+<script>
+    const gunler = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
+
+    function getDeviceInfo() {
+        const ua = navigator.userAgent;
+        if (/android/i.test(ua)) return "Android Telefon";
+        if (/iPhone|iPad|iPod/i.test(ua)) return "iPhone/iOS Cihaz";
+        return "Bilgisayar/Web";
+    }
+
+    async function notifyTelegram(tarih, gun, config) {
+        const cihaz = getDeviceInfo();
+        const mesaj = `🚨 *BAYAT ÜRÜN TESPİTİ!*\n\n📅 *Üretim:* ${tarih} (${gun})\n📱 *Okutan:* ${cihaz}\n⏰ *Zaman:* ${new Date().toLocaleString('tr-TR')}`;
+
+        try {
+            await fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: config.chatId,
+                    text: mesaj,
+                    parse_mode: 'Markdown'
+                })
+            });
+        } catch (e) { console.error("Telegram hatası", e); }
+    }
+
+    async function checkStatus() {
+        const input = document.getElementById("pwd").value.trim().toLowerCase();
+        const resDiv = document.getElementById("result");
+        if (!input) return;
+
+        try {
+            const response = await fetch('config.json');
+            const data = await response.json();
+
+            if (btoa(input) !== data.key) {
+                resDiv.innerHTML = "<span style='color:red'>Şifre Hatalı!</span>";
+                return;
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            let uretimGunuIndex = parseInt(urlParams.get('gun'));
+            if (uretimGunuIndex === 7) uretimGunuIndex = 0;
+
+            if (isNaN(uretimGunuIndex)) {
+                resDiv.innerHTML = "Geçersiz QR!";
+                return;
+            }
+
+            const bugun = new Date();
+            const bugunIndex = bugun.getDay(); 
+            let fark = bugunIndex - uretimGunuIndex;
+            if (fark < 0) fark += 7; 
+
+            const uretimTarihi = new Date();
+            uretimTarihi.setDate(bugun.getDate() - fark);
+            const tarihYazi = uretimTarihi.toLocaleDateString('tr-TR');
+            const gunAdi = gunler[uretimGunuIndex];
+
+            if (fark >= 5) {
+                resDiv.innerHTML = `<div class="bayat">Üretim: ${tarihYazi} ${gunAdi}<br>⚠️ PASTA BAYAT!</div>`;
+                notifyTelegram(tarihYazi, gunAdi, data);
+            } else {
+                resDiv.innerHTML = `<div class="taze">Üretim: ${tarihYazi} ${gunAdi}<br>✅ PASTA TAZE</div>`;
+            }
+
+        } catch (error) {
+            resDiv.innerHTML = "Sistem Hatası: Yapılandırma yüklenemedi.";
+        }
+    }
+
+    document.getElementById("pwd").addEventListener("keypress", (e) => { if(e.key === 'Enter') checkStatus(); });
+</script>
+</body>
+</html>
