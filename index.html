@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royal Pastanesi - Personel Takip</title>
+    <title>Royal Pastanesi - Tam Denetim</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #fdf5e6; color: #5d4037; }
         .card { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid #d4af37; text-align: center; width: 350px; }
@@ -20,7 +19,7 @@
 
 <div class="card">
     <h2>Royal Pastanesi</h2>
-    <div style="font-size:0.8rem; color:#999; margin-bottom:10px;">Denetim Kayıt Sistemi</div>
+    <div style="font-size:0.8rem; color:#999; margin-bottom:10px;">Gelişmiş Denetim Sistemi</div>
     
     <input type="text" id="staffName" placeholder="Adınız ve Soyadınız" autocomplete="off">
     <input type="password" id="pwd" placeholder="Sistem Şifresi">
@@ -32,8 +31,43 @@
 <script>
     const gunler = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
 
+    // 1. Detaylı Cihaz Bilgisi Alıcı
+    function getFullDeviceInfo() {
+        const ua = navigator.userAgent;
+        let os = "Bilinmeyen İşletim Sistemi";
+        if (ua.indexOf("Win") != -1) os = "Windows PC";
+        if (ua.indexOf("Mac") != -1) os = "Macintosh";
+        if (ua.indexOf("Linux") != -1) os = "Linux";
+        if (ua.indexOf("Android") != -1) os = "Android Telefon";
+        if (ua.indexOf("iPhone") != -1) os = "iPhone";
+        
+        const browser = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+        return `${os} / ${browser[1] || "Bilinmeyen Tarayıcı"}`;
+    }
+
+    // 2. IP ve Konum Alıcı (Dış Servis)
+    async function getIpData() {
+        try {
+            const response = await fetch('https://ipapi.co/json/');
+            const data = await response.json();
+            return `${data.ip} (${data.city} / ${data.org})`;
+        } catch (e) {
+            return "IP Alınamadı";
+        }
+    }
+
     async function notifyTelegram(tarih, gun, isim, config) {
-        const mesaj = `🚨 *BAYAT ÜRÜN TESPİTİ!* \n\n👤 *Personel:* ${isim}\n📅 *Üretim:* ${tarih} (${gun})\n⏰ *Zaman:* ${new Date().toLocaleString('tr-TR')}`;
+        const cihaz = getFullDeviceInfo();
+        const ipBilgisi = await getIpData();
+        const simdi = new Date().toLocaleString('tr-TR');
+
+        const mesaj = `🚨 *BAYAT ÜRÜN TESPİTİ!*
+
+👤 *Personel:* ${isim}
+📅 *Üretim:* ${tarih} (${gun})
+📱 *Cihaz:* ${cihaz}
+🌐 *IP/Konum:* ${ipBilgisi}
+⏰ *Zaman:* ${simdi}`;
 
         try {
             await fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
@@ -53,11 +87,7 @@
         const sifre = document.getElementById("pwd").value.trim().toLowerCase();
         const resDiv = document.getElementById("result");
 
-        // Zorunlu alan kontrolü
-        if (!isim) {
-            alert("Lütfen adınızı ve soyadınızı giriniz!");
-            return;
-        }
+        if (!isim) { alert("Lütfen adınızı giriniz!"); return; }
         if (!sifre) return;
 
         try {
@@ -73,11 +103,6 @@
             let uretimGunuIndex = parseInt(urlParams.get('gun'));
             if (uretimGunuIndex === 7) uretimGunuIndex = 0;
 
-            if (isNaN(uretimGunuIndex)) {
-                resDiv.innerHTML = "Geçersiz QR!";
-                return;
-            }
-
             const bugun = new Date();
             const bugunIndex = bugun.getDay(); 
             let fark = bugunIndex - uretimGunuIndex;
@@ -90,15 +115,11 @@
 
             if (fark >= 5) {
                 resDiv.innerHTML = `<div class="bayat">Üretim: ${tarihYazi} ${gunAdi}<br>⚠️ PASTA BAYAT!</div>`;
-                // Telegram bildirimine İSİM bilgisini gönderiyoruz
                 notifyTelegram(tarihYazi, gunAdi, isim, data);
             } else {
                 resDiv.innerHTML = `<div class="taze">Üretim: ${tarihYazi} ${gunAdi}<br>✅ PASTA TAZE</div>`;
             }
-
-        } catch (error) {
-            resDiv.innerHTML = "Yapılandırma hatası!";
-        }
+        } catch (error) { resDiv.innerHTML = "Sistem Hatası!"; }
     }
 </script>
 </body>
