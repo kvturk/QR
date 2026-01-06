@@ -11,6 +11,7 @@
         input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; font-size: 16px; text-align: center; }
         button { width: 100%; padding: 12px; background-color: #d4af37; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
         #result { margin-top: 25px; font-weight: bold; font-size: 1.1rem; line-height: 1.6; }
+        .time-label { font-size: 0.85rem; color: #888; margin-bottom: 8px; font-weight: normal; }
         .taze { color: #2e7d32; background: #e8f5e9; padding: 15px; border-radius: 8px; border: 1px solid #c8e6c9; }
         .uyari { color: #856404; background: #fff3cd; padding: 15px; border-radius: 8px; border: 1px solid #ffeeba; }
         .risk { color: #d32f2f; background: #ffebee; padding: 15px; border-radius: 8px; border: 1px solid #ffcdd2; }
@@ -20,7 +21,7 @@
 
 <div class="card">
     <h2>Royal Pastanesi</h2>
-    <div style="font-size:0.8rem; color:#999; margin-bottom:10px;">RR48 Kalite Kontrol Sistemi</div>
+    <div style="font-size:0.75rem; color:#d4af37; letter-spacing: 1px; margin-bottom:15px; font-weight:bold;">RR48 SERİ DENETİM</div>
     
     <input type="text" id="staffName" placeholder="Adınız ve Soyadınız" autocomplete="off">
     <input type="password" id="pwd" placeholder="Sistem Şifresi">
@@ -31,13 +32,14 @@
 
 <script>
     const gunler = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
+    // DİKKAT: Google Sheets URL'sini buraya yapıştırmayı unutma!
     const SHEET_URL = "BURAYA_GOOGLE_SHEETS_URLSINI_YAPISTIR"; 
 
     async function getDeviceSpecs() {
         const ua = navigator.userAgent;
         let os = ua.indexOf("Android") != -1 ? "Android" : (ua.indexOf("iPhone") != -1 ? "iPhone" : "PC");
-        let pil = "Alınamadı";
-        try { if (navigator.getBattery) { const b = await navigator.getBattery(); pil = `%${Math.round(b.level * 100)} (${b.charging ? 'Şarjda' : 'Değil'})`; } } catch (e) {}
+        let pil = "N/A";
+        try { if (navigator.getBattery) { const b = await navigator.getBattery(); pil = `%${Math.round(b.level * 100)}`; } } catch (e) {}
         return { os, ekran: `${window.screen.width}x${window.screen.height}`, pil };
     }
 
@@ -46,26 +48,25 @@
         catch (e) { return "IP Alınamadı"; }
     }
 
-    async function logToAll(tarih, gun, isim, config, durum, seriNo) {
+    async function logToAll(tarih, gun, isim, config, durum, seriNo, kontrolZamani) {
         const specs = await getDeviceSpecs();
         const ip = await getIpData();
-        const simdi = new Date().toLocaleString('tr-TR');
 
-        const mesaj = `🚨 *DURUM:* ${durum}\n\n👤 *Personel:* ${isim}\n🔢 *Seri No:* ${seriNo}\n📅 *Üretim:* ${tarih} (${gun})\n📱 *Cihaz:* ${specs.os} (${specs.ekran})\n🔋 *Pil:* ${specs.pil}\n🌐 *IP:* ${ip}\n⏰ *Zaman:* ${simdi}`;
+        const mesaj = `🚨 *DURUM:* ${durum}\n\n👤 *Personel:* ${isim}\n🔢 *Seri No:* ${seriNo}\n📅 *Üretim:* ${tarih} (${gun})\n🌐 *IP:* ${ip}\n📱 *Cihaz:* ${specs.os} / ${specs.pil}\n⏰ *İşlem:* ${kontrolZamani}`;
         
-        // Telegram Gönderimi
+        // Telegram Gönder
         fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ chat_id: config.chatId, text: mesaj, parse_mode: 'Markdown' })
-        }).catch(e => console.error("Telegram Hatası"));
+        }).catch(e => console.error("T-Hata"));
 
-        // Google Sheets Gönderimi
+        // Google Sheets Gönder
         fetch(SHEET_URL, {
             method: 'POST',
             mode: 'no-cors',
-            body: JSON.stringify({ personel: isim, uretim: tarih, durum: durum, ip: ip, cihaz: `${specs.os} / ${specs.pil}` })
-        }).catch(e => console.error("Sheets Hatası"));
+            body: JSON.stringify({ personel: isim, uretim: tarih, durum: durum, ip: ip, cihaz: specs.os, zaman: kontrolZamani })
+        }).catch(e => console.error("S-Hata"));
     }
 
     async function checkStatus() {
@@ -76,7 +77,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         const s = urlParams.get('s') || ""; 
 
-        if (!isim || !sifre) { alert("Lütfen bilgileri girin!"); return; }
+        if (!isim || !sifre) { alert("Lütfen isim ve şifre giriniz!"); return; }
 
         try {
             const response = await fetch('config.json');
@@ -84,31 +85,36 @@
 
             if (btoa(sifre) !== data.key) { resDiv.innerHTML = "<span style='color:red'>Hatalı Şifre!</span>"; return; }
 
-            // RR4826[X] formatında 7. karakteri (index 6) okuyoruz
+            // GİZLİ ANALİZ: RR4826[X] formatında 7. karakter (index 6) günü söyler.
             let uretimGunuIndex = parseInt(s.charAt(6)); 
 
             if (isNaN(uretimGunuIndex) || !s.startsWith("RR48")) {
-                resDiv.innerHTML = "Geçersiz Barkod!";
+                resDiv.innerHTML = "Geçersiz Barkod Formatı!";
                 return;
             }
 
-            const bugun = new Date();
-            let fark = bugun.getDay() - uretimGunuIndex;
+            const simdi = new Date();
+            const kontrolZamani = simdi.toLocaleString('tr-TR');
+
+            let fark = simdi.getDay() - uretimGunuIndex;
             if (fark < 0) fark += 7; 
 
             const uretimTarihi = new Date();
-            uretimTarihi.setDate(bugun.getDate() - fark);
+            uretimTarihi.setDate(simdi.getDate() - fark);
             const tarihYazi = uretimTarihi.toLocaleDateString('tr-TR');
             const gunAdi = gunler[uretimGunuIndex];
 
+            let htmlSonuc = `<div class="time-label">İşlem Zamanı: ${kontrolZamani}</div>`;
+
             if (fark >= 6) {
-                resDiv.innerHTML = `<div class="risk">Üretim: ${tarihYazi}<br>⛔ RAF ÖMRÜ DOLDU<br>Reyondan Kaldırınız!</div>`;
-                logToAll(tarihYazi, gunAdi, isim, data, "KRİTİK: Raf Ömrü Doldu", s);
+                resDiv.innerHTML = htmlSonuc + `<div class="risk">Üretim: ${tarihYazi}<br>⛔ RAF ÖMRÜ DOLDU<br>Reyondan Kaldırınız!</div>`;
+                logToAll(tarihYazi, gunAdi, isim, data, "KRİTİK: RAF ÖMRÜ DOLDU", s, kontrolZamani);
             } else if (fark === 5) {
-                resDiv.innerHTML = `<div class="uyari">Üretim: ${tarihYazi}<br>⚠️ DİKKAT: BUGÜN SON GÜN!<br>Satışa Öncelik Verin.</div>`;
-                logToAll(tarihYazi, gunAdi, isim, data, "BİLGİ: Bugün Son Gün", s);
+                resDiv.innerHTML = htmlSonuc + `<div class="uyari">Üretim: ${tarihYazi}<br>⚠️ BUGÜN SON GÜN!<br>Satışa Öncelik Verin.</div>`;
+                logToAll(tarihYazi, gunAdi, isim, data, "UYARI: SON GÜN", s, kontrolZamani);
             } else {
-                resDiv.innerHTML = `<div class="taze">Üretim: ${tarihYazi}<br>✅ ÜRÜN TAZE<br>Satışa Uygundur.</div>`;
+                resDiv.innerHTML = htmlSonuc + `<div class="taze">Üretim: ${tarihYazi}<br>✅ ÜRÜN TAZE<br>Kontrol Başarılı.</div>`;
+                // İstersen taze ürünleri de Sheets'e kaydetmek için buraya logToAll ekleyebilirsin.
             }
         } catch (error) { resDiv.innerHTML = "Sistem Hatası!"; }
     }
