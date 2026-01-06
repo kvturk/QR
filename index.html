@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royal Pastanesi - RR48 Denetim</title>
+    <title>Royal Pastanesi - Kalite Kontrol</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #fdf5e6; color: #5d4037; }
         .card { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid #d4af37; text-align: center; width: 350px; }
@@ -21,7 +21,7 @@
 
 <div class="card">
     <h2>Royal Pastanesi</h2>
-    <div style="font-size:0.75rem; color:#d4af37; letter-spacing: 1px; margin-bottom:15px; font-weight:bold;">SERİ DENETİM</div>
+    <div style="font-size:0.75rem; color:#d4af37; letter-spacing: 1px; margin-bottom:15px; font-weight:bold;">KALİTE KONTROL SİSTEMİ</div>
     
     <input type="text" id="staffName" placeholder="Adınız ve Soyadınız" autocomplete="off">
     <input type="password" id="pwd" placeholder="Sistem Şifresi">
@@ -32,7 +32,7 @@
 
 <script>
     const gunler = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
-    // DİKKAT: Google Sheets URL'sini buraya yapıştırmayı unutma!
+    // Google Sheets URL'sini buraya yapıştırdığından emin ol!
     const SHEET_URL = "https://script.google.com/macros/s/AKfycbyZlvvJkdRBFJAhf0GLXuWLCfhpXnrCsahnZ9SizJ_fp4k8vEFbYa625fH262woftOP/exec";
 
     async function getDeviceSpecs() {
@@ -85,7 +85,7 @@
 
             if (btoa(sifre) !== data.key) { resDiv.innerHTML = "<span style='color:red'>Hatalı Şifre!</span>"; return; }
 
-            // GİZLİ ANALİZ: RR4826[X] formatında 7. karakter (index 6) günü söyler.
+            // RR4826[X] formatında 7. karakter (index 6) günü söyler.
             let uretimGunuIndex = parseInt(s.charAt(6)); 
 
             if (isNaN(uretimGunuIndex) || !s.startsWith("RR48")) {
@@ -111,10 +111,10 @@
                 logToAll(tarihYazi, gunAdi, isim, data, "KRİTİK: RAF ÖMRÜ DOLDU", s, kontrolZamani);
             } else if (fark === 5) {
                 resDiv.innerHTML = htmlSonuc + `<div class="uyari">Üretim: ${tarihYazi}<br>⚠️ BUGÜN SON GÜN!<br>Satışa Öncelik Verin.</div>`;
+                // ARTIK SON GÜN BİLGİSİ DE TELEGRAM VE SHEETS'E GİDİYOR
                 logToAll(tarihYazi, gunAdi, isim, data, "UYARI: SON GÜN", s, kontrolZamani);
             } else {
                 resDiv.innerHTML = htmlSonuc + `<div class="taze">Üretim: ${tarihYazi}<br>✅ ÜRÜN TAZE<br>Kontrol Başarılı.</div>`;
-                // İstersen taze ürünleri de Sheets'e kaydetmek için buraya logToAll ekleyebilirsin.
             }
         } catch (error) { resDiv.innerHTML = "Sistem Hatası!"; }
     }
