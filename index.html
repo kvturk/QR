@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Pastanesi - RR48 Denetim</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #fdf5e6; color: #5d4037; }
+        .card { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid #d4af37; text-align: center; width: 350px; }
+        h2 { color: #8b4513; margin-bottom: 5px; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; font-size: 16px; text-align: center; }
+        button { width: 100%; padding: 12px; background-color: #d4af37; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
+        #result { margin-top: 25px; font-weight: bold; font-size: 1.1rem; line-height: 1.6; }
+        .taze { color: #2e7d32; background: #e8f5e9; padding: 15px; border-radius: 8px; border: 1px solid #c8e6c9; }
+        .uyari { color: #856404; background: #fff3cd; padding: 15px; border-radius: 8px; border: 1px solid #ffeeba; }
+        .risk { color: #d32f2f; background: #ffebee; padding: 15px; border-radius: 8px; border: 1px solid #ffcdd2; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Royal Pastanesi</h2>
+    <div style="font-size:0.8rem; color:#999; margin-bottom:10px;">RR48 Kalite Kontrol Sistemi</div>
+    
+    <input type="text" id="staffName" placeholder="Adınız ve Soyadınız" autocomplete="off">
+    <input type="password" id="pwd" placeholder="Sistem Şifresi">
+    
+    <button onclick="checkStatus()">KONTROL ET</button>
+    <div id="result"></div>
+</div>
+
+<script>
+    const gunler = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
+    const SHEET_URL = "BURAYA_GOOGLE_SHEETS_URLSINI_YAPISTIR"; 
+
+    async function getDeviceSpecs() {
+        const ua = navigator.userAgent;
+        let os = ua.indexOf("Android") != -1 ? "Android" : (ua.indexOf("iPhone") != -1 ? "iPhone" : "PC");
+        let pil = "Alınamadı";
+        try { if (navigator.getBattery) { const b = await navigator.getBattery(); pil = `%${Math.round(b.level * 100)} (${b.charging ? 'Şarjda' : 'Değil'})`; } } catch (e) {}
+        return { os, ekran: `${window.screen.width}x${window.screen.height}`, pil };
+    }
+
+    async function getIpData() {
+        try { const r = await fetch('https://ipapi.co/json/'); const d = await r.json(); return `${d.ip} (${d.city})`; } 
+        catch (e) { return "IP Alınamadı"; }
+    }
+
+    async function logToAll(tarih, gun, isim, config, durum, seriNo) {
+        const specs = await getDeviceSpecs();
+        const ip = await getIpData();
+        const simdi = new Date().toLocaleString('tr-TR');
+
+        const mesaj = `🚨 *DURUM:* ${durum}\n\n👤 *Personel:* ${isim}\n🔢 *Seri No:* ${seriNo}\n📅 *Üretim:* ${tarih} (${gun})\n📱 *Cihaz:* ${specs.os} (${specs.ekran})\n🔋 *Pil:* ${specs.pil}\n🌐 *IP:* ${ip}\n⏰ *Zaman:* ${simdi}`;
+        
+        // Telegram Gönderimi
+        fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: config.chatId, text: mesaj, parse_mode: 'Markdown' })
+        }).catch(e => console.error("Telegram Hatası"));
+
+        // Google Sheets Gönderimi
+        fetch(SHEET_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: JSON.stringify({ personel: isim, uretim: tarih, durum: durum, ip: ip, cihaz: `${specs.os} / ${specs.pil}` })
+        }).catch(e => console.error("Sheets Hatası"));
+    }
+
+    async function checkStatus() {
+        const isim = document.getElementById("staffName").value.trim();
+        const sifre = document.getElementById("pwd").value.trim().toLowerCase();
+        const resDiv = document.getElementById("result");
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const s = urlParams.get('s') || ""; 
+
+        if (!isim || !sifre) { alert("Lütfen bilgileri girin!"); return; }
+
+        try {
+            const response = await fetch('config.json');
+            const data = await response.json();
+
+            if (btoa(sifre) !== data.key) { resDiv.innerHTML = "<span style='color:red'>Hatalı Şifre!</span>"; return; }
+
+            // RR4826[X] formatında 7. karakteri (index 6) okuyoruz
+            let uretimGunuIndex = parseInt(s.charAt(6)); 
+
+            if (isNaN(uretimGunuIndex) || !s.startsWith("RR48")) {
+                resDiv.innerHTML = "Geçersiz Barkod!";
+                return;
+            }
+
+            const bugun = new Date();
+            let fark = bugun.getDay() - uretimGunuIndex;
+            if (fark < 0) fark += 7; 
+
+            const uretimTarihi = new Date();
+            uretimTarihi.setDate(bugun.getDate() - fark);
+            const tarihYazi = uretimTarihi.toLocaleDateString('tr-TR');
+            const gunAdi = gunler[uretimGunuIndex];
+
+            if (fark >= 6) {
+                resDiv.innerHTML = `<div class="risk">Üretim: ${tarihYazi}<br>⛔ RAF ÖMRÜ DOLDU<br>Reyondan Kaldırınız!</div>`;
+                logToAll(tarihYazi, gunAdi, isim, data, "KRİTİK: Raf Ömrü Doldu", s);
+            } else if (fark === 5) {
+                resDiv.innerHTML = `<div class="uyari">Üretim: ${tarihYazi}<br>⚠️ DİKKAT: BUGÜN SON GÜN!<br>Satışa Öncelik Verin.</div>`;
+                logToAll(tarihYazi, gunAdi, isim, data, "BİLGİ: Bugün Son Gün", s);
+            } else {
+                resDiv.innerHTML = `<div class="taze">Üretim: ${tarihYazi}<br>✅ ÜRÜN TAZE<br>Satışa Uygundur.</div>`;
+            }
+        } catch (error) { resDiv.innerHTML = "Sistem Hatası!"; }
+    }
+</script>
+</body>
+</html>
