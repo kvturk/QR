@@ -6,12 +6,12 @@
     <title>Royal Kalite Kontrol V4.1</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #fdf5e6; color: #5d4037; }
-        .card { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid #d4af37; text-align: center; width: 350px; }
+        .card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid #d4af37; text-align: center; width: 350px; }
         h2 { color: #8b4513; margin-bottom: 5px; }
-        .input-group { margin: 10px 0; position: relative; }
-        input { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; font-size: 16px; text-align: center; }
-        /* Manuel Giriş Kutusu Özel Stili */
-        #manualSerial { font-weight: bold; letter-spacing: 2px; color: #8b4513; background-color: #fffaf0; }
+        .input-group { margin: 15px 0; text-align: left; }
+        label { font-size: 0.75rem; color: #8b4513; font-weight: bold; margin-left: 5px; }
+        input { width: 100%; padding: 12px; margin-top: 5px; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; font-size: 16px; text-align: center; }
+        #manualSerial { font-weight: bold; letter-spacing: 2px; color: #8b4513; background-color: #fffaf0; border: 2px solid #d4af37; }
         button { width: 100%; padding: 12px; background-color: #d4af37; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
         #result { margin-top: 25px; font-weight: bold; font-size: 1.1rem; line-height: 1.6; }
         .time-label { font-size: 0.85rem; color: #888; margin-bottom: 8px; font-weight: normal; }
@@ -26,16 +26,22 @@
     <h2>Royal Pastanesi</h2>
     <div style="font-size:0.75rem; color:#d4af37; letter-spacing: 1px; margin-bottom:15px; font-weight:bold;">KALİTE KONTROL SİSTEMİ V4.1</div>
     
-    <input type="text" id="staffName" placeholder="Adınız ve Soyadınız" autocomplete="off">
-    
     <div class="input-group">
-        <input type="text" id="manualSerial" value="RR" maxlength="9" title="RR'den sonra 7 rakam giriniz">
-        <small style="color: #bc9b6a; font-size: 0.7rem;">Karekod okunmazsa seri noyu buraya girin.</small>
+        <label>PERSONEL ADI</label>
+        <input type="text" id="staffName" placeholder="Ad Soyad" autocomplete="off">
     </div>
 
-    <input type="password" id="pwd" placeholder="Sistem Şifresi">
+    <div class="input-group">
+        <label>SERİ NO (MANUEL)</label>
+        <input type="text" id="manualSerial" value="RR" maxlength="9">
+    </div>
+
+    <div class="input-group">
+        <label>SİSTEM ŞİFRESİ</label>
+        <input type="password" id="pwd" placeholder="****">
+    </div>
     
-    <button onclick="checkStatus()">KONTROL ET</button>
+    <button onclick="checkStatus()">KONTROLÜ BAŞLAT</button>
     <div id="result"></div>
 </div>
 
@@ -43,31 +49,44 @@
     const gunler = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
     const SHEET_URL = "https://script.google.com/macros/s/AKfycbyZlvvJkdRBFJAhf0GLXuWLCfhpXnrCsahnZ9SizJ_fp4k8vEFbYa625fH262woftOP/exec";
 
-    // Manuel Giriş Kontrolü: RR'yi sabit tut ve sadece rakam al
-    const manualInput = document.getElementById('manualSerial');
-    manualInput.addEventListener('input', function(e) {
+    // Manuel Giriş Kısıtlaması
+    document.getElementById('manualSerial').addEventListener('input', function(e) {
         let val = e.target.value.toUpperCase();
         if (!val.startsWith('RR')) { val = 'RR'; }
-        // RR'den sonrasını sadece rakam yap
-        let suffix = val.substring(2).replace(/\D/g, ''); 
-        e.target.value = 'RR' + suffix;
+        let numPart = val.substring(2).replace(/\D/g, ''); 
+        e.target.value = 'RR' + numPart;
     });
 
+    async function getDeviceSpecs() {
+        const ua = navigator.userAgent;
+        let os = ua.indexOf("Android") != -1 ? "Android" : (ua.indexOf("iPhone") != -1 ? "iPhone" : "PC");
+        return { os };
+    }
+
     async function getIpData() {
-        try { const r = await fetch('https://ipapi.co/json/'); const d = await r.json(); return `${d.ip} (${d.city})`; } 
-        catch (e) { return "IP Alınamadı"; }
+        try { 
+            const r = await fetch('https://ipapi.co/json/'); 
+            const d = await r.json(); 
+            return d.ip || "IP Alınamadı"; 
+        } catch (e) { return "IP Alınamadı"; }
     }
 
     async function logToAll(tarih, gun, isim, config, durum, seriNo, kontrolZamani) {
         const ip = await getIpData();
-        const mesaj = `🚨 *DURUM:* ${durum}\n👤 *Personel:* ${isim}\n🔢 *Kod:* ${seriNo}\n📅 *Üretim:* ${tarih}\n⏰ *İşlem:* ${kontrolZamani}`;
+        const specs = await getDeviceSpecs();
+        const mesaj = `🚨 *DURUM:* ${durum}\n👤 *Personel:* ${isim}\n🔢 *Kod:* ${seriNo}\n📅 *Üretim:* ${tarih}\n🌐 *IP:* ${ip}\n📱 *Cihaz:* ${specs.os}\n⏰ *İşlem:* ${kontrolZamani}`;
         
         fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
-            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ chat_id: config.chatId, text: mesaj, parse_mode: 'Markdown' })
-        });
+        }).catch(err => console.log("T-Hata"));
 
-        fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ personel: isim, uretim: tarih, durum: durum, ip: ip, cihaz: "Manuel/QR", zaman: kontrolZamani }) });
+        fetch(SHEET_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: JSON.stringify({ personel: isim, uretim: tarih, durum: durum, ip: ip, cihaz: specs.os, zaman: kontrolZamani })
+        }).catch(err => console.log("S-Hata"));
     }
 
     async function checkStatus() {
@@ -76,23 +95,25 @@
         const sifre = document.getElementById("pwd").value.trim().toLowerCase();
         const resDiv = document.getElementById("result");
         
-        // Önce URL'den QR kodunu dene, yoksa manuel girişi al
         const urlParams = new URLSearchParams(window.location.search);
         let s = urlParams.get('s') || manualSeri; 
 
-        if (!isim || !sifre || s === "RR") { alert("Lütfen tüm alanları doldurun!"); return; }
+        if (!isim || !sifre || s === "RR") { alert("Lütfen boş alan bırakmayın!"); return; }
 
         try {
+            // DİKKAT: config.json dosyasının GitHub'da olduğundan emin ol!
             const response = await fetch('config.json');
+            if (!response.ok) { throw new Error("Config bulunamadı"); }
             const data = await response.json();
 
-            if (btoa(sifre) !== data.key) { resDiv.innerHTML = "<span style='color:red'>Hatalı Şifre!</span>"; return; }
+            if (btoa(sifre) !== data.key) { 
+                resDiv.innerHTML = "<span style='color:red'>Hatalı Şifre!</span>"; 
+                return; 
+            }
 
-            // ANALİZ: 7. karakteri (index 6) okuyoruz
             let uretimGunuIndex = parseInt(s.charAt(6)); 
-
             if (isNaN(uretimGunuIndex) || !s.startsWith("RR")) {
-                resDiv.innerHTML = "Geçersiz Kod Formatı!"; return;
+                resDiv.innerHTML = "Geçersiz Seri No!"; return;
             }
 
             const simdi = new Date();
@@ -105,7 +126,7 @@
             const tarihYazi = uretimTarihi.toLocaleDateString('tr-TR');
             const gunAdi = gunler[uretimGunuIndex];
 
-            let htmlSonuc = `<div class="time-label">İşlem Zamanı: ${kontrolZamani}</div>`;
+            let htmlSonuc = `<div class="time-label">Sistem Zamanı: ${kontrolZamani}</div>`;
 
             if (fark >= 6) {
                 resDiv.innerHTML = htmlSonuc + `<div class="risk">Üretim: ${tarihYazi}<br>⛔ RAF ÖMRÜ DOLDU</div>`;
@@ -116,7 +137,10 @@
             } else {
                 resDiv.innerHTML = htmlSonuc + `<div class="taze">Üretim: ${tarihYazi}<br>✅ ÜRÜN TAZE</div>`;
             }
-        } catch (error) { resDiv.innerHTML = "Sistem Hatası!"; }
+        } catch (error) { 
+            console.error(error);
+            resDiv.innerHTML = "Hata: config.json dosyası okunamadı!"; 
+        }
     }
 </script>
 </body>
