@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Kalite Kontrol V4.1</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #fdf5e6; color: #5d4037; }
+        .card { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid #d4af37; text-align: center; width: 350px; }
+        h2 { color: #8b4513; margin-bottom: 5px; }
+        .input-group { margin: 10px 0; position: relative; }
+        input { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; font-size: 16px; text-align: center; }
+        /* Manuel Giriş Kutusu Özel Stili */
+        #manualSerial { font-weight: bold; letter-spacing: 2px; color: #8b4513; background-color: #fffaf0; }
+        button { width: 100%; padding: 12px; background-color: #d4af37; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
+        #result { margin-top: 25px; font-weight: bold; font-size: 1.1rem; line-height: 1.6; }
+        .time-label { font-size: 0.85rem; color: #888; margin-bottom: 8px; font-weight: normal; }
+        .taze { color: #2e7d32; background: #e8f5e9; padding: 15px; border-radius: 8px; border: 1px solid #c8e6c9; }
+        .uyari { color: #856404; background: #fff3cd; padding: 15px; border-radius: 8px; border: 1px solid #ffeeba; }
+        .risk { color: #d32f2f; background: #ffebee; padding: 15px; border-radius: 8px; border: 1px solid #ffcdd2; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Royal Pastanesi</h2>
+    <div style="font-size:0.75rem; color:#d4af37; letter-spacing: 1px; margin-bottom:15px; font-weight:bold;">KALİTE KONTROL SİSTEMİ V4.1</div>
+    
+    <input type="text" id="staffName" placeholder="Adınız ve Soyadınız" autocomplete="off">
+    
+    <div class="input-group">
+        <input type="text" id="manualSerial" value="RR" maxlength="9" title="RR'den sonra 7 rakam giriniz">
+        <small style="color: #bc9b6a; font-size: 0.7rem;">Karekod okunmazsa seri noyu buraya girin.</small>
+    </div>
+
+    <input type="password" id="pwd" placeholder="Sistem Şifresi">
+    
+    <button onclick="checkStatus()">KONTROL ET</button>
+    <div id="result"></div>
+</div>
+
+<script>
+    const gunler = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
+    const SHEET_URL = "https://script.google.com/macros/s/AKfycbyZlvvJkdRBFJAhf0GLXuWLCfhpXnrCsahnZ9SizJ_fp4k8vEFbYa625fH262woftOP/exec";
+
+    // Manuel Giriş Kontrolü: RR'yi sabit tut ve sadece rakam al
+    const manualInput = document.getElementById('manualSerial');
+    manualInput.addEventListener('input', function(e) {
+        let val = e.target.value.toUpperCase();
+        if (!val.startsWith('RR')) { val = 'RR'; }
+        // RR'den sonrasını sadece rakam yap
+        let suffix = val.substring(2).replace(/\D/g, ''); 
+        e.target.value = 'RR' + suffix;
+    });
+
+    async function getIpData() {
+        try { const r = await fetch('https://ipapi.co/json/'); const d = await r.json(); return `${d.ip} (${d.city})`; } 
+        catch (e) { return "IP Alınamadı"; }
+    }
+
+    async function logToAll(tarih, gun, isim, config, durum, seriNo, kontrolZamani) {
+        const ip = await getIpData();
+        const mesaj = `🚨 *DURUM:* ${durum}\n👤 *Personel:* ${isim}\n🔢 *Kod:* ${seriNo}\n📅 *Üretim:* ${tarih}\n⏰ *İşlem:* ${kontrolZamani}`;
+        
+        fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: config.chatId, text: mesaj, parse_mode: 'Markdown' })
+        });
+
+        fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ personel: isim, uretim: tarih, durum: durum, ip: ip, cihaz: "Manuel/QR", zaman: kontrolZamani }) });
+    }
+
+    async function checkStatus() {
+        const isim = document.getElementById("staffName").value.trim();
+        const manualSeri = document.getElementById("manualSerial").value.trim();
+        const sifre = document.getElementById("pwd").value.trim().toLowerCase();
+        const resDiv = document.getElementById("result");
+        
+        // Önce URL'den QR kodunu dene, yoksa manuel girişi al
+        const urlParams = new URLSearchParams(window.location.search);
+        let s = urlParams.get('s') || manualSeri; 
+
+        if (!isim || !sifre || s === "RR") { alert("Lütfen tüm alanları doldurun!"); return; }
+
+        try {
+            const response = await fetch('config.json');
+            const data = await response.json();
+
+            if (btoa(sifre) !== data.key) { resDiv.innerHTML = "<span style='color:red'>Hatalı Şifre!</span>"; return; }
+
+            // ANALİZ: 7. karakteri (index 6) okuyoruz
+            let uretimGunuIndex = parseInt(s.charAt(6)); 
+
+            if (isNaN(uretimGunuIndex) || !s.startsWith("RR")) {
+                resDiv.innerHTML = "Geçersiz Kod Formatı!"; return;
+            }
+
+            const simdi = new Date();
+            const kontrolZamani = simdi.toLocaleString('tr-TR');
+            let fark = simdi.getDay() - uretimGunuIndex;
+            if (fark < 0) fark += 7; 
+
+            const uretimTarihi = new Date();
+            uretimTarihi.setDate(simdi.getDate() - fark);
+            const tarihYazi = uretimTarihi.toLocaleDateString('tr-TR');
+            const gunAdi = gunler[uretimGunuIndex];
+
+            let htmlSonuc = `<div class="time-label">İşlem Zamanı: ${kontrolZamani}</div>`;
+
+            if (fark >= 6) {
+                resDiv.innerHTML = htmlSonuc + `<div class="risk">Üretim: ${tarihYazi}<br>⛔ RAF ÖMRÜ DOLDU</div>`;
+                logToAll(tarihYazi, gunAdi, isim, data, "KRİTİK: RAF ÖMRÜ DOLDU", s, kontrolZamani);
+            } else if (fark === 5) {
+                resDiv.innerHTML = htmlSonuc + `<div class="uyari">Üretim: ${tarihYazi}<br>⚠️ BUGÜN SON GÜN!</div>`;
+                logToAll(tarihYazi, gunAdi, isim, data, "UYARI: SON GÜN", s, kontrolZamani);
+            } else {
+                resDiv.innerHTML = htmlSonuc + `<div class="taze">Üretim: ${tarihYazi}<br>✅ ÜRÜN TAZE</div>`;
+            }
+        } catch (error) { resDiv.innerHTML = "Sistem Hatası!"; }
+    }
+</script>
+</body>
+</html>
