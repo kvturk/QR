@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royal Kalite Kontrol V5.0</title>
+    <title>Royal Kalite Kontrol V5.1</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #fdf5e6; color: #5d4037; }
         .card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid #d4af37; text-align: center; width: 350px; }
@@ -20,7 +20,7 @@
 
 <div class="card">
     <h2>Royal Pastanesi</h2>
-    <div style="font-size:0.75rem; color:#d4af37; letter-spacing: 1px; margin-bottom:15px; font-weight:bold;">LOKASYON GÜVENLİKLİ SİSTEM V5.0</div>
+    <div style="font-size:0.75rem; color:#d4af37; letter-spacing: 1px; margin-bottom:15px; font-weight:bold;">GÜVENLİ DENETİM SİSTEMİ V5.1</div>
     
     <div class="input-group">
         <label>PERSONEL ADI</label>
@@ -63,12 +63,19 @@
     async function processAll() {
         const resDiv = document.getElementById("result");
         const isim = document.getElementById("staffName").value.trim();
-        if(!isim) { alert("Önce isim giriniz!"); return; }
+        
+        // 1. GÜVENLİK ADIMI: CİHAZ KONTROLÜ
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (!isMobile) {
+            resDiv.innerHTML = "<div style='color:red; background:#ffebee; padding:10px; border-radius:8px;'>❌ HATA: Bu sistem sadece şubelerdeki mobil cihazlar (Telefon/Tablet) üzerinden kullanılabilir. PC erişimi yasaktır.</div>";
+            return;
+        }
 
-        resDiv.innerHTML = "📍 Konum doğrulanıyor...";
+        if(!isim) { alert("Önce isminizi yazın!"); return; }
+        resDiv.innerHTML = "📍 Konum ve Güvenlik doğrulanıyor...";
 
         if (!navigator.geolocation) {
-            resDiv.innerHTML = "Cihaz konumu desteklemiyor!";
+            resDiv.innerHTML = "Cihazınız konum özelliğini desteklemiyor!";
             return;
         }
 
@@ -78,7 +85,6 @@
             
             let aktifSube = null;
             SUBELER.forEach(s => {
-                // MESAFE 500 METRE OLARAK AYARLANDI
                 if (getDistance(uLat, uLon, s.lat, s.lon) < 500) aktifSube = s.ad;
             });
 
@@ -88,9 +94,9 @@
             if (aktifSube) {
                 runSystem(config, aktifSube);
             } else {
-                // Şube dışında ise Telegram'a konum linkli ihbar gönder
+                // Şube dışı veya PC'den konum taklidi durumunda ihbar gönder
                 const mapLink = `https://www.google.com/maps?q=${uLat},${uLon}`;
-                const ihbar = `⚠️ *İZİNSİZ ERİŞİM DENEMESİ!*\n\n👤 *Personel:* ${isim}\n📍 *Konum:* Şube Dışı (500m dışında)\n🗺️ [Haritada Gör](${mapLink})\n⏰ *Zaman:* ${new Date().toLocaleString('tr-TR')}`;
+                const ihbar = `⚠️ *İZİNSİZ ERİŞİM DENEMESİ!*\n\n👤 *Personel:* ${isim}\n📍 *Konum:* Şube Dışı\n📱 *Cihaz:* Mobil\n🗺️ [Haritada Gör](${mapLink})\n⏰ *Zaman:* ${new Date().toLocaleString('tr-TR')}`;
                 
                 fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
                     method: 'POST',
@@ -98,10 +104,10 @@
                     body: JSON.stringify({ chat_id: config.chatId, text: ihbar, parse_mode: 'Markdown' })
                 });
 
-                resDiv.innerHTML = "<div style='color:red; background:#ffebee; padding:10px; border-radius:8px;'>❌ HATA: İşlem sadece şube içinden yapılabilir. Konumunuz bildirildi.</div>";
+                resDiv.innerHTML = "<div style='color:red; background:#ffebee; padding:10px; border-radius:8px;'>❌ HATA: Sadece şube içerisinden işlem yapabilirsiniz. Konumunuz ve personel bilginiz yöneticiye iletildi.</div>";
             }
         }, (err) => {
-            resDiv.innerHTML = "❌ Konum izni verilmedi! Lütfen ayarlardan izin verin.";
+            resDiv.innerHTML = "❌ Konum izni verilmedi! İşlem yapılamaz.";
         }, { enableHighAccuracy: true });
     }
 
@@ -114,7 +120,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         let s = urlParams.get('s') || manualSeri;
 
-        if (btoa(sifre) !== config.key) { resDiv.innerHTML = "<span style='color:red'>Hatalı Şifre!</span>"; return; }
+        if (btoa(sifre) !== config.key) { resDiv.innerHTML = "❌ Şifre Hatalı!"; return; }
 
         let gunIndex = parseInt(s.charAt(6));
         const simdi = new Date();
@@ -127,6 +133,7 @@
 
         let durum = fark >= 6 ? "KRİTİK: RAF ÖMRÜ DOLDU" : (fark === 5 ? "UYARI: SON GÜN" : "✅ ÜRÜN TAZE");
         
+        // Başarılı Kayıt Bildirimi
         const msg = `📍 *Şube:* ${subeAdi}\n👤 *Personel:* ${isim}\n🔢 *Kod:* ${s}\n📅 *Üretim:* ${tarihYazi}\n📊 *Durum:* ${durum}`;
         
         fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
@@ -141,9 +148,10 @@
             body: JSON.stringify({ personel: isim, uretim: tarihYazi, durum: subeAdi + " - " + durum, zaman: simdi.toLocaleString('tr-TR') })
         });
 
-        resDiv.innerHTML = `<div style="background:#f0f4f8; padding:15px; border-radius:8px;"><b>${subeAdi}</b><br><span style="color:#d4af37">${durum}</span><br>Üretim: ${tarihYazi}</div>`;
+        resDiv.innerHTML = `<div style="background:#f0f4f8; padding:15px; border-radius:10px; border:1px solid #d4af37;"><b>${subeAdi} Doğrulandı</b><br><span style="color:#8b4513">${durum}</span><br>Tarih: ${tarihYazi}</div>`;
     }
 
+    // RR Manuel Giriş Sabitleme
     document.getElementById('manualSerial').addEventListener('input', function(e) {
         let val = e.target.value.toUpperCase();
         if (!val.startsWith('RR')) val = 'RR';
