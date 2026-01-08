@@ -45,10 +45,13 @@
     const SHEET_URL = "https://script.google.com/macros/s/AKfycbyZlvvJkdRBFJAhf0GLXuWLCfhpXnrCsahnZ9SizJ_fp4k8vEFbYa625fH262woftOP/exec";
     const SUBELER = [
         { ad: "Gümbet Şube", lat: 37.0389, lon: 27.4118 },
-        { ad: "Gümbet 2 Şube", lat: 37.0378, lon: 27.4042 },
         { ad: "Konacık Şube", lat: 37.0463, lon: 27.4003 },
         { ad: "Kumbahçe Şube", lat: 37.0325, lon: 27.4393 }
     ];
+
+    function getRoyalWeek(date) {
+        return Math.ceil(date.getDate() / 7);
+    }
 
     async function getIpData() {
         try {
@@ -68,13 +71,6 @@
         return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
     }
 
-    // Ayın kaçıncı haftası olduğunu bulan fonksiyon
-    function getWeekOfMonth(date) {
-        const dayOfMonth = date.getDate();
-        const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-        return Math.ceil((dayOfMonth + firstDayOfMonth) / 7);
-    }
-
     async function processAll() {
         const resDiv = document.getElementById("result");
         const isim = document.getElementById("staffName").value.trim();
@@ -84,12 +80,7 @@
 
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         if (!isMobile) {
-            resDiv.innerHTML = "<div style='color:red'>❌ HATA: PC üzerinden erişim yasaktır.</div>";
-            fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ chat_id: config.chatId, text: `🖥️ *PC ERİŞİM DENEMESİ!*\n👤 *Personel:* ${isim || 'Bilinmiyor'}\n🌐 *IP:* ${userIp}`, parse_mode: 'Markdown' })
-            });
+            resDiv.innerHTML = "<div style='color:red'>❌ HATA: PC Yasaktır.</div>";
             return;
         }
 
@@ -107,16 +98,10 @@
             if (aktifSube) {
                 runSystem(config, aktifSube, userIp);
             } else {
-                const mapLink = `https://www.google.com/maps?q=${uLat},${uLon}`;
-                fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ chat_id: config.chatId, text: `⚠️ *LOKASYON İHLALİ!*\n👤 *Personel:* ${isim}\n🌐 *IP:* ${userIp}\n📍 *Durum:* Şube Dışı\n🗺️ [Haritada Gör](${mapLink})`, parse_mode: 'Markdown' })
-                });
                 resDiv.innerHTML = "<div style='color:red'>❌ HATA: Şube dışındasınız!</div>";
             }
         }, (err) => {
-            resDiv.innerHTML = "❌ HATA: Konum izni verilmedi!";
+            resDiv.innerHTML = "❌ HATA: Konum izni gerekli!";
         }, { enableHighAccuracy: true });
     }
 
@@ -130,21 +115,17 @@
         let s = urlParams.get('s') || manualSeriInput.value.trim();
 
         if (btoa(sifreInput.value.trim().toLowerCase()) !== config.key) { 
-            resDiv.innerHTML = "❌ Şifre Hatalı!"; 
-            return; 
+            resDiv.innerHTML = "❌ Şifre Hatalı!"; return; 
         }
 
-        // RR + 4 hane rastgele + 1 hafta + 1 gün -> Min 8 karakter
         if (s.length < 8 || !s.startsWith("RR")) {
-            resDiv.innerHTML = "❌ HATA: Geçersiz veya Eksik Kod!";
-            return;
+            resDiv.innerHTML = "❌ HATA: Geçersiz Kod!"; return;
         }
 
         const simdi = new Date();
-        const suankiHafta = getWeekOfMonth(simdi);
-        const suankiGun = simdi.getDay();
+        const suankiHafta = getRoyalWeek(simdi);
+        const suankiGun = simdi.getDay() === 0 ? 7 : simdi.getDay();
 
-        // RAKAMLARI AYIR: RRXXXXHG (H=6. karakter, G=7. karakter)
         let haftaIndex = parseInt(s.charAt(5)); 
         let gunIndex = parseInt(s.charAt(6));   
 
@@ -152,71 +133,37 @@
         let uretimTarihi = new Date();
         let isBayat = false;
 
-        // --- HAFTA KONTROLÜ ---
         if (haftaIndex !== suankiHafta) {
-            durum = "❌ KRİTİK: GEÇEN HAFTADAN KALMA / BAYAT!";
+            durum = "❌ KRİTİK: ESKİ HAFTA ÜRÜNÜ!";
             isBayat = true;
         } else {
-            // --- GÜN KONTROLÜ ---
             let fark = suankiGun - gunIndex;
-            if (fark < 0) fark += 7; // Gelecek hafta gibi görünmesin
-
+            if (fark < 0) fark += 7;
             uretimTarihi.setDate(simdi.getDate() - fark);
-            
-            if (fark >= 6) {
-                durum = "❌ KRİTİK: RAF ÖMRÜ DOLDU";
-                isBayat = true;
-            } else if (fark === 5) {
-                durum = "⚠️ UYARI: BUGÜN SON GÜN";
-            } else {
-                durum = "✅ ÜRÜN TAZE";
-            }
+            durum = fark >= 6 ? "❌ KRİTİK: RAF ÖMRÜ DOLDU" : (fark === 5 ? "⚠️ BUGÜN SON GÜN" : "✅ ÜRÜN TAZE");
         }
 
-        const tarihYazi = isBayat && haftaIndex !== suankiHafta ? "BELİRSİZ (ESKİ HAFTA)" : uretimTarihi.toLocaleDateString('tr-TR');
-        
-        // KAYITLAR (Hiçbir alan bozulmadı)
-        const ts = new Date().getTime();
-        fetch(`${SHEET_URL}?v=${ts}`, {
+        const tarihYazi = isBayat ? "ESKİ/BAYAT" : uretimTarihi.toLocaleDateString('tr-TR');
+
+        fetch(SHEET_URL, {
             method: 'POST',
             mode: 'no-cors',
-            body: JSON.stringify({ 
-                personel: isimInput.value, 
-                uretim: tarihYazi, 
-                durum: subeAdi + " - " + durum, 
-                zaman: simdi.toLocaleString('tr-TR'), 
-                kod: s, 
-                ip: ip 
-            })
+            body: JSON.stringify({ personel: isimInput.value, uretim: tarihYazi, durum: subeAdi + " - " + durum, zaman: simdi.toLocaleString('tr-TR'), kod: s, ip: ip })
         });
 
         fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ 
-                chat_id: config.chatId, 
-                text: `📍 *Şube:* ${subeAdi}\n👤 *Personel:* ${isimInput.value}\n🔢 *Kod:* ${s}\n📊 *Durum:* ${durum}\n📅 *Hafta:* ${haftaIndex}. Hafta\n📅 *Üretim:* ${tarihYazi}`, 
-                parse_mode: 'Markdown' 
-            })
+            body: JSON.stringify({ chat_id: config.chatId, text: `📍 *Şube:* ${subeAdi}\n👤 *Pers:* ${isimInput.value}\n🔢 *Kod:* ${s}\n📊 *Durum:* ${durum}\n📅 *Hafta:* ${haftaIndex}. Hf`, parse_mode: 'Markdown' })
         });
 
-        // EKRAN SONUCU
-        resDiv.innerHTML = `<div style="background:${isBayat ? '#ffebee' : '#e8f5e9'}; padding:15px; border-radius:10px; border:1px solid ${isBayat ? '#c62828' : '#2e7d32'}; color:${isBayat ? '#c62828' : '#2e7d32'};">
-            <b>İŞLEM BAŞARILI</b><br>
-            ${durum}<br>
-            <span style="font-size:0.9rem; color:#555;">Kayıtlı Üretim: ${tarihYazi}</span>
+        resDiv.innerHTML = `<div style="background:${isBayat ? '#ffebee' : '#e8f5e9'}; padding:15px; border-radius:10px; color:${isBayat ? '#c62828' : '#2e7d32'};">
+            <b>İŞLEM TAMAM</b><br>${durum}<br><small>Hafta: ${haftaIndex} | Gün: ${gunIndex}</small>
         </div>`;
 
         window.history.replaceState({}, document.title, window.location.pathname);
-        manualSeriInput.value = "RR";
-        sifreInput.value = "";
+        manualSeriInput.value = "RR"; sifreInput.value = "";
     }
-
-    document.getElementById('manualSerial').addEventListener('input', function(e) {
-        let val = e.target.value.toUpperCase();
-        if (!val.startsWith('RR')) val = 'RR';
-        e.target.value = 'RR' + val.substring(2).replace(/\D/g, '');
-    });
 </script>
 </body>
 </html>
