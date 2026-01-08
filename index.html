@@ -77,7 +77,7 @@
 
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         if (!isMobile) {
-            resDiv.innerHTML = "<div style='color:red'>❌ HATA: PC üzerinden erişim yasaktır.</div>";
+            resDiv.innerHTML = "<div style='color:red'>❌ HATA: Mobile üzerinden erişim yapınız.</div>";
             fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
