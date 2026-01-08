@@ -43,8 +43,10 @@
 
 <script>
     const SHEET_URL = "https://script.google.com/macros/s/AKfycbyZlvvJkdRBFJAhf0GLXuWLCfhpXnrCsahnZ9SizJ_fp4k8vEFbYa625fH262woftOP/exec";
+    
     const SUBELER = [
         { ad: "Gümbet Şube", lat: 37.0389, lon: 27.4118 },
+        { ad: "Gümbet 2 Şube", lat: 37.0378, lon: 27.4042 },
         { ad: "Konacık Şube", lat: 37.0463, lon: 27.4003 },
         { ad: "Kumbahçe Şube", lat: 37.0325, lon: 27.4393 }
     ];
@@ -78,19 +80,26 @@
         const config = await configResponse.json();
         const userIp = await getIpData();
 
+        // PC Engeli
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         if (!isMobile) {
-            resDiv.innerHTML = "<div style='color:red'>❌ HATA: PC Yasaktır.</div>";
+            resDiv.innerHTML = "<div style='color:red'>❌ HATA: PC üzerinden erişim yasaktır.</div>";
+            fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ chat_id: config.chatId, text: `🖥️ *PC ERİŞİM DENEMESİ!*\n👤 *Pers:* ${isim || 'Bilinmiyor'}\n🌐 *IP:* ${userIp}`, parse_mode: 'Markdown' })
+            });
             return;
         }
 
         if(!isim) { alert("Lütfen adınızı yazın!"); return; }
-        resDiv.innerHTML = "🔍 Kontrol ediliyor...";
+        resDiv.innerHTML = "🔍 Konum ve Veri Doğrulanıyor...";
 
         navigator.geolocation.getCurrentPosition(async (pos) => {
             const uLat = pos.coords.latitude;
             const uLon = pos.coords.longitude;
             let aktifSube = null;
+            
             SUBELER.forEach(s => {
                 if (getDistance(uLat, uLon, s.lat, s.lon) < 500) aktifSube = s.ad;
             });
@@ -98,10 +107,16 @@
             if (aktifSube) {
                 runSystem(config, aktifSube, userIp);
             } else {
+                const mapLink = `https://www.google.com/maps?q=${uLat},${uLon}`;
+                fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ chat_id: config.chatId, text: `⚠️ *ŞUBE DIŞI DENEME!*\n👤 *Pers:* ${isim}\n📍 [Konumu Gör](${mapLink})\n🌐 *IP:* ${userIp}`, parse_mode: 'Markdown' })
+                });
                 resDiv.innerHTML = "<div style='color:red'>❌ HATA: Şube dışındasınız!</div>";
             }
         }, (err) => {
-            resDiv.innerHTML = "❌ HATA: Konum izni gerekli!";
+            resDiv.innerHTML = "❌ HATA: Konum izni verilmedi!";
         }, { enableHighAccuracy: true });
     }
 
@@ -115,11 +130,13 @@
         let s = urlParams.get('s') || manualSeriInput.value.trim();
 
         if (btoa(sifreInput.value.trim().toLowerCase()) !== config.key) { 
-            resDiv.innerHTML = "❌ Şifre Hatalı!"; return; 
+            resDiv.innerHTML = "❌ Şifre Hatalı!"; 
+            return; 
         }
 
         if (s.length < 8 || !s.startsWith("RR")) {
-            resDiv.innerHTML = "❌ HATA: Geçersiz Kod!"; return;
+            resDiv.innerHTML = "❌ HATA: Geçersiz veya Eksik Kod!";
+            return;
         }
 
         const simdi = new Date();
@@ -138,32 +155,63 @@
             isBayat = true;
         } else {
             let fark = suankiGun - gunIndex;
-            if (fark < 0) fark += 7;
+            if (fark < 0) fark += 7; 
             uretimTarihi.setDate(simdi.getDate() - fark);
-            durum = fark >= 6 ? "❌ KRİTİK: RAF ÖMRÜ DOLDU" : (fark === 5 ? "⚠️ BUGÜN SON GÜN" : "✅ ÜRÜN TAZE");
+            
+            if (fark >= 6) {
+                durum = "❌ KRİTİK: RAF ÖMRÜ DOLDU";
+                isBayat = true;
+            } else if (fark === 5) {
+                durum = "⚠️ UYARI: BUGÜN SON GÜN";
+            } else {
+                durum = "✅ ÜRÜN TAZE";
+            }
         }
 
-        const tarihYazi = isBayat ? "ESKİ/BAYAT" : uretimTarihi.toLocaleDateString('tr-TR');
+        const tarihYazi = isBayat && haftaIndex !== suankiHafta ? "ESKİ HAFTA" : uretimTarihi.toLocaleDateString('tr-TR');
 
+        // Google Sheets Kaydı
         fetch(SHEET_URL, {
             method: 'POST',
             mode: 'no-cors',
-            body: JSON.stringify({ personel: isimInput.value, uretim: tarihYazi, durum: subeAdi + " - " + durum, zaman: simdi.toLocaleString('tr-TR'), kod: s, ip: ip })
+            body: JSON.stringify({ 
+                personel: isimInput.value, 
+                uretim: tarihYazi, 
+                durum: subeAdi + " - " + durum, 
+                zaman: simdi.toLocaleString('tr-TR'), 
+                kod: s, 
+                ip: ip 
+            })
         });
 
+        // Telegram Bildirimi
         fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ chat_id: config.chatId, text: `📍 *Şube:* ${subeAdi}\n👤 *Pers:* ${isimInput.value}\n🔢 *Kod:* ${s}\n📊 *Durum:* ${durum}\n📅 *Hafta:* ${haftaIndex}. Hf`, parse_mode: 'Markdown' })
+            body: JSON.stringify({ 
+                chat_id: config.chatId, 
+                text: `📍 *Şube:* ${subeAdi}\n👤 *Pers:* ${isimInput.value}\n🌐 *IP:* ${ip}\n🔢 *Kod:* ${s}\n📊 *Durum:* ${durum}\n📅 *Hafta:* ${haftaIndex}. Hafta`, 
+                parse_mode: 'Markdown' 
+            })
         });
 
-        resDiv.innerHTML = `<div style="background:${isBayat ? '#ffebee' : '#e8f5e9'}; padding:15px; border-radius:10px; color:${isBayat ? '#c62828' : '#2e7d32'};">
-            <b>İŞLEM TAMAM</b><br>${durum}<br><small>Hafta: ${haftaIndex} | Gün: ${gunIndex}</small>
+        // Ekran Çıktısı
+        resDiv.innerHTML = `<div style="background:${isBayat ? '#ffebee' : '#e8f5e9'}; padding:15px; border-radius:10px; border:1px solid ${isBayat ? '#c62828' : '#2e7d32'}; color:${isBayat ? '#c62828' : '#2e7d32'};">
+            <b>İŞLEM BAŞARILI</b><br>
+            ${durum}<br>
+            <span style="font-size:0.9rem; color:#555;">Üretim Tarihi: ${tarihYazi}</span>
         </div>`;
 
         window.history.replaceState({}, document.title, window.location.pathname);
-        manualSeriInput.value = "RR"; sifreInput.value = "";
+        manualSeriInput.value = "RR";
+        sifreInput.value = "";
     }
+
+    document.getElementById('manualSerial').addEventListener('input', function(e) {
+        let val = e.target.value.toUpperCase();
+        if (!val.startsWith('RR')) val = 'RR';
+        e.target.value = 'RR' + val.substring(2).replace(/\D/g, '');
+    });
 </script>
 </body>
 </html>
