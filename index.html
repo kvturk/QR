@@ -140,7 +140,10 @@
         const uretimTarihi = new Date();
         uretimTarihi.setDate(simdi.getDate() - fark);
         const tarihYazi = uretimTarihi.toLocaleDateString('tr-TR');
-        let durum = fark >= 6 ? "KRİTİK: RAF ÖMRÜ DOLDU" : (fark === 5 ? "⚠️ BUGÜN SON GÜN" : "✅ ÜRÜN TAZE");
+        
+        // BAYAT DURUMU BELİRLEME
+        let isBayat = fark >= 6;
+        let durum = isBayat ? "KRİTİK: RAF ÖMRÜ DOLDU" : (fark === 5 ? "⚠️ BUGÜN SON GÜN" : "✅ ÜRÜN TAZE");
         
         // KAYITLAR
         const ts = new Date().getTime();
@@ -156,12 +159,29 @@
             body: JSON.stringify({ chat_id: config.chatId, text: `📍 *Şube:* ${subeAdi}\n👤 *Personel:* ${isimInput.value}\n🔢 *Kod:* ${s}\n📊 *Durum:* ${durum}\n📅 *Üretim:* ${tarihYazi}`, parse_mode: 'Markdown' })
         });
 
-        // EKRANA TARİHİ GERİ GETİRDİK
-        resDiv.innerHTML = `<div style="background:#e8f5e9; padding:15px; border-radius:10px; border:1px solid #2e7d32; color:#2e7d32;">
-            <b>İŞLEM BAŞARILI</b><br>
-            ${durum}<br>
-            <span style="font-size:0.9rem; color:#555;">Üretim Tarihi: ${tarihYazi}</span>
-        </div>`;
+        // GÜNCELLENEN VURGULU EKRAN (Sadece Burası Değişti)
+        resDiv.innerHTML = `
+            <div style="
+                background: ${isBayat ? '#ffebee' : '#e8f5e9'}; 
+                padding: 20px; 
+                border-radius: 15px; 
+                border: 3px solid ${isBayat ? '#d32f2f' : '#2e7d32'}; 
+                color: ${isBayat ? '#d32f2f' : '#2e7d32'};
+                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            ">
+                <div style="font-size: 1.5rem; font-weight: 800; margin-bottom: 8px;">
+                    ${isBayat ? '❌ DİKKAT: BAYAT!' : '✅ İŞLEM TAMAM'}
+                </div>
+                <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 10px;">
+                    ${durum}
+                </div>
+                <hr style="border: 0; border-top: 1px solid ${isBayat ? '#ffcdd2' : '#c8e6c9'}; margin: 10px 0;">
+                <div style="font-size: 0.95rem; color: #444; line-height: 1.5;">
+                    <b>Üretim Tarihi:</b> ${tarihYazi}<br>
+                    <b>Şube:</b> ${subeAdi}
+                </div>
+            </div>
+        `;
 
         window.history.replaceState({}, document.title, window.location.pathname);
         manualSeriInput.value = "RR";
