@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royal Kalite Kontrol V5.4</title>
+    <title>Royal Kalite Kontrol V5.5</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #fdf5e6; color: #5d4037; }
         .card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid #d4af37; text-align: center; width: 350px; }
@@ -20,7 +20,7 @@
 
 <div class="card">
     <h2>Royal Pastanesi</h2>
-    <div style="font-size:0.75rem; color:#d4af37; letter-spacing: 1px; margin-bottom:15px; font-weight:bold;">FULL GUARD GÜVENLİK V5.4</div>
+    <div style="font-size:0.75rem; color:#d4af37; letter-spacing: 1px; margin-bottom:15px; font-weight:bold;">TAM SİSTEM V5.5</div>
     
     <div class="input-group">
         <label>PERSONEL ADI</label>
@@ -73,35 +73,25 @@
         const isim = document.getElementById("staffName").value.trim();
         const configResponse = await fetch('config.json');
         const config = await configResponse.json();
-        
-        // 1. IP'Yİ EN BAŞTA ÇEK
         const userIp = await getIpData();
 
-        // 2. PC ERİŞİM KONTROLÜ VE İHBARI
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         if (!isMobile) {
-            resDiv.innerHTML = "<div style='color:red'>❌ HATA: PC üzerinden erişim yasaktır. Mobil cihaz kullanın.</div>";
-            
+            resDiv.innerHTML = "<div style='color:red'>❌ HATA: PC üzerinden erişim yasaktır.</div>";
             fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ 
-                    chat_id: config.chatId, 
-                    text: `🖥️ *PC ERİŞİM DENEMESİ!*\n👤 *Personel:* ${isim || 'Bilinmiyor'}\n🌐 *IP:* ${userIp}\n⏰ *Zaman:* ${new Date().toLocaleString('tr-TR')}`, 
-                    parse_mode: 'Markdown' 
-                })
+                body: JSON.stringify({ chat_id: config.chatId, text: `🖥️ *PC ERİŞİM DENEMESİ!*\n👤 *Personel:* ${isim || 'Bilinmiyor'}\n🌐 *IP:* ${userIp}`, parse_mode: 'Markdown' })
             });
             return;
         }
 
-        if(!isim) { alert("Lütfen isminizi yazın!"); return; }
-        resDiv.innerHTML = "🔍 Güvenlik kontrolü yapılıyor...";
+        if(!isim) { alert("Lütfen adınızı yazın!"); return; }
+        resDiv.innerHTML = "🔍 Kontrol ediliyor...";
 
-        // 3. KONUM KONTROLÜ VE İHBARI
         navigator.geolocation.getCurrentPosition(async (pos) => {
             const uLat = pos.coords.latitude;
             const uLon = pos.coords.longitude;
-            
             let aktifSube = null;
             SUBELER.forEach(s => {
                 if (getDistance(uLat, uLon, s.lat, s.lon) < 500) aktifSube = s.ad;
@@ -114,13 +104,9 @@
                 fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ 
-                        chat_id: config.chatId, 
-                        text: `⚠️ *LOKASYON İHLALİ!*\n👤 *Personel:* ${isim}\n🌐 *IP:* ${userIp}\n📍 *Durum:* Şube Dışı\n🗺️ [Haritada Gör](${mapLink})`, 
-                        parse_mode: 'Markdown' 
-                    })
+                    body: JSON.stringify({ chat_id: config.chatId, text: `⚠️ *LOKASYON İHLALİ!*\n👤 *Personel:* ${isim}\n📍 *Durum:* Şube Dışı\n🗺️ [Haritada Gör](${mapLink})`, parse_mode: 'Markdown' })
                 });
-                resDiv.innerHTML = "<div style='color:red'>❌ HATA: Şube dışındasınız! Konumunuz yöneticiye iletildi.</div>";
+                resDiv.innerHTML = "<div style='color:red'>❌ HATA: Şube dışındasınız!</div>";
             }
         }, (err) => {
             resDiv.innerHTML = "❌ HATA: Konum izni verilmedi!";
@@ -167,14 +153,16 @@
         fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ 
-                chat_id: config.chatId, 
-                text: `📍 *Şube:* ${subeAdi}\n👤 *Personel:* ${isimInput.value}\n🌐 *IP:* ${ip}\n🔢 *Kod:* ${s}\n📊 *Durum:* ${durum}`, 
-                parse_mode: 'Markdown' 
-            })
+            body: JSON.stringify({ chat_id: config.chatId, text: `📍 *Şube:* ${subeAdi}\n👤 *Personel:* ${isimInput.value}\n🔢 *Kod:* ${s}\n📊 *Durum:* ${durum}\n📅 *Üretim:* ${tarihYazi}`, parse_mode: 'Markdown' })
         });
 
-        resDiv.innerHTML = `<div style="background:#e8f5e9; padding:15px; border-radius:10px;"><b>BAŞARILI!</b><br>${durum}</div>`;
+        // EKRANA TARİHİ GERİ GETİRDİK
+        resDiv.innerHTML = `<div style="background:#e8f5e9; padding:15px; border-radius:10px; border:1px solid #2e7d32; color:#2e7d32;">
+            <b>İŞLEM BAŞARILI</b><br>
+            ${durum}<br>
+            <span style="font-size:0.9rem; color:#555;">Üretim Tarihi: ${tarihYazi}</span>
+        </div>`;
+
         window.history.replaceState({}, document.title, window.location.pathname);
         manualSeriInput.value = "RR";
         sifreInput.value = "";
