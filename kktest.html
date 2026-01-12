@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royal Kalite Kontrol V8.2</title>
+    <title>Royal Kalite Kontrol V8.3</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background-color: #fdf5e6; color: #5d4037; padding: 20px; box-sizing: border-box; }
         .card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid #d4af37; text-align: center; width: 100%; max-width: 350px; }
@@ -22,12 +22,13 @@
 
 <div class="card">
     <h2>Royal Pastanesi</h2>
-    <div style="font-size:0.75rem; color:#d4af37; letter-spacing: 1px; margin-bottom:15px; font-weight:bold;">KK V8.2 (GÜVENLİ OTURUM)</div>
+    <div style="font-size:0.75rem; color:#d4af37; letter-spacing: 1px; margin-bottom:15px; font-weight:bold;">KK V8.3 (TAM GÜVENLİK)</div>
     
     <div id="authFields">
         <div class="input-group">
             <label>PERSONEL ADI</label>
-            <input type="text" id="staffName" placeholder="Ad Soyad" autocomplete="off" maxlength="30">
+            <input type="text" id="staffName" placeholder="Ad Soyad" autocomplete="off" maxlength="30" 
+                   oninput="this.value = this.value.replace(/[^a-zA-ZçÇğĞıİöÖşŞüÜ\s]/g, '')">
         </div>
         <div class="input-group">
             <label>SİSTEM ŞİFRESİ</label>
@@ -39,7 +40,8 @@
 
     <div class="input-group">
         <label>SERİ NO (MANUEL)</label>
-        <input type="text" id="manualSerial" placeholder="Örn: P852319" maxlength="7">
+        <input type="text" id="manualSerial" placeholder="Örn: P852319" maxlength="7" 
+               oninput="this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '')">
     </div>
     
     <button id="mainBtn" onclick="processAll()">KONTROLÜ BAŞLAT</button>
@@ -56,19 +58,11 @@
         { ad: "Kumbahçe Şube", lat: 37.0325, lon: 27.4393 }
     ];
 
-    // GÜVENLİK: Karakter temizleme (XSS ve SQL koruması için)
-    function sanitize(str, pattern) {
-        if (pattern === 'alpha') return str.replace(/[^a-zA-ZçÇğĞıİöÖşŞüÜ\s]/g, '');
-        if (pattern === 'alphanumeric') return str.replace(/[^a-zA-Z0-9]/g, '');
-        return str.replace(/[<>]/g, '');
-    }
-
-    // SAYFA AÇILDIĞINDA OTURUM KONTROLÜ
     window.onload = checkSession;
 
     function checkSession() {
         const session = JSON.parse(localStorage.getItem('royal_session'));
-        if (session && (Date.now() - session.time < 3600000)) { // 60 Dakika (3600000 ms)
+        if (session && (Date.now() - session.time < 3600000)) {
             document.getElementById('authFields').style.display = 'none';
             document.getElementById('sessionStatus').style.display = 'block';
             document.getElementById('sessionStatus').textContent = "👤 Personel: " + session.name;
@@ -88,6 +82,31 @@
         document.getElementById('pwd').value = "";
     }
 
+    async function getIpData() {
+        try {
+            const r = await fetch('https://api.ipify.org?format=json'); // Daha stabil bir servis
+            const d = await r.json();
+            return d.ip || "Alınamadı";
+        } catch (e) { return "Bağlantı Hatası"; }
+    }
+
+    async function sendSecurityAlert(config, type, isim, ip, sube = "Bilinmiyor") {
+        const text = `🚨 *GÜVENLİK İHLALİ*\n\n⚠️ *Tip:* ${type}\n👤 *Pers:* ${isim}\n🌐 *IP:* ${ip}\n📍 *Konum:* ${sube}`;
+        await fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ chat_id: config.chatId, text: text, parse_mode: 'Markdown' })
+        });
+    }
+
+    function getDistance(lat1, lon1, lat2, lon2) {
+        const R = 6371e3;
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLon = (lon2 - lon1) * Math.PI / 180;
+        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
+    }
+
     function getRoyalWeek(date) {
         const gun = date.getDate();
         const ayinBasi = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -95,37 +114,27 @@
         return Math.ceil((gun + ilkGun - 1) / 7);
     }
 
-    async function getIpData() {
-        try {
-            const r = await fetch('https://ipapi.co/json/');
-            const d = await r.json();
-            return d.ip || "IP Alınamadı";
-        } catch (e) { return "IP Alınamadı"; }
-    }
-
-    function getDistance(lat1, lon1, lat2, lon2) {
-        const R = 6371e3;
-        const dLat = (lat2 - lat1) * Math.PI / 180;
-        const dLon = (lon2 - lon1) * Math.PI / 180;
-        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                  Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-                  Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
-    }
-
     async function processAll() {
         const resDiv = document.getElementById("result");
         const session = checkSession();
-        const isim = session ? session.name : sanitize(document.getElementById("staffName").value.trim(), 'alpha');
+        const staffNameInput = document.getElementById("staffName").value.trim();
+        const isim = session ? session.name : staffNameInput;
 
+        // Önce Ayarları ve IP'yi alalım ki raporlayabilelim
+        const configResponse = await fetch('config.json');
+        const config = await configResponse.json();
+        const userIp = await getIpData();
+
+        // 1. PC/MOBİL KONTROLÜ VE BİLDİRİMİ
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         if (!isMobile) {
-            resDiv.innerHTML = "<div style='color:red'>❌ HATA: Sadece mobil cihazlar kullanabilir.</div>";
+            resDiv.innerHTML = "<div style='color:red'>❌ HATA: PC Yasaktır.</div>";
+            await sendSecurityAlert(config, "PC'den Giriş Denemesi", isim || "Bilinmiyor", userIp);
             return;
         }
 
         if(!isim) { alert("Lütfen adınızı yazın!"); return; }
-        resDiv.innerHTML = "🔍 Zaman ve Veri Doğrulanıyor...";
+        resDiv.innerHTML = "🔍 Konum ve Zaman Doğrulanıyor...";
 
         navigator.geolocation.getCurrentPosition(async (pos) => {
             const uLat = pos.coords.latitude;
@@ -136,12 +145,10 @@
             });
 
             if (aktifSube) {
-                const configResponse = await fetch('config.json');
-                const config = await configResponse.json();
-                const userIp = await getIpData();
                 runSystem(config, aktifSube, userIp, isim);
             } else {
                 resDiv.innerHTML = "<div style='color:red'>❌ HATA: Şube dışındasınız!</div>";
+                await sendSecurityAlert(config, "Şube Dışı Okutma", isim, userIp, "Dışarıda");
             }
         }, (err) => {
             resDiv.innerHTML = "❌ HATA: Konum izni gerekli!";
@@ -155,14 +162,14 @@
         const session = checkSession();
         
         const urlParams = new URLSearchParams(window.location.search);
-        let s = sanitize(urlParams.get('s') || manualSeriInput.value.trim().toUpperCase(), 'alphanumeric');
+        let s = urlParams.get('s') || manualSeriInput.value.trim().toUpperCase();
 
-        // Şifre Doğrulama (Eğer oturum yoksa)
         if (!session) {
             if (btoa(sifreInput.value.trim().toLowerCase()) !== config.key) { 
-                resDiv.innerHTML = "❌ Şifre Hatalı!"; return; 
+                resDiv.innerHTML = "❌ Şifre Hatalı!"; 
+                await sendSecurityAlert(config, "Yanlış Şifre Denemesi", currentStaff, ip, subeAdi);
+                return; 
             }
-            // Başarılı girişte 60dk oturum başlat
             localStorage.setItem('royal_session', JSON.stringify({ name: currentStaff, time: Date.now() }));
             checkSession();
         }
@@ -177,52 +184,38 @@
         const currentH = getRoyalWeek(now);
         const currentG = now.getDay() === 0 ? 7 : now.getDay();
 
-        if (s.length < 7) {
-            resDiv.innerHTML = "❌ HATA: Eksik veya hatalı kod!"; return;
-        }
+        if (s.length < 7) { resDiv.innerHTML = "❌ HATA: Hatalı Kod!"; return; }
 
         let prefix = s.charAt(0);
         let hIndex = parseInt(s.charAt(4)); 
         let gIndex = parseInt(s.charAt(5));
 
         if (!['P', 'S'].includes(prefix) || isNaN(hIndex) || isNaN(gIndex)) {
-             resDiv.innerHTML = "❌ HATA: Tanımsız Kod!"; return;
+            resDiv.innerHTML = "❌ HATA: Geçersiz Kod!"; return;
         }
 
         let rafOmru = (prefix === 'S') ? 5 : 6;
         let urunTuru = (prefix === 'S') ? "SÜTLÜ TATLI" : "PASTA";
 
         if (hIndex > currentH || (hIndex === currentH && gIndex > currentG)) {
-             resDiv.innerHTML = `<div style="background:#fff3e0; border:3px solid #ff9800; padding:20px; border-radius:15px; color:#e65100;">
-                    <h2 style="margin:0">🚫 ERKEN OKUTMA!</h2>
-                    <p>Üretim günü henüz gelmedi.</p>
-                </div>`;
+            resDiv.innerHTML = `<div style="background:#fff3e0; padding:15px; border-radius:10px; color:#e65100;">🚫 GELECEK TARİHLİ ÜRÜN!</div>`;
             return;
         }
 
         let isBayat = false;
         let durum = "";
+        let fark = currentG - gIndex;
         
-        if (hIndex < currentH) {
-            durum = "❌ KRİTİK: ESKİ HAFTA ÜRÜNÜ!";
-            isBayat = true;
-        } else {
-            let fark = currentG - gIndex;
-            if (fark >= rafOmru) {
-                durum = `❌ KRİTİK: ${urunTuru} RAF ÖMRÜ DOLDU (İADE!)`;
-                isBayat = true;
-            } else if (fark === (rafOmru - 1)) {
-                durum = "⚠️ UYARI: BUGÜN SON SATIŞ GÜNÜ";
-            } else {
-                durum = "✅ ÜRÜN TAZE";
-            }
-        }
+        if (hIndex < currentH) { durum = "❌ KRİTİK: ESKİ HAFTA!"; isBayat = true; } 
+        else if (fark >= rafOmru) { durum = `❌ RAF ÖMRÜ DOLDU (İADE!)`; isBayat = true; }
+        else if (fark === (rafOmru - 1)) { durum = "⚠️ BUGÜN SON SATIŞ GÜNÜ"; }
+        else { durum = "✅ ÜRÜN TAZE"; }
 
         const uretimTarihi = new Date(now);
-        uretimTarihi.setDate(now.getDate() - (currentG - gIndex));
+        uretimTarihi.setDate(now.getDate() - fark);
         const tarihYazi = uretimTarihi.toLocaleDateString('tr-TR');
 
-        // KAYITLAR
+        // KAYIT
         fetch(`${SHEET_URL}`, {
             method: 'POST',
             mode: 'no-cors',
@@ -232,28 +225,20 @@
         fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ chat_id: config.chatId, text: `📍 *Şube:* ${subeAdi}\n👤 *Pers:* ${currentStaff}\n🍰 *Tür:* ${urunTuru}\n🔢 *Kod:* ${s}\n📊 *Durum:* ${durum}\n📅 *Üretim:* ${tarihYazi}`, parse_mode: 'Markdown' })
+            body: JSON.stringify({ chat_id: config.chatId, text: `📍 *Şube:* ${subeAdi}\n👤 *Pers:* ${currentStaff}\n🍰 *Tür:* ${urunTuru}\n🔢 *Kod:* ${s}\n📊 *Durum:* ${durum}\n📅 *Üretim:* ${tarihYazi}\n🌐 *IP:* ${ip}`, parse_mode: 'Markdown' })
         });
 
         resDiv.innerHTML = `
-            <div style="background: ${isBayat ? '#ffebee' : '#e8f5e9'}; padding: 20px; border-radius: 15px; border: 3px solid ${isBayat ? '#d32f2f' : '#2e7d32'}; color: ${isBayat ? '#d32f2f' : '#2e7d32'}; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                <div style="font-size: 1.5rem; font-weight: 800; margin-bottom: 8px;">${isBayat ? '❌ İADE EDİLMELİ!' : '✅ SATILABİLİR'}</div>
-                <div style="font-size: 1.1rem; font-weight: bold; margin-bottom: 10px;">${durum}</div>
-                <hr style="border: 0; border-top: 1px solid ${isBayat ? '#ffcdd2' : '#c8e6c9'}; margin: 10px 0;">
-                <div style="font-size: 0.95rem; color: #444;">
-                    <b>Ürün Türü:</b> ${urunTuru}<br>
-                    <b>Üretim Tarihi:</b> ${tarihYazi}<br>
-                    <b>Şube:</b> ${subeAdi}
-                </div>
+            <div style="background: ${isBayat ? '#ffebee' : '#e8f5e9'}; padding: 20px; border-radius: 15px; border: 3px solid ${isBayat ? '#d32f2f' : '#2e7d32'}; color: ${isBayat ? '#d32f2f' : '#2e7d32'};">
+                <div style="font-size: 1.3rem; font-weight: 800;">${isBayat ? '❌ İADE ET!' : '✅ SATILABİLİR'}</div>
+                <div>${durum}</div>
+                <hr>
+                <div style="font-size: 0.9rem; color: #444;">Üretim: ${tarihYazi} / Tür: ${urunTuru}</div>
             </div>`;
 
         window.history.replaceState({}, document.title, window.location.pathname);
         manualSeriInput.value = "";
     }
-
-    document.getElementById('manualSerial').addEventListener('input', function(e) {
-        e.target.value = sanitize(e.target.value.toUpperCase(), 'alphanumeric');
-    });
 </script>
 </body>
 </html>
