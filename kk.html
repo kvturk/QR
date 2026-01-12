@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royal Kalite Kontrol V5.6.1</title>
+    <title>Royal Kalite Kontrol V6.0</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #fdf5e6; color: #5d4037; }
         .card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid #d4af37; text-align: center; width: 350px; }
@@ -20,7 +20,7 @@
 
 <div class="card">
     <h2>Royal Pastanesi</h2>
-    <div style="font-size:0.75rem; color:#d4af37; letter-spacing: 1px; margin-bottom:15px; font-weight:bold;">KK V5.6.1 (ESNEK & GÖRSEL)</div>
+    <div style="font-size:0.75rem; color:#d4af37; letter-spacing: 1px; margin-bottom:15px; font-weight:bold;">KK V6.0 (GÜVENLİ ZAMAN)</div>
     
     <div class="input-group">
         <label>PERSONEL ADI</label>
@@ -50,8 +50,12 @@
         { ad: "Kumbahçe Şube", lat: 37.0325, lon: 27.4393 }
     ];
 
+    // Takvim Haftası Hesabı (Pazartesi Başlangıçlı)
     function getRoyalWeek(date) {
-        return Math.ceil(date.getDate() / 7);
+        const gun = date.getDate();
+        const ayinBasi = new Date(date.getFullYear(), date.getMonth(), 1);
+        const ilkGun = ayinBasi.getDay() === 0 ? 7 : ayinBasi.getDay();
+        return Math.ceil((gun + ilkGun - 1) / 7);
     }
 
     async function getIpData() {
@@ -86,7 +90,7 @@
         }
 
         if(!isim) { alert("Lütfen adınızı yazın!"); return; }
-        resDiv.innerHTML = "🔍 Kontrol ediliyor...";
+        resDiv.innerHTML = "🔍 Zaman ve Konum Doğrulanıyor...";
 
         navigator.geolocation.getCurrentPosition(async (pos) => {
             const uLat = pos.coords.latitude;
@@ -123,33 +127,41 @@
             resDiv.innerHTML = "❌ HATA: Geçersiz Kod!"; return;
         }
 
-        const simdi = new Date();
-        const suankiHafta = getRoyalWeek(simdi);
-        const suankiGun = simdi.getDay() === 0 ? 7 : simdi.getDay();
-        const ayinGunu = simdi.getDate();
+        // 1. İNTERNETTEN İSTANBUL SAATİNİ ÇEK
+        let now;
+        try {
+            const timeRes = await fetch("https://worldtimeapi.org/api/timezone/Europe/Istanbul");
+            const timeData = await timeRes.json();
+            now = new Date(timeData.datetime);
+        } catch (e) {
+            now = new Date(); // API hatasında cihaz saatine döner
+        }
 
-        let haftaIndex = parseInt(s.charAt(5)); 
-        let gunIndex = parseInt(s.charAt(6));   
+        const currentH = getRoyalWeek(now);
+        const currentG = now.getDay() === 0 ? 7 : now.getDay();
 
-        let isHaftaUygun = false;
+        let hIndex = parseInt(s.charAt(5)); 
+        let gIndex = parseInt(s.charAt(6));
+
+        // 2. GELECEK TARİH KONTROLÜ
+        if (hIndex > currentH || (hIndex === currentH && gIndex > currentG)) {
+            resDiv.innerHTML = `
+                <div style="background:#fff3e0; border:3px solid #ff9800; padding:20px; border-radius:15px; color:#e65100;">
+                    <h2 style="margin:0">🚫 ERKEN OKUTMA!</h2>
+                    <p style="font-size:0.9rem">Bu ürünün üretim günü henüz gelmedi. Yarının barkodunu bugünden okutamazsınız.</p>
+                </div>`;
+            return; 
+        }
+
         let isBayat = false;
         let durum = "";
 
-        // HAFTA KONTROLÜ + AY GEÇİŞ TOLERANSI
-        if (haftaIndex === suankiHafta) {
-            isHaftaUygun = true;
-        } else if (ayinGunu <= 3 && (haftaIndex === 4 || haftaIndex === 5)) {
-            // Ayın ilk 3 günündeysek geçen ayın son haftalarını kabul et
-            isHaftaUygun = true;
-        }
-
-        if (!isHaftaUygun) {
+        // 3. BAYAT KONTROLÜ
+        if (hIndex < currentH) {
             durum = "❌ KRİTİK: ESKİ HAFTA ÜRÜNÜ!";
             isBayat = true;
         } else {
-            let fark = suankiGun - gunIndex;
-            if (fark < 0) fark += 7;
-            
+            let fark = currentG - gIndex;
             if (fark >= 6) {
                 durum = "❌ KRİTİK: RAF ÖMRÜ DOLDU";
                 isBayat = true;
@@ -160,29 +172,25 @@
             }
         }
 
-        const uretimTarihi = new Date();
-        let uretimGoster = "BELİRSİZ";
-        if (!isBayat || haftaIndex === suankiHafta) {
-            let fark = suankiGun - gunIndex;
-            if (fark < 0) fark += 7;
-            uretimTarihi.setDate(simdi.getDate() - fark);
-            uretimGoster = uretimTarihi.toLocaleDateString('tr-TR');
-        }
+        const uretimTarihi = new Date(now);
+        let farkGun = currentG - gIndex;
+        uretimTarihi.setDate(now.getDate() - farkGun);
+        const tarihYazi = uretimTarihi.toLocaleDateString('tr-TR');
 
-        // Kayıtlar
+        // 4. TELEGRAM VE SHEETS KAYITLARI
         fetch(SHEET_URL, {
             method: 'POST',
             mode: 'no-cors',
-            body: JSON.stringify({ personel: isimInput.value, uretim: uretimGoster, durum: subeAdi + " - " + durum, zaman: simdi.toLocaleString('tr-TR'), kod: s, ip: ip })
+            body: JSON.stringify({ personel: isimInput.value, uretim: tarihYazi, durum: subeAdi + " - " + durum, zaman: now.toLocaleString('tr-TR'), kod: s, ip: ip })
         });
 
         fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ chat_id: config.chatId, text: `📍 *Şube:* ${subeAdi}\n👤 *Pers:* ${isimInput.value}\n🔢 *Kod:* ${s}\n📊 *Durum:* ${durum}`, parse_mode: 'Markdown' })
+            body: JSON.stringify({ chat_id: config.chatId, text: `📍 *Şube:* ${subeAdi}\n👤 *Pers:* ${isimInput.value}\n🔢 *Kod:* ${s}\n📊 *Durum:* ${durum}\n📅 *Üretim:* ${tarihYazi}`, parse_mode: 'Markdown' })
         });
 
-        // V5.6.1 İÇİN ÖZEL: VURGULU VE BÜYÜK UYARI EKRANI
+        // 5. GÖRSEL SONUÇ EKRANI
         resDiv.innerHTML = `
             <div style="
                 background: ${isBayat ? '#ffebee' : '#e8f5e9'}; 
@@ -200,9 +208,9 @@
                 </div>
                 <hr style="border: 0; border-top: 1px solid ${isBayat ? '#ffcdd2' : '#c8e6c9'}; margin: 10px 0;">
                 <div style="font-size: 0.95rem; color: #444; line-height: 1.5;">
-                    <b>Üretim Tarihi:</b> ${uretimGoster}<br>
+                    <b>Üretim Tarihi:</b> ${tarihYazi}<br>
                     <b>Şube:</b> ${subeAdi}<br>
-                    <small style="color: #777;">Hafta: ${haftaIndex} | Gün: ${gunIndex}</small>
+                    <small style="color: #777;">Hafta: ${hIndex} | Gün: ${gIndex}</small>
                 </div>
             </div>
         `;
@@ -210,12 +218,6 @@
         window.history.replaceState({}, document.title, window.location.pathname);
         manualSeriInput.value = "RR"; sifreInput.value = "";
     }
-    
-    document.getElementById('manualSerial').addEventListener('input', function(e) {
-        let val = e.target.value.toUpperCase();
-        if (!val.startsWith('RR')) val = 'RR';
-        e.target.value = 'RR' + val.substring(2).replace(/\D/g, '');
-    });
 </script>
 </body>
 </html>
