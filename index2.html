@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royal Kalite Kontrol V8.3</title>
+    <title>Royal Kalite Kontrol V8.4</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background-color: #fdf5e6; color: #5d4037; padding: 20px; box-sizing: border-box; }
         .card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid #d4af37; text-align: center; width: 100%; max-width: 350px; }
@@ -14,7 +14,7 @@
         #manualSerial { font-weight: bold; letter-spacing: 2px; color: #8b4513; background-color: #fffaf0; border: 2px solid #d4af37; text-transform: uppercase; }
         button { width: 100%; padding: 15px; background-color: #d4af37; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
         #result { margin-top: 25px; font-weight: bold; font-size: 1.1rem; line-height: 1.6; }
-        .session-info { font-size: 0.8rem; color: #2e7d32; margin-bottom: 10px; font-weight: bold; }
+        .session-info { font-size: 0.8rem; color: #2e7d32; margin-bottom: 10px; font-weight: bold; background: #e8f5e9; padding: 10px; border-radius: 10px; }
         .logout-btn { background: none; color: #8b4513; font-size: 0.7rem; text-decoration: underline; margin-top: 20px; border: none; cursor: pointer; width: auto; padding: 5px; }
     </style>
 </head>
@@ -22,7 +22,7 @@
 
 <div class="card">
     <h2>Royal Pastanesi</h2>
-    <div style="font-size:0.75rem; color:#d4af37; letter-spacing: 1px; margin-bottom:15px; font-weight:bold;">KK V8.3 (TAM GÜVENLİK)</div>
+    <div style="font-size:0.75rem; color:#d4af37; letter-spacing: 1px; margin-bottom:15px; font-weight:bold;">KK V8.4 (ONARILMIŞ)</div>
     
     <div id="authFields">
         <div class="input-group">
@@ -46,7 +46,7 @@
     
     <button id="mainBtn" onclick="processAll()">KONTROLÜ BAŞLAT</button>
     <div id="result"></div>
-    <button id="logoutBtn" class="logout-btn" onclick="clearSession()" style="display:none;">Vardiyayı Kapat (Oturumu Sil)</button>
+    <button id="logoutBtn" class="logout-btn" onclick="clearSession(true)" style="display:none;">Vardiyayı Kapat (Oturumu Sil)</button>
 </div>
 
 <script>
@@ -58,33 +58,43 @@
         { ad: "Kumbahçe Şube", lat: 37.0325, lon: 27.4393 }
     ];
 
-    window.onload = checkSession;
+    window.onload = function() { checkSession(false); };
 
-    function checkSession() {
-        const session = JSON.parse(localStorage.getItem('royal_session'));
-        if (session && (Date.now() - session.time < 3600000)) {
+    // Onarım: checkSession artık formdaki isminizi silmeyecek
+    function checkSession(forceClear = false) {
+        const sessionStr = localStorage.getItem('royal_session');
+        if (!sessionStr) return null;
+
+        const session = JSON.parse(sessionStr);
+        const isExpired = (Date.now() - session.time > 3600000);
+
+        if (session && !isExpired && !forceClear) {
             document.getElementById('authFields').style.display = 'none';
             document.getElementById('sessionStatus').style.display = 'block';
             document.getElementById('sessionStatus').textContent = "👤 Personel: " + session.name;
             document.getElementById('logoutBtn').style.display = 'inline-block';
             return session;
+        } else if (isExpired || forceClear) {
+            clearSession(true);
         }
-        clearSession();
         return null;
     }
 
-    function clearSession() {
+    function clearSession(resetInputs = true) {
         localStorage.removeItem('royal_session');
         document.getElementById('authFields').style.display = 'block';
         document.getElementById('sessionStatus').style.display = 'none';
         document.getElementById('logoutBtn').style.display = 'none';
-        document.getElementById('staffName').value = "";
-        document.getElementById('pwd').value = "";
+        if(resetInputs) {
+            document.getElementById('staffName').value = "";
+            document.getElementById('pwd').value = "";
+        }
     }
 
     async function getIpData() {
         try {
-            const r = await fetch('https://api.ipify.org?format=json'); // Daha stabil bir servis
+            // Daha hızlı ve güvenilir bir IP servisi
+            const r = await fetch('https://api.ipify.org?format=json');
             const d = await r.json();
             return d.ip || "Alınamadı";
         } catch (e) { return "Bağlantı Hatası"; }
@@ -116,20 +126,22 @@
 
     async function processAll() {
         const resDiv = document.getElementById("result");
-        const session = checkSession();
-        const staffNameInput = document.getElementById("staffName").value.trim();
-        const isim = session ? session.name : staffNameInput;
+        
+        // Önce girdileri oku (Sıralama düzeltildi)
+        const session = checkSession(false);
+        const staffNameValue = document.getElementById("staffName").value.trim();
+        const isim = session ? session.name : staffNameValue;
 
-        // Önce Ayarları ve IP'yi alalım ki raporlayabilelim
+        // Config ve IP en başta yüklenmeli
         const configResponse = await fetch('config.json');
         const config = await configResponse.json();
         const userIp = await getIpData();
 
-        // 1. PC/MOBİL KONTROLÜ VE BİLDİRİMİ
+        // 1. PC ENGELİ VE ANLIK RAPOR
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         if (!isMobile) {
             resDiv.innerHTML = "<div style='color:red'>❌ HATA: PC Yasaktır.</div>";
-            await sendSecurityAlert(config, "PC'den Giriş Denemesi", isim || "Bilinmiyor", userIp);
+            await sendSecurityAlert(config, "YASAKLI CİHAZ (PC)", isim || "İsimsiz", userIp);
             return;
         }
 
@@ -148,7 +160,7 @@
                 runSystem(config, aktifSube, userIp, isim);
             } else {
                 resDiv.innerHTML = "<div style='color:red'>❌ HATA: Şube dışındasınız!</div>";
-                await sendSecurityAlert(config, "Şube Dışı Okutma", isim, userIp, "Dışarıda");
+                await sendSecurityAlert(config, "ŞUBE DIŞI DENEME", isim, userIp, "Dış Mekan");
             }
         }, (err) => {
             resDiv.innerHTML = "❌ HATA: Konum izni gerekli!";
@@ -159,7 +171,7 @@
         const resDiv = document.getElementById("result");
         const manualSeriInput = document.getElementById("manualSerial");
         const sifreInput = document.getElementById("pwd");
-        const session = checkSession();
+        const session = checkSession(false);
         
         const urlParams = new URLSearchParams(window.location.search);
         let s = urlParams.get('s') || manualSeriInput.value.trim().toUpperCase();
@@ -167,11 +179,12 @@
         if (!session) {
             if (btoa(sifreInput.value.trim().toLowerCase()) !== config.key) { 
                 resDiv.innerHTML = "❌ Şifre Hatalı!"; 
-                await sendSecurityAlert(config, "Yanlış Şifre Denemesi", currentStaff, ip, subeAdi);
+                await sendSecurityAlert(config, "YANLIŞ ŞİFRE", currentStaff, ip, subeAdi);
                 return; 
             }
+            // Şifre doğruysa oturumu şimdi kaydet
             localStorage.setItem('royal_session', JSON.stringify({ name: currentStaff, time: Date.now() }));
-            checkSession();
+            checkSession(false);
         }
 
         let now;
@@ -184,21 +197,21 @@
         const currentH = getRoyalWeek(now);
         const currentG = now.getDay() === 0 ? 7 : now.getDay();
 
-        if (s.length < 7) { resDiv.innerHTML = "❌ HATA: Hatalı Kod!"; return; }
+        if (s.length < 7) { resDiv.innerHTML = "❌ HATA: Kod Hatalı!"; return; }
 
         let prefix = s.charAt(0);
         let hIndex = parseInt(s.charAt(4)); 
         let gIndex = parseInt(s.charAt(5));
 
         if (!['P', 'S'].includes(prefix) || isNaN(hIndex) || isNaN(gIndex)) {
-            resDiv.innerHTML = "❌ HATA: Geçersiz Kod!"; return;
+            resDiv.innerHTML = "❌ HATA: Geçersiz Format!"; return;
         }
 
         let rafOmru = (prefix === 'S') ? 5 : 6;
         let urunTuru = (prefix === 'S') ? "SÜTLÜ TATLI" : "PASTA";
 
         if (hIndex > currentH || (hIndex === currentH && gIndex > currentG)) {
-            resDiv.innerHTML = `<div style="background:#fff3e0; padding:15px; border-radius:10px; color:#e65100;">🚫 GELECEK TARİHLİ ÜRÜN!</div>`;
+            resDiv.innerHTML = `<div style="background:#fff3e0; padding:15px; border-radius:10px; color:#e65100;">🚫 GELECEĞİN ÜRÜNÜ!</div>`;
             return;
         }
 
@@ -230,9 +243,9 @@
 
         resDiv.innerHTML = `
             <div style="background: ${isBayat ? '#ffebee' : '#e8f5e9'}; padding: 20px; border-radius: 15px; border: 3px solid ${isBayat ? '#d32f2f' : '#2e7d32'}; color: ${isBayat ? '#d32f2f' : '#2e7d32'};">
-                <div style="font-size: 1.3rem; font-weight: 800;">${isBayat ? '❌ İADE ET!' : '✅ SATILABİLİR'}</div>
+                <div style="font-size: 1.3rem; font-weight: 800;">${isBayat ? '❌ İADE EDİLMELİ!' : '✅ SATILABİLİR'}</div>
                 <div>${durum}</div>
-                <hr>
+                <hr style="border-top:1px solid #ccc; margin:10px 0;">
                 <div style="font-size: 0.9rem; color: #444;">Üretim: ${tarihYazi} / Tür: ${urunTuru}</div>
             </div>`;
 
