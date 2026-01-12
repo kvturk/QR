@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royal Kalite Kontrol V6.0</title>
+    <title>Royal Kalite Kontrol V7.0</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #fdf5e6; color: #5d4037; }
         .card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid #d4af37; text-align: center; width: 350px; }
@@ -11,7 +11,7 @@
         .input-group { margin: 15px 0; text-align: left; }
         label { font-size: 0.75rem; color: #8b4513; font-weight: bold; margin-left: 5px; }
         input { width: 100%; padding: 12px; margin-top: 5px; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; font-size: 16px; text-align: center; }
-        #manualSerial { font-weight: bold; letter-spacing: 2px; color: #8b4513; background-color: #fffaf0; border: 2px solid #d4af37; }
+        #manualSerial { font-weight: bold; letter-spacing: 2px; color: #8b4513; background-color: #fffaf0; border: 2px solid #d4af37; text-transform: uppercase; }
         button { width: 100%; padding: 15px; background-color: #d4af37; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
         #result { margin-top: 25px; font-weight: bold; font-size: 1.1rem; line-height: 1.6; }
     </style>
@@ -20,7 +20,7 @@
 
 <div class="card">
     <h2>Royal Pastanesi</h2>
-    <div style="font-size:0.75rem; color:#d4af37; letter-spacing: 1px; margin-bottom:15px; font-weight:bold;">KK V6.0 (GÜVENLİ ZAMAN)</div>
+    <div style="font-size:0.75rem; color:#d4af37; letter-spacing: 1px; margin-bottom:15px; font-weight:bold;">KK V7.0 (GİZLİ ALGORİTMA)</div>
     
     <div class="input-group">
         <label>PERSONEL ADI</label>
@@ -29,7 +29,7 @@
 
     <div class="input-group">
         <label>SERİ NO (MANUEL)</label>
-        <input type="text" id="manualSerial" value="RR" maxlength="9">
+        <input type="text" id="manualSerial" placeholder="Örn: P852319" maxlength="7">
     </div>
 
     <div class="input-group">
@@ -50,7 +50,7 @@
         { ad: "Kumbahçe Şube", lat: 37.0325, lon: 27.4393 }
     ];
 
-    // Takvim Haftası Hesabı (Pazartesi Başlangıçlı)
+    // PAZARTESİ BAŞLANGIÇLI TAKVİM HAFTASI
     function getRoyalWeek(date) {
         const gun = date.getDate();
         const ayinBasi = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -90,7 +90,7 @@
         }
 
         if(!isim) { alert("Lütfen adınızı yazın!"); return; }
-        resDiv.innerHTML = "🔍 Zaman ve Konum Doğrulanıyor...";
+        resDiv.innerHTML = "🔍 Şifre Çözülüyor...";
 
         navigator.geolocation.getCurrentPosition(async (pos) => {
             const uLat = pos.coords.latitude;
@@ -117,68 +117,86 @@
         const sifreInput = document.getElementById("pwd");
         
         const urlParams = new URLSearchParams(window.location.search);
-        let s = urlParams.get('s') || manualSeriInput.value.trim();
+        let s = urlParams.get('s') || manualSeriInput.value.trim().toUpperCase();
 
+        // Şifre Kontrolü
         if (btoa(sifreInput.value.trim().toLowerCase()) !== config.key) { 
             resDiv.innerHTML = "❌ Şifre Hatalı!"; return; 
         }
 
-        if (s.length < 8 || !s.startsWith("RR")) {
-            resDiv.innerHTML = "❌ HATA: Geçersiz Kod!"; return;
-        }
-
-        // 1. İNTERNETTEN İSTANBUL SAATİNİ ÇEK
+        // 1. ZAMAN DOĞRULAMA (İNTERNET SAATİ)
         let now;
         try {
             const timeRes = await fetch("https://worldtimeapi.org/api/timezone/Europe/Istanbul");
             const timeData = await timeRes.json();
             now = new Date(timeData.datetime);
-        } catch (e) {
-            now = new Date(); // API hatasında cihaz saatine döner
-        }
+        } catch (e) { now = new Date(); } // İnternet yoksa mecburen sistem saati
 
         const currentH = getRoyalWeek(now);
         const currentG = now.getDay() === 0 ? 7 : now.getDay();
 
-        let hIndex = parseInt(s.charAt(5)); 
-        let gIndex = parseInt(s.charAt(6));
-
-        // 2. GELECEK TARİH KONTROLÜ
-        if (hIndex > currentH || (hIndex === currentH && gIndex > currentG)) {
-            resDiv.innerHTML = `
-                <div style="background:#fff3e0; border:3px solid #ff9800; padding:20px; border-radius:15px; color:#e65100;">
-                    <h2 style="margin:0">🚫 ERKEN OKUTMA!</h2>
-                    <p style="font-size:0.9rem">Bu ürünün üretim günü henüz gelmedi. Yarının barkodunu bugünden okutamazsınız.</p>
-                </div>`;
-            return; 
+        // 2. KOD DEŞİFRE (DECIPHERING)
+        // Format: P(0) + RRR(1-3) + H(4) + G(5) + R(6)
+        if (s.length < 7) {
+            resDiv.innerHTML = "❌ HATA: Eksik veya hatalı kod!"; return;
         }
 
+        let prefix = s.charAt(0); // P veya S
+        let hIndex = parseInt(s.charAt(4)); // GİZLİ HAFTA NO
+        let gIndex = parseInt(s.charAt(5)); // GİZLİ GÜN NO
+
+        if (!['P', 'S'].includes(prefix) || isNaN(hIndex) || isNaN(gIndex)) {
+             resDiv.innerHTML = "❌ HATA: Tanımsız Kod Formatı!"; return;
+        }
+
+        // RAF ÖMRÜ KURALI
+        let rafOmru = 6; // P (Pasta) için varsayılan
+        let urunTuru = "PASTA";
+        
+        if (prefix === 'S') {
+            rafOmru = 3; // Sütlü için
+            urunTuru = "SÜTLÜ TATLI";
+        }
+
+        // 3. GELECEK TARİH KONTROLÜ (ZAMAN YOLCULUĞU ENGELİ)
+        if (hIndex > currentH || (hIndex === currentH && gIndex > currentG)) {
+             resDiv.innerHTML = `
+                <div style="background:#fff3e0; border:3px solid #ff9800; padding:20px; border-radius:15px; color:#e65100;">
+                    <h2 style="margin:0">🚫 ERKEN OKUTMA!</h2>
+                    <p>Bu ürünün üretim tarihi henüz gelmedi.<br>Sistem Geleceğe Kapalıdır.</p>
+                </div>`;
+            return;
+        }
+
+        // 4. BAYAT/TAZE HESABI
         let isBayat = false;
         let durum = "";
-
-        // 3. BAYAT KONTROLÜ
+        
         if (hIndex < currentH) {
             durum = "❌ KRİTİK: ESKİ HAFTA ÜRÜNÜ!";
             isBayat = true;
         } else {
             let fark = currentG - gIndex;
-            if (fark >= 6) {
-                durum = "❌ KRİTİK: RAF ÖMRÜ DOLDU";
+            
+            if (fark >= rafOmru) {
+                durum = `❌ KRİTİK: ${urunTuru} RAF ÖMRÜ DOLDU`;
                 isBayat = true;
-            } else if (fark === 5) {
+            } else if (fark === (rafOmru - 1)) {
                 durum = "⚠️ UYARI: BUGÜN SON GÜN";
             } else {
                 durum = "✅ ÜRÜN TAZE";
             }
         }
 
+        // ÜRETİM TARİHİNİ GERİ HESAPLA
         const uretimTarihi = new Date(now);
         let farkGun = currentG - gIndex;
         uretimTarihi.setDate(now.getDate() - farkGun);
         const tarihYazi = uretimTarihi.toLocaleDateString('tr-TR');
 
-        // 4. TELEGRAM VE SHEETS KAYITLARI
-        fetch(SHEET_URL, {
+        // KAYITLAR
+        const ts = new Date().getTime();
+        fetch(`${SHEET_URL}?v=${ts}`, {
             method: 'POST',
             mode: 'no-cors',
             body: JSON.stringify({ personel: isimInput.value, uretim: tarihYazi, durum: subeAdi + " - " + durum, zaman: now.toLocaleString('tr-TR'), kod: s, ip: ip })
@@ -187,10 +205,10 @@
         fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ chat_id: config.chatId, text: `📍 *Şube:* ${subeAdi}\n👤 *Pers:* ${isimInput.value}\n🔢 *Kod:* ${s}\n📊 *Durum:* ${durum}\n📅 *Üretim:* ${tarihYazi}`, parse_mode: 'Markdown' })
+            body: JSON.stringify({ chat_id: config.chatId, text: `📍 *Şube:* ${subeAdi}\n👤 *Pers:* ${isimInput.value}\n🍰 *Tür:* ${urunTuru}\n🔢 *Kod:* ${s}\n📊 *Durum:* ${durum}\n📅 *Üretim:* ${tarihYazi}`, parse_mode: 'Markdown' })
         });
 
-        // 5. GÖRSEL SONUÇ EKRANI
+        // 5. GÖRSEL SONUÇ (VURUCU EKRAN)
         resDiv.innerHTML = `
             <div style="
                 background: ${isBayat ? '#ffebee' : '#e8f5e9'}; 
@@ -203,21 +221,26 @@
                 <div style="font-size: 1.5rem; font-weight: 800; margin-bottom: 8px;">
                     ${isBayat ? '❌ DİKKAT: BAYAT!' : '✅ İŞLEM BAŞARILI'}
                 </div>
-                <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 10px;">
+                <div style="font-size: 1.1rem; font-weight: bold; margin-bottom: 10px;">
                     ${durum}
                 </div>
                 <hr style="border: 0; border-top: 1px solid ${isBayat ? '#ffcdd2' : '#c8e6c9'}; margin: 10px 0;">
                 <div style="font-size: 0.95rem; color: #444; line-height: 1.5;">
+                    <b>Ürün Türü:</b> ${urunTuru}<br>
                     <b>Üretim Tarihi:</b> ${tarihYazi}<br>
-                    <b>Şube:</b> ${subeAdi}<br>
-                    <small style="color: #777;">Hafta: ${hIndex} | Gün: ${gIndex}</small>
+                    <b>Şube:</b> ${subeAdi}
                 </div>
             </div>
         `;
 
         window.history.replaceState({}, document.title, window.location.pathname);
-        manualSeriInput.value = "RR"; sifreInput.value = "";
+        manualSeriInput.value = ""; sifreInput.value = "";
     }
+
+    // Manuel Girişte Küçük Harfi Büyüt ve P/S kontrolü yap
+    document.getElementById('manualSerial').addEventListener('input', function(e) {
+        e.target.value = e.target.value.toUpperCase();
+    });
 </script>
 </body>
 </html>
