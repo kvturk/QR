@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Kalite Kontrol V8.6</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background-color: #fdf5e6; color: #5d4037; padding: 20px; box-sizing: border-box; }
+        .card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid #d4af37; text-align: center; width: 100%; max-width: 350px; }
+        h2 { color: #8b4513; margin-bottom: 5px; }
+        .input-group { margin: 15px 0; text-align: left; }
+        label { font-size: 0.75rem; color: #8b4513; font-weight: bold; margin-left: 5px; }
+        input { width: 100%; padding: 12px; margin-top: 5px; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; font-size: 16px; text-align: center; }
+        #manualSerial { font-weight: bold; letter-spacing: 2px; color: #8b4513; background-color: #fffaf0; border: 2px solid #d4af37; text-transform: uppercase; }
+        button { width: 100%; padding: 15px; background-color: #d4af37; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
+        #result { margin-top: 25px; font-weight: bold; font-size: 1.1rem; line-height: 1.6; }
+        .session-info { font-size: 0.8rem; color: #2e7d32; margin-bottom: 10px; font-weight: bold; background: #e8f5e9; padding: 10px; border-radius: 10px; }
+        .logout-btn { background: none; color: #8b4513; font-size: 0.7rem; text-decoration: underline; margin-top: 20px; border: none; cursor: pointer; width: auto; padding: 5px; }
+        
+        /* DURUM ÇUBUĞU */
+        .progress-container { width: 100%; background-color: #e0e0e0; border-radius: 10px; margin: 15px 0; height: 20px; overflow: hidden; display: none; }
+        .progress-bar { height: 100%; text-align: center; line-height: 20px; color: white; font-size: 12px; font-weight: bold; transition: width 0.5s ease-in-out; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Royal Pastanesi</h2>
+    <div style="font-size:0.75rem; color:#d4af37; letter-spacing: 1px; margin-bottom:15px; font-weight:bold;">ROYAL KK V8.6 (AY KORUMALI)</div>
+    
+    <div id="authFields">
+        <div class="input-group">
+            <label>PERSONEL ADI</label>
+            <input type="text" id="staffName" placeholder="Ad Soyad" autocomplete="off" maxlength="30" 
+                   oninput="this.value = this.value.replace(/[^a-zA-ZçÇğĞıİöÖşŞüÜ\s]/g, '')">
+        </div>
+        <div class="input-group">
+            <label>SİSTEM ŞİFRESİ</label>
+            <input type="password" id="pwd" placeholder="****">
+        </div>
+    </div>
+
+    <div id="sessionStatus" class="session-info" style="display:none;"></div>
+
+    <div class="input-group">
+        <label>SERİ NO (MANUEL)</label>
+        <input type="text" id="manualSerial" placeholder="Örn: P852319" maxlength="7" 
+               oninput="this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '')">
+    </div>
+    
+    <button id="mainBtn" onclick="processAll()">KONTROLÜ BAŞLAT</button>
+    
+    <div id="result"></div>
+    
+    <div id="lifeBarContainer" class="progress-container">
+        <div id="lifeBar" class="progress-bar" style="width: 0%"></div>
+    </div>
+
+    <button id="logoutBtn" class="logout-btn" onclick="clearSession(true)" style="display:none;">Vardiyayı Kapat (Oturumu Sil)</button>
+</div>
+
+<script>
+    // --- GİZLİ AYARLAR ---
+    const SECRET_CONFIG = {
+        botToken: "8280174252:AAHkcwG-VpWnHi1B3qGj5rrDLh9OurXTeQ4",
+        chatId: "924832074", 
+        key: "MjAyNnJveWFs",
+        sheetUrl: "https://script.google.com/macros/s/AKfycbyZlvvJkdRBFJAhf0GLXuWLCfhpXnrCsahnZ9SizJ_fp4k8vEFbYa625fH262woftOP/exec"
+    };
+
+    const SUBELER = [
+        { ad: "Gümbet Şube", lat: 37.0389, lon: 27.4118 },
+        { ad: "Gümbet 2 Şube", lat: 37.0378, lon: 27.4042 },
+        { ad: "Konacık Şube", lat: 37.0463, lon: 27.4003 },
+        { ad: "Kumbahçe Şube", lat: 37.0325, lon: 27.4393 }
+    ];
+
+    window.onload = function() { checkSession(false); };
+
+    function checkSession(forceClear = false) {
+        const sessionStr = localStorage.getItem('royal_session');
+        if (!sessionStr) return null;
+        const session = JSON.parse(sessionStr);
+        const isExpired = (Date.now() - session.time > 3600000); 
+
+        if (session && !isExpired && !forceClear) {
+            document.getElementById('authFields').style.display = 'none';
+            document.getElementById('sessionStatus').style.display = 'block';
+            document.getElementById('sessionStatus').textContent = "👤 Personel: " + session.name;
+            document.getElementById('logoutBtn').style.display = 'inline-block';
+            return session;
+        } else if (isExpired || forceClear) {
+            clearSession(true);
+        }
+        return null;
+    }
+
+    function clearSession(resetInputs = true) {
+        localStorage.removeItem('royal_session');
+        document.getElementById('authFields').style.display = 'block';
+        document.getElementById('sessionStatus').style.display = 'none';
+        document.getElementById('logoutBtn').style.display = 'none';
+        document.getElementById('lifeBarContainer').style.display = 'none';
+        document.getElementById('result').innerHTML = "";
+        if(resetInputs) {
+            document.getElementById('staffName').value = "";
+            document.getElementById('pwd').value = "";
+        }
+    }
+
+    async function getIpData() {
+        try {
+            const r = await fetch('https://api.ipify.org?format=json');
+            const d = await r.json();
+            return d.ip || "Alınamadı";
+        } catch (e) { return "Bağlantı Hatası"; }
+    }
+
+    async function sendSecurityAlert(type, isim, ip, sube = "Bilinmiyor") {
+        const text = `🚨 *GÜVENLİK İHLALİ*\n\n⚠️ *Tip:* ${type}\n👤 *Pers:* ${isim}\n🌐 *IP:* ${ip}\n📍 *Konum:* ${sube}`;
+        await fetch(`https://api.telegram.org/bot${SECRET_CONFIG.botToken}/sendMessage`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ chat_id: SECRET_CONFIG.chatId, text: text, parse_mode: 'Markdown' })
+        });
+    }
+
+    function getDistance(lat1, lon1, lat2, lon2) {
+        const R = 6371e3;
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLon = (lon2 - lon1) * Math.PI / 180;
+        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
+    }
+
+    function getRoyalWeek(date) {
+        const gun = date.getDate();
+        const ayinBasi = new Date(date.getFullYear(), date.getMonth(), 1);
+        const ilkGun = ayinBasi.getDay() === 0 ? 7 : ayinBasi.getDay();
+        return Math.ceil((gun + ilkGun - 1) / 7);
+    }
+
+    async function processAll() {
+        const resDiv = document.getElementById("result");
+        const barContainer = document.getElementById("lifeBarContainer");
+        resDiv.innerHTML = "🔍 Analiz Ediliyor...";
+        barContainer.style.display = "none";
+
+        const session = checkSession(false);
+        const staffNameValue = document.getElementById("staffName").value.trim();
+        const isim = session ? session.name : staffNameValue;
+
+        const userIp = await getIpData();
+
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (!isMobile) {
+            resDiv.innerHTML = "<div style='color:red'>❌ HATA: PC Yasaktır.</div>";
+            await sendSecurityAlert("PC GİRİŞİ", isim || "Bilinmiyor", userIp);
+            return;
+        }
+
+        if(!isim) { alert("Lütfen adınızı yazın!"); return; }
+        resDiv.innerHTML = "🔍 Konum ve Veri Doğrulanıyor...";
+
+        navigator.geolocation.getCurrentPosition(async (pos) => {
+            const uLat = pos.coords.latitude;
+            const uLon = pos.coords.longitude;
+            let aktifSube = null;
+            SUBELER.forEach(s => {
+                if (getDistance(uLat, uLon, s.lat, s.lon) < 500) aktifSube = s.ad;
+            });
+
+            if (aktifSube) {
+                runSystem(aktifSube, userIp, isim);
+            } else {
+                resDiv.innerHTML = "<div style='color:red'>❌ HATA: Şube dışındasınız!</div>";
+                await sendSecurityAlert("ŞUBE DIŞI", isim, userIp, "Dışarıda");
+            }
+        }, (err) => {
+            resDiv.innerHTML = "❌ HATA: Konum izni gerekli!";
+        }, { enableHighAccuracy: true });
+    }
+
+    async function runSystem(subeAdi, ip, currentStaff) {
+        const resDiv = document.getElementById("result");
+        const barContainer = document.getElementById("lifeBarContainer");
+        const bar = document.getElementById("lifeBar");
+        const manualSeriInput = document.getElementById("manualSerial");
+        const sifreInput = document.getElementById("pwd");
+        const session = checkSession(false);
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        let s = urlParams.get('s') || manualSeriInput.value.trim().toUpperCase();
+
+        if (!session) {
+            if (btoa(sifreInput.value.trim().toLowerCase()) !== SECRET_CONFIG.key) { 
+                resDiv.innerHTML = "❌ İsim veya Şifre Hatalı!"; 
+                await sendSecurityAlert("YANLIŞ ŞİFRE", currentStaff, ip, subeAdi);
+                return; 
+            }
+            localStorage.setItem('royal_session', JSON.stringify({ name: currentStaff, time: Date.now() }));
+            checkSession(false);
+        }
+
+        let now;
+        try {
+            const timeRes = await fetch("https://worldtimeapi.org/api/timezone/Europe/Istanbul");
+            const timeData = await timeRes.json();
+            now = new Date(timeData.datetime);
+        } catch (e) { now = new Date(); }
+
+        const currentH = getRoyalWeek(now);
+        const currentG = now.getDay() === 0 ? 7 : now.getDay();
+
+        if (s.length < 7) { resDiv.innerHTML = "❌ HATA: Kod Hatalı!"; return; }
+
+        let prefix = s.charAt(0);
+        let hIndex = parseInt(s.charAt(4)); 
+        let gIndex = parseInt(s.charAt(5));
+
+        if (!['P', 'S'].includes(prefix) || isNaN(hIndex) || isNaN(gIndex)) {
+            resDiv.innerHTML = "❌ HATA: Geçersiz Format!"; return;
+        }
+
+        let iadeLimiti = (prefix === 'S') ? 4 : 5; 
+        let urunTuru = (prefix === 'S') ? "SÜTLÜ TATLI" : "PASTA";
+
+        // --- DÜZELTİLMİŞ ALGORİTMA BAŞLANGICI ---
+        let toplamGunFarki = 0;
+        
+        // Önce basit farkı hesapla (Aynı ay içindeyse bu çalışır)
+        let basitFark = (currentH - hIndex) * 7 + (currentG - gIndex);
+
+        if (basitFark < 0) {
+            // Fark NEGATİF çıktıysa, muhtemelen yeni aya girdik.
+            // Geçen ayın takvimini tarayıp bu barkodun tarihini bulmaya çalışalım.
+            let arananTarih = null;
+            let tempDate = new Date(now.getFullYear(), now.getMonth() - 1, 1); // Geçen ayın 1'i
+            
+            // Geçen ayın sonuna kadar gün gün tara
+            while (tempDate.getMonth() === (now.getMonth() - 1 + 12) % 12) {
+                let tH = getRoyalWeek(tempDate); // O günün haftası
+                let tG = tempDate.getDay() === 0 ? 7 : tempDate.getDay(); // O günün günü
+                
+                // Eğer barkoddaki Hafta ve Gün ile eşleşirse, tarihi bulduk demektir!
+                if (tH === hIndex && tG === gIndex) {
+                    arananTarih = new Date(tempDate);
+                    break;
+                }
+                tempDate.setDate(tempDate.getDate() + 1);
+            }
+
+            if (arananTarih) {
+                // Tarihi bulduysak, şimdi ile arasındaki gerçek gün farkını al
+                let zamanFarki = now.getTime() - arananTarih.getTime();
+                toplamGunFarki = Math.floor(zamanFarki / (1000 * 3600 * 24));
+            } else {
+                // Bulamadıysak gerçekten gelecek tarihli veya hatalıdır
+                toplamGunFarki = basitFark;
+            }
+        } else {
+            // Fark pozitifse sorun yok, aynı aydır.
+            toplamGunFarki = basitFark;
+        }
+        // --- DÜZELTİLMİŞ ALGORİTMA BİTİŞİ ---
+
+        if (toplamGunFarki < 0) {
+             resDiv.innerHTML = `<div style="background:#fff3e0; padding:15px; border-radius:10px; color:#e65100;">🚫 GELECEK TARİHLİ ÜRÜN!</div>`;
+             return;
+        }
+        
+        let isBayat = false;
+        let durum = "";
+        let barColor = "#4caf50"; 
+        let barPercent = 0;
+
+        if (toplamGunFarki >= iadeLimiti) {
+            durum = `❌ RAF ÖMRÜ DOLDU (İADE!)`;
+            isBayat = true;
+            barPercent = 100;
+            barColor = "#d32f2f"; 
+        } else if (toplamGunFarki === (iadeLimiti - 1)) {
+            durum = "⚠️ BUGÜN SON SATIŞ GÜNÜ";
+            barPercent = 90;
+            barColor = "#ff9800"; 
+        } else {
+            durum = "✅ ÜRÜN TAZE";
+            barPercent = Math.max(10, (toplamGunFarki / iadeLimiti) * 80);
+            barColor = "#4caf50";
+        }
+
+        if (toplamGunFarki > 14) {
+             durum = "❌ KRİTİK: ÇOK ESKİ ÜRÜN!";
+             isBayat = true;
+             barPercent = 100;
+             barColor = "#b71c1c"; 
+        }
+
+        const uretimTarihi = new Date(now);
+        uretimTarihi.setDate(now.getDate() - toplamGunFarki);
+        const tarihYazi = uretimTarihi.toLocaleDateString('tr-TR');
+
+        barContainer.style.display = "block";
+        setTimeout(() => {
+            bar.style.width = barPercent + "%";
+            bar.style.backgroundColor = barColor;
+            bar.textContent = isBayat ? "ÖMÜR BİTTİ" : `%${Math.round(barPercent)} DOLDU`;
+        }, 100);
+
+        fetch(SECRET_CONFIG.sheetUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: JSON.stringify({ personel: currentStaff, uretim: tarihYazi, durum: subeAdi + " - " + durum, zaman: now.toLocaleString('tr-TR'), kod: s, ip: ip })
+        });
+
+        fetch(`https://api.telegram.org/bot${SECRET_CONFIG.botToken}/sendMessage`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ chat_id: SECRET_CONFIG.chatId, text: `📍 *Şube:* ${subeAdi}\n👤 *Pers:* ${currentStaff}\n🍰 *Tür:* ${urunTuru}\n🔢 *Kod:* ${s}\n📊 *Durum:* ${durum}\n📅 *Üretim:* ${tarihYazi}\n🌐 *IP:* ${ip}`, parse_mode: 'Markdown' })
+        });
+
+        resDiv.innerHTML = `
+            <div style="background: ${isBayat ? '#ffebee' : '#e8f5e9'}; padding: 20px; border-radius: 15px; border: 3px solid ${isBayat ? '#d32f2f' : '#2e7d32'}; color: ${isBayat ? '#d32f2f' : '#2e7d32'};">
+                <div style="font-size: 1.3rem; font-weight: 800;">${isBayat ? '❌ İADE EDİLMELİ!' : '✅ SATILABİLİR'}</div>
+                <div>${durum}</div>
+                <hr style="border-top:1px solid #ccc; margin:10px 0;">
+                <div style="font-size: 0.9rem; color: #444;">Üretim: ${tarihYazi} (${toplamGunFarki} Günlük)</div>
+            </div>`;
+
+        window.history.replaceState({}, document.title, window.location.pathname);
+        manualSeriInput.value = "";
+    }
+</script>
+</body>
+</html>
