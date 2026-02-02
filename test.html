@@ -1,0 +1,15 @@
+<button onclick="openCamera()">Kamera Aç</button>
+
+<input 
+  type="file" 
+  id="cameraInput"
+  accept="image/*"
+  capture="environment"
+  style="display:none"
+/>
+
+<script>
+function openCamera() {
+  document.getElementById("cameraInput").click();
+}
+</script>
