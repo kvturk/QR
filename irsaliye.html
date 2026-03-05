@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Royal İrsaliye</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#2e1065 0%,#6b21a8 100%);min-height:100vh;display:flex;align-items:center;justify-content:center}
+        .glass-card{background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-radius:24px;box-shadow:0 20px 25px -5px rgba(0,0,0,0.2)}
+        .p-btn{background:#7c3aed;transition:all 0.3s ease}.p-btn:hover{background:#6d28d9;transform:translateY(-2px)}
+    </style>
+</head>
+<body class="p-6">
+    <div class="glass-card w-full max-w-md p-8 text-center">
+        <div class="mb-6">
+            <h1 class="text-3xl font-bold text-purple-900">Royal Pastanesi</h1>
+            <p class="text-purple-600 font-medium">İrsaliye Kayıt Sistemi</p>
+        </div>
+        <div class="bg-purple-50 rounded-2xl p-6 mb-6 border-2 border-purple-100">
+            <span class="text-sm uppercase tracking-widest text-purple-400 font-bold">Kod</span>
+            <div id="iN" class="text-2xl md:text-3xl font-mono font-bold text-purple-800 mt-2">RRIR--------</div>
+        </div>
+        <div class="flex flex-col gap-3">
+            <button onclick="_gN()" class="p-btn text-white font-bold py-4 px-6 rounded-xl shadow-lg">ÜRET</button>
+            <button onclick="_cC()" id="cB" class="bg-white border-2 border-purple-200 text-purple-700 font-bold py-3 px-6 rounded-xl">KOPYALA</button>
+        </div>
+        <div class="mt-8 pt-6 border-t border-purple-100 text-left flex justify-between text-xs text-purple-400">
+            <span>Sıra: <b id="lC">0</b></span>
+            <span>v1.0.2</span>
+        </div>
+    </div>
+    <script>
+        const _fD=()=>{const n=new Date();return`${String(n.getDate()).padStart(2,'0')}${String(n.getMonth()+1).padStart(2,'0')}${n.getFullYear()}`};
+        const _gN=()=>{const t=_fD();let c=localStorage.getItem('_rC')||0;c=parseInt(c)+1;const p=String(c).padStart(3,'0');const f=`RRIR${t}${p}`;document.getElementById('iN').innerText=f;document.getElementById('lC').innerText=c;localStorage.setItem('_rC',c);localStorage.setItem('_rD',t);const b=document.getElementById('cB');b.innerText="KOPYALA";b.className="bg-white border-2 border-purple-200 text-purple-700 font-bold py-3 px-6 rounded-xl"};
+        const _cC=()=>{const x=document.getElementById('iN').innerText;if(x.includes('---'))return;navigator.clipboard.writeText(x).then(()=>{const b=document.getElementById('cB');b.innerText="TAMAM ✓";b.classList.add('bg-green-500','text-white');setTimeout(()=>{b.innerText="KOPYALA";b.classList.remove('bg-green-500','text-white')},1500)})};
+        window.onload=()=>{document.getElementById('lC').innerText=localStorage.getItem('_rC')||0};
+    </script>
+</body>
+</html>
