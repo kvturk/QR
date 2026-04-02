@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Pastanesi - Ana Menü</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #3b1b7d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fbf9ff;
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 350px;
+            width: 90%;
+        }
+        h2 {
+            color: #3b1b7d;
+            margin: 0 0 5px 0;
+            font-weight: 700;
+            font-size: 24px;
+        }
+        .separator {
+            width: 30px;
+            height: 3px;
+            background-color: #a885ef;
+            margin: 0 auto 30px auto;
+            border-radius: 2px;
+        }
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .nav-buttons a {
+            text-decoration: none;
+            background-color: #854cf6;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(133, 76, 246, 0.4);
+            transition: all 0.2s ease;
+        }
+        .nav-buttons a:hover {
+            background-color: #723be0;
+            transform: translateY(-2px);
+        }
+        .system-time {
+            margin-top: 25px;
+            font-size: 11px;
+            color: #bba1f2;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Royal Pastanesi</h2>
+    <div class="separator"></div>
+    
+    <div class="nav-buttons">
+        <a href="https://kvturk.github.io/QR/irsaliye.html">İRSALİYE GİRİŞİ</a>
+        <a href="https://kvturk.github.io/QR/tedarik.html">TEDARİK LİSTESİ</a>
+    </div>
+    
+    <div class="system-time" id="timeDisplay">Sistem Zamanı: Yükleniyor...</div>
+</div>
+
+<script>
+    function saatiGuncelle() {
+        const simdi = new Date();
+        document.getElementById('timeDisplay').innerText = "Sistem Zamanı: " + simdi.toLocaleTimeString('tr-TR');
+    }
+    setInterval(saatiGuncelle, 1000);
+    saatiGuncelle();
+</script>
+
+</body>
+</html>
