@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tedarik Listesi PDF Oluşturucu</title>
+    <title>Tedarik Listesi Akıllı Yöneticisi (Seçmeli CSV Formatı)</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
@@ -17,8 +17,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
         }
         .container {
             background-color: #fbf9ff;
@@ -26,18 +28,18 @@
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             text-align: center;
-            max-width: 400px;
-            width: 90%;
+            max-width: 950px;
+            width: 100%;
         }
         h2 {
             color: #3b1b7d;
             margin: 0 0 5px 0;
             font-weight: 700;
-            font-size: 20px;
+            font-size: 22px;
         }
         .separator {
-            width: 30px;
-            height: 3px;
+            width: 40px;
+            height: 4px;
             background-color: #a885ef;
             margin: 0 auto 20px auto;
             border-radius: 2px;
@@ -50,7 +52,7 @@
             font-weight: 600;
             margin-bottom: 20px;
             border: 1px solid #e0d4fc;
-            padding: 5px 15px;
+            padding: 6px 18px;
             border-radius: 20px;
             transition: background 0.2s;
         }
@@ -61,14 +63,21 @@
             background-color: #f2eefa;
             border: 2px dashed #bba1f2;
             border-radius: 10px;
-            padding: 15px;
+            padding: 18px;
             margin-bottom: 20px;
             position: relative;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            transition: background 0.3s;
+        }
+        .file-input-wrapper:hover {
+            background-color: #e8ddf7;
         }
         .file-input-wrapper p {
             margin: 0;
             color: #7252ab;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
         }
         input[type="file"] {
@@ -80,25 +89,93 @@
             opacity: 0;
             cursor: pointer;
         }
+        
+        .table-container {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 13px;
+        }
+        th {
+            background-color: #854cf6;
+            color: white;
+            padding: 12px 10px;
+            white-space: nowrap;
+        }
+        td {
+            background-color: white;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            border-right: 1px solid #eee;
+            color: #333;
+            transition: all 0.2s;
+        }
+        td[contenteditable="true"] {
+            cursor: text;
+            font-weight: 600;
+            min-width: 60px;
+        }
+        td[contenteditable="true"]:hover, td[contenteditable="true"]:focus {
+            background-color: #f6f2ff;
+            outline: 2px solid #a885ef;
+            outline-offset: -2px;
+            color: #3b1b7d;
+        }
+
+        .checkbox-cell {
+            text-align: center;
+            width: 40px;
+        }
+        input[type="checkbox"] {
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+            accent-color: #854cf6;
+        }
+
         button.primary-btn {
             background-color: #854cf6;
             color: white;
             border: none;
             padding: 15px 20px;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 700;
             border-radius: 8px;
             cursor: pointer;
             width: 100%;
-            transition: background-color 0.3s ease;
+            max-width: 400px;
+            transition: background-color 0.3s ease, transform 0.1s;
             box-shadow: 0 4px 15px rgba(133, 76, 246, 0.4);
+            display: none;
+            margin: 0 auto;
         }
         button.primary-btn:hover {
             background-color: #723be0;
         }
+        button.primary-btn:active {
+            transform: scale(0.98);
+        }
+        .info-text {
+            font-size: 13px;
+            color: #d35400;
+            margin-bottom: 15px;
+            display: none;
+            font-weight: 600;
+            background: #fff3e0;
+            padding: 10px;
+            border-radius: 8px;
+        }
         .system-time {
-            margin-top: 20px;
-            font-size: 10px;
+            margin-top: 25px;
+            font-size: 11px;
             color: #bba1f2;
         }
     </style>
@@ -109,20 +186,26 @@
     <h2>Tedarik Satın Alma</h2>
     <div class="separator"></div>
     
-    <a href="main.html" class="back-link">← Ana Menüye Dön</a>
+    <a href="index.html" class="back-link">← Ana Menüye Dön</a>
     
     <div class="file-input-wrapper">
-        <p>KERZZPOS CSV SEÇ (Tıkla)</p>
+        <p>KERZZPOS CSV RAPORU SEÇ</p>
         <input type="file" id="csvFileInput" accept=".csv" />
     </div>
+
+    <div id="infoText" class="info-text">
+        ☑ Soldaki kutucuklardan PDF'e eklemek istediklerinizi seçin.<br>
+        ✎ Düzenlemek veya ekleme yapmak için hücrelere tıklayabilirsiniz.
+    </div>
     
-    <button class="primary-btn" onclick="dosyayiIsle()">PDF OLUŞTUR</button>
+    <div class="table-container" id="tableContainer"></div>
+    
+    <button id="pdfBtn" class="primary-btn" onclick="pdfOlustur()">SEÇİLİ OLANLARI PDF YAP</button>
     
     <div class="system-time" id="timeDisplay">Sistem Zamanı: Yükleniyor...</div>
 </div>
 
 <script>
-    // Sistem Saati
     function saatiGuncelle() {
         const simdi = new Date();
         document.getElementById('timeDisplay').innerText = "Sistem Zamanı: " + simdi.toLocaleTimeString('tr-TR');
@@ -130,13 +213,13 @@
     setInterval(saatiGuncelle, 1000);
     saatiGuncelle();
 
-    // CSV Yükleme ve Dosya Adı Gösterme
-    document.getElementById('csvFileInput').addEventListener('change', function(e) {
-        const fileName = e.target.files[0] ? e.target.files[0].name : "KERZZPOS CSV SEÇ (Tıkla)";
-        e.target.previousElementSibling.innerText = fileName;
-    });
+    function tumunuSec(source) {
+        const checkboxes = document.querySelectorAll('.row-checkbox');
+        checkboxes.forEach(cb => {
+            cb.checked = source.checked;
+        });
+    }
 
-    // Türkçe Karakter Düzeltici
     function turkceKarakterleriTemizle(metin) {
         if (!metin) return '';
         const trMap = {
@@ -146,66 +229,207 @@
         return metin.replace(/[çğıöşüÇĞİÖŞÜ]/g, match => trMap[match] || match);
     }
 
-    // PDF İşleme Motoru
-    function dosyayiIsle() {
-        const fileInput = document.getElementById('csvFileInput');
-        const file = fileInput.files[0];
+    document.getElementById('csvFileInput').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
 
-        if (!file) {
-            alert("Lütfen önce KerzzPOS'tan aldığınız bir CSV dosyası seçin.");
-            return;
-        }
+        e.target.previousElementSibling.innerText = file.name;
 
         const reader = new FileReader();
+        reader.onload = function(event) {
+            const csvContent = event.target.result;
+            const rows = csvContent.split(/\r?\n/);
 
-        reader.onload = function(e) {
-            const hamVeri = e.target.result;
-            const satirlar = hamVeri.split('\n');
-
-            // "Silinme" kelimesi geçmeyen ve boş olmayan satırları tut
-            const temizSatirlar = satirlar.filter(satir => {
-                return satir.trim() !== '' && !satir.toLowerCase().includes('silinme');
-            });
-
-            // CSV ayracını tespit et
-            const ayiraciBul = temizSatirlar[0] && temizSatirlar[0].includes(';') ? ';' : ',';
-
-            // jsPDF başlat
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF({ orientation: 'landscape' });
-
-            const tabloVerisi = temizSatirlar.map(satir => {
-                const hucreler = satir.split(ayiraciBul);
-                return hucreler.map(hucre => turkceKarakterleriTemizle(hucre.trim()));
-            });
-
-            // PDF Başlığı
-            doc.setTextColor(59, 27, 125); 
-            doc.setFontSize(16);
-            doc.text("Royal Pastanesi Satin Alma Listesi", 14, 15);
-            doc.setTextColor(0, 0, 0); 
-            doc.setFontSize(10);
+            let isHeaderParsed = false;
+            let keepColumns = []; 
+            let tableHTML = '<table id="dataTable"><thead><tr>';
             
-            // PDF Tarihi
-            const bugun = new Date();
-            const tarihMetni = "Tarih: " + bugun.toLocaleDateString('tr-TR');
-            doc.text(tarihMetni, 14, 22);
+            tableHTML += `<th class="checkbox-cell" title="Tümünü Seç/Kaldır"><input type="checkbox" id="selectAll" checked onchange="tumunuSec(this)"></th>`;
 
-            // Tablo Oluşturma
-            doc.autoTable({
-                startY: 28,
-                head: [tabloVerisi[0]], 
-                body: tabloVerisi.slice(1),
-                theme: 'striped',
-                styles: { fontSize: 8 }, 
-                headStyles: { fillColor: [133, 76, 246] }
+            const normalize = text => text.toLowerCase().replace(/\./g, '').trim();
+            
+            const columnsToRemove = [
+                "ürün grubu", 
+                "merkez sevk mik", 
+                "şube m kabul mik", 
+                "fark"
+            ];
+
+            rows.forEach(rowText => {
+                const rowTextLower = rowText.toLowerCase();
+                const cells = rowText.split(';');
+
+                if (rowTextLower.includes('rapor alınma zamanı') || 
+                    rowTextLower.includes('raporu alan kullanıcı') || 
+                    rowTextLower.includes('rapor alınan pc adı') ||
+                    rowTextLower.includes('sipariş detayı') ||
+                    (rowTextLower.includes('şube') && rowTextLower.includes(':')) ||
+                    rowTextLower.includes('1/1') ||
+                    rowText.trim() === '') {
+                    return; 
+                }
+
+                if (rowTextLower.includes('silinme')) return;
+
+                if (!isHeaderParsed && rowTextLower.includes('stok kodu') && rowTextLower.includes('ürün adı')) {
+                    cells.forEach((cellText, index) => {
+                        cellText = cellText.trim();
+                        
+                        if (cellText !== '') {
+                            const normText = normalize(cellText);
+                            const shouldRemove = columnsToRemove.some(c => normText.includes(normalize(c)));
+                            
+                            if (!shouldRemove) {
+                                let isSubeSutunu = false;
+                                
+                                if (normText.includes('mrk ony')) {
+                                    cellText = "Şube Adı";
+                                    isSubeSutunu = true;
+                                }
+                                
+                                keepColumns.push({ index: index, name: cellText, isSubeSutunu: isSubeSutunu });
+                                tableHTML += `<th>${cellText}</th>`;
+                            }
+                        }
+                    });
+                    tableHTML += '</tr></thead><tbody>';
+                    isHeaderParsed = true;
+                    return; 
+                }
+
+                if (isHeaderParsed) {
+                    let rowHasData = false;
+                    let tempRowHTML = '<tr>';
+                    
+                    tempRowHTML += `<td class="checkbox-cell"><input type="checkbox" class="row-checkbox" checked></td>`;
+                    
+                    keepColumns.forEach(col => {
+                        let cellContent = cells[col.index] ? cells[col.index].trim() : '';
+                        
+                        if (col.isSubeSutunu) {
+                            cellContent = "";
+                        } else {
+                            if (cellContent !== '') rowHasData = true;
+                        }
+                        
+                        tempRowHTML += `<td contenteditable="true">${cellContent}</td>`;
+                    });
+                    
+                    tempRowHTML += '</tr>';
+
+                    if (rowHasData) {
+                        tableHTML += tempRowHTML;
+                    }
+                }
             });
 
-            // Sadece PDF İndir
-            doc.save('royal_pastanesi_tedarik.pdf');
+            tableHTML += '</tbody></table>';
+
+            document.getElementById('tableContainer').innerHTML = tableHTML;
+            document.getElementById('tableContainer').style.display = 'block';
+            document.getElementById('pdfBtn').style.display = 'block';
+            document.getElementById('infoText').style.display = 'block';
         };
 
         reader.readAsText(file, 'UTF-8');
+    });
+
+    function pdfOlustur() {
+        const table = document.getElementById('dataTable');
+        if (!table) return;
+
+        let tabloVerisi = [];
+        const satirlar = table.querySelectorAll('tr');
+
+        satirlar.forEach((satir, index) => {
+            let satirVerisi = [];
+            
+            if (index === 0) {
+                const hucreler = satir.querySelectorAll('th');
+                for(let i = 1; i < hucreler.length; i++) {
+                    satirVerisi.push(turkceKarakterleriTemizle(hucreler[i].innerText));
+                }
+                tabloVerisi.push(satirVerisi);
+            } else {
+                const checkbox = satir.querySelector('.row-checkbox');
+                if (checkbox && checkbox.checked) {
+                    const hucreler = satir.querySelectorAll('td');
+                    for(let i = 1; i < hucreler.length; i++) {
+                        satirVerisi.push(turkceKarakterleriTemizle(hucreler[i].innerText));
+                    }
+                    tabloVerisi.push(satirVerisi);
+                }
+            }
+        });
+
+        if (tabloVerisi.length <= 1) {
+            alert("Lütfen PDF'e aktarmak için en az bir satır seçin.");
+            return;
+        }
+
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({ orientation: 'landscape' });
+
+        // Ana Başlık
+        doc.setTextColor(59, 27, 125); 
+        doc.setFontSize(16);
+        doc.setFont(undefined, 'bold');
+        doc.text("Royal Pastanesi Satin Alma Listesi", 14, 15);
+        
+        // Tarih
+        doc.setTextColor(0, 0, 0); 
+        doc.setFontSize(10);
+        doc.setFont(undefined, 'normal');
+        const bugun = new Date();
+        const tarihMetni = "Tarih: " + bugun.toLocaleDateString('tr-TR');
+        doc.text(tarihMetni, 14, 22);
+
+        // Tablo Çizimi
+        doc.autoTable({
+            startY: 28,
+            head: [tabloVerisi[0]], 
+            body: tabloVerisi.slice(1), 
+            theme: 'striped',
+            styles: { fontSize: 9 }, 
+            headStyles: { fillColor: [133, 76, 246] }
+        });
+
+        // --- ŞEKİLLİ FOOTER (ALT BİLGİ) KISMI ---
+        // Tablonun bittiği Y koordinatını alıp üzerine 15 birim boşluk ekliyoruz
+        let finalY = doc.lastAutoTable.finalY + 15; 
+        
+        // Eğer tablo sayfanın çok altına inmişse, yazılar sıkışmasın diye yeni sayfa açıyoruz
+        if (finalY > 185) { 
+            doc.addPage();
+            finalY = 20;
+        }
+
+        // Estetik Mor Ayraç Çizgisi
+        doc.setDrawColor(168, 133, 239); // Açık mor buton rengi
+        doc.setLineWidth(0.5);
+        doc.line(14, finalY, 283, finalY); // A4 Landscape genişliğine uygun çizgi
+
+        finalY += 8;
+
+        // Sol Kısım: İletişim Bilgileri
+        doc.setTextColor(59, 27, 125); // Koyu Mor
+        doc.setFontSize(12);
+        doc.setFont(undefined, 'bold');
+        doc.text("RR Royal Unlu Mamulleri", 14, finalY);
+
+        doc.setFont(undefined, 'normal');
+        doc.setTextColor(80, 80, 80); // Koyu Gri
+        doc.setFontSize(9);
+        // PDF default fontlarında Türkçe karakter patlamasın diye Irtibat yazdık
+        doc.text("Irtibat : +90 545 123 48 48", 14, finalY + 6);
+        doc.text("www.royalpastanesi.com", 14, finalY + 11);
+
+        // Sağ Kısım: Vergi Bilgileri (Sağa Hizalı)
+        doc.text("V.D : Bodrum", 283, finalY + 6, { align: "right" });
+        doc.text("V.N : 7351695819", 283, finalY + 11, { align: "right" });
+
+        // PDF'i İndir
+        doc.save('royal_pastanesi_tedarik_raporu.pdf');
     }
 </script>
 
