@@ -1,428 +1,63 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tedarik Listesi Akıllı Yöneticisi (Seçmeli CSV Formatı)</title>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #3b1b7d;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .container {
-            background-color: #fbf9ff;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            text-align: center;
-            max-width: 950px;
-            width: 100%;
-        }
-        h2 {
-            color: #3b1b7d;
-            margin: 0 0 5px 0;
-            font-weight: 700;
-            font-size: 22px;
-        }
-        .separator {
-            width: 40px;
-            height: 4px;
-            background-color: #a885ef;
-            margin: 0 auto 20px auto;
-            border-radius: 2px;
-        }
-        .back-link {
-            display: inline-block;
-            color: #854cf6;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            border: 1px solid #e0d4fc;
-            padding: 6px 18px;
-            border-radius: 20px;
-            transition: background 0.2s;
-        }
-        .back-link:hover {
-            background-color: #e0d4fc;
-        }
-        .file-input-wrapper {
-            background-color: #f2eefa;
-            border: 2px dashed #bba1f2;
-            border-radius: 10px;
-            padding: 18px;
-            margin-bottom: 20px;
-            position: relative;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-            transition: background 0.3s;
-        }
-        .file-input-wrapper:hover {
-            background-color: #e8ddf7;
-        }
-        .file-input-wrapper p {
-            margin: 0;
-            color: #7252ab;
-            font-size: 14px;
-            font-weight: 600;
-        }
-        input[type="file"] {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
-        
-        .table-container {
-            margin-top: 20px;
-            margin-bottom: 20px;
-            overflow-x: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            display: none;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            font-size: 13px;
-        }
-        th {
-            background-color: #854cf6;
-            color: white;
-            padding: 12px 10px;
-            white-space: nowrap;
-        }
-        td {
-            background-color: white;
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-            border-right: 1px solid #eee;
-            color: #333;
-            transition: all 0.2s;
-        }
-        td[contenteditable="true"] {
-            cursor: text;
-            font-weight: 600;
-            min-width: 60px;
-        }
-        td[contenteditable="true"]:hover, td[contenteditable="true"]:focus {
-            background-color: #f6f2ff;
-            outline: 2px solid #a885ef;
-            outline-offset: -2px;
-            color: #3b1b7d;
-        }
-
-        .checkbox-cell {
-            text-align: center;
-            width: 40px;
-        }
-        input[type="checkbox"] {
-            cursor: pointer;
-            width: 16px;
-            height: 16px;
-            accent-color: #854cf6;
-        }
-
-        button.primary-btn {
-            background-color: #854cf6;
-            color: white;
-            border: none;
-            padding: 15px 20px;
-            font-size: 16px;
-            font-weight: 700;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-            max-width: 400px;
-            transition: background-color 0.3s ease, transform 0.1s;
-            box-shadow: 0 4px 15px rgba(133, 76, 246, 0.4);
-            display: none;
-            margin: 0 auto;
-        }
-        button.primary-btn:hover {
-            background-color: #723be0;
-        }
-        button.primary-btn:active {
-            transform: scale(0.98);
-        }
-        .info-text {
-            font-size: 13px;
-            color: #d35400;
-            margin-bottom: 15px;
-            display: none;
-            font-weight: 600;
-            background: #fff3e0;
-            padding: 12px;
-            border-radius: 8px;
-            line-height: 1.6;
-        }
-        .system-time {
-            margin-top: 25px;
-            font-size: 11px;
-            color: #bba1f2;
-        }
-    </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Tedarik Listesi Yöneticisi</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+body{font-family:'Poppins',sans-serif;background-color:#3b1b7d;display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0;padding:20px;box-sizing:border-box}
+.container{background-color:#fbf9ff;padding:30px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.3);text-align:center;max-width:950px;width:100%}
+h2{color:#3b1b7d;margin:0 0 5px 0;font-weight:700;font-size:22px}
+.separator{width:40px;height:4px;background-color:#a885ef;margin:0 auto 20px auto;border-radius:2px}
+.back-link{display:inline-block;color:#854cf6;text-decoration:none;font-size:13px;font-weight:600;margin-bottom:20px;border:1px solid #e0d4fc;padding:6px 18px;border-radius:20px;transition:background 0.2s}
+.back-link:hover{background-color:#e0d4fc}
+.file-input-wrapper{background-color:#f2eefa;border:2px dashed #bba1f2;border-radius:10px;padding:18px;margin-bottom:20px;position:relative;max-width:400px;margin-left:auto;margin-right:auto;transition:background 0.3s}
+.file-input-wrapper:hover{background-color:#e8ddf7}
+.file-input-wrapper p{margin:0;color:#7252ab;font-size:14px;font-weight:600}
+input[type="file"]{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.table-container{margin-top:20px;margin-bottom:20px;overflow-x:auto;border-radius:8px;box-shadow:0 4px 15px rgba(0,0,0,0.05);display:none}
+table{width:100%;border-collapse:collapse;text-align:left;font-size:13px}
+th{background-color:#854cf6;color:#fff;padding:12px 10px;white-space:nowrap}
+td{background-color:#fff;padding:10px;border-bottom:1px solid #eee;border-right:1px solid #eee;color:#333;transition:all 0.2s}
+td[contenteditable="true"]{cursor:text;font-weight:600;min-width:60px}
+td[contenteditable="true"]:hover,td[contenteditable="true"]:focus{background-color:#f6f2ff;outline:2px solid #a885ef;outline-offset:-2px;color:#3b1b7d}
+td.readonly-cell{background-color:#f9f9f9;color:#777;cursor:not-allowed;font-weight:normal}
+select.sube-select{width:100%;padding:8px 5px;border:1px solid #ccc;border-radius:5px;font-family:'Poppins',sans-serif;font-size:12px;color:#333;cursor:pointer;outline:none}
+select.sube-select:focus{border-color:#854cf6}
+.checkbox-cell{text-align:center;width:40px}
+input[type="checkbox"]{cursor:pointer;width:16px;height:16px;accent-color:#854cf6}
+button.primary-btn{background-color:#854cf6;color:#fff;border:none;padding:15px 20px;font-size:16px;font-weight:700;border-radius:8px;cursor:pointer;width:100%;max-width:400px;transition:background-color 0.3s ease,transform 0.1s;box-shadow:0 4px 15px rgba(133,76,246,0.4);display:none;margin:0 auto}
+button.primary-btn:hover{background-color:#723be0}
+button.primary-btn:active{transform:scale(0.98)}
+.info-text{font-size:13px;color:#d35400;margin-bottom:15px;display:none;font-weight:600;background:#fff3e0;padding:12px;border-radius:8px;line-height:1.6}
+.system-time{margin-top:25px;font-size:11px;color:#bba1f2}
+</style>
 </head>
 <body>
-
 <div class="container">
-    <h2>Tedarik Satın Alma</h2>
-    <div class="separator"></div>
-    
-    <a href="main.html" class="back-link">← Ana Menüye Dön</a>
-    
-    <div class="file-input-wrapper">
-        <p>KERZZPOS CSV RAPORU SEÇ</p>
-        <input type="file" id="csvFileInput" accept=".csv" />
-    </div>
-
-    <div id="infoText" class="info-text">
-        ☑ Soldaki kutucuklardan PDF'e eklemek istediklerinizi seçin.<br>
-        ✎ Düzenlemek veya ekleme yapmak için hücrelere tıklayabilirsiniz.<br>
-        ⚠️ <b>Not:</b> Türkçe karakterlerin düzgün görünmesi için yüklediğiniz dosya <b>UTF-8</b> formatında olmalıdır.
-    </div>
-    
-    <div class="table-container" id="tableContainer"></div>
-    
-    <button id="pdfBtn" class="primary-btn" onclick="pdfOlustur()">SEÇİLİ OLANLARI PDF YAP</button>
-    
-    <div class="system-time" id="timeDisplay">Sistem Zamanı: Yükleniyor...</div>
+<h2>Tedarik Satın Alma</h2>
+<div class="separator"></div>
+<a href="main.html" class="back-link">← Ana Menüye Dön</a>
+<div class="file-input-wrapper">
+<p>CSV RAPORU SEÇ</p>
+<input type="file" id="csvFileInput" accept=".csv" />
 </div>
-
+<div id="infoText" class="info-text">
+☑ Soldaki kutucuklardan PDF'e eklemek istediklerinizi seçin.<br>
+✎ Miktarları düzenlemek için hücrelere tıklayabilirsiniz.<br>
+⚠️ <b>Not:</b> Türkçe karakterlerin düzgün görünmesi için yüklediğiniz dosya <b>UTF-8</b> formatında olmalıdır.
+</div>
+<div class="table-container" id="tableContainer"></div>
+<button id="pdfBtn" class="primary-btn" onclick="_0x5f1a()">SEÇİLİ OLANLARI PDF YAP</button>
+<div class="system-time" id="timeDisplay"></div>
+</div>
 <script>
-    function saatiGuncelle() {
-        const simdi = new Date();
-        document.getElementById('timeDisplay').innerText = "Sistem Zamanı: " + simdi.toLocaleTimeString('tr-TR');
-    }
-    setInterval(saatiGuncelle, 1000);
-    saatiGuncelle();
-
-    function tumunuSec(source) {
-        const checkboxes = document.querySelectorAll('.row-checkbox');
-        checkboxes.forEach(cb => {
-            cb.checked = source.checked;
-        });
-    }
-
-    function turkceKarakterleriTemizle(metin) {
-        if (!metin) return '';
-        const trMap = {
-            'ç': 'c', 'ğ': 'g', 'ı': 'i', 'ö': 'o', 'ş': 's', 'ü': 'u',
-            'Ç': 'C', 'Ğ': 'G', 'İ': 'I', 'Ö': 'O', 'Ş': 'S', 'Ü': 'U'
-        };
-        return metin.replace(/[çğıöşüÇĞİÖŞÜ]/g, match => trMap[match] || match);
-    }
-
-    document.getElementById('csvFileInput').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        e.target.previousElementSibling.innerText = file.name;
-
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            const csvContent = event.target.result;
-            const rows = csvContent.split(/\r?\n/);
-
-            let isHeaderParsed = false;
-            let keepColumns = []; 
-            let tableHTML = '<table id="dataTable"><thead><tr>';
-            
-            tableHTML += `<th class="checkbox-cell" title="Tümünü Seç/Kaldır"><input type="checkbox" id="selectAll" checked onchange="tumunuSec(this)"></th>`;
-
-            const normalize = text => text.toLowerCase().replace(/\./g, '').trim();
-            
-            const columnsToRemove = [
-                "ürün grubu", 
-                "merkez sevk mik", 
-                "şube m kabul mik", 
-                "fark"
-            ];
-
-            rows.forEach(rowText => {
-                const rowTextLower = rowText.toLowerCase();
-                const cells = rowText.split(';');
-
-                if (rowTextLower.includes('rapor alınma zamanı') || 
-                    rowTextLower.includes('raporu alan kullanıcı') || 
-                    rowTextLower.includes('rapor alınan pc adı') ||
-                    rowTextLower.includes('sipariş detayı') ||
-                    (rowTextLower.includes('şube') && rowTextLower.includes(':')) ||
-                    rowTextLower.includes('1/1') ||
-                    rowText.trim() === '') {
-                    return; 
-                }
-
-                if (rowTextLower.includes('silinme')) return;
-
-                if (!isHeaderParsed && rowTextLower.includes('stok kodu') && rowTextLower.includes('ürün adı')) {
-                    cells.forEach((cellText, index) => {
-                        cellText = cellText.trim();
-                        
-                        if (cellText !== '') {
-                            const normText = normalize(cellText);
-                            const shouldRemove = columnsToRemove.some(c => normText.includes(normalize(c)));
-                            
-                            if (!shouldRemove) {
-                                let isSubeSutunu = false;
-                                
-                                if (normText.includes('mrk ony')) {
-                                    cellText = "Şube Adı";
-                                    isSubeSutunu = true;
-                                }
-                                
-                                keepColumns.push({ index: index, name: cellText, isSubeSutunu: isSubeSutunu });
-                                tableHTML += `<th>${cellText}</th>`;
-                            }
-                        }
-                    });
-                    tableHTML += '</tr></thead><tbody>';
-                    isHeaderParsed = true;
-                    return; 
-                }
-
-                if (isHeaderParsed) {
-                    let rowHasData = false;
-                    let tempRowHTML = '<tr>';
-                    
-                    tempRowHTML += `<td class="checkbox-cell"><input type="checkbox" class="row-checkbox" checked></td>`;
-                    
-                    keepColumns.forEach(col => {
-                        let cellContent = cells[col.index] ? cells[col.index].trim() : '';
-                        
-                        if (col.isSubeSutunu) {
-                            cellContent = "";
-                        } else {
-                            if (cellContent !== '') rowHasData = true;
-                        }
-                        
-                        tempRowHTML += `<td contenteditable="true">${cellContent}</td>`;
-                    });
-                    
-                    tempRowHTML += '</tr>';
-
-                    if (rowHasData) {
-                        tableHTML += tempRowHTML;
-                    }
-                }
-            });
-
-            tableHTML += '</tbody></table>';
-
-            document.getElementById('tableContainer').innerHTML = tableHTML;
-            document.getElementById('tableContainer').style.display = 'block';
-            document.getElementById('pdfBtn').style.display = 'block';
-            document.getElementById('infoText').style.display = 'block';
-        };
-
-        reader.readAsText(file, 'UTF-8');
-    });
-
-    function pdfOlustur() {
-        const table = document.getElementById('dataTable');
-        if (!table) return;
-
-        let tabloVerisi = [];
-        const satirlar = table.querySelectorAll('tr');
-
-        satirlar.forEach((satir, index) => {
-            let satirVerisi = [];
-            
-            if (index === 0) {
-                const hucreler = satir.querySelectorAll('th');
-                for(let i = 1; i < hucreler.length; i++) {
-                    satirVerisi.push(turkceKarakterleriTemizle(hucreler[i].innerText));
-                }
-                tabloVerisi.push(satirVerisi);
-            } else {
-                const checkbox = satir.querySelector('.row-checkbox');
-                if (checkbox && checkbox.checked) {
-                    const hucreler = satir.querySelectorAll('td');
-                    for(let i = 1; i < hucreler.length; i++) {
-                        satirVerisi.push(turkceKarakterleriTemizle(hucreler[i].innerText));
-                    }
-                    tabloVerisi.push(satirVerisi);
-                }
-            }
-        });
-
-        if (tabloVerisi.length <= 1) {
-            alert("Lütfen PDF'e aktarmak için en az bir satır seçin.");
-            return;
-        }
-
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF({ orientation: 'landscape' });
-
-        doc.setTextColor(59, 27, 125); 
-        doc.setFontSize(16);
-        doc.setFont(undefined, 'bold');
-        doc.text("Royal Pastanesi Satin Alma Listesi", 14, 15);
-        
-        doc.setTextColor(0, 0, 0); 
-        doc.setFontSize(10);
-        doc.setFont(undefined, 'normal');
-        const bugun = new Date();
-        const tarihMetni = "Tarih: " + bugun.toLocaleDateString('tr-TR');
-        doc.text(tarihMetni, 14, 22);
-
-        doc.autoTable({
-            startY: 28,
-            head: [tabloVerisi[0]], 
-            body: tabloVerisi.slice(1), 
-            theme: 'striped',
-            styles: { fontSize: 9 }, 
-            headStyles: { fillColor: [133, 76, 246] }
-        });
-
-        let finalY = doc.lastAutoTable.finalY + 15; 
-        
-        if (finalY > 185) { 
-            doc.addPage();
-            finalY = 20;
-        }
-
-        doc.setDrawColor(168, 133, 239); 
-        doc.setLineWidth(0.5);
-        doc.line(14, finalY, 283, finalY); 
-
-        finalY += 8;
-
-        doc.setTextColor(59, 27, 125); 
-        doc.setFontSize(12);
-        doc.setFont(undefined, 'bold');
-        doc.text("RR Royal Unlu Mamulleri", 14, finalY);
-
-        doc.setFont(undefined, 'normal');
-        doc.setTextColor(80, 80, 80); 
-        doc.setFontSize(9);
-        doc.text("Irtibat : +90 545 123 48 48", 14, finalY + 6);
-        doc.text("www.royalpastanesi.com", 14, finalY + 11);
-
-        doc.text("V.D : Bodrum", 283, finalY + 6, { align: "right" });
-        doc.text("V.N : 7351695819", 283, finalY + 11, { align: "right" });
-
-        doc.save('royal_pastanesi_tedarik_raporu.pdf');
-    }
+const _0x1a2b=()=>{const d=new Date();document.getElementById('timeDisplay').innerText="Sistem Zamanı: "+d.toLocaleTimeString('tr-TR');};setInterval(_0x1a2b,1000);_0x1a2b();
+const _0xc3d4=(s)=>{document.querySelectorAll('.row-checkbox').forEach(c=>{c.checked=s.checked;});};
+const _0x9f8e=(m)=>{if(!m)return'';const t={'ç':'c','ğ':'g','ı':'i','ö':'o','ş':'s','ü':'u','Ç':'C','Ğ':'G','İ':'I','Ö':'O','Ş':'S','Ü':'U'};return m.replace(/[çğıöşüÇĞİÖŞÜ]/g,x=>t[x]||x);};
+document.getElementById('csvFileInput').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;e.target.previousElementSibling.innerText=f.name;const r=new FileReader();r.onload=ev=>{const c=ev.target.result;const rs=c.split(/\r?\n/);let hp=false,kc=[],tH='<table id="dataTable"><thead><tr><th class="checkbox-cell" title="Tümünü Seç/Kaldır"><input type="checkbox" id="selectAll" checked onchange="_0xc3d4(this)"></th>';const nr=x=>x.toLowerCase().replace(/\./g,'').trim();const rm=["ürün grubu","merkez sevk mik","şube m kabul mik","fark"];const sl=["Gümbet Şube","Konacık Şube","Tedarik  Depo","Bodrum Şube","İmalat Depo","Gümbet-2 Şube"];rs.forEach(rw=>{const rl=rw.toLowerCase(),cs=rw.split(';');if(rl.includes('rapor alınma zamanı')||rl.includes('raporu alan kullanıcı')||rl.includes('rapor alınan pc adı')||rl.includes('sipariş detayı')||(rl.includes('şube')&&rl.includes(':'))||rl.includes('1/1')||rw.trim()==='')return;if(rl.includes('silinme'))return;if(!hp&&rl.includes('stok kodu')&&rl.includes('ürün adı')){cs.forEach((ct,i)=>{ct=ct.trim();if(ct!==''){const nt=nr(ct);if(!rm.some(x=>nt.includes(nr(x)))){let isS=false,isB=false;if(nt.includes('mrk ony')){ct="Şube Adı";isS=true;}if(nt==='birim')isB=true;kc.push({i:i,n:ct,isS:isS,isB:isB});tH+=`<th>${ct}</th>`;}}});tH+='</tr></thead><tbody>';hp=true;return;}if(hp){let rh=false,tr='<tr><td class="checkbox-cell"><input type="checkbox" class="row-checkbox" checked></td>';kc.forEach(co=>{let clc=cs[co.i]?cs[co.i].trim():'';if(co.isS){let sh='<select class="sube-select"><option value="" disabled selected>Seçiniz...</option>';sl.forEach(s=>{sh+=`<option value="${s}">${s}</option>`;});sh+='</select>';tr+=`<td>${sh}</td>`;rh=true;}else if(co.isB){if(clc!=='')rh=true;tr+=`<td class="readonly-cell">${clc}</td>`;}else{if(clc!=='')rh=true;tr+=`<td contenteditable="true">${clc}</td>`;}});tr+='</tr>';if(rh)tH+=tr;}});tH+='</tbody></table>';const tc=document.getElementById('tableContainer');tc.innerHTML=tH;tc.style.display='block';document.getElementById('pdfBtn').style.display='block';document.getElementById('infoText').style.display='block';};r.readAsText(f,'UTF-8');});
+const _0x5f1a=()=>{const tb=document.getElementById('dataTable');if(!tb)return;let tv=[],err=false;tb.querySelectorAll('tr').forEach((r,idx)=>{let sv=[];if(idx===0){const hc=r.querySelectorAll('th');for(let i=1;i<hc.length;i++)sv.push(_0x9f8e(hc[i].innerText));tv.push(sv);}else{const cb=r.querySelector('.row-checkbox');if(cb&&cb.checked){const hc=r.querySelectorAll('td');for(let i=1;i<hc.length;i++){let ct="";const se=hc[i].querySelector('select');if(se){if(!se.value){se.style.border="2px solid red";err=true;}else{se.style.border="1px solid #ccc";ct=se.value;}}else{ct=hc[i].innerText;}sv.push(_0x9f8e(ct));}tv.push(sv);}else{const us=r.querySelector('select');if(us)us.style.border="1px solid #ccc";}}});if(err){alert("Lütfen PDF'e eklenecek tüm satırlar için Şube seçimi yapınız!");return;}if(tv.length<=1){alert("Lütfen PDF'e aktarmak için en az bir satır seçin.");return;}const{jsPDF}=window.jspdf;const dc=new jsPDF({orientation:'landscape'});dc.setTextColor(59,27,125);dc.setFontSize(16);dc.setFont(undefined,'bold');dc.text("Royal Pastanesi Satin Alma Listesi",14,15);dc.setTextColor(0,0,0);dc.setFontSize(10);dc.setFont(undefined,'normal');const dt=new Date();dc.text("Tarih: "+dt.toLocaleDateString('tr-TR'),14,22);dc.autoTable({startY:28,head:[tv[0]],body:tv.slice(1),theme:'striped',styles:{fontSize:9},headStyles:{fillColor:[133,76,246]}});let fy=dc.lastAutoTable.finalY+15;if(fy>185){dc.addPage();fy=20;}dc.setDrawColor(168,133,239);dc.setLineWidth(0.5);dc.line(14,fy,283,fy);fy+=8;dc.setTextColor(59,27,125);dc.setFontSize(12);dc.setFont(undefined,'bold');dc.text("RR Royal Unlu Mamulleri",14,fy);dc.setFont(undefined,'normal');dc.setTextColor(80,80,80);dc.setFontSize(9);dc.text("Irtibat : +90 545 123 48 48",14,fy+6);dc.text("www.royalpastanesi.com",14,fy+11);dc.text("V.D : Bodrum",283,fy+6,{align:"right"});dc.text("V.N : 7351695819",283,fy+11,{align:"right"});const pad=n=>n.toString().padStart(2,'0');const fn=`Royal_Pastanesi_${pad(dt.getDate())}-${pad(dt.getMonth()+1)}-${dt.getFullYear()}_${pad(dt.getHours())}-${pad(dt.getMinutes())}.pdf`;dc.save(fn);};
 </script>
-
 </body>
 </html>
