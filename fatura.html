@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royal Pastanesi - Fatura No Paneli</title>
+    <title>Fatura No Paneli</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
@@ -17,7 +17,7 @@
             margin: 0;
         }
         .container {
-            background-color: #fbf9ff;
+            background-color: #f8f6fc;
             padding: 40px 30px;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
@@ -27,67 +27,77 @@
         }
         h2 {
             color: #3b1b7d;
-            margin: 0 0 5px 0;
+            margin: 0 0 15px 0;
             font-weight: 700;
             font-size: 24px;
         }
         .separator {
-            width: 30px;
+            width: 40px;
             height: 3px;
             background-color: #a885ef;
-            margin: 0 auto 30px auto;
+            margin: 0 auto 25px auto;
             border-radius: 2px;
         }
         .invoice-box {
-            background-color: #f0eaff;
-            padding: 20px;
+            background-color: #fbf9ff;
+            padding: 20px 10px;
             border-radius: 12px;
-            margin-bottom: 20px;
-            border: 2px dashed #854cf6;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            margin-bottom: 25px;
+            border: 1px solid #eae0fb;
         }
-        .invoice-box:active {
-            transform: scale(0.98);
+        .invoice-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #bba1f2;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
         }
         .invoice-number {
             font-size: 20px;
             font-weight: 700;
-            color: #3b1b7d;
+            color: #5a2eb0;
             letter-spacing: 1px;
             word-break: break-all;
         }
-        .copy-hint {
+        .btn {
             display: block;
-            font-size: 10px;
-            color: #854cf6;
-            margin-top: 5px;
-            font-weight: 600;
-        }
-        .generate-btn {
-            display: inline-block;
+            width: 100%;
             text-decoration: none;
-            background-color: #854cf6;
-            color: white;
             font-weight: 700;
-            font-size: 16px;
-            padding: 15px 30px;
+            font-size: 15px;
+            padding: 16px 0;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(133, 76, 246, 0.4);
             transition: all 0.2s ease;
             cursor: pointer;
             border: none;
-            width: 100%;
+            margin-bottom: 15px;
+            box-sizing: border-box;
         }
-        .generate-btn:hover {
-            background-color: #723be0;
+        .btn-primary {
+            background-color: #7d44ed;
+            color: white;
+            box-shadow: 0 4px 15px rgba(125, 68, 237, 0.3);
+        }
+        .btn-primary:hover {
+            background-color: #6a35d4;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background-color: white;
+            color: #7d44ed;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        .btn-secondary:hover {
+            border-color: #7d44ed;
             transform: translateY(-2px);
         }
         .system-time {
-            margin-top: 25px;
+            margin-top: 20px;
             font-size: 11px;
             color: #bba1f2;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -95,36 +105,58 @@
 
 <div class="container">
     <h2>Royal Pastanesi</h2>
-    <p style="color: #6a44bb; font-weight: 600; margin-bottom: 10px;">Fatura No Üretici</p>
     <div class="separator"></div>
     
-    <div class="invoice-box" onclick="kopyala()">
-        <div class="invoice-number" id="faturaNo">RRFT2026000000001</div>
-        <span class="copy-hint" id="copyText">Kopyalamak için tıkla</span>
+    <div class="invoice-box">
+        <div class="invoice-label">FATURA NO</div>
+        <div class="invoice-number" id="faturaNo">Numara Bekleniyor...</div>
     </div>
     
-    <button class="generate-btn" onclick="faturaUret()">YENİ NUMARA ÜRET</button>
+    <button class="btn btn-primary" onclick="faturaUret()">YENİ FATURA NO ÜRET</button>
+    <button class="btn btn-secondary" id="copyBtn" onclick="kopyala()">KOPYALA</button>
     
     <div class="system-time" id="timeDisplay">Sistem Zamanı: Yükleniyor...</div>
 </div>
 
 <script>
+    // Sayfa açıldığında otomatik bir numara üret
+    window.onload = faturaUret;
+
     function faturaUret() {
         const simdi = new Date();
+        
+        // Tarih ve saat verilerini 2 haneli olacak şekilde formatlıyoruz (03, 04, 19 vb.)
+        const gun = String(simdi.getDate()).padStart(2, '0');
+        const ay = String(simdi.getMonth() + 1).padStart(2, '0');
         const yil = simdi.getFullYear();
-        const rastgele = Math.floor(100000000 + Math.random() * 900000000);
-        const yeniNo = "RRFT" + yil + rastgele;
+        const saat = String(simdi.getHours()).padStart(2, '0');
+        const dakika = String(simdi.getMinutes()).padStart(2, '0');
+        const saniye = String(simdi.getSeconds()).padStart(2, '0');
+        
+        // Milisaniyeyi 2 haneye düşürüyoruz
+        const milisaniye = String(Math.floor(simdi.getMilliseconds() / 10)).padStart(2, '0');
+
+        // RRFT + GÜN + AY + YIL + SAAT + DAKİKA + SANİYE + MİLİSANİYE
+        const yeniNo = "RRFT" + gun + ay + yil + saat + dakika + saniye + milisaniye;
+        
         document.getElementById('faturaNo').innerText = yeniNo;
-        document.getElementById('copyText').innerText = "Kopyalamak için tıkla";
-        document.getElementById('copyText').style.color = "#854cf6";
+        
+        // Yeni numara üretildiğinde kopyala butonunu sıfırla
+        const copyBtn = document.getElementById('copyBtn');
+        copyBtn.innerText = "KOPYALA";
+        copyBtn.style.color = "#7d44ed";
     }
 
     function kopyala() {
         const metin = document.getElementById('faturaNo').innerText;
+        
+        // Eğer henüz numara üretilmediyse kopyalamayı engelle
+        if (metin === "Numara Bekleniyor...") return;
+
         navigator.clipboard.writeText(metin).then(() => {
-            const hint = document.getElementById('copyText');
-            hint.innerText = "KOPYALANDI!";
-            hint.style.color = "#28a745";
+            const copyBtn = document.getElementById('copyBtn');
+            copyBtn.innerText = "KOPYALANDI!";
+            copyBtn.style.color = "#28a745"; // Başarılı olunca yeşil renk
         });
     }
 
