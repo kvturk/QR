@@ -2,6 +2,17 @@
   {
     "durum": "URUN TAZE",
     "gun_farki": 2,
+    "ip": "85.98.42.98",
+    "kod": "P367313",
+    "personel": "Ayşegül",
+    "sube": "Gümbet Şube",
+    "uretim": "13.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-15T15:07:43.137Z"
+  },
+  {
+    "durum": "URUN TAZE",
+    "gun_farki": 2,
     "ip": "31.142.8.114",
     "kod": "P367313",
     "personel": "Naz",
