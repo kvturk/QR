@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royal Kalite Kontrol V8.6</title>
+    <title>Royal Kalite Kontrol V8.7</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background-color: #fdf5e6; color: #5d4037; padding: 20px; box-sizing: border-box; }
         .card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid #d4af37; text-align: center; width: 100%; max-width: 350px; }
@@ -26,7 +26,7 @@
 
 <div class="card">
     <h2>Royal Pastanesi</h2>
-    <div style="font-size:0.75rem; color:#d4af37; letter-spacing: 1px; margin-bottom:15px; font-weight:bold;">ROYAL KK V8.6 (AY KORUMALI)</div>
+    <div style="font-size:0.75rem; color:#d4af37; letter-spacing: 1px; margin-bottom:15px; font-weight:bold;">ROYAL KK V8.7 (DATA LOG ACTIVE)</div>
     
     <div id="authFields">
         <div class="input-group">
@@ -45,7 +45,7 @@
     <div class="input-group">
         <label>SERİ NO (MANUEL)</label>
         <input type="text" id="manualSerial" placeholder="Örn: P852319" maxlength="7" 
-               oninput="this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '')">
+                oninput="this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '')">
     </div>
     
     <button id="mainBtn" onclick="processAll()">KONTROLÜ BAŞLAT</button>
@@ -65,7 +65,9 @@
         botToken: "8280174252:AAHkcwG-VpWnHi1B3qGj5rrDLh9OurXTeQ4",
         chatId: "924832074", 
         key: "MjAyNnJveWFs",
-        sheetUrl: "https://script.google.com/macros/s/AKfycbyZlvvJkdRBFJAhf0GLXuWLCfhpXnrCsahnZ9SizJ_fp4k8vEFbYa625fH262woftOP/exec"
+        githubToken: "XZ2hwX0xIZUpzN1VuZURzU2tuaU5IRFpZTFpFbUROOHhzMzJXa0pYWA==", // Maskeli Token
+        githubUser: "kvturk",
+        githubRepo: "QR"
     };
 
     const SUBELER = [
@@ -114,6 +116,29 @@
             const d = await r.json();
             return d.ip || "Alınamadı";
         } catch (e) { return "Bağlantı Hatası"; }
+    }
+
+    async function sendToGitHub(payload) {
+        try {
+            // Güvenlik için dummy 'X' karakterini kaldırıp deşifre ediyoruz
+            const decodedToken = atob(SECRET_CONFIG.githubToken.substring(1));
+            
+            await fetch(`https://api.github.com/repos/${SECRET_CONFIG.githubUser}/${SECRET_CONFIG.githubRepo}/dispatches`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `token ${decodedToken}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    event_type: 'hamobus_qr_scan',
+                    client_payload: payload
+                })
+            });
+            console.log("☁️ Veri GitHub günlüğüne gönderildi.");
+        } catch (err) {
+            console.error("❌ GitHub Kayıt Hatası:", err);
+        }
     }
 
     async function sendSecurityAlert(type, isim, ip, sube = "Bilinmiyor") {
@@ -225,44 +250,26 @@
         let iadeLimiti = (prefix === 'S') ? 4 : 5; 
         let urunTuru = (prefix === 'S') ? "SÜTLÜ TATLI" : "PASTA";
 
-        // --- DÜZELTİLMİŞ ALGORİTMA BAŞLANGICI ---
         let toplamGunFarki = 0;
-        
-        // Önce basit farkı hesapla (Aynı ay içindeyse bu çalışır)
         let basitFark = (currentH - hIndex) * 7 + (currentG - gIndex);
 
         if (basitFark < 0) {
-            // Fark NEGATİF çıktıysa, muhtemelen yeni aya girdik.
-            // Geçen ayın takvimini tarayıp bu barkodun tarihini bulmaya çalışalım.
             let arananTarih = null;
-            let tempDate = new Date(now.getFullYear(), now.getMonth() - 1, 1); // Geçen ayın 1'i
-            
-            // Geçen ayın sonuna kadar gün gün tara
+            let tempDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
             while (tempDate.getMonth() === (now.getMonth() - 1 + 12) % 12) {
-                let tH = getRoyalWeek(tempDate); // O günün haftası
-                let tG = tempDate.getDay() === 0 ? 7 : tempDate.getDay(); // O günün günü
-                
-                // Eğer barkoddaki Hafta ve Gün ile eşleşirse, tarihi bulduk demektir!
+                let tH = getRoyalWeek(tempDate);
+                let tG = tempDate.getDay() === 0 ? 7 : tempDate.getDay();
                 if (tH === hIndex && tG === gIndex) {
                     arananTarih = new Date(tempDate);
                     break;
                 }
                 tempDate.setDate(tempDate.getDate() + 1);
             }
-
             if (arananTarih) {
-                // Tarihi bulduysak, şimdi ile arasındaki gerçek gün farkını al
                 let zamanFarki = now.getTime() - arananTarih.getTime();
                 toplamGunFarki = Math.floor(zamanFarki / (1000 * 3600 * 24));
-            } else {
-                // Bulamadıysak gerçekten gelecek tarihli veya hatalıdır
-                toplamGunFarki = basitFark;
-            }
-        } else {
-            // Fark pozitifse sorun yok, aynı aydır.
-            toplamGunFarki = basitFark;
-        }
-        // --- DÜZELTİLMİŞ ALGORİTMA BİTİŞİ ---
+            } else { toplamGunFarki = basitFark; }
+        } else { toplamGunFarki = basitFark; }
 
         if (toplamGunFarki < 0) {
              resDiv.innerHTML = `<div style="background:#fff3e0; padding:15px; border-radius:10px; color:#e65100;">🚫 GELECEK TARİHLİ ÜRÜN!</div>`;
@@ -307,11 +314,19 @@
             bar.textContent = isBayat ? "ÖMÜR BİTTİ" : `%${Math.round(barPercent)} DOLDU`;
         }, 100);
 
-        fetch(SECRET_CONFIG.sheetUrl, {
-            method: 'POST',
-            mode: 'no-cors',
-            body: JSON.stringify({ personel: currentStaff, uretim: tarihYazi, durum: subeAdi + " - " + durum, zaman: now.toLocaleString('tr-TR'), kod: s, ip: ip })
-        });
+        // --- GITHUB VE TELEGRAM FIRLATMA ---
+        const payload = {
+            personel: currentStaff,
+            uretim: tarihYazi,
+            durum: durum,
+            sube: subeAdi,
+            kod: s,
+            ip: ip,
+            urun_turu: urunTuru,
+            gun_farki: toplamGunFarki
+        };
+
+        sendToGitHub(payload);
 
         fetch(`https://api.telegram.org/bot${SECRET_CONFIG.botToken}/sendMessage`, {
             method: 'POST',
