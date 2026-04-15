@@ -50,9 +50,9 @@ jobs:
             // Yeni veriyi en basa ekle
             data.unshift(newEntry);
 
-            // 14 gunluk temizlik (Sadece taze verileri tutar)
+            // 7 gunluk temizlik (Sadece taze verileri tutar)
             const threshold = new Date();
-            threshold.setDate(threshold.getDate() - 14);
+            threshold.setDate(threshold.getDate() - 7);
             data = data.filter(entry => entry.timestamp && new Date(entry.timestamp) > threshold);
 
             // Dosyaya geri yaz
