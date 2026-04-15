@@ -21,37 +21,62 @@ jobs:
       - name: Node.js Kurulumu
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '20'
 
-      - name: JSON Güncelle ve 14 Gün Temizliği Yap
+      - name: JSON Güncelle (Klasör ve Hata Korumalı)
         run: |
           node -e "
           const fs = require('fs');
-          const path = 'QR/hamobus.json'; // QR klasörünün içindeki dosya
+          const path = require('path');
           
-          let data = [];
-          if (fs.existsSync(path)) {
-            const raw = fs.readFileSync(path, 'utf8');
-            data = raw ? JSON.parse(raw) : [];
+          // DOSYA YOLU: Eğer dosya ana dizindeyse sadece 'hamobus.json' yap. 
+          // Eğer QR klasörü içindeyse 'QR/hamobus.json' kalsın.
+          const filePath = 'QR/hamobus.json'; 
+          const dir = path.dirname(filePath);
+
+          // 1. Klasör yoksa oluştur (recursive: true hatayı engeller)
+          if (!fs.existsSync(dir) && dir !== '.') {
+            fs.mkdirSync(dir, { recursive: true });
+            console.log('Klasör oluşturuldu: ' + dir);
           }
 
-          const newEntry = ${{ toJson(github.event.client_payload) }};
-          newEntry.timestamp = new Date().toISOString();
-          
-          data.unshift(newEntry);
+          // 2. Mevcut veriyi güvenli oku
+          let data = [];
+          if (fs.existsSync(filePath)) {
+            try {
+              const raw = fs.readFileSync(filePath, 'utf8').trim();
+              data = raw ? JSON.parse(raw) : [];
+            } catch (e) {
+              console.log('JSON bozuk veya boş, yeni liste oluşturuluyor...');
+              data = [];
+            }
+          }
 
+          // 3. Yeni veriyi ekle (Timestamp ekleyerek)
+          try {
+            const newEntry = ${{ toJson(github.event.client_payload) }};
+            newEntry.timestamp = new Date().toISOString();
+            data.unshift(newEntry);
+            console.log('Yeni veri eklendi.');
+          } catch (e) {
+            console.error('Payload okuma hatası:', e);
+            process.exit(1);
+          }
+
+          // 4. 14 gün temizliği
           const threshold = new Date();
           threshold.setDate(threshold.getDate() - 14);
-          
-          data = data.filter(entry => new Date(entry.timestamp) > threshold);
+          data = data.filter(entry => entry.timestamp && new Date(entry.timestamp) > threshold);
 
-          fs.writeFileSync(path, JSON.stringify(data, null, 2));
+          // 5. Kaydet
+          fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+          console.log('Dosya güncellendi: ' + filePath);
           "
 
       - name: Değişiklikleri GitHub'a Kaydet
         run: |
           git config --global user.name 'Hamobus-Bot'
           git config --global user.email 'bot@royalpastanesi.com'
-          git add QR/hamobus.json
+          git add .
           git commit -m '📦 Hamobus: Yeni QR Kaydı + 14 Günlük Temizlik' || echo 'Değişiklik yok'
           git push
