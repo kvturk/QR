@@ -4,6 +4,11 @@ on:
   repository_dispatch:
     types: [hamobus_qr_scan]
 
+# Aynı anda birden fazla okutma gelirse sıraya koyar, iptal etmez.
+concurrency:
+  group: hamobus-logging
+  cancel-in-progress: false 
+
 permissions:
   contents: write
 
@@ -19,14 +24,15 @@ jobs:
         with:
           node-version: '20'
 
-      - name: JSON Guncelle (Dizin ve Hata Korumali)
+      - name: JSON Guncelle (Ana Dizin Modu)
+        # Veriyi PAYLOAD ismiyle guvenli bir sekilde sisteme aliyoruz
         env:
           PAYLOAD: ${{ toJson(github.event.client_payload) }}
         run: |
           node -e "
           const fs = require('fs');
           
-          // DOSYA YOLU: 'QR/' on ekini kaldirdik, direkt ana dizine yazar.
+          // DOSYA YOLU: Artik 'QR/' yok, direkt ana dizindeki dosyaya yazar.
           const filePath = 'hamobus.json'; 
           
           try {
@@ -35,20 +41,25 @@ jobs:
             newEntry.timestamp = new Date().toISOString();
 
             let data = [];
+            // Dosya varsa oku, yoksa bos dizi baslat
             if (fs.existsSync(filePath)) {
               const fileContent = fs.readFileSync(filePath, 'utf8').trim();
               data = fileContent ? JSON.parse(fileContent) : [];
             }
 
+            // Yeni veriyi en basa ekle
             data.unshift(newEntry);
+
+            // 14 gunluk temizlik (Sadece taze verileri tutar)
             const threshold = new Date();
             threshold.setDate(threshold.getDate() - 14);
             data = data.filter(entry => entry.timestamp && new Date(entry.timestamp) > threshold);
 
+            // Dosyaya geri yaz
             fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
             console.log('Islem Basarili: ' + newEntry.kod);
           } catch (err) {
-            console.error('HATA:', err.message);
+            console.error('HATA OLUSTU:', err.message);
             process.exit(1);
           }
           "
@@ -58,5 +69,5 @@ jobs:
           git config --global user.name 'Hamobus-Bot'
           git config --global user.email 'bot@royalpastanesi.com'
           git add hamobus.json
-          git commit -m 'Hamobus: Veri Ana Dizine Kaydedildi' || echo 'Degisiklik yok'
+          git commit -m 'Hamobus: Veri Ana Dizine Yazildi (Emoji Temizlendi)' || echo 'Degisiklik yok'
           git push
