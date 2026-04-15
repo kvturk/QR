@@ -1,6 +1,17 @@
 [
   {
     "durum": "URUN TAZE",
+    "gun_farki": 0,
+    "ip": "88.248.55.80",
+    "kod": "S124333",
+    "personel": "Damla",
+    "sube": "Kumbahçe Şube",
+    "uretim": "15.04.2026",
+    "urun_turu": "SUTLU TATLI",
+    "timestamp": "2026-04-15T17:13:40.498Z"
+  },
+  {
+    "durum": "URUN TAZE",
     "gun_farki": 2,
     "ip": "88.248.55.80",
     "kod": "S215314",
