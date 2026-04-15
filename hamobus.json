@@ -1,5 +1,16 @@
 [
   {
+    "durum": "URUN TAZE",
+    "gun_farki": 3,
+    "ip": "5.229.97.153",
+    "kod": "P229273",
+    "personel": "Hatice",
+    "sube": "Konacık Şube",
+    "uretim": "12.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-15T18:52:29.487Z"
+  },
+  {
     "durum": "BUGUN SON SATIS GUNU",
     "gun_farki": 4,
     "ip": "5.229.97.153",
