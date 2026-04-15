@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royal Kalite Kontrol V8.7</title>
+    <title>Royal Kalite Kontrol V8.8</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background-color: #fdf5e6; color: #5d4037; padding: 20px; box-sizing: border-box; }
         .card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid #d4af37; text-align: center; width: 100%; max-width: 350px; }
@@ -16,8 +16,6 @@
         #result { margin-top: 25px; font-weight: bold; font-size: 1.1rem; line-height: 1.6; }
         .session-info { font-size: 0.8rem; color: #2e7d32; margin-bottom: 10px; font-weight: bold; background: #e8f5e9; padding: 10px; border-radius: 10px; }
         .logout-btn { background: none; color: #8b4513; font-size: 0.7rem; text-decoration: underline; margin-top: 20px; border: none; cursor: pointer; width: auto; padding: 5px; }
-        
-        /* DURUM ÇUBUĞU */
         .progress-container { width: 100%; background-color: #e0e0e0; border-radius: 10px; margin: 15px 0; height: 20px; overflow: hidden; display: none; }
         .progress-bar { height: 100%; text-align: center; line-height: 20px; color: white; font-size: 12px; font-weight: bold; transition: width 0.5s ease-in-out; }
     </style>
@@ -26,7 +24,7 @@
 
 <div class="card">
     <h2>Royal Pastanesi</h2>
-    <div style="font-size:0.75rem; color:#d4af37; letter-spacing: 1px; margin-bottom:15px; font-weight:bold;">ROYAL KK V8.7 (DATA LOG ACTIVE)</div>
+    <div style="font-size:0.75rem; color:#d4af37; letter-spacing: 1px; margin-bottom:15px; font-weight:bold;">ROYAL KK V8.8 (SPEED OPTIMIZED)</div>
     
     <div id="authFields">
         <div class="input-group">
@@ -60,12 +58,11 @@
 </div>
 
 <script>
-    // --- GİZLİ AYARLAR ---
     const SECRET_CONFIG = {
         botToken: "8280174252:AAHkcwG-VpWnHi1B3qGj5rrDLh9OurXTeQ4",
         chatId: "924832074", 
         key: "MjAyNnJveWFs",
-        githubToken: "XZ2hwX0xIZUpzN1VuZURzU2tuaU5IRFpZTFpFbUROOHhzMzJXa0pYWA==", // Maskeli Token
+        githubToken: "XZ2hwX0xIZUpzN1VuZURzU2tuaU5IRFpZTFpFbUROOHhzMzJXa0pYWA==",
         githubUser: "kvturk",
         githubRepo: "QR"
     };
@@ -84,7 +81,6 @@
         if (!sessionStr) return null;
         const session = JSON.parse(sessionStr);
         const isExpired = (Date.now() - session.time > 3600000); 
-
         if (session && !isExpired && !forceClear) {
             document.getElementById('authFields').style.display = 'none';
             document.getElementById('sessionStatus').style.display = 'block';
@@ -120,9 +116,7 @@
 
     async function sendToGitHub(payload) {
         try {
-            // Güvenlik için dummy 'X' karakterini kaldırıp deşifre ediyoruz
             const decodedToken = atob(SECRET_CONFIG.githubToken.substring(1));
-            
             await fetch(`https://api.github.com/repos/${SECRET_CONFIG.githubUser}/${SECRET_CONFIG.githubRepo}/dispatches`, {
                 method: 'POST',
                 headers: {
@@ -135,18 +129,15 @@
                     client_payload: payload
                 })
             });
-            console.log("☁️ Veri GitHub günlüğüne gönderildi.");
-        } catch (err) {
-            console.error("❌ GitHub Kayıt Hatası:", err);
-        }
+        } catch (err) { console.error("GitHub Error:", err); }
     }
 
     async function sendSecurityAlert(type, isim, ip, sube = "Bilinmiyor") {
-        const text = `🚨 *GÜVENLİK İHLALİ*\n\n⚠️ *Tip:* ${type}\n👤 *Pers:* ${isim}\n🌐 *IP:* ${ip}\n📍 *Konum:* ${sube}`;
+        const text = `🚨 GUVENLIK IHLALI\n\nTip: ${type}\nPers: ${isim}\nIP: ${ip}\nKonum: ${sube}`;
         await fetch(`https://api.telegram.org/bot${SECRET_CONFIG.botToken}/sendMessage`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ chat_id: SECRET_CONFIG.chatId, text: text, parse_mode: 'Markdown' })
+            body: JSON.stringify({ chat_id: SECRET_CONFIG.chatId, text: text })
         });
     }
 
@@ -167,25 +158,20 @@
 
     async function processAll() {
         const resDiv = document.getElementById("result");
-        const barContainer = document.getElementById("lifeBarContainer");
         resDiv.innerHTML = "🔍 Analiz Ediliyor...";
-        barContainer.style.display = "none";
-
+        
         const session = checkSession(false);
         const staffNameValue = document.getElementById("staffName").value.trim();
         const isim = session ? session.name : staffNameValue;
-
         const userIp = await getIpData();
 
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        if (!isMobile) {
+        if (!/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
             resDiv.innerHTML = "<div style='color:red'>❌ HATA: PC Yasaktır.</div>";
-            await sendSecurityAlert("PC GİRİŞİ", isim || "Bilinmiyor", userIp);
+            await sendSecurityAlert("PC GIRISI", isim || "Bilinmiyor", userIp);
             return;
         }
 
         if(!isim) { alert("Lütfen adınızı yazın!"); return; }
-        resDiv.innerHTML = "🔍 Konum ve Veri Doğrulanıyor...";
 
         navigator.geolocation.getCurrentPosition(async (pos) => {
             const uLat = pos.coords.latitude;
@@ -198,12 +184,12 @@
             if (aktifSube) {
                 runSystem(aktifSube, userIp, isim);
             } else {
-                resDiv.innerHTML = "<div style='color:red'>❌ HATA: Şube dışındasınız!</div>";
-                await sendSecurityAlert("ŞUBE DIŞI", isim, userIp, "Dışarıda");
+                resDiv.innerHTML = "<div style='color:red'>❌ HATA: Sube disindasiniz!</div>";
+                await sendSecurityAlert("SUBE DISI", isim, userIp, "Disarida");
             }
         }, (err) => {
             resDiv.innerHTML = "❌ HATA: Konum izni gerekli!";
-        }, { enableHighAccuracy: true });
+        }, { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 });
     }
 
     async function runSystem(subeAdi, ip, currentStaff) {
@@ -219,8 +205,8 @@
 
         if (!session) {
             if (btoa(sifreInput.value.trim().toLowerCase()) !== SECRET_CONFIG.key) { 
-                resDiv.innerHTML = "❌ İsim veya Şifre Hatalı!"; 
-                await sendSecurityAlert("YANLIŞ ŞİFRE", currentStaff, ip, subeAdi);
+                resDiv.innerHTML = "❌ Isim veya Sifre Hatali!"; 
+                await sendSecurityAlert("YANLIS SIFRE", currentStaff, ip, subeAdi);
                 return; 
             }
             localStorage.setItem('royal_session', JSON.stringify({ name: currentStaff, time: Date.now() }));
@@ -237,18 +223,18 @@
         const currentH = getRoyalWeek(now);
         const currentG = now.getDay() === 0 ? 7 : now.getDay();
 
-        if (s.length < 7) { resDiv.innerHTML = "❌ HATA: Kod Hatalı!"; return; }
+        if (s.length < 7) { resDiv.innerHTML = "❌ HATA: Kod Hatali!"; return; }
 
         let prefix = s.charAt(0);
         let hIndex = parseInt(s.charAt(4)); 
         let gIndex = parseInt(s.charAt(5));
 
         if (!['P', 'S'].includes(prefix) || isNaN(hIndex) || isNaN(gIndex)) {
-            resDiv.innerHTML = "❌ HATA: Geçersiz Format!"; return;
+            resDiv.innerHTML = "❌ HATA: Gecersiz Format!"; return;
         }
 
         let iadeLimiti = (prefix === 'S') ? 4 : 5; 
-        let urunTuru = (prefix === 'S') ? "SÜTLÜ TATLI" : "PASTA";
+        let urunTuru = (prefix === 'S') ? "SUTLU TATLI" : "PASTA";
 
         let toplamGunFarki = 0;
         let basitFark = (currentH - hIndex) * 7 + (currentG - gIndex);
@@ -272,7 +258,7 @@
         } else { toplamGunFarki = basitFark; }
 
         if (toplamGunFarki < 0) {
-             resDiv.innerHTML = `<div style="background:#fff3e0; padding:15px; border-radius:10px; color:#e65100;">🚫 GELECEK TARİHLİ ÜRÜN!</div>`;
+             resDiv.innerHTML = `<div style="background:#fff3e0; padding:15px; border-radius:10px; color:#e65100;">GELECEK TARIHLI URUN!</div>`;
              return;
         }
         
@@ -282,22 +268,22 @@
         let barPercent = 0;
 
         if (toplamGunFarki >= iadeLimiti) {
-            durum = `❌ RAF ÖMRÜ DOLDU (İADE!)`;
+            durum = "RAF OMRU DOLDU (IADE!)";
             isBayat = true;
             barPercent = 100;
             barColor = "#d32f2f"; 
         } else if (toplamGunFarki === (iadeLimiti - 1)) {
-            durum = "⚠️ BUGÜN SON SATIŞ GÜNÜ";
+            durum = "BUGUN SON SATIS GUNU";
             barPercent = 90;
             barColor = "#ff9800"; 
         } else {
-            durum = "✅ ÜRÜN TAZE";
+            durum = "URUN TAZE";
             barPercent = Math.max(10, (toplamGunFarki / iadeLimiti) * 80);
             barColor = "#4caf50";
         }
 
         if (toplamGunFarki > 14) {
-             durum = "❌ KRİTİK: ÇOK ESKİ ÜRÜN!";
+             durum = "KRITIK: COK ESKI URUN!";
              isBayat = true;
              barPercent = 100;
              barColor = "#b71c1c"; 
@@ -311,10 +297,9 @@
         setTimeout(() => {
             bar.style.width = barPercent + "%";
             bar.style.backgroundColor = barColor;
-            bar.textContent = isBayat ? "ÖMÜR BİTTİ" : `%${Math.round(barPercent)} DOLDU`;
+            bar.textContent = isBayat ? "OMUR BITTI" : `%${Math.round(barPercent)} DOLDU`;
         }, 100);
 
-        // --- GITHUB VE TELEGRAM FIRLATMA ---
         const payload = {
             personel: currentStaff,
             uretim: tarihYazi,
@@ -326,20 +311,20 @@
             gun_farki: toplamGunFarki
         };
 
+        // Veri gönderimi (Aynı anda fırlatılır)
         sendToGitHub(payload);
-
         fetch(`https://api.telegram.org/bot${SECRET_CONFIG.botToken}/sendMessage`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ chat_id: SECRET_CONFIG.chatId, text: `📍 *Şube:* ${subeAdi}\n👤 *Pers:* ${currentStaff}\n🍰 *Tür:* ${urunTuru}\n🔢 *Kod:* ${s}\n📊 *Durum:* ${durum}\n📅 *Üretim:* ${tarihYazi}\n🌐 *IP:* ${ip}`, parse_mode: 'Markdown' })
+            body: JSON.stringify({ chat_id: SECRET_CONFIG.chatId, text: `Sube: ${subeAdi}\nPers: ${currentStaff}\nTur: ${urunTuru}\nKod: ${s}\nDurum: ${durum}\nUretim: ${tarihYazi}\nIP: ${ip}` })
         });
 
         resDiv.innerHTML = `
             <div style="background: ${isBayat ? '#ffebee' : '#e8f5e9'}; padding: 20px; border-radius: 15px; border: 3px solid ${isBayat ? '#d32f2f' : '#2e7d32'}; color: ${isBayat ? '#d32f2f' : '#2e7d32'};">
-                <div style="font-size: 1.3rem; font-weight: 800;">${isBayat ? '❌ İADE EDİLMELİ!' : '✅ SATILABİLİR'}</div>
+                <div style="font-size: 1.3rem; font-weight: 800;">${isBayat ? 'IADE EDILMELI!' : 'SATILABILIR'}</div>
                 <div>${durum}</div>
                 <hr style="border-top:1px solid #ccc; margin:10px 0;">
-                <div style="font-size: 0.9rem; color: #444;">Üretim: ${tarihYazi} (${toplamGunFarki} Günlük)</div>
+                <div style="font-size: 0.9rem; color: #444;">Uretim: ${tarihYazi} (${toplamGunFarki} Gunluk)</div>
             </div>`;
 
         window.history.replaceState({}, document.title, window.location.pathname);
