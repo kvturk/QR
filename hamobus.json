@@ -1,5 +1,16 @@
 [
   {
+    "durum": "URUN TAZE",
+    "gun_farki": 1,
+    "ip": "88.248.55.80",
+    "kod": "P498327",
+    "personel": "Damla",
+    "sube": "Kumbahçe Şube",
+    "uretim": "14.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-15T17:11:04.997Z"
+  },
+  {
     "durum": "BUGUN SON SATIS GUNU",
     "gun_farki": 4,
     "ip": "88.248.55.80",
