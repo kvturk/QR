@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "personel": "Rukiye Vapur",
+    "uretim": "11.04.2026",
+    "durum": "⚠️ BUGÜN SON SATIŞ GÜNÜ",
+    "sube": "Gümbet Şube",
+    "kod": "P185261",
+    "ip": "85.98.42.98",
+    "urun_turu": "PASTA",
+    "gun_farki": 4,
+    "timestamp": "2026-04-15T12:15:00.000Z"
+  }
+]
