@@ -11,55 +11,74 @@
         .royal-purple { color: #8e44ad; }
         .bg-royal-purple { background-color: #8e44ad; }
         .table-shadow { box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-        
-        /* SKT Durum Renkleri */
         .status-taze { background-color: #d4f4e2; color: #27ae60; }
         .status-songun { background-color: #fff3e0; color: #e65100; }
         .status-iade { background-color: #fce4e4; color: #e74c3c; }
         .status-kritik { background-color: #1a1a1a; color: #ffffff; }
-
         .badge { padding: 4px 12px; border-radius: 8px; font-weight: 600; font-size: 11px; text-transform: uppercase; }
+        
+        /* Liderlik Kartı Animasyonu */
+        .leader-card { transition: all 0.3s ease; border-left: 4px solid #8e44ad; }
     </style>
 </head>
 <body class="p-4 md:p-8">
 
     <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-            <div class="flex items-center gap-3">
-                <div class="bg-royal-purple p-2 rounded-lg text-white shadow-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-6">
+            <div class="flex items-center gap-4">
+                <div class="bg-royal-purple p-3 rounded-2xl text-white shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                     </svg>
                 </div>
                 <div>
-                    <h1 class="text-xl font-bold text-gray-800">Operasyonel Takip Paneli</h1>
-                    <p class="text-xs text-gray-400">Kalite Kontrol Veri Günlüğü (Son 7 Gün)</p>
+                    <h1 class="text-2xl font-bold text-gray-800 tracking-tight">Operasyonel Takip Paneli</h1>
+                    <div id="topBranchContainer" class="hidden mt-1">
+                        <span class="bg-purple-100 text-purple-700 text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wider">🏆 En Aktif: <span id="topBranchName">-</span></span>
+                    </div>
                 </div>
             </div>
 
-            <div class="flex gap-2">
-                <select id="subeFilter" onchange="renderTable()" class="border border-gray-200 rounded-xl px-4 py-2 outline-none focus:ring-2 focus:ring-purple-200 transition-all text-sm font-semibold text-gray-700 bg-white shadow-sm">
-                    <option value="Tümü">Tüm Birimler</option>
-                    <option value="Gümbet Şube">Gümbet Şube</option>
-                    <option value="Gümbet 2 Şube">Gümbet 2 Şube</option>
-                    <option value="Konacık Şube">Konacık Şube</option>
-                    <option value="Kumbahçe Şube">Kumbahçe Şube</option>
-                </select>
+            <div class="flex flex-wrap gap-3 bg-white p-3 rounded-2xl shadow-sm border border-gray-100">
+                <div class="flex flex-col">
+                    <label class="text-[10px] font-bold text-gray-400 ml-1 mb-1 uppercase">Birim</label>
+                    <select id="subeFilter" onchange="renderTable()" class="border-0 bg-gray-50 rounded-xl px-4 py-2 outline-none focus:ring-2 focus:ring-purple-200 transition-all text-sm font-semibold text-gray-700">
+                        <option value="Tümü">Tüm Birimler</option>
+                        <option value="Gümbet Şube">Gümbet Şube</option>
+                        <option value="Gümbet 2 Şube">Gümbet 2 Şube</option>
+                        <option value="Konacık Şube">Konacık Şube</option>
+                        <option value="Kumbahçe Şube">Kumbahçe Şube</option>
+                    </select>
+                </div>
+
+                <div class="flex flex-col">
+                    <label class="text-[10px] font-bold text-gray-400 ml-1 mb-1 uppercase">Zaman Dilimi</label>
+                    <select id="timeFilter" onchange="renderTable()" class="border-0 bg-gray-50 rounded-xl px-4 py-2 outline-none focus:ring-2 focus:ring-purple-200 transition-all text-sm font-semibold text-gray-700">
+                        <option value="7">Son 7 Gün</option>
+                        <option value="bugun">Bugün</option>
+                        <option value="dun">Dün</option>
+                    </select>
+                </div>
                 
-                <button onclick="fetchData()" class="flex items-center gap-2 border border-gray-200 rounded-xl px-4 py-2 hover:bg-gray-50 transition-all text-sm text-gray-600 bg-white shadow-sm">
-                    🔄 Veriyi Senkronize Et
-                </button>
+                <div class="flex items-end">
+                    <button onclick="fetchData()" class="bg-royal-purple hover:opacity-90 text-white p-2.5 rounded-xl transition-all shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
 
-        <div class="bg-white rounded-3xl overflow-hidden table-shadow overflow-x-auto">
+        <div class="bg-white rounded-3xl overflow-hidden table-shadow overflow-x-auto border border-gray-100">
             <table class="w-full text-left border-collapse">
-                <thead class="bg-gray-50 border-b border-gray-100 text-purple-400 text-xs font-semibold uppercase tracking-widest">
+                <thead class="bg-gray-50/50 border-b border-gray-100 text-purple-400 text-[10px] font-bold uppercase tracking-[0.2em]">
                     <tr>
                         <th class="px-6 py-5">Giriş Zamanı</th>
                         <th class="px-6 py-5">Birim / Personel</th>
                         <th class="px-6 py-5">Log Detayı</th>
-                        <th class="px-6 py-5">Üretim Tarihi</th> <th class="px-6 py-5 text-center">Durum</th>
+                        <th class="px-6 py-5">Üretim Tarihi</th>
+                        <th class="px-6 py-5 text-center">Durum</th>
                         <th class="px-6 py-5 text-right">Seri No</th>
                     </tr>
                 </thead>
@@ -68,7 +87,7 @@
             </table>
         </div>
         
-        <p class="mt-6 text-center text-gray-400 text-[10px] tracking-widest uppercase">Internal QC Logger v1.1.1 | Royal Data Protection</p>
+        <p class="mt-8 text-center text-gray-400 text-[10px] tracking-widest uppercase font-semibold">Internal QC Logger v1.2.0 | Royal Data Protection</p>
     </div>
 
     <script>
@@ -78,11 +97,27 @@
             try {
                 const response = await fetch('hamobus.json?t=' + new Date().getTime());
                 allData = await response.json();
+                calculateStats();
                 renderTable();
             } catch (err) {
                 console.error("Veri yukleme hatasi:", err);
-                document.getElementById('sktTable').innerHTML = '<tr><td colspan="6" class="p-10 text-center text-red-400 font-bold font-mono">⚠️ VERI DOSYASI HENUZ OLUSTURULMADI VEYA BOS</td></tr>';
+                document.getElementById('sktTable').innerHTML = '<tr><td colspan="6" class="p-10 text-center text-red-400 font-bold font-mono uppercase tracking-widest">⚠️ Veri dosyası bulunamadı</td></tr>';
             }
+        }
+
+        // --- EN ÇOK OKUTAN ŞUBEYİ HESAPLA ---
+        function calculateStats() {
+            if (allData.length === 0) return;
+            
+            const counts = {};
+            allData.forEach(item => {
+                counts[item.sube] = (counts[item.sube] || 0) + 1;
+            });
+
+            const topBranch = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
+            
+            document.getElementById('topBranchName').textContent = `${topBranch} (${counts[topBranch]} Okutma)`;
+            document.getElementById('topBranchContainer').classList.remove('hidden');
         }
 
         function getStatusBadge(durum) {
@@ -95,14 +130,30 @@
         function renderTable() {
             const tableBody = document.getElementById('sktTable');
             const subeFilter = document.getElementById('subeFilter').value;
+            const timeFilter = document.getElementById('timeFilter').value;
             tableBody.innerHTML = '';
 
+            const now = new Date();
+            const todayStr = now.toLocaleDateString('tr-TR');
+            const yesterday = new Date();
+            yesterday.setDate(now.getDate() - 1);
+            const yesterdayStr = yesterday.toLocaleDateString('tr-TR');
+
             const filteredData = allData.filter(item => {
-                return subeFilter === "Tümü" || item.sube === subeFilter;
+                // Şube Filtresi
+                const subeMatch = (subeFilter === "Tümü" || item.sube === subeFilter);
+                
+                // Zaman Filtresi
+                const itemDate = new Date(item.timestamp).toLocaleDateString('tr-TR');
+                let timeMatch = true;
+                if (timeFilter === "bugun") timeMatch = (itemDate === todayStr);
+                if (timeFilter === "dun") timeMatch = (itemDate === yesterdayStr);
+
+                return subeMatch && timeMatch;
             });
 
             if (filteredData.length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="6" class="p-10 text-center text-gray-400 italic">Secili birim icin kayit bulunamadi.</td></tr>';
+                tableBody.innerHTML = '<tr><td colspan="6" class="p-10 text-center text-gray-400 italic font-medium">Kriterlere uygun kayıt bulunamadı.</td></tr>';
                 return;
             }
 
@@ -113,22 +164,22 @@
 
                 tableBody.innerHTML += `
                     <tr class="hover:bg-gray-50/50 transition-colors">
-                        <td class="px-6 py-5 whitespace-nowrap text-xs font-mono text-gray-700 font-bold italic">🕒 ${scanDate}</td>
+                        <td class="px-6 py-5 whitespace-nowrap text-[11px] font-mono text-gray-500 font-bold italic">🕒 ${scanDate}</td>
                         <td class="px-6 py-5">
-                            <div class="font-bold text-gray-800">${item.sube}</div>
-                            <div class="text-[11px] text-purple-400 font-medium">👤 ${item.personel}</div>
+                            <div class="font-bold text-gray-800 tracking-tight">${item.sube}</div>
+                            <div class="text-[10px] text-purple-400 font-bold uppercase tracking-wider">👤 ${item.personel}</div>
                         </td>
                         <td class="px-6 py-5">
-                            <div class="font-semibold text-gray-700">${urunTuru}</div>
-                            <div class="text-[10px] text-gray-400">${item.gun_farki} Gunluk</div>
+                            <div class="font-bold text-gray-700">${urunTuru}</div>
+                            <div class="text-[10px] text-gray-400 font-medium italic">${item.gun_farki} Günlük</div>
                         </td>
-                        <td class="px-6 py-5 text-gray-500 font-medium font-mono">
+                        <td class="px-6 py-5 text-gray-600 font-bold font-mono text-xs">
                             ${item.uretim}
                         </td>
                         <td class="px-6 py-5 text-center">
                             <span class="badge ${badgeClass}">${item.durum}</span>
                         </td>
-                        <td class="px-6 py-5 text-right font-mono text-xs font-bold text-gray-300">
+                        <td class="px-6 py-5 text-right font-mono text-sm font-black text-gray-900 tracking-tighter">
                             ${item.kod}
                         </td>
                     </tr>
