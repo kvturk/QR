@@ -1,0 +1,65 @@
+name: Hamobus Data Logger
+
+on:
+  repository_dispatch:
+    types: [hamobus_qr_scan] # HTML'den gelen sinyali yakalar
+
+# İŞTE ÇAKIŞMAYI ÖNLEYEN SİHİRLİ AYAR:
+# Aynı anda 10 kişi okutsa bile GitHub bunları sıraya dizer (Queue)
+concurrency:
+  group: hamobus-logging
+  cancel-in-progress: false 
+
+permissions:
+  contents: write
+
+jobs:
+  update-json:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Depoyu Kontrol Et
+        uses: actions/checkout@v4
+
+      - name: Node.js Kurulumu
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: JSON Güncelle ve 14 Gün Temizliği Yap
+        run: |
+          node -e "
+          const fs = require('fs');
+          const file = 'hamobus.json';
+          
+          // 1. Mevcut veriyi oku (Dosya yoksa boş dizi başlat)
+          let data = [];
+          if (fs.existsSync(file)) {
+            const raw = fs.readFileSync(file, 'utf8');
+            data = raw ? JSON.parse(raw) : [];
+          }
+
+          // 2. HTML'den gelen yeni veriyi al
+          const newEntry = ${{ toJson(github.event.client_payload) }};
+          newEntry.timestamp = new Date().toISOString(); // Sunucu zamanını ekle
+          
+          // Yeni kaydı listenin en başına koy (Dashboard'da kolaylık olur)
+          data.unshift(newEntry);
+
+          // 3. 14 GÜNLÜK TEMİZLİK (DOSYANIN ŞİŞMESİNİ ÖNLER)
+          const threshold = new Date();
+          threshold.setDate(threshold.getDate() - 14);
+          
+          // Sadece son 14 günün verisini filtrele
+          data = data.filter(entry => new Date(entry.timestamp) > threshold);
+
+          // 4. Güncel halini geri yaz
+          fs.writeFileSync(file, JSON.stringify(data, null, 2));
+          "
+
+      - name: Değişiklikleri GitHub'a Kaydet
+        run: |
+          git config --global user.name 'Hamobus-Bot'
+          git config --global user.email 'bot@royalpastanesi.com'
+          git add hamobus.json
+          git commit -m '📦 Hamobus: Yeni QR Kaydı + 14 Günlük Temizlik' || echo 'Değişiklik yok'
+          git push
