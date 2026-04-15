@@ -27,11 +27,11 @@ jobs:
         run: |
           node -e "
           const fs = require('fs');
-          const file = 'hamobus.json';
+          const path = 'QR/hamobus.json'; // QR klasörünün içindeki dosya
           
           let data = [];
-          if (fs.existsSync(file)) {
-            const raw = fs.readFileSync(file, 'utf8');
+          if (fs.existsSync(path)) {
+            const raw = fs.readFileSync(path, 'utf8');
             data = raw ? JSON.parse(raw) : [];
           }
 
@@ -45,13 +45,13 @@ jobs:
           
           data = data.filter(entry => new Date(entry.timestamp) > threshold);
 
-          fs.writeFileSync(file, JSON.stringify(data, null, 2));
+          fs.writeFileSync(path, JSON.stringify(data, null, 2));
           "
 
       - name: Değişiklikleri GitHub'a Kaydet
         run: |
           git config --global user.name 'Hamobus-Bot'
           git config --global user.email 'bot@royalpastanesi.com'
-          git add hamobus.json
+          git add QR/hamobus.json
           git commit -m '📦 Hamobus: Yeni QR Kaydı + 14 Günlük Temizlik' || echo 'Değişiklik yok'
           git push
