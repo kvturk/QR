@@ -12,7 +12,7 @@
         .bg-royal-purple { background-color: #8e44ad; }
         .table-shadow { box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
         
-        /* SKT Durum Renkleri (Yeni Metin Düzeni) */
+        /* SKT Durum Renkleri */
         .status-taze { background-color: #d4f4e2; color: #27ae60; }
         .status-songun { background-color: #fff3e0; color: #e65100; }
         .status-iade { background-color: #fce4e4; color: #e74c3c; }
@@ -59,17 +59,16 @@
                         <th class="px-6 py-5">Giriş Zamanı</th>
                         <th class="px-6 py-5">Birim / Personel</th>
                         <th class="px-6 py-5">Log Detayı</th>
-                        <th class="px-6 py-5">Değer Tarihi</th>
-                        <th class="px-6 py-5 text-center">Durum</th>
+                        <th class="px-6 py-5">Üretim Tarihi</th> <th class="px-6 py-5 text-center">Durum</th>
                         <th class="px-6 py-5 text-right">Seri No</th>
                     </tr>
                 </thead>
                 <tbody id="sktTable" class="divide-y divide-gray-50 text-gray-600 text-sm">
-                    </tbody>
+                </tbody>
             </table>
         </div>
         
-        <p class="mt-6 text-center text-gray-400 text-[10px] tracking-widest uppercase">Internal QC Logger v1.1.0 | Royal Data Protection</p>
+        <p class="mt-6 text-center text-gray-400 text-[10px] tracking-widest uppercase">Internal QC Logger v1.1.1 | Royal Data Protection</p>
     </div>
 
     <script>
@@ -77,18 +76,16 @@
 
         async function fetchData() {
             try {
-                // Cache engellemek için t parametresi eklendi
                 const response = await fetch('hamobus.json?t=' + new Date().getTime());
                 allData = await response.json();
                 renderTable();
             } catch (err) {
                 console.error("Veri yukleme hatasi:", err);
-                document.getElementById('sktTable').innerHTML = '<tr><td colspan="6" class="p-10 text-center text-red-400 font-bold font-mono">⚠️ VERI DOSYASI HENUZ OLISTURULMADI VEYA BOS</td></tr>';
+                document.getElementById('sktTable').innerHTML = '<tr><td colspan="6" class="p-10 text-center text-red-400 font-bold font-mono">⚠️ VERI DOSYASI HENUZ OLUSTURULMADI VEYA BOS</td></tr>';
             }
         }
 
         function getStatusBadge(durum) {
-            // Yeni metin tabanlı kontrol (Emoji bağımlılığı kaldırıldı)
             if (durum.includes("IADE") || durum.includes("DOLDU")) return "status-iade";
             if (durum.includes("SON SATIS")) return "status-songun";
             if (durum.includes("KRITIK")) return "status-kritik";
@@ -112,13 +109,11 @@
             filteredData.forEach(item => {
                 const badgeClass = getStatusBadge(item.durum);
                 const scanDate = new Date(item.timestamp).toLocaleString('tr-TR');
-                
-                // Urun turu temizleme (Opsiyonel: SUTLU TATLI -> Type S gibi yapilabilir)
                 const urunTuru = item.urun_turu || "Belirsiz";
 
                 tableBody.innerHTML += `
                     <tr class="hover:bg-gray-50/50 transition-colors">
-                        <td class="px-6 py-5 whitespace-nowrap text-[11px] font-mono text-gray-400 italic font-bold">${scanDate}</td>
+                        <td class="px-6 py-5 whitespace-nowrap text-xs font-mono text-gray-700 font-bold italic">🕒 ${scanDate}</td>
                         <td class="px-6 py-5">
                             <div class="font-bold text-gray-800">${item.sube}</div>
                             <div class="text-[11px] text-purple-400 font-medium">👤 ${item.personel}</div>
@@ -142,7 +137,6 @@
         }
 
         fetchData();
-        // 2 dakikada bir otomatik yenileme
         setInterval(fetchData, 120000);
     </script>
 </body>
