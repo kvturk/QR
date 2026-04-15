@@ -3,6 +3,17 @@
     "durum": "BUGUN SON SATIS GUNU",
     "gun_farki": 4,
     "ip": "5.229.97.153",
+    "kod": "P163265",
+    "personel": "Hatice",
+    "sube": "Konacık Şube",
+    "uretim": "11.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-15T18:53:58.926Z"
+  },
+  {
+    "durum": "BUGUN SON SATIS GUNU",
+    "gun_farki": 4,
+    "ip": "5.229.97.153",
     "kod": "P185261",
     "personel": "Hatice",
     "sube": "Konacık Şube",
