@@ -1,1 +1,149 @@
 
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royapp | SKT Denetim Paneli</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; }
+        .royal-purple { color: #8e44ad; }
+        .bg-royal-purple { background-color: #8e44ad; }
+        .table-shadow { box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        
+        /* SKT Durum Renkleri */
+        .status-taze { background-color: #d4f4e2; color: #27ae60; }
+        .status-songun { background-color: #fff3e0; color: #e65100; }
+        .status-iade { background-color: #fce4e4; color: #e74c3c; }
+        .status-kritik { background-color: #1a1a1a; color: #ffffff; }
+
+        .badge { padding: 4px 12px; border-radius: 8px; font-weight: 600; font-size: 11px; text-transform: uppercase; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-royal-purple p-2 rounded-lg text-white shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-gray-800">SKT Takip Paneli</h1>
+                    <p class="text-xs text-gray-400">Son 14 Günün Okutma Kayıtları</p>
+                </div>
+            </div>
+
+            <div class="flex gap-2">
+                <select id="subeFilter" onchange="renderTable()" class="border border-gray-200 rounded-xl px-4 py-2 outline-none focus:ring-2 focus:ring-purple-200 transition-all text-sm font-semibold text-gray-700 bg-white shadow-sm">
+                    <option value="Tümü">Tüm Şubeler</option>
+                    <option value="Gümbet Şube">Gümbet Şube</option>
+                    <option value="Gümbet 2 Şube">Gümbet 2 Şube</option>
+                    <option value="Konacık Şube">Konacık Şube</option>
+                    <option value="Kumbahçe Şube">Kumbahçe Şube</option>
+                </select>
+                
+                <button onclick="fetchData()" class="flex items-center gap-2 border border-gray-200 rounded-xl px-4 py-2 hover:bg-gray-50 transition-all text-sm text-gray-600 bg-white shadow-sm">
+                    🔄 Yenile
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-3xl overflow-hidden table-shadow overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead class="bg-gray-50 border-b border-gray-100 text-purple-400 text-xs font-semibold uppercase tracking-widest">
+                    <tr>
+                        <th class="px-6 py-5">Okutma Zamanı</th>
+                        <th class="px-6 py-5">Şube / Personel</th>
+                        <th class="px-6 py-5">Ürün Bilgisi</th>
+                        <th class="px-6 py-5">Üretim Tarihi</th>
+                        <th class="px-6 py-5 text-center">Durum</th>
+                        <th class="px-6 py-5 text-right">Kod</th>
+                    </tr>
+                </thead>
+                <tbody id="sktTable" class="divide-y divide-gray-50 text-gray-600 text-sm">
+                    </tbody>
+            </table>
+        </div>
+        
+        <p class="mt-6 text-center text-gray-400 text-[10px] tracking-widest uppercase">Royal Pastanesi Internal SKT System v1.0</p>
+    </div>
+
+    <script>
+        let allData = [];
+
+        async function fetchData() {
+            try {
+                // hamobus.json dosyasını çekiyoruz
+                const response = await fetch('hamobus.json?t=' + new Date().getTime());
+                allData = await response.json();
+                renderTable();
+            } catch (err) {
+                console.error("Veri yükleme hatası:", err);
+                document.getElementById('sktTable').innerHTML = '<tr><td colspan="6" class="p-10 text-center text-red-400">Veri bulunamadı veya hamobus.json henüz oluşmadı.</td></tr>';
+            }
+        }
+
+        function getStatusBadge(durum) {
+            if (durum.includes("İADE")) return "status-iade";
+            if (durum.includes("SON SATIŞ")) return "status-songun";
+            if (durum.includes("KRİTİK")) return "status-kritik";
+            return "status-taze";
+        }
+
+        function renderTable() {
+            const tableBody = document.getElementById('sktTable');
+            const subeFilter = document.getElementById('subeFilter').value;
+            tableBody.innerHTML = '';
+
+            // Veriyi şubeye göre filtrele
+            const filteredData = allData.filter(item => {
+                return subeFilter === "Tümü" || item.sube === subeFilter;
+            });
+
+            if (filteredData.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="6" class="p-10 text-center text-gray-400">Bu şube için kayıt bulunamadı.</td></tr>';
+                return;
+            }
+
+            filteredData.forEach(item => {
+                const badgeClass = getStatusBadge(item.durum);
+                const scanDate = new Date(item.timestamp).toLocaleString('tr-TR');
+
+                tableBody.innerHTML += `
+                    <tr class="hover:bg-gray-50/50 transition-colors">
+                        <td class="px-6 py-5 whitespace-nowrap text-[11px] font-mono text-gray-400">🕒 ${scanDate}</td>
+                        <td class="px-6 py-5">
+                            <div class="font-bold text-gray-800">${item.sube}</div>
+                            <div class="text-[11px] text-purple-400 italic">👤 ${item.personel}</div>
+                        </td>
+                        <td class="px-6 py-5">
+                            <div class="font-semibold text-gray-700">${item.urun_turu}</div>
+                            <div class="text-[10px] text-gray-400">${item.gun_farki} Günlük Ürün</div>
+                        </td>
+                        <td class="px-6 py-5 text-gray-500 font-medium">
+                            📅 ${item.uretim}
+                        </td>
+                        <td class="px-6 py-5 text-center">
+                            <span class="badge ${badgeClass}">${item.durum.replace('❌ ', '').replace('⚠️ ', '').replace('✅ ', '')}</span>
+                        </td>
+                        <td class="px-6 py-5 text-right font-mono text-xs font-bold text-gray-400">
+                            ${item.kod}
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        // Sayfa açıldığında verileri çek
+        fetchData();
+
+        // Her 5 dakikada bir otomatik yenile (opsiyonel)
+        setInterval(fetchData, 300000);
+    </script>
+</body>
+</html>
