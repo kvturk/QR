@@ -19,17 +19,17 @@ jobs:
         with:
           node-version: '20'
 
-      - name: JSON Güncelle (Güvenli Mod)
-        # Veriyi PAYLOAD ismiyle sisteme tanıtıyoruz
+      - name: JSON Guncelle (Guvenli Mod)
+        # Veriyi PAYLOAD ismiyle sisteme tanitiyoruz
         env:
           PAYLOAD: ${{ toJson(github.event.client_payload) }}
         run: |
           node -e "
           const fs = require('fs');
-          const path = 'QR/hamobus.json'; // Dosya yolun bu ise aynen kalsın
+          const path = 'QR/hamobus.json'; 
           
           try {
-            // 1. Veriyi sistem değişkeninden çekiyoruz (En güvenli yol)
+            // 1. Veriyi sistem degiskeninden cekiyoruz
             const payloadRaw = process.env.PAYLOAD;
             const newEntry = JSON.parse(payloadRaw);
             newEntry.timestamp = new Date().toISOString();
@@ -40,12 +40,12 @@ jobs:
               const fileContent = fs.readFileSync(path, 'utf8').trim();
               data = fileContent ? JSON.parse(fileContent) : [];
             } else {
-              // Klasör yoksa oluştur
+              // Klasor yoksa olustur
               const dir = 'QR';
               if (!fs.existsSync(dir)) fs.mkdirSync(dir);
             }
 
-            // 3. Veriyi ekle ve 14 gün temizliği yap
+            // 3. Veriyi ekle ve 14 gun temizligi yap
             data.unshift(newEntry);
             const threshold = new Date();
             threshold.setDate(threshold.getDate() - 14);
@@ -53,17 +53,17 @@ jobs:
 
             // 4. Kaydet
             fs.writeFileSync(path, JSON.stringify(data, null, 2));
-            console.log('✅ İşlem Başarılı: ' + newEntry.kod);
+            console.log('Islem Basarili: ' + newEntry.kod);
           } catch (err) {
-            console.error('❌ HATA:', err.message);
+            console.error('HATA:', err.message);
             process.exit(1);
           }
           "
 
-      - name: Değişiklikleri GitHub'a Kaydet
+      - name: Degisiklikleri GitHub'a Kaydet
         run: |
           git config --global user.name 'Hamobus-Bot'
           git config --global user.email 'bot@royalpastanesi.com'
           git add .
-          git commit -m '📦 Hamobus: Kayıt Güncellendi' || echo 'Değişiklik yok'
+          git commit -m 'Hamobus: Kayit Guncellendi' || echo 'Degisiklik yok'
           git push
