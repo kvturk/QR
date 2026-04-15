@@ -1,6 +1,17 @@
 [
   {
     "durum": "URUN TAZE",
+    "gun_farki": 2,
+    "ip": "5.229.97.153",
+    "kod": "P367313",
+    "personel": "Hatice",
+    "sube": "Konacık Şube",
+    "uretim": "13.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-15T18:52:49.456Z"
+  },
+  {
+    "durum": "URUN TAZE",
     "gun_farki": 3,
     "ip": "5.229.97.153",
     "kod": "P229273",
