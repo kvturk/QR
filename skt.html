@@ -16,15 +16,12 @@
         .status-iade { background-color: #fce4e4; color: #e74c3c; }
         .status-kritik { background-color: #1a1a1a; color: #ffffff; }
         .badge { padding: 4px 12px; border-radius: 8px; font-weight: 600; font-size: 11px; text-transform: uppercase; }
-        
-        /* Liderlik Kartı Animasyonu */
-        .leader-card { transition: all 0.3s ease; border-left: 4px solid #8e44ad; }
     </style>
 </head>
 <body class="p-4 md:p-8">
 
     <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-6">
+        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 gap-6">
             <div class="flex items-center gap-4">
                 <div class="bg-royal-purple p-3 rounded-2xl text-white shadow-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -33,14 +30,15 @@
                 </div>
                 <div>
                     <h1 class="text-2xl font-bold text-gray-800 tracking-tight">Operasyonel Takip Paneli</h1>
-                    <div id="topBranchContainer" class="hidden mt-1">
-                        <span class="bg-purple-100 text-purple-700 text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wider">🏆 En Aktif: <span id="topBranchName">-</span></span>
+                    <div id="statsContainer" class="flex gap-2 mt-1">
+                        <span class="bg-purple-100 text-purple-700 text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wider">🏆 Haftalık Lider: <span id="topBranchName">-</span></span>
+                        <span id="filteredCountBadge" class="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wider">📊 Seçili Toplam: <span id="filteredCount">0</span></span>
                     </div>
                 </div>
             </div>
 
-            <div class="flex flex-wrap gap-3 bg-white p-3 rounded-2xl shadow-sm border border-gray-100">
-                <div class="flex flex-col">
+            <div class="flex flex-wrap gap-3 bg-white p-3 rounded-2xl shadow-sm border border-gray-100 w-full lg:w-auto">
+                <div class="flex flex-col flex-1 lg:flex-none">
                     <label class="text-[10px] font-bold text-gray-400 ml-1 mb-1 uppercase">Birim</label>
                     <select id="subeFilter" onchange="renderTable()" class="border-0 bg-gray-50 rounded-xl px-4 py-2 outline-none focus:ring-2 focus:ring-purple-200 transition-all text-sm font-semibold text-gray-700">
                         <option value="Tümü">Tüm Birimler</option>
@@ -51,12 +49,11 @@
                     </select>
                 </div>
 
-                <div class="flex flex-col">
+                <div class="flex flex-col flex-1 lg:flex-none">
                     <label class="text-[10px] font-bold text-gray-400 ml-1 mb-1 uppercase">Zaman Dilimi</label>
                     <select id="timeFilter" onchange="renderTable()" class="border-0 bg-gray-50 rounded-xl px-4 py-2 outline-none focus:ring-2 focus:ring-purple-200 transition-all text-sm font-semibold text-gray-700">
+                        <option value="bugun" selected>Bugün</option> <option value="dun">Dün</option>
                         <option value="7">Son 7 Gün</option>
-                        <option value="bugun">Bugün</option>
-                        <option value="dun">Dün</option>
                     </select>
                 </div>
                 
@@ -70,7 +67,7 @@
             </div>
         </div>
 
-        <div class="bg-white rounded-3xl overflow-hidden table-shadow overflow-x-auto border border-gray-100">
+        <div class="bg-white rounded-3xl overflow-hidden table-shadow border border-gray-100 overflow-x-auto">
             <table class="w-full text-left border-collapse">
                 <thead class="bg-gray-50/50 border-b border-gray-100 text-purple-400 text-[10px] font-bold uppercase tracking-[0.2em]">
                     <tr>
@@ -83,11 +80,11 @@
                     </tr>
                 </thead>
                 <tbody id="sktTable" class="divide-y divide-gray-50 text-gray-600 text-sm">
-                </tbody>
+                    </tbody>
             </table>
         </div>
         
-        <p class="mt-8 text-center text-gray-400 text-[10px] tracking-widest uppercase font-semibold">Internal QC Logger v1.2.0 | Royal Data Protection</p>
+        <p class="mt-8 text-center text-gray-400 text-[10px] tracking-widest uppercase font-semibold">Internal QC Logger v1.3.0 | Royal Data Protection</p>
     </div>
 
     <script>
@@ -97,27 +94,21 @@
             try {
                 const response = await fetch('hamobus.json?t=' + new Date().getTime());
                 allData = await response.json();
-                calculateStats();
+                calculateHaftalikLider();
                 renderTable();
             } catch (err) {
                 console.error("Veri yukleme hatasi:", err);
-                document.getElementById('sktTable').innerHTML = '<tr><td colspan="6" class="p-10 text-center text-red-400 font-bold font-mono uppercase tracking-widest">⚠️ Veri dosyası bulunamadı</td></tr>';
+                document.getElementById('sktTable').innerHTML = '<tr><td colspan="6" class="p-10 text-center text-red-400 font-bold font-mono">⚠️ VERİ DOSYASI OKUNAMIYOR</td></tr>';
             }
         }
 
-        // --- EN ÇOK OKUTAN ŞUBEYİ HESAPLA ---
-        function calculateStats() {
+        // Haftalık en aktif şubeyi hesapla (7 günlük veriden)
+        function calculateHaftalikLider() {
             if (allData.length === 0) return;
-            
             const counts = {};
-            allData.forEach(item => {
-                counts[item.sube] = (counts[item.sube] || 0) + 1;
-            });
-
+            allData.forEach(item => { counts[item.sube] = (counts[item.sube] || 0) + 1; });
             const topBranch = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
-            
-            document.getElementById('topBranchName').textContent = `${topBranch} (${counts[topBranch]} Okutma)`;
-            document.getElementById('topBranchContainer').classList.remove('hidden');
+            document.getElementById('topBranchName').textContent = topBranch;
         }
 
         function getStatusBadge(durum) {
@@ -152,8 +143,11 @@
                 return subeMatch && timeMatch;
             });
 
+            // SAYAÇ GÜNCELLEME: Seçilen şube ve güne ait toplam rakam
+            document.getElementById('filteredCount').textContent = filteredData.length;
+
             if (filteredData.length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="6" class="p-10 text-center text-gray-400 italic font-medium">Kriterlere uygun kayıt bulunamadı.</td></tr>';
+                tableBody.innerHTML = '<tr><td colspan="6" class="p-10 text-center text-gray-400 italic">Seçili kriterlere göre kayıt bulunamadı.</td></tr>';
                 return;
             }
 
@@ -188,7 +182,7 @@
         }
 
         fetchData();
-        setInterval(fetchData, 120000);
+        setInterval(fetchData, 120000); // 2 dkda bir oto-yenile
     </script>
 </body>
 </html>
