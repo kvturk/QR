@@ -4,7 +4,6 @@ on:
   repository_dispatch:
     types: [hamobus_qr_scan]
 
-# Personel peş peşe okutsa da işlemlerin birbirini ezmesini engeller.
 concurrency:
   group: hamobus-logging
   cancel-in-progress: false 
@@ -19,14 +18,21 @@ jobs:
       - name: Depoyu Kontrol Et
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Rebase işlemi için tüm geçmiş gereklidir.
+          fetch-depth: 0
 
       - name: Node.js Kurulumu
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: JSON Guncelle (Ana Dizin Modu)
+      - name: Git Ayarlarını Yap ve Gunceli Cek
+        run: |
+          git config --global user.name 'Hamobus-Bot'
+          git config --global user.email 'bot@royalpastanesi.com'
+          # KRITIK: Islem yapmadan hemen once en guncel veriyi çekiyoruz
+          git pull origin main
+
+      - name: JSON Guncelle (Guncel Veri Uzerine)
         env:
           PAYLOAD: ${{ toJson(github.event.client_payload) }}
         run: |
@@ -40,6 +46,7 @@ jobs:
             newEntry.timestamp = new Date().toISOString();
 
             let data = [];
+            // Az once 'pull' yaptigimiz icin artik en guncel dosya elimizde
             if (fs.existsSync(filePath)) {
               const fileContent = fs.readFileSync(filePath, 'utf8').trim();
               data = fileContent ? JSON.parse(fileContent) : [];
@@ -59,17 +66,10 @@ jobs:
           }
           "
 
-      - name: Degisiklikleri GitHub'a Kaydet
+      - name: Degisiklikleri Kaydet ve Firlat
         run: |
-          git config --global user.name 'Hamobus-Bot'
-          git config --global user.email 'bot@royalpastanesi.com'
           git add hamobus.json
-          
-          # 1. ÖNCE ELİMİZDEKİ DEĞİŞİKLİĞİ KAYDEDİYORUZ (HATA ALMAMAK İÇİN)
-          git commit -m 'Hamobus: Veri Guncellendi (7 Gunluk Limit)' || echo 'Degisiklik yok'
-          
-          # 2. SONRA GITHUB'DAKİ GÜNCELİ ÇEKİP ÜZERİNE EKLİYORUZ
+          git commit -m 'Hamobus: Yeni Kayit Eklendi' || echo 'Degisiklik yok'
+          # Eger bu saniyede bile baskasi bisey yuklediyse rebase ile uste cik
           git pull --rebase origin main
-          
-          # 3. ŞİMDİ GÜVENLE YAYINLIYORUZ
           git push origin main
