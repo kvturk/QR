@@ -1,5 +1,16 @@
 [
   {
+    "durum": "URUN TAZE",
+    "gun_farki": 0,
+    "ip": "5.24.125.76",
+    "kod": "P805344",
+    "personel": "Naz",
+    "sube": "Gümbet Şube",
+    "uretim": "16.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-16T17:57:27.667Z"
+  },
+  {
     "durum": "BUGUN SON SATIS GUNU",
     "gun_farki": 4,
     "ip": "5.24.125.76",
