@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Depoyu Kontrol Et
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Rebase işlemi için tüm geçmişi çekiyoruz
 
       - name: Node.js Kurulumu
         uses: actions/setup-node@v4
@@ -31,8 +33,6 @@ jobs:
         run: |
           node -e "
           const fs = require('fs');
-          
-          // DOSYA YOLU: Artik 'QR/' yok, direkt ana dizindeki dosyaya yazar.
           const filePath = 'hamobus.json'; 
           
           try {
@@ -41,7 +41,6 @@ jobs:
             newEntry.timestamp = new Date().toISOString();
 
             let data = [];
-            // Dosya varsa oku, yoksa bos dizi baslat
             if (fs.existsSync(filePath)) {
               const fileContent = fs.readFileSync(filePath, 'utf8').trim();
               data = fileContent ? JSON.parse(fileContent) : [];
@@ -69,5 +68,7 @@ jobs:
           git config --global user.name 'Hamobus-Bot'
           git config --global user.email 'bot@royalpastanesi.com'
           git add hamobus.json
-          git commit -m 'Hamobus: Veri Ana Dizine Yazildi (Emoji Temizlendi)' || echo 'Degisiklik yok'
-          git push
+          # KRITIK: Kaydetmeden once GitHub'daki en guncel dosyayi cekip uzerine ekler
+          git pull --rebase origin main
+          git commit -m 'Hamobus: Veri Guncellendi (7 Gunluk Limit)' || echo 'Degisiklik yok'
+          git push origin main
