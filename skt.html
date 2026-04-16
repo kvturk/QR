@@ -11,36 +11,46 @@
         .royal-purple { color: #8e44ad; }
         .bg-royal-purple { background-color: #8e44ad; }
         .table-shadow { box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-        .status-taze { background-color: #d4f4e2; color: #27ae60; }
-        .status-songun { background-color: #fff3e0; color: #e65100; }
-        .status-iade { background-color: #fce4e4; color: #e74c3c; }
-        .status-kritik { background-color: #1a1a1a; color: #ffffff; }
-        .badge { padding: 4px 12px; border-radius: 8px; font-weight: 600; font-size: 11px; text-transform: uppercase; }
+        
+        /* Yeni Ciddi Durum Renkleri */
+        .status-suit { background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; } /* Taze */
+        .status-warning { background-color: #fef3c7; color: #92400e; border: 1px solid #fde68a; } /* Son Gün */
+        .status-danger { background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca; } /* İade */
+        .status-extreme { background-color: #111827; color: #ffffff; } /* Kritik */
+
+        .badge { padding: 6px 14px; border-radius: 10px; font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .iade-alert { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
     </style>
 </head>
 <body class="p-4 md:p-8">
 
     <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 gap-6">
-            <div class="flex items-center gap-4">
-                <div class="bg-royal-purple p-3 rounded-2xl text-white shadow-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-10 gap-6">
+            <div class="flex items-center gap-5">
+                <div class="bg-royal-purple p-4 rounded-3xl text-white shadow-xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                     </svg>
                 </div>
                 <div>
-                    <h1 class="text-2xl font-bold text-gray-800 tracking-tight">Operasyonel Takip Paneli</h1>
-                    <div id="statsContainer" class="flex gap-2 mt-1">
-                        <span class="bg-purple-100 text-purple-700 text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wider">🏆 Haftalık Lider: <span id="topBranchName">-</span></span>
-                        <span id="filteredCountBadge" class="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wider">📊 Seçili Toplam: <span id="filteredCount">0</span></span>
+                    <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Kalite Kontrol Denetimi</h1>
+                    <div id="statsContainer" class="flex flex-wrap gap-2 mt-2">
+                        <div id="iadeAlertBox" class="hidden">
+                            <span class="bg-red-600 text-white text-[10px] font-black px-3 py-1.5 rounded-lg uppercase tracking-tighter iade-alert flex items-center gap-1">
+                                ⚠️ <span id="iadeCountLabel">0</span> ADET İADE BEKLİYOR
+                            </span>
+                        </div>
+                        <span class="bg-slate-200 text-slate-700 text-[10px] font-bold px-3 py-1.5 rounded-lg uppercase tracking-wider">🏆 Lider: <span id="topBranchName">-</span></span>
+                        <span class="bg-blue-100 text-blue-700 text-[10px] font-bold px-3 py-1.5 rounded-lg uppercase tracking-wider">📊 İşlem: <span id="filteredCount">0</span></span>
                     </div>
                 </div>
             </div>
 
-            <div class="flex flex-wrap gap-3 bg-white p-3 rounded-2xl shadow-sm border border-gray-100 w-full lg:w-auto">
+            <div class="flex flex-wrap gap-3 bg-white p-4 rounded-[2rem] shadow-sm border border-gray-100 w-full lg:w-auto">
                 <div class="flex flex-col flex-1 lg:flex-none">
-                    <label class="text-[10px] font-bold text-gray-400 ml-1 mb-1 uppercase">Birim</label>
-                    <select id="subeFilter" onchange="renderTable()" class="border-0 bg-gray-50 rounded-xl px-4 py-2 outline-none focus:ring-2 focus:ring-purple-200 transition-all text-sm font-semibold text-gray-700">
+                    <label class="text-[10px] font-black text-slate-400 ml-2 mb-1 uppercase tracking-widest">Denetim Birimi</label>
+                    <select id="subeFilter" onchange="renderTable()" class="border-0 bg-slate-50 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-purple-200 transition-all text-sm font-bold text-slate-700 cursor-pointer">
                         <option value="Tümü">Tüm Birimler</option>
                         <option value="Gümbet Şube">Gümbet Şube</option>
                         <option value="Gümbet 2 Şube">Gümbet 2 Şube</option>
@@ -50,16 +60,17 @@
                 </div>
 
                 <div class="flex flex-col flex-1 lg:flex-none">
-                    <label class="text-[10px] font-bold text-gray-400 ml-1 mb-1 uppercase">Zaman Dilimi</label>
-                    <select id="timeFilter" onchange="renderTable()" class="border-0 bg-gray-50 rounded-xl px-4 py-2 outline-none focus:ring-2 focus:ring-purple-200 transition-all text-sm font-semibold text-gray-700">
-                        <option value="bugun" selected>Bugün</option> <option value="dun">Dün</option>
+                    <label class="text-[10px] font-black text-slate-400 ml-2 mb-1 uppercase tracking-widest">Periyot</label>
+                    <select id="timeFilter" onchange="renderTable()" class="border-0 bg-slate-50 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-purple-200 transition-all text-sm font-bold text-slate-700 cursor-pointer">
+                        <option value="bugun" selected>Bugün (Güncel)</option>
+                        <option value="dun">Dün</option>
                         <option value="7">Son 7 Gün</option>
                     </select>
                 </div>
                 
                 <div class="flex items-end">
-                    <button onclick="fetchData()" class="bg-royal-purple hover:opacity-90 text-white p-2.5 rounded-xl transition-all shadow-md">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <button onclick="fetchData()" class="bg-royal-purple hover:scale-105 active:scale-95 text-white p-3.5 rounded-2xl transition-all shadow-lg shadow-purple-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                         </svg>
                     </button>
@@ -67,24 +78,24 @@
             </div>
         </div>
 
-        <div class="bg-white rounded-3xl overflow-hidden table-shadow border border-gray-100 overflow-x-auto">
+        <div class="bg-white rounded-[2.5rem] overflow-hidden table-shadow border border-gray-100 overflow-x-auto">
             <table class="w-full text-left border-collapse">
-                <thead class="bg-gray-50/50 border-b border-gray-100 text-purple-400 text-[10px] font-bold uppercase tracking-[0.2em]">
+                <thead class="bg-slate-50 border-b border-slate-100 text-slate-400 text-[10px] font-black uppercase tracking-[0.25em]">
                     <tr>
-                        <th class="px-6 py-5">Giriş Zamanı</th>
-                        <th class="px-6 py-5">Birim / Personel</th>
-                        <th class="px-6 py-5">Log Detayı</th>
-                        <th class="px-6 py-5">Üretim Tarihi</th>
-                        <th class="px-6 py-5 text-center">Durum</th>
-                        <th class="px-6 py-5 text-right">Seri No</th>
+                        <th class="px-8 py-6">Kayıt Tarihi</th>
+                        <th class="px-8 py-6">Denetim Lokasyonu</th>
+                        <th class="px-8 py-6">Ürün Grubu</th>
+                        <th class="px-8 py-6">Üretim Tarihi</th>
+                        <th class="px-8 py-6 text-center">Denetim Sonucu</th>
+                        <th class="px-8 py-6 text-right">Takip No (S/N)</th>
                     </tr>
                 </thead>
-                <tbody id="sktTable" class="divide-y divide-gray-50 text-gray-600 text-sm">
-                    </tbody>
+                <tbody id="sktTable" class="divide-y divide-slate-50 text-slate-600 text-sm">
+                </tbody>
             </table>
         </div>
         
-        <p class="mt-8 text-center text-gray-400 text-[10px] tracking-widest uppercase font-semibold">Internal QC Logger v1.3.0 | Royal Data Protection</p>
+        <p class="mt-10 text-center text-slate-400 text-[10px] tracking-[0.3em] uppercase font-bold">Royal Bakery Quality Assurance v1.4.0</p>
     </div>
 
     <script>
@@ -94,28 +105,34 @@
             try {
                 const response = await fetch('hamobus.json?t=' + new Date().getTime());
                 allData = await response.json();
-                calculateHaftalikLider();
+                calculateLider();
                 renderTable();
             } catch (err) {
-                console.error("Veri yukleme hatasi:", err);
-                document.getElementById('sktTable').innerHTML = '<tr><td colspan="6" class="p-10 text-center text-red-400 font-bold font-mono">⚠️ VERİ DOSYASI OKUNAMIYOR</td></tr>';
+                console.error("Hata:", err);
+                document.getElementById('sktTable').innerHTML = '<tr><td colspan="6" class="p-20 text-center text-slate-300 font-black italic">VERİ BAĞLANTISI KESİLDİ</td></tr>';
             }
         }
 
-        // Haftalık en aktif şubeyi hesapla (7 günlük veriden)
-        function calculateHaftalikLider() {
+        function calculateLider() {
             if (allData.length === 0) return;
             const counts = {};
             allData.forEach(item => { counts[item.sube] = (counts[item.sube] || 0) + 1; });
-            const topBranch = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
-            document.getElementById('topBranchName').textContent = topBranch;
+            const top = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
+            document.getElementById('topBranchName').textContent = top;
         }
 
-        function getStatusBadge(durum) {
-            if (durum.includes("IADE") || durum.includes("DOLDU")) return "status-iade";
-            if (durum.includes("SON SATIS")) return "status-songun";
-            if (durum.includes("KRITIK")) return "status-kritik";
-            return "status-taze";
+        // Ciddi Terminoloji Eşleştirmesi
+        function getStatusInfo(durum) {
+            if (durum.includes("IADE") || durum.includes("DOLDU")) {
+                return { label: "TERMİN SONU (İADE)", class: "status-danger", isIade: true };
+            }
+            if (durum.includes("SON SATIS")) {
+                return { label: "RİSKLİ (SON GÜN)", class: "status-warning", isIade: false };
+            }
+            if (durum.includes("KRITIK")) {
+                return { label: "KRİTİK (İMHA)", class: "status-extreme", isIade: true };
+            }
+            return { label: "STANDARTLARA UYGUN", class: "status-suit", isIade: false };
         }
 
         function renderTable() {
@@ -130,11 +147,10 @@
             yesterday.setDate(now.getDate() - 1);
             const yesterdayStr = yesterday.toLocaleDateString('tr-TR');
 
+            let iadeCount = 0;
+
             const filteredData = allData.filter(item => {
-                // Şube Filtresi
                 const subeMatch = (subeFilter === "Tümü" || item.sube === subeFilter);
-                
-                // Zaman Filtresi
                 const itemDate = new Date(item.timestamp).toLocaleDateString('tr-TR');
                 let timeMatch = true;
                 if (timeFilter === "bugun") timeMatch = (itemDate === todayStr);
@@ -143,46 +159,57 @@
                 return subeMatch && timeMatch;
             });
 
-            // SAYAÇ GÜNCELLEME: Seçilen şube ve güne ait toplam rakam
+            // Seçilen filtredeki toplam ve iade sayısını hesapla
             document.getElementById('filteredCount').textContent = filteredData.length;
 
             if (filteredData.length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="6" class="p-10 text-center text-gray-400 italic">Seçili kriterlere göre kayıt bulunamadı.</td></tr>';
+                document.getElementById('iadeAlertBox').classList.add('hidden');
+                tableBody.innerHTML = '<tr><td colspan="6" class="p-20 text-center text-slate-400 font-medium italic italic">Seçili kriterde kayıt bulunamadı.</td></tr>';
                 return;
             }
 
             filteredData.forEach(item => {
-                const badgeClass = getStatusBadge(item.durum);
+                const status = getStatusInfo(item.durum);
+                if (status.isIade) iadeCount++;
+
                 const scanDate = new Date(item.timestamp).toLocaleString('tr-TR');
-                const urunTuru = item.urun_turu || "Belirsiz";
+                const urunTuru = item.urun_turu || "BELİRTİLMEMİŞ";
 
                 tableBody.innerHTML += `
-                    <tr class="hover:bg-gray-50/50 transition-colors">
-                        <td class="px-6 py-5 whitespace-nowrap text-[11px] font-mono text-gray-500 font-bold italic">🕒 ${scanDate}</td>
-                        <td class="px-6 py-5">
-                            <div class="font-bold text-gray-800 tracking-tight">${item.sube}</div>
-                            <div class="text-[10px] text-purple-400 font-bold uppercase tracking-wider">👤 ${item.personel}</div>
+                    <tr class="hover:bg-slate-50/80 transition-all">
+                        <td class="px-8 py-6 whitespace-nowrap text-[11px] font-mono text-slate-800 font-black italic">🕒 ${scanDate}</td>
+                        <td class="px-8 py-6">
+                            <div class="font-extrabold text-slate-900 tracking-tight">${item.sube}</div>
+                            <div class="text-[10px] text-purple-500 font-black uppercase tracking-tighter">DENETÇİ: ${item.personel}</div>
                         </td>
-                        <td class="px-6 py-5">
-                            <div class="font-bold text-gray-700">${urunTuru}</div>
-                            <div class="text-[10px] text-gray-400 font-medium italic">${item.gun_farki} Günlük</div>
+                        <td class="px-8 py-6">
+                            <div class="font-bold text-slate-800">${urunTuru}</div>
+                            <div class="text-[10px] text-slate-400 font-bold uppercase underline decoration-purple-200">KONTROL: ${item.gun_farki}. GÜN</div>
                         </td>
-                        <td class="px-6 py-5 text-gray-600 font-bold font-mono text-xs">
+                        <td class="px-8 py-6 text-slate-700 font-black font-mono text-xs">
                             ${item.uretim}
                         </td>
-                        <td class="px-6 py-5 text-center">
-                            <span class="badge ${badgeClass}">${item.durum}</span>
+                        <td class="px-8 py-6 text-center">
+                            <span class="badge ${status.class}">${status.label}</span>
                         </td>
-                        <td class="px-6 py-5 text-right font-mono text-sm font-black text-gray-900 tracking-tighter">
+                        <td class="px-8 py-6 text-right font-mono text-sm font-black text-black tracking-widest bg-slate-50/30">
                             ${item.kod}
                         </td>
                     </tr>
                 `;
             });
+
+            // Header İade Uyarı Güncelleme
+            if (iadeCount > 0) {
+                document.getElementById('iadeCountLabel').textContent = iadeCount;
+                document.getElementById('iadeAlertBox').classList.remove('hidden');
+            } else {
+                document.getElementById('iadeAlertBox').classList.add('hidden');
+            }
         }
 
         fetchData();
-        setInterval(fetchData, 120000); // 2 dkda bir oto-yenile
+        setInterval(fetchData, 120000);
     </script>
 </body>
 </html>
