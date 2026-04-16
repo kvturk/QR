@@ -1,5 +1,16 @@
 [
   {
+    "durum": "URUN TAZE",
+    "gun_farki": 3,
+    "ip": "85.98.42.98",
+    "kod": "P367313",
+    "personel": "Ayşegül",
+    "sube": "Gümbet Şube",
+    "uretim": "13.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-16T12:12:56.883Z"
+  },
+  {
     "durum": "BUGUN SON SATIS GUNU",
     "gun_farki": 4,
     "ip": "85.98.42.98",
