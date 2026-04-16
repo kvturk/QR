@@ -1,6 +1,17 @@
 [
   {
     "durum": "URUN TAZE",
+    "gun_farki": 0,
+    "ip": "88.247.207.247",
+    "kod": "P805344",
+    "personel": "Aslı Özveren",
+    "sube": "Konacık Şube",
+    "uretim": "16.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-16T17:14:03.086Z"
+  },
+  {
+    "durum": "URUN TAZE",
     "gun_farki": 1,
     "ip": "78.189.186.231",
     "kod": "S526331",
