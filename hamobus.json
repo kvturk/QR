@@ -3,6 +3,17 @@
     "durum": "URUN TAZE",
     "gun_farki": 2,
     "ip": "88.248.55.80",
+    "kod": "S417326",
+    "personel": "Demet",
+    "sube": "Kumbahçe Şube",
+    "uretim": "14.04.2026",
+    "urun_turu": "SUTLU TATLI",
+    "timestamp": "2026-04-16T08:13:00.753Z"
+  },
+  {
+    "durum": "URUN TAZE",
+    "gun_farki": 2,
+    "ip": "88.248.55.80",
     "kod": "P498327",
     "personel": "Demet",
     "sube": "Kumbahçe Şube",
