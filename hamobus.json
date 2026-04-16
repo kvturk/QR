@@ -1,5 +1,16 @@
 [
   {
+    "durum": "BUGUN SON SATIS GUNU",
+    "gun_farki": 4,
+    "ip": "85.98.42.98",
+    "kod": "P229273",
+    "personel": "Ayşegül",
+    "sube": "Gümbet Şube",
+    "uretim": "12.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-16T12:11:19.928Z"
+  },
+  {
     "durum": "URUN TAZE",
     "gun_farki": 0,
     "ip": "85.98.42.98",
