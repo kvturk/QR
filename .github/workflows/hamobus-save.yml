@@ -4,7 +4,7 @@ on:
   repository_dispatch:
     types: [hamobus_qr_scan]
 
-# Aynı anda birden fazla okutma gelirse sıraya koyar, iptal etmez.
+# Personel peş peşe okutsa da işlemlerin birbirini ezmesini engeller.
 concurrency:
   group: hamobus-logging
   cancel-in-progress: false 
@@ -19,7 +19,7 @@ jobs:
       - name: Depoyu Kontrol Et
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Rebase işlemi için tüm geçmişi çekiyoruz
+          fetch-depth: 0 # Rebase işlemi için tüm geçmiş gereklidir.
 
       - name: Node.js Kurulumu
         uses: actions/setup-node@v4
@@ -27,7 +27,6 @@ jobs:
           node-version: '20'
 
       - name: JSON Guncelle (Ana Dizin Modu)
-        # Veriyi PAYLOAD ismiyle guvenli bir sekilde sisteme aliyoruz
         env:
           PAYLOAD: ${{ toJson(github.event.client_payload) }}
         run: |
@@ -46,19 +45,16 @@ jobs:
               data = fileContent ? JSON.parse(fileContent) : [];
             }
 
-            // Yeni veriyi en basa ekle
             data.unshift(newEntry);
 
-            // 7 gunluk temizlik (Sadece taze verileri tutar)
             const threshold = new Date();
             threshold.setDate(threshold.getDate() - 7);
             data = data.filter(entry => entry.timestamp && new Date(entry.timestamp) > threshold);
 
-            // Dosyaya geri yaz
             fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
             console.log('Islem Basarili: ' + newEntry.kod);
           } catch (err) {
-            console.error('HATA OLUSTU:', err.message);
+            console.error('HATA:', err.message);
             process.exit(1);
           }
           "
@@ -68,7 +64,12 @@ jobs:
           git config --global user.name 'Hamobus-Bot'
           git config --global user.email 'bot@royalpastanesi.com'
           git add hamobus.json
-          # KRITIK: Kaydetmeden once GitHub'daki en guncel dosyayi cekip uzerine ekler
-          git pull --rebase origin main
+          
+          # 1. ÖNCE ELİMİZDEKİ DEĞİŞİKLİĞİ KAYDEDİYORUZ (HATA ALMAMAK İÇİN)
           git commit -m 'Hamobus: Veri Guncellendi (7 Gunluk Limit)' || echo 'Degisiklik yok'
+          
+          # 2. SONRA GITHUB'DAKİ GÜNCELİ ÇEKİP ÜZERİNE EKLİYORUZ
+          git pull --rebase origin main
+          
+          # 3. ŞİMDİ GÜVENLE YAYINLIYORUZ
           git push origin main
