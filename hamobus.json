@@ -1,6 +1,17 @@
 [
   {
     "durum": "URUN TAZE",
+    "gun_farki": 0,
+    "ip": "31.142.22.233",
+    "kod": "P761356",
+    "personel": "Selma Doğan",
+    "sube": "Gümbet Şube",
+    "uretim": "17.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-17T10:22:09.320Z"
+  },
+  {
+    "durum": "URUN TAZE",
     "gun_farki": 1,
     "ip": "37.155.21.190",
     "kod": "P490345",
