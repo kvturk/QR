@@ -2,6 +2,17 @@
   {
     "durum": "URUN TAZE",
     "gun_farki": 0,
+    "ip": "78.189.186.231",
+    "kod": "S532351",
+    "personel": "Basak",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "17.04.2026",
+    "urun_turu": "SUTLU TATLI",
+    "timestamp": "2026-04-17T14:03:10.104Z"
+  },
+  {
+    "durum": "URUN TAZE",
+    "gun_farki": 0,
     "ip": "85.98.42.98",
     "kod": "S532351",
     "personel": "Rukiye vapur",
