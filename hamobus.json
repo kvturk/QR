@@ -1,5 +1,16 @@
 [
   {
+    "durum": "URUN TAZE",
+    "gun_farki": 2,
+    "ip": "31.142.22.233",
+    "kod": "P530334",
+    "personel": "Selma Doğan",
+    "sube": "Gümbet Şube",
+    "uretim": "15.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-17T10:43:32.454Z"
+  },
+  {
     "durum": "RAF OMRU DOLDU (IADE!)",
     "gun_farki": 6,
     "ip": "37.155.21.190",
