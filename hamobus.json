@@ -1,6 +1,17 @@
 [
   {
     "durum": "RAF OMRU DOLDU (IADE!)",
+    "gun_farki": 6,
+    "ip": "37.155.21.190",
+    "kod": "P163265",
+    "personel": "Deryaövet",
+    "sube": "Gümbet Şube",
+    "uretim": "11.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-17T10:25:14.115Z"
+  },
+  {
+    "durum": "RAF OMRU DOLDU (IADE!)",
     "gun_farki": 5,
     "ip": "37.155.21.190",
     "kod": "P229273",
