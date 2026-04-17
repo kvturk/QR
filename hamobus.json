@@ -8,6 +8,17 @@
     "sube": "Gümbet 2 Şube",
     "uretim": "16.04.2026",
     "urun_turu": "PASTA",
+    "timestamp": "2026-04-17T11:29:37.863Z"
+  },
+  {
+    "durum": "URUN TAZE",
+    "gun_farki": 1,
+    "ip": "78.189.186.231",
+    "kod": "P490345",
+    "personel": "Basak",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "16.04.2026",
+    "urun_turu": "PASTA",
     "timestamp": "2026-04-17T11:29:28.809Z"
   },
   {
