@@ -3,70 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>RoyalAPP | Mobile QC</title>
+    <title>RoyalAPP | Mobile QC Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; }
         .bg-royal { background-color: #3b1c7a; }
-        .text-royal { color: #3b1c7a; }
-        .card-shadow { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); }
         
-        /* Ciddi Durum Renkleri */
-        .status-suit { background: #dcfce7; color: #166534; border-left: 5px solid #22c55e; } 
-        .status-warning { background: #fef3c7; color: #92400e; border-left: 5px solid #f59e0b; } 
-        .status-danger { background: #fee2e2; color: #991b1b; border-left: 5px solid #ef4444; } 
-        .status-extreme { background: #111827; color: #ffffff; border-left: 5px solid #000000; }
+        /* --- DİNAMİK DURUM EFEKTLERİ --- */
+        
+        /* STANDART (TAZE) */
+        .status-suit { 
+            background: #ffffff; 
+            border-left: 6px solid #22c55e; 
+        } 
+
+        /* SON GÜN (SARI UYARI) */
+        .status-warning { 
+            background: #fffbeb; 
+            border-left: 6px solid #f59e0b;
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.1);
+        } 
+
+        /* İADE (KIRMIZI YANIP SÖNEN) */
+        .status-danger { 
+            background: #fef2f2; 
+            border-left: 6px solid #ef4444;
+            animation: iade-pulse 2s infinite;
+        } 
+
+        /* KRİTİK (SİYAH) */
+        .status-extreme { 
+            background: #111827; 
+            color: #ffffff; 
+            border-left: 6px solid #ef4444; 
+        }
+
+        /* ANIMASYON: İADE PARLAMA */
+        @keyframes iade-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
 
         .sticky-header { position: sticky; top: 0; z-index: 50; }
-        .safe-area-bottom { padding-bottom: env(safe-area-inset-bottom); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="safe-area-bottom">
+<body class="pb-10">
 
-    <div class="sticky-header bg-royal text-white p-4 shadow-lg rounded-b-3xl">
-        <div class="flex justify-between items-center mb-3">
+    <div class="sticky-header bg-royal text-white p-4 shadow-xl rounded-b-[2rem]">
+        <div class="flex justify-between items-center mb-4">
             <div>
                 <h1 class="text-xl font-extrabold tracking-tight">Royal QC Mobile</h1>
-                <p class="text-[10px] opacity-70 uppercase tracking-widest font-bold">Yönetici Denetim Paneli</p>
+                <p class="text-[10px] opacity-70 uppercase tracking-[0.2em] font-black">Denetim Monitorü</p>
             </div>
-            <button onclick="fetchData()" class="bg-white/20 p-2 rounded-xl active:scale-90 transition-transform">
+            <button onclick="fetchData()" class="bg-white/20 p-2.5 rounded-2xl active:scale-90 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>
             </button>
         </div>
         
-        <div class="flex gap-2">
-            <div class="bg-white/10 flex-1 p-3 rounded-2xl text-center border border-white/10">
-                <div class="text-[10px] uppercase font-black opacity-60">Toplam</div>
-                <div id="totalCount" class="text-xl font-extrabold">-</div>
+        <div class="flex gap-3">
+            <div class="bg-white/10 flex-1 p-3 rounded-2xl text-center border border-white/5">
+                <div class="text-[9px] uppercase font-black opacity-50 mb-1">Toplam Tarama</div>
+                <div id="totalCount" class="text-2xl font-black">-</div>
             </div>
-            <div id="iadeCard" class="bg-red-500/20 flex-1 p-3 rounded-2xl text-center border border-red-500/30">
-                <div class="text-[10px] uppercase font-black text-red-200">İade</div>
-                <div id="iadeCount" class="text-xl font-extrabold text-red-100">-</div>
+            <div class="bg-red-500/30 flex-1 p-3 rounded-2xl text-center border border-red-500/20">
+                <div class="text-[9px] uppercase font-black text-red-200 mb-1">Bekleyen İade</div>
+                <div id="iadeCount" class="text-2xl font-black text-red-100">-</div>
             </div>
         </div>
     </div>
 
     <div class="p-4 flex gap-2 overflow-x-auto no-scrollbar">
-        <select id="subeFilter" onchange="renderCards()" class="bg-white border-none rounded-xl px-4 py-2 text-xs font-bold shadow-sm outline-none focus:ring-2 focus:ring-purple-300">
+        <select id="subeFilter" onchange="renderCards()" class="bg-white border-none rounded-xl px-4 py-2.5 text-[11px] font-black shadow-sm outline-none text-slate-600 uppercase">
             <option value="Tümü">Tüm Şubeler</option>
             <option value="Gümbet Şube">Gümbet</option>
             <option value="Gümbet 2 Şube">Gümbet 2</option>
             <option value="Konacık Şube">Konacık</option>
             <option value="Kumbahçe Şube">Kumbahçe</option>
         </select>
-        <select id="timeFilter" onchange="renderCards()" class="bg-white border-none rounded-xl px-4 py-2 text-xs font-bold shadow-sm outline-none focus:ring-2 focus:ring-purple-300">
+        <select id="timeFilter" onchange="renderCards()" class="bg-white border-none rounded-xl px-4 py-2.5 text-[11px] font-black shadow-sm outline-none text-slate-600 uppercase">
             <option value="bugun">Bugün</option>
             <option value="dun">Dün</option>
-            <option value="7">Son 7 Gün</option>
+            <option value="7">7 Gün</option>
         </select>
     </div>
 
-    <div id="cardContainer" class="px-4 space-y-3 pb-20">
-        <div class="text-center py-10 text-slate-400 font-bold italic">Veriler yükleniyor...</div>
-    </div>
+    <div id="cardContainer" class="px-4 space-y-4">
+        </div>
 
     <script>
         let allData = [];
@@ -77,15 +104,16 @@
                 allData = await response.json();
                 renderCards();
             } catch (err) {
-                document.getElementById('cardContainer').innerHTML = '<div class="text-center text-red-500 font-black p-10">VERİ ALINAMADI!</div>';
+                document.getElementById('cardContainer').innerHTML = '<div class="p-10 text-center opacity-30 font-black">BAGLANTI HATASI</div>';
             }
         }
 
         function getStatusInfo(durum) {
-            if (durum.includes("IADE") || durum.includes("DOLDU")) return { label: "İADE", class: "status-danger" };
-            if (durum.includes("SON SATIS")) return { label: "SON GÜN", class: "status-warning" };
-            if (durum.includes("KRITIK")) return { label: "İMHAAA", class: "status-extreme" };
-            return { label: "UYGUN", class: "status-suit" };
+            const d = durum.toUpperCase();
+            if (d.includes("IADE") || d.includes("DOLDU")) return { label: "İADE EDİLECEK", class: "status-danger", textCol: "text-red-600" };
+            if (d.includes("SON SATIS") || d.includes("BUGUN SON")) return { label: "SON SATIŞ GÜNÜ", class: "status-warning", textCol: "text-amber-600" };
+            if (d.includes("KRITIK")) return { label: "KRİTİK İMHA", class: "status-extreme", textCol: "text-white" };
+            return { label: "STANDART UYGUN", class: "status-suit", textCol: "text-emerald-600" };
         }
 
         function renderCards() {
@@ -95,8 +123,9 @@
             
             const now = new Date();
             const todayStr = now.toLocaleDateString('tr-TR');
-            const yesterday = new Date(); yesterday.setDate(now.getDate() - 1);
-            const yesterdayStr = yesterday.toLocaleDateString('tr-TR');
+            const yesterdayStr = new Date(now.setDate(now.getDate() - 1)).toLocaleDateString('tr-TR');
+            // now objesini bozmamak için tekrar düzeltelim (opsiyonel ama sağlıklı)
+            const resetNow = new Date();
 
             const filtered = allData.filter(item => {
                 const subeMatch = (subeFilter === "Tümü" || item.sube === subeFilter);
@@ -111,7 +140,7 @@
             let iadeTotal = 0;
 
             if (filtered.length === 0) {
-                container.innerHTML = '<div class="text-center py-10 text-slate-400 font-bold italic">Kayıt bulunamadı.</div>';
+                container.innerHTML = '<div class="text-center py-20 opacity-20 font-black tracking-widest uppercase">Kayıt Yok</div>';
                 document.getElementById('iadeCount').textContent = 0;
                 return;
             }
@@ -119,44 +148,47 @@
             container.innerHTML = '';
             filtered.forEach(item => {
                 const status = getStatusInfo(item.durum);
-                if (status.label !== "UYGUN") iadeTotal++;
+                if (status.label !== "STANDART UYGUN") iadeTotal++;
 
                 const scanTime = new Date(item.timestamp).toLocaleTimeString('tr-TR', {hour: '2-digit', minute:'2-digit'});
+                const isExtreme = status.class === "status-extreme";
                 
                 container.innerHTML += `
-                    <div class="bg-white rounded-2xl p-4 card-shadow border border-slate-100 ${status.class}">
-                        <div class="flex justify-between items-start mb-3">
+                    <div class="rounded-3xl p-5 shadow-sm border border-slate-200 transition-all ${status.class}">
+                        <div class="flex justify-between items-start mb-4">
                             <div>
-                                <h3 class="font-extrabold text-slate-900 leading-tight">${item.sube}</h3>
-                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">🕒 ${scanTime} - ${item.personel}</p>
+                                <h3 class="font-extrabold text-lg ${isExtreme ? 'text-white' : 'text-slate-900'} leading-tight">${item.sube}</h3>
+                                <p class="text-[10px] font-bold ${isExtreme ? 'text-slate-400' : 'text-slate-400'} uppercase tracking-widest mt-1">
+                                    🕒 ${scanTime} • ${item.personel}
+                                </p>
                             </div>
-                            <span class="text-[9px] font-black px-2 py-1 rounded-lg uppercase bg-white/50 border border-current">
+                            <span class="text-[10px] font-black px-3 py-1.5 rounded-xl uppercase tracking-tighter bg-white shadow-sm ${status.textCol}">
                                 ${status.label}
                             </span>
                         </div>
                         
-                        <div class="grid grid-cols-2 gap-2 border-t border-slate-50 pt-3 mt-1">
+                        <div class="grid grid-cols-2 gap-4 pt-4 border-t ${isExtreme ? 'border-white/10' : 'border-slate-100'}">
                             <div>
-                                <p class="text-[9px] text-slate-400 font-bold uppercase">Ürün / Tür</p>
-                                <p class="text-xs font-extrabold text-slate-700">${item.urun_turu || "PASTA"}</p>
+                                <p class="text-[9px] uppercase font-bold opacity-50 mb-0.5">Ürün Grubu</p>
+                                <p class="text-[13px] font-extrabold">${item.urun_turu || "PASTA"}</p>
                             </div>
                             <div class="text-right">
-                                <p class="text-[9px] text-slate-400 font-bold uppercase">S/N</p>
-                                <p class="text-xs font-black text-royal font-mono">${item.kod}</p>
+                                <p class="text-[9px] uppercase font-bold opacity-50 mb-0.5">Seri No</p>
+                                <p class="text-[13px] font-black font-mono tracking-tighter">${item.kod}</p>
                             </div>
                             <div>
-                                <p class="text-[9px] text-slate-400 font-bold uppercase">Üretim</p>
-                                <p class="text-xs font-bold text-slate-700">${item.uretim}</p>
+                                <p class="text-[9px] uppercase font-bold opacity-50 mb-0.5">Üretim</p>
+                                <p class="text-[13px] font-bold">${item.uretim}</p>
                             </div>
                             <div class="text-right">
-                                <p class="text-[9px] text-slate-400 font-bold uppercase">Kontrol</p>
-                                <p class="text-xs font-bold text-purple-600">${item.gun_farki}. GÜN</p>
+                                <p class="text-[9px] uppercase font-bold opacity-50 mb-0.5">Raf Ömrü</p>
+                                <p class="text-[13px] font-black text-purple-500">${item.gun_farki}. GÜN</p>
                             </div>
                         </div>
 
-                        <div class="mt-3 pt-2 border-t border-dashed border-slate-200 flex justify-between items-center">
-                            <span class="text-[8px] font-bold text-slate-300 uppercase tracking-widest">Digital Signature</span>
-                            <span class="text-[9px] font-mono font-bold text-slate-400 bg-slate-50 px-2 py-0.5 rounded border">IP: ${item.ip || "0.0.0.0"}</span>
+                        <div class="mt-4 pt-3 border-t border-dashed ${isExtreme ? 'border-white/5' : 'border-slate-200'} flex justify-between items-center opacity-60">
+                             <span class="text-[8px] font-black uppercase tracking-[0.2em]">Safety Protocol v9</span>
+                             <span class="text-[10px] font-mono font-bold italic">IP: ${item.ip || "0.0.0.0"}</span>
                         </div>
                     </div>
                 `;
@@ -166,7 +198,7 @@
         }
 
         fetchData();
-        setInterval(fetchData, 60000); // 1 dakikada bir otomatik yenile
+        setInterval(fetchData, 60000);
     </script>
 </body>
 </html>
