@@ -1,5 +1,16 @@
 [
   {
+    "durum": "RAF OMRU DOLDU (IADE!)",
+    "gun_farki": 4,
+    "ip": "88.248.55.80",
+    "kod": "S215314",
+    "personel": "Demet",
+    "sube": "Kumbahçe Şube",
+    "uretim": "13.04.2026",
+    "urun_turu": "SUTLU TATLI",
+    "timestamp": "2026-04-17T04:23:03.802Z"
+  },
+  {
     "durum": "URUN TAZE",
     "gun_farki": 2,
     "ip": "5.24.125.76",
