@@ -1,6 +1,17 @@
 [
   {
     "durum": "URUN TAZE",
+    "gun_farki": 2,
+    "ip": "88.248.55.80",
+    "kod": "P530334",
+    "personel": "Demet",
+    "sube": "Kumbahçe Şube",
+    "uretim": "15.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-17T04:25:15.630Z"
+  },
+  {
+    "durum": "URUN TAZE",
     "gun_farki": 3,
     "ip": "88.248.55.80",
     "kod": "P498327",
