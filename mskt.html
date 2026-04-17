@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RoyalAPP | Mobile QC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; }
+        .bg-royal { background-color: #3b1c7a; }
+        .text-royal { color: #3b1c7a; }
+        .card-shadow { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); }
+        
+        /* Ciddi Durum Renkleri */
+        .status-suit { background: #dcfce7; color: #166534; border-left: 5px solid #22c55e; } 
+        .status-warning { background: #fef3c7; color: #92400e; border-left: 5px solid #f59e0b; } 
+        .status-danger { background: #fee2e2; color: #991b1b; border-left: 5px solid #ef4444; } 
+        .status-extreme { background: #111827; color: #ffffff; border-left: 5px solid #000000; }
+
+        .sticky-header { position: sticky; top: 0; z-index: 50; }
+        .safe-area-bottom { padding-bottom: env(safe-area-inset-bottom); }
+    </style>
+</head>
+<body class="safe-area-bottom">
+
+    <div class="sticky-header bg-royal text-white p-4 shadow-lg rounded-b-3xl">
+        <div class="flex justify-between items-center mb-3">
+            <div>
+                <h1 class="text-xl font-extrabold tracking-tight">Royal QC Mobile</h1>
+                <p class="text-[10px] opacity-70 uppercase tracking-widest font-bold">Yönetici Denetim Paneli</p>
+            </div>
+            <button onclick="fetchData()" class="bg-white/20 p-2 rounded-xl active:scale-90 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+            </button>
+        </div>
+        
+        <div class="flex gap-2">
+            <div class="bg-white/10 flex-1 p-3 rounded-2xl text-center border border-white/10">
+                <div class="text-[10px] uppercase font-black opacity-60">Toplam</div>
+                <div id="totalCount" class="text-xl font-extrabold">-</div>
+            </div>
+            <div id="iadeCard" class="bg-red-500/20 flex-1 p-3 rounded-2xl text-center border border-red-500/30">
+                <div class="text-[10px] uppercase font-black text-red-200">İade</div>
+                <div id="iadeCount" class="text-xl font-extrabold text-red-100">-</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-4 flex gap-2 overflow-x-auto no-scrollbar">
+        <select id="subeFilter" onchange="renderCards()" class="bg-white border-none rounded-xl px-4 py-2 text-xs font-bold shadow-sm outline-none focus:ring-2 focus:ring-purple-300">
+            <option value="Tümü">Tüm Şubeler</option>
+            <option value="Gümbet Şube">Gümbet</option>
+            <option value="Gümbet 2 Şube">Gümbet 2</option>
+            <option value="Konacık Şube">Konacık</option>
+            <option value="Kumbahçe Şube">Kumbahçe</option>
+        </select>
+        <select id="timeFilter" onchange="renderCards()" class="bg-white border-none rounded-xl px-4 py-2 text-xs font-bold shadow-sm outline-none focus:ring-2 focus:ring-purple-300">
+            <option value="bugun">Bugün</option>
+            <option value="dun">Dün</option>
+            <option value="7">Son 7 Gün</option>
+        </select>
+    </div>
+
+    <div id="cardContainer" class="px-4 space-y-3 pb-20">
+        <div class="text-center py-10 text-slate-400 font-bold italic">Veriler yükleniyor...</div>
+    </div>
+
+    <script>
+        let allData = [];
+
+        async function fetchData() {
+            try {
+                const response = await fetch('hamobus.json?t=' + new Date().getTime());
+                allData = await response.json();
+                renderCards();
+            } catch (err) {
+                document.getElementById('cardContainer').innerHTML = '<div class="text-center text-red-500 font-black p-10">VERİ ALINAMADI!</div>';
+            }
+        }
+
+        function getStatusInfo(durum) {
+            if (durum.includes("IADE") || durum.includes("DOLDU")) return { label: "İADE", class: "status-danger" };
+            if (durum.includes("SON SATIS")) return { label: "SON GÜN", class: "status-warning" };
+            if (durum.includes("KRITIK")) return { label: "İMHAAA", class: "status-extreme" };
+            return { label: "UYGUN", class: "status-suit" };
+        }
+
+        function renderCards() {
+            const container = document.getElementById('cardContainer');
+            const subeFilter = document.getElementById('subeFilter').value;
+            const timeFilter = document.getElementById('timeFilter').value;
+            
+            const now = new Date();
+            const todayStr = now.toLocaleDateString('tr-TR');
+            const yesterday = new Date(); yesterday.setDate(now.getDate() - 1);
+            const yesterdayStr = yesterday.toLocaleDateString('tr-TR');
+
+            const filtered = allData.filter(item => {
+                const subeMatch = (subeFilter === "Tümü" || item.sube === subeFilter);
+                const itemDate = new Date(item.timestamp).toLocaleDateString('tr-TR');
+                let timeMatch = true;
+                if (timeFilter === "bugun") timeMatch = (itemDate === todayStr);
+                if (timeFilter === "dun") timeMatch = (itemDate === yesterdayStr);
+                return subeMatch && timeMatch;
+            });
+
+            document.getElementById('totalCount').textContent = filtered.length;
+            let iadeTotal = 0;
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="text-center py-10 text-slate-400 font-bold italic">Kayıt bulunamadı.</div>';
+                document.getElementById('iadeCount').textContent = 0;
+                return;
+            }
+
+            container.innerHTML = '';
+            filtered.forEach(item => {
+                const status = getStatusInfo(item.durum);
+                if (status.label !== "UYGUN") iadeTotal++;
+
+                const scanTime = new Date(item.timestamp).toLocaleTimeString('tr-TR', {hour: '2-digit', minute:'2-digit'});
+                
+                container.innerHTML += `
+                    <div class="bg-white rounded-2xl p-4 card-shadow border border-slate-100 ${status.class}">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="font-extrabold text-slate-900 leading-tight">${item.sube}</h3>
+                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">🕒 ${scanTime} - ${item.personel}</p>
+                            </div>
+                            <span class="text-[9px] font-black px-2 py-1 rounded-lg uppercase bg-white/50 border border-current">
+                                ${status.label}
+                            </span>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-2 border-t border-slate-50 pt-3 mt-1">
+                            <div>
+                                <p class="text-[9px] text-slate-400 font-bold uppercase">Ürün / Tür</p>
+                                <p class="text-xs font-extrabold text-slate-700">${item.urun_turu || "PASTA"}</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-[9px] text-slate-400 font-bold uppercase">S/N</p>
+                                <p class="text-xs font-black text-royal font-mono">${item.kod}</p>
+                            </div>
+                            <div>
+                                <p class="text-[9px] text-slate-400 font-bold uppercase">Üretim</p>
+                                <p class="text-xs font-bold text-slate-700">${item.uretim}</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-[9px] text-slate-400 font-bold uppercase">Kontrol</p>
+                                <p class="text-xs font-bold text-purple-600">${item.gun_farki}. GÜN</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 pt-2 border-t border-dashed border-slate-200 flex justify-between items-center">
+                            <span class="text-[8px] font-bold text-slate-300 uppercase tracking-widest">Digital Signature</span>
+                            <span class="text-[9px] font-mono font-bold text-slate-400 bg-slate-50 px-2 py-0.5 rounded border">IP: ${item.ip || "0.0.0.0"}</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('iadeCount').textContent = iadeTotal;
+        }
+
+        fetchData();
+        setInterval(fetchData, 60000); // 1 dakikada bir otomatik yenile
+    </script>
+</body>
+</html>
