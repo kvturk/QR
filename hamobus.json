@@ -1,6 +1,17 @@
 [
   {
     "durum": "URUN TAZE",
+    "gun_farki": 1,
+    "ip": "37.155.21.190",
+    "kod": "P490345",
+    "personel": "Deryaövet",
+    "sube": "Gümbet Şube",
+    "uretim": "16.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-17T10:22:00.760Z"
+  },
+  {
+    "durum": "URUN TAZE",
     "gun_farki": 3,
     "ip": "37.155.21.190",
     "kod": "P498327",
