@@ -8,6 +8,17 @@
     "sube": "Konacık Şube",
     "uretim": "16.04.2026",
     "urun_turu": "PASTA",
+    "timestamp": "2026-04-17T07:56:35.203Z"
+  },
+  {
+    "durum": "URUN TAZE",
+    "gun_farki": 1,
+    "ip": "5.229.97.153",
+    "kod": "P490345",
+    "personel": "Hatice",
+    "sube": "Konacık Şube",
+    "uretim": "16.04.2026",
+    "urun_turu": "PASTA",
     "timestamp": "2026-04-17T07:56:25.946Z"
   },
   {
