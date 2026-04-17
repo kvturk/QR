@@ -3,6 +3,17 @@
     "auth_key": "2026royal",
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
+    "kod": "P490345",
+    "personel": "Rukiye vapur",
+    "sube": "Gümbet Şube",
+    "uretim": "16.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-17T19:48:21.579Z"
+  },
+  {
+    "auth_key": "2026royal",
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
     "kod": "S218344",
     "personel": "Rukiye vapur",
     "sube": "Gümbet Şube",
