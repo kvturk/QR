@@ -1,5 +1,16 @@
 [
   {
+    "durum": "URUN TAZE",
+    "gun_farki": 1,
+    "ip": "85.98.42.98",
+    "kod": "P490345",
+    "personel": "Rukiye vapur",
+    "sube": "Gümbet Şube",
+    "uretim": "16.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-17T12:24:24.649Z"
+  },
+  {
     "durum": "BUGUN SON SATIS GUNU",
     "gun_farki": 4,
     "ip": "85.98.42.98",
