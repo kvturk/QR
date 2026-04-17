@@ -3,6 +3,17 @@
     "durum": "URUN TAZE",
     "gun_farki": 2,
     "ip": "78.189.186.231",
+    "kod": "S526331",
+    "personel": "Özlem",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "15.04.2026",
+    "urun_turu": "SUTLU TATLI",
+    "timestamp": "2026-04-17T11:28:10.071Z"
+  },
+  {
+    "durum": "URUN TAZE",
+    "gun_farki": 2,
+    "ip": "78.189.186.231",
     "kod": "S124333",
     "personel": "Özlem",
     "sube": "Gümbet 2 Şube",
