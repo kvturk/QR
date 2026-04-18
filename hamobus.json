@@ -3,6 +3,17 @@
     "auth_key": "2026royal",
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
+    "kod": "P315352",
+    "personel": "Selma Doğan",
+    "sube": "Gümbet Şube",
+    "uretim": "17.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-18T11:14:16.814Z"
+  },
+  {
+    "auth_key": "2026royal",
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
     "kod": "P761356",
     "personel": "Selma Doğan",
     "sube": "Gümbet Şube",
