@@ -1,6 +1,17 @@
 [
   {
     "auth_key": "2026royal",
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 4,
+    "kod": "P498327",
+    "personel": "Aslı",
+    "sube": "Kumbahçe Şube",
+    "uretim": "14.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-18T07:43:12.951Z"
+  },
+  {
+    "auth_key": "2026royal",
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 3,
     "kod": "P530334",
