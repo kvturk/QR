@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royapp | QC Denetim Paneli v1.8</title>
+    <title>Royapp | QC Denetim Paneli v1.8.1</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -19,18 +19,21 @@
 
         .badge { padding: 6px 14px; border-radius: 10px; font-weight: 800; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
         
-        /* Pulse Efektleri */
+        /* Animasyonlar */
         .iade-alert-box { animation: iade-pulse 2s infinite; }
         @keyframes iade-pulse { 
             0% { transform: scale(1); } 
-            50% { transform: scale(1.05); } 
+            50% { transform: scale(1.03); } 
             100% { transform: scale(1); } 
         }
 
         .action-btn { transition: all 0.2s ease; cursor: pointer; user-select: none; }
         .action-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
         .action-btn:active { transform: scale(0.95); }
-        .btn-active { ring: 3px; ring-offset: 2px; }
+        
+        /* Buton Dönme Efekti */
+        .refreshing { animation: spin 0.8s linear; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="p-4 md:p-8">
@@ -73,19 +76,19 @@
                         </select>
                     </div>
                     
-                    <button onclick="fetchData()" class="bg-royal-purple hover:bg-opacity-90 active:scale-95 text-white p-4 rounded-2xl transition-all shadow-lg self-end h-[48px]">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <button id="refreshBtn" onclick="fetchData()" class="bg-royal-purple hover:bg-opacity-90 active:scale-95 text-white p-4 rounded-2xl transition-all shadow-lg self-end h-[48px]">
+                        <svg id="refreshIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                         </svg>
                     </button>
 
                     <div class="flex gap-2 self-end h-[48px]">
-                        <div id="riskBtn" onclick="toggleStatusFilter('risk')" class="action-btn bg-orange-500 text-white px-5 rounded-2xl flex items-center shadow-lg hidden">
+                        <div id="riskBtn" onclick="toggleStatusFilter('risk')" class="action-btn bg-orange-500 text-white px-6 rounded-full flex items-center shadow-lg hidden">
                             <span class="text-[10px] font-black uppercase tracking-tighter flex items-center gap-2">
                                 <span class="text-base">⚠️</span> <span id="riskCountLabel">0</span> RİSKLİ
                             </span>
                         </div>
-                        <div id="iadeBtn" onclick="toggleStatusFilter('iade')" class="action-btn iade-alert-box bg-red-600 text-white px-5 rounded-2xl flex items-center shadow-lg hidden">
+                        <div id="iadeBtn" onclick="toggleStatusFilter('iade')" class="action-btn iade-alert-box bg-red-600 text-white px-6 rounded-full flex items-center shadow-lg hidden">
                             <span class="text-[10px] font-black uppercase tracking-tighter flex items-center gap-2">
                                 <span class="text-base">🚨</span> <span id="iadeCountLabel">0</span> İADE
                             </span>
@@ -112,31 +115,34 @@
                 <tbody id="sktTable" class="divide-y divide-slate-50 text-slate-600 text-sm"></tbody>
             </table>
         </div>
-        
-        <p class="mt-10 text-center text-slate-400 text-[11px] tracking-[0.4em] uppercase font-black italic">Royapp | Operational Terminal v1.8.0</p>
     </div>
 
     <script>
         let allData = [];
-        let currentStatusFilter = 'all'; // all, risk, iade
+        let currentStatusFilter = 'all';
 
         async function fetchData() {
+            const icon = document.getElementById('refreshIcon');
+            icon.classList.add('refreshing'); // Görsel geri bildirim
+            
             try {
                 const response = await fetch('hamobus.json?t=' + new Date().getTime());
                 allData = await response.json();
+                
+                // Veri gelince her şeyi sıfırdan hesapla ve çiz
                 calculateLider();
                 renderTable();
+                
+                setTimeout(() => icon.classList.remove('refreshing'), 800);
             } catch (err) {
-                document.getElementById('sktTable').innerHTML = '<tr><td colspan="6" class="p-20 text-center text-slate-300 font-bold italic uppercase tracking-widest">SİSTEM ÇEVRİMDIŞI</td></tr>';
+                console.error(err);
+                document.getElementById('sktTable').innerHTML = '<tr><td colspan="6" class="p-20 text-center text-slate-300 font-bold italic uppercase">SİSTEM ÇEVRİMDIŞI</td></tr>';
+                icon.classList.remove('refreshing');
             }
         }
 
         function toggleStatusFilter(type) {
-            if (currentStatusFilter === type) {
-                currentStatusFilter = 'all';
-            } else {
-                currentStatusFilter = type;
-            }
+            currentStatusFilter = (currentStatusFilter === type) ? 'all' : type;
             renderTable();
         }
 
@@ -155,10 +161,7 @@
         function getStatusInfo(item) {
             const gun = parseInt(item.gun_farki);
             const tip = item.kod ? item.kod.charAt(0).toUpperCase() : 'P';
-            
-            // KRITIK IMHA
             if (gun > 14) return { label: "KRİTİK (İMHA)", class: "status-extreme", isIade: true, isRisk: false };
-            
             if (tip === 'S') {
                 if (gun >= 4) return { label: "TERMİN SONU", class: "status-danger", isIade: true, isRisk: false };
                 if (gun === 3) return { label: "RİSKLİ (SON)", class: "status-warning", isIade: false, isRisk: true };
@@ -184,43 +187,35 @@
             let riskCount = 0;
             let dayCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
 
-            // Önce temel filtrelemeyi yap (Şube ve Zaman)
             let baseFiltered = allData.filter(item => {
                 const subeMatch = (subeFilter === "Tümü" || item.sube === subeFilter);
                 const itemDate = new Date(item.timestamp).toLocaleDateString('tr-TR');
-                let timeMatch = true;
-                if (timeFilter === "bugun") timeMatch = (itemDate === todayStr);
-                if (timeFilter === "dun") timeMatch = (itemDate === yesterdayStr);
+                let timeMatch = (timeFilter === "bugun") ? (itemDate === todayStr) : (itemDate === yesterdayStr);
                 return subeMatch && timeMatch;
             });
 
-            // Sayıları hesapla
             baseFiltered.forEach(item => {
                 const s = getStatusInfo(item);
                 if (s.isIade) iadeCount++;
                 if (s.isRisk) riskCount++;
-                
                 if (timeFilter === "bugun") {
                     const gun = parseInt(item.gun_farki);
                     if (gun >= 1 && gun <= 6) dayCounts[gun]++;
                 }
             });
 
-            // Butonları güncelle
-            const iadeBtn = document.getElementById('iadeBtn');
-            const riskBtn = document.getElementById('riskBtn');
-            
             document.getElementById('iadeCountLabel').textContent = iadeCount;
             document.getElementById('riskCountLabel').textContent = riskCount;
 
+            const iadeBtn = document.getElementById('iadeBtn');
+            const riskBtn = document.getElementById('riskBtn');
             iadeBtn.classList.toggle('hidden', iadeCount === 0);
             riskBtn.classList.toggle('hidden', riskCount === 0);
             
-            // Aktif filtre görseli
-            iadeBtn.style.border = currentStatusFilter === 'iade' ? '3px solid white' : 'none';
-            riskBtn.style.border = currentStatusFilter === 'risk' ? '3px solid white' : 'none';
+            // Aktif buton görsel efekti (Ring/Çerçeve)
+            iadeBtn.className = `action-btn iade-alert-box bg-red-600 text-white px-6 rounded-full flex items-center shadow-lg ${iadeCount === 0 ? 'hidden' : ''} ${currentStatusFilter === 'iade' ? 'ring-4 ring-red-300' : ''}`;
+            riskBtn.className = `action-btn bg-orange-500 text-white px-6 rounded-full flex items-center shadow-lg ${riskCount === 0 ? 'hidden' : ''} ${currentStatusFilter === 'risk' ? 'ring-4 ring-orange-200' : ''}`;
 
-            // Şimdi Durum Filtresini uygula
             let finalData = baseFiltered.filter(item => {
                 const s = getStatusInfo(item);
                 if (currentStatusFilter === 'iade') return s.isIade;
@@ -228,18 +223,14 @@
                 return true;
             });
 
-            // Günlük özet panelini göster
             if (timeFilter === "bugun" && baseFiltered.length > 0) {
                 daySummaryDiv.classList.remove('hidden');
                 daySummaryDiv.innerHTML = Object.keys(dayCounts).map(day => `
                     <div class="day-card bg-white px-5 py-2.5 rounded-2xl shadow-sm flex items-center gap-3">
                         <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">${day}. GÜN</span>
                         <span class="text-sm font-[900] ${dayCounts[day] > 0 ? 'text-purple-600' : 'text-slate-200'}">${dayCounts[day]}</span>
-                    </div>
-                `).join('');
-            } else {
-                daySummaryDiv.classList.add('hidden');
-            }
+                    </div>`).join('');
+            } else { daySummaryDiv.classList.add('hidden'); }
 
             document.getElementById('filteredCount').textContent = finalData.length;
 
