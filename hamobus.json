@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 0,
+    "ip": "88.247.207.247",
+    "kod": "P147363",
+    "personel": "Aslı Özveren",
+    "sube": "Konacık Şube",
+    "uretim": "18.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-18T17:42:16.563Z"
+  },
+  {
     "durum": "RİSKLİ (SON GÜN)",
     "gun_farki": 4,
     "ip": "88.247.207.247",
@@ -3676,38 +3687,5 @@
     "uretim": "15.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-16T17:44:25.431Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 2,
-    "ip": "178.240.139.19",
-    "kod": "P498327",
-    "personel": "Aslı",
-    "sube": "Kumbahçe Şube",
-    "uretim": "14.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T17:42:00.625Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 0,
-    "ip": "178.240.139.19",
-    "kod": "P490345",
-    "personel": "Aslı",
-    "sube": "Kumbahçe Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T17:41:25.506Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 0,
-    "ip": "178.240.139.19",
-    "kod": "P490345",
-    "personel": "Aslı",
-    "sube": "Kumbahçe Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T17:40:50.667Z"
   }
 ]
