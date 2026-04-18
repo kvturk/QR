@@ -2,6 +2,17 @@
   {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
+    "ip": "78.189.186.231",
+    "kod": "P490345",
+    "personel": "Basak",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "16.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-18T17:14:17.515Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
     "ip": "178.240.139.19",
     "kod": "P805344",
     "personel": "Demet",
@@ -3753,170 +3764,5 @@
     "uretim": "13.04.2026",
     "urun_turu": "SUTLU TATLI",
     "timestamp": "2026-04-16T17:36:43.190Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 0,
-    "ip": "88.247.207.247",
-    "kod": "P805344",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T17:14:03.086Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 1,
-    "ip": "78.189.186.231",
-    "kod": "S526331",
-    "personel": "Oktay",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "15.04.2026",
-    "urun_turu": "SUTLU TATLI",
-    "timestamp": "2026-04-16T16:51:44.191Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 1,
-    "ip": "78.189.186.231",
-    "kod": "S124333",
-    "personel": "Oktay",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "15.04.2026",
-    "urun_turu": "SUTLU TATLI",
-    "timestamp": "2026-04-16T16:51:35.750Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 1,
-    "ip": "78.189.186.231",
-    "kod": "S124333",
-    "personel": "Oktay",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "15.04.2026",
-    "urun_turu": "SUTLU TATLI",
-    "timestamp": "2026-04-16T16:51:22.424Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 1,
-    "ip": "78.189.186.231",
-    "kod": "S124333",
-    "personel": "Oktay",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "15.04.2026",
-    "urun_turu": "SUTLU TATLI",
-    "timestamp": "2026-04-16T16:51:11.769Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 0,
-    "ip": "78.189.186.231",
-    "kod": "P490345",
-    "personel": "Oktay",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T16:50:44.663Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 0,
-    "ip": "78.189.186.231",
-    "kod": "P490345",
-    "personel": "Oktay",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T16:50:13.899Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 0,
-    "ip": "78.189.186.231",
-    "kod": "P805344",
-    "personel": "Oktay",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T16:50:02.921Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 0,
-    "ip": "78.189.186.231",
-    "kod": "P490345",
-    "personel": "Oktay",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T16:49:49.387Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 0,
-    "ip": "78.189.186.231",
-    "kod": "P805344",
-    "personel": "Oktay",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T16:49:38.929Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 0,
-    "ip": "78.189.186.231",
-    "kod": "P490345",
-    "personel": "Oktay",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T16:48:59.300Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 0,
-    "ip": "78.189.186.231",
-    "kod": "P490345",
-    "personel": "Oktay",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T16:48:39.199Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 0,
-    "ip": "78.189.186.231",
-    "kod": "P490345",
-    "personel": "Oktay",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T16:48:29.284Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 1,
-    "ip": "78.189.186.231",
-    "kod": "P530334",
-    "personel": "Oktay",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "15.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T16:48:06.708Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 0,
-    "ip": "78.189.186.231",
-    "kod": "P490345",
-    "personel": "Oktay",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T16:47:53.857Z"
   }
 ]
