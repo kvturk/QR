@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "88.247.207.247",
+    "kod": "P761356",
+    "personel": "Aslı Özveren",
+    "sube": "Konacık Şube",
+    "uretim": "17.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-18T14:56:04.687Z"
+  },
+  {
     "durum": "RİSKLİ (SON GÜN)",
     "gun_farki": 4,
     "ip": "88.247.207.247",
@@ -3632,93 +3643,5 @@
     "uretim": "14.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-16T15:00:21.575Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 0,
-    "ip": "5.24.125.76",
-    "kod": "P490345",
-    "personel": "Naz",
-    "sube": "Gümbet Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T14:20:13.435Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 0,
-    "ip": "5.24.125.76",
-    "kod": "P490345",
-    "personel": "Naz",
-    "sube": "Gümbet Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T14:19:49.948Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 1,
-    "ip": "5.24.125.76",
-    "kod": "P530334",
-    "personel": "Naz",
-    "sube": "Gümbet Şube",
-    "uretim": "15.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T14:08:19.487Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 0,
-    "ip": "5.24.125.76",
-    "kod": "P490345",
-    "personel": "Naz",
-    "sube": "Gümbet Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T14:07:46.884Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 0,
-    "ip": "5.24.125.76",
-    "kod": "P490345",
-    "personel": "Naz",
-    "sube": "Gümbet Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T14:05:50.182Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 0,
-    "ip": "5.24.125.76",
-    "kod": "P490345",
-    "personel": "Naz",
-    "sube": "Gümbet Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T14:05:31.645Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 1,
-    "ip": "5.24.125.76",
-    "kod": "P530334",
-    "personel": "Naz",
-    "sube": "Gümbet Şube",
-    "uretim": "15.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T14:05:07.894Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 1,
-    "ip": "5.24.125.76",
-    "kod": "P530334",
-    "personel": "Naz",
-    "sube": "Gümbet Şube",
-    "uretim": "15.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T14:04:47.887Z"
   }
 ]
