@@ -2,6 +2,17 @@
   {
     "auth_key": "2026royal",
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 0,
+    "kod": "P147363",
+    "personel": "Merve",
+    "sube": "Gümbet Şube",
+    "uretim": "18.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-18T06:21:49.610Z"
+  },
+  {
+    "auth_key": "2026royal",
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "kod": "P761356",
     "personel": "Hatice",
