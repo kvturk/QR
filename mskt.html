@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>RoyalAPP | Mobile QC Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; }
         .bg-royal { background-color: #3b1c7a; }
@@ -25,12 +25,17 @@
 
         @keyframes iade-pulse {
             0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
-            70% { box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
             100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
         }
 
         .sticky-header { position: sticky; top: 0; z-index: 50; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
+
+        /* Filtre Buton Efektleri */
+        .filter-btn { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        .filter-btn:active { transform: scale(0.92); }
+        .btn-active { ring: 3px solid white; box-shadow: 0 0 20px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body class="pb-10">
@@ -38,37 +43,49 @@
     <div class="sticky-header bg-royal text-white p-4 shadow-xl rounded-b-[2rem]">
         <div class="flex justify-between items-center mb-4">
             <div>
-                <h1 class="text-xl font-extrabold tracking-tight">Royal QC Mobile</h1>
-                <p class="text-[10px] opacity-70 uppercase tracking-[0.2em] font-black">Denetim Monitorü</p>
+                <h1 class="text-xl font-[900] tracking-tight">Royal QC Mobile</h1>
+                <p class="text-[9px] opacity-60 uppercase tracking-[0.2em] font-black">Saha Denetim Terminali</p>
             </div>
             <button onclick="fetchData()" class="bg-white/20 p-2.5 rounded-2xl active:scale-90 transition-transform">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                <svg id="refreshIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>
             </button>
         </div>
         
-        <div class="flex gap-3">
-            <div class="bg-white/10 flex-1 p-3 rounded-2xl text-center border border-white/5">
-                <div class="text-[9px] uppercase font-black opacity-50 mb-1">Seçili Gün İşlemi</div>
-                <div id="totalCount" class="text-2xl font-black">-</div>
+        <div class="flex gap-2">
+            <div class="bg-white/10 flex-1 p-3 rounded-2xl border border-white/5 flex flex-col items-center justify-center">
+                <div class="text-[9px] uppercase font-black opacity-40 mb-1">İşlem</div>
+                <div id="totalCount" class="text-xl font-[900] leading-none">-</div>
             </div>
-            <div class="bg-red-500/30 flex-1 p-3 rounded-2xl text-center border border-red-500/20">
-                <div class="text-[9px] uppercase font-black text-red-200 mb-1">Kayıtlı İade</div>
-                <div id="iadeCount" class="text-2xl font-black text-red-100">-</div>
-            </div>
+            
+            <button id="riskBtn" onclick="toggleStatusFilter('uyari')" class="filter-btn bg-orange-500 flex-[1.5] p-3 rounded-2xl border border-orange-400/30 flex items-center justify-center gap-2 shadow-lg">
+                <span class="text-lg">⚠️</span>
+                <div class="text-left">
+                    <div class="text-[8px] uppercase font-[900] opacity-80 leading-none">RİSKLİ</div>
+                    <div id="riskCount" class="text-xl font-[900] leading-none">-</div>
+                </div>
+            </button>
+
+            <button id="iadeBtn" onclick="toggleStatusFilter('iade')" class="filter-btn bg-red-600 flex-[1.5] p-3 rounded-2xl border border-red-500/30 flex items-center justify-center gap-2 shadow-lg">
+                <span class="text-lg">🚨</span>
+                <div class="text-left">
+                    <div class="text-[8px] uppercase font-[900] opacity-80 leading-none">İADELER</div>
+                    <div id="iadeCount" class="text-xl font-[900] leading-none">-</div>
+                </div>
+            </button>
         </div>
     </div>
 
     <div class="p-4 flex gap-2 overflow-x-auto no-scrollbar">
-        <select id="subeFilter" onchange="renderCards()" class="bg-white border-none rounded-xl px-4 py-2.5 text-[11px] font-black shadow-sm outline-none text-slate-600 uppercase">
+        <select id="subeFilter" onchange="resetStatusFilter(); renderCards()" class="bg-white border-none rounded-xl px-4 py-3 text-[11px] font-[900] shadow-sm outline-none text-slate-600 uppercase flex-1">
             <option value="Tümü">Tüm Şubeler</option>
             <option value="Gümbet Şube">Gümbet</option>
             <option value="Gümbet 2 Şube">Gümbet 2</option>
             <option value="Konacık Şube">Konacık</option>
             <option value="Kumbahçe Şube">Kumbahçe</option>
         </select>
-        <select id="timeFilter" onchange="renderCards()" class="bg-white border-none rounded-xl px-4 py-2.5 text-[11px] font-black shadow-sm outline-none text-slate-600 uppercase">
+        <select id="timeFilter" onchange="resetStatusFilter(); renderCards()" class="bg-white border-none rounded-xl px-4 py-3 text-[11px] font-[900] shadow-sm outline-none text-slate-600 uppercase flex-1">
             <option value="bugun">Bugün</option>
             <option value="dun">Dün</option>
         </select>
@@ -78,18 +95,32 @@
 
     <script>
         let allData = [];
+        let currentStatusFilter = 'all'; // all, iade, uyari
 
         async function fetchData() {
+            const icon = document.getElementById('refreshIcon');
+            icon.style.transition = "transform 0.5s ease";
+            icon.style.transform = "rotate(360deg)";
+            
             try {
                 const response = await fetch('hamobus.json?t=' + new Date().getTime());
                 allData = await response.json();
                 renderCards();
+                setTimeout(() => icon.style.transform = "rotate(0deg)", 500);
             } catch (err) {
                 document.getElementById('cardContainer').innerHTML = '<div class="p-10 text-center opacity-30 font-black">BAGLANTI HATASI</div>';
             }
         }
 
-        // 🧠 DURUMU JSON'DAN OKU VE GÖRSELLEŞTİR
+        function toggleStatusFilter(type) {
+            currentStatusFilter = (currentStatusFilter === type) ? 'all' : type;
+            renderCards();
+        }
+
+        function resetStatusFilter() {
+            currentStatusFilter = 'all';
+        }
+
         function getStatusInfo(item) {
             const d = item.durum ? item.durum.toUpperCase() : "";
             if (d.includes("IADE") || d.includes("DOLDU") || d.includes("SONU")) 
@@ -113,35 +144,49 @@
             yesterday.setDate(yesterday.getDate() - 1);
             const yesterdayStr = yesterday.toLocaleDateString('tr-TR');
 
-            // 1. ADIM: JSON'daki tüm verileri seçilen tarih ve şubeye göre süz
-            const filtered = allData.filter(item => {
+            // 1. Şube ve Zaman Filtresi
+            const baseFiltered = allData.filter(item => {
                 const subeMatch = (subeFilter === "Tümü" || item.sube === subeFilter);
                 const itemDate = new Date(item.timestamp).toLocaleDateString('tr-TR');
-                
-                let timeMatch = false;
-                if (timeFilter === "bugun") timeMatch = (itemDate === todayStr);
-                else if (timeFilter === "dun") timeMatch = (itemDate === yesterdayStr);
-
+                let timeMatch = (timeFilter === "bugun") ? (itemDate === todayStr) : (itemDate === yesterdayStr);
                 return subeMatch && timeMatch;
             });
 
-            // 2. ADIM: Sayıları doğrudan süzülen (filtered) listeden al
-            document.getElementById('totalCount').textContent = filtered.length; // Toplam işlem
-
+            // Sayıları Hesapla
             let iadeTotal = 0;
-            container.innerHTML = '';
+            let riskTotal = 0;
+            baseFiltered.forEach(item => {
+                const s = getStatusInfo(item);
+                if (s.type === "iade") iadeTotal++;
+                if (s.type === "uyari") riskTotal++;
+            });
 
-            if (filtered.length === 0) {
+            document.getElementById('totalCount').textContent = baseFiltered.length;
+            document.getElementById('iadeCount').textContent = iadeTotal;
+            document.getElementById('riskCount').textContent = riskTotal;
+
+            // Buton Aktiflik Durumu
+            document.getElementById('riskBtn').style.opacity = (currentStatusFilter === 'uyari' || currentStatusFilter === 'all') ? "1" : "0.4";
+            document.getElementById('iadeBtn').style.opacity = (currentStatusFilter === 'iade' || currentStatusFilter === 'all') ? "1" : "0.4";
+            document.getElementById('riskBtn').classList.toggle('btn-active', currentStatusFilter === 'uyari');
+            document.getElementById('iadeBtn').classList.toggle('btn-active', currentStatusFilter === 'iade');
+
+            // 2. Aksiyon Filtresi (Riskli/İade)
+            const finalData = baseFiltered.filter(item => {
+                const s = getStatusInfo(item);
+                if (currentStatusFilter === 'iade') return s.type === "iade";
+                if (currentStatusFilter === 'uyari') return s.type === "uyari";
+                return true;
+            });
+
+            if (finalData.length === 0) {
                 container.innerHTML = '<div class="text-center py-20 opacity-20 font-black tracking-widest uppercase">Kayıt Yok</div>';
-                document.getElementById('iadeCount').textContent = 0;
                 return;
             }
 
-            // 3. ADIM: Her kartı oluştururken JSON'daki durumuna bak ve iadeleri say
-            filtered.forEach(item => {
+            container.innerHTML = '';
+            finalData.forEach(item => {
                 const status = getStatusInfo(item);
-                if (status.type === "iade") iadeTotal++; // Eğer JSON'daki metin iade diyorsa sayacı artır
-
                 const scanTime = new Date(item.timestamp).toLocaleTimeString('tr-TR', {hour: '2-digit', minute:'2-digit'});
                 const isExtreme = status.class === "status-extreme";
                 
@@ -149,7 +194,7 @@
                     <div class="rounded-3xl p-5 shadow-sm border border-slate-200 transition-all ${status.class}">
                         <div class="flex justify-between items-start mb-4">
                             <div>
-                                <h3 class="font-extrabold text-lg ${isExtreme ? 'text-white' : 'text-slate-900'} leading-tight">${item.sube}</h3>
+                                <h3 class="font-[900] text-lg ${isExtreme ? 'text-white' : 'text-slate-900'} leading-tight">${item.sube}</h3>
                                 <p class="text-[10px] font-bold ${isExtreme ? 'text-slate-400' : 'text-slate-400'} uppercase tracking-widest mt-1">
                                     🕒 ${scanTime} • ${item.personel}
                                 </p>
@@ -161,31 +206,27 @@
                         <div class="grid grid-cols-2 gap-4 pt-4 border-t ${isExtreme ? 'border-white/10' : 'border-slate-100'}">
                             <div>
                                 <p class="text-[9px] uppercase font-bold opacity-50 mb-0.5">Ürün Grubu</p>
-                                <p class="text-[13px] font-extrabold">${item.urun_turu || "PASTA"}</p>
+                                <p class="text-[13px] font-[900]">${item.urun_turu || "PASTA"}</p>
                             </div>
                             <div class="text-right">
                                 <p class="text-[9px] uppercase font-bold opacity-50 mb-0.5">Seri No</p>
-                                <p class="text-[13px] font-black font-mono tracking-tighter">${item.kod}</p>
+                                <p class="text-[13px] font-[900] font-mono tracking-tighter">${item.kod}</p>
                             </div>
                             <div>
                                 <p class="text-[9px] uppercase font-bold opacity-50 mb-0.5">Üretim</p>
                                 <p class="text-[13px] font-bold">${item.uretim}</p>
                             </div>
                             <div class="text-right">
-                                <p class="text-[9px] uppercase font-bold opacity-50 mb-0.5">Raf Ömrü</p>
-                                <p class="text-[13px] font-black text-purple-500">${item.gun_farki}. GÜN</p>
+                                <p class="text-[9px] uppercase font-bold opacity-50 mb-0.5">Ömür</p>
+                                <p class="text-[13px] font-[900] text-purple-600">${item.gun_farki}. GÜN</p>
                             </div>
                         </div>
                         <div class="mt-4 pt-3 border-t border-dashed ${isExtreme ? 'border-white/5' : 'border-slate-200'} flex justify-between items-center opacity-60">
                              <span class="text-[8px] font-black uppercase tracking-[0.2em]">Safety Protocol v9</span>
                              <span class="text-[10px] font-mono font-bold italic">IP: ${item.ip || "0.0.0.0"}</span>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             });
-
-            // Sonucu yukarıdaki kırmızı kutuya bas
-            document.getElementById('iadeCount').textContent = iadeTotal;
         }
 
         fetchData();
