@@ -51,11 +51,11 @@
         
         <div class="flex gap-3">
             <div class="bg-white/10 flex-1 p-3 rounded-2xl text-center border border-white/5">
-                <div class="text-[9px] uppercase font-black opacity-50 mb-1">2 Günlük Toplam</div>
+                <div class="text-[9px] uppercase font-black opacity-50 mb-1">2 Günlük Kayıt</div>
                 <div id="totalCount" class="text-2xl font-black">-</div>
             </div>
             <div class="bg-red-500/30 flex-1 p-3 rounded-2xl text-center border border-red-500/20">
-                <div class="text-[9px] uppercase font-black text-red-200 mb-1">Bekleyen İade</div>
+                <div class="text-[9px] uppercase font-black text-red-200 mb-1">Sistemdeki İadeler</div>
                 <div id="iadeCount" class="text-2xl font-black text-red-100">-</div>
             </div>
         </div>
@@ -90,22 +90,22 @@
             }
         }
 
-        // 🧠 Akıllı Durum Belirleyici (P ve S Kuralları)
+        // 🧠 JSON'daki "Durum" Metnine Göre Renk Belirle
         function getStatusInfo(item) {
-            const gun = parseInt(item.gun_farki);
-            const tip = item.kod ? item.kod.charAt(0).toUpperCase() : 'P';
+            const d = item.durum ? item.durum.toUpperCase() : "";
+            
+            // Renkleri metne göre otomatik seçiyoruz ki görsel uyarı çalışsın
+            if (d.includes("IADE") || d.includes("DOLDU") || d.includes("SONU")) 
+                return { label: item.durum, class: "status-danger", textCol: "text-red-600" };
+            
+            if (d.includes("SON") || d.includes("RISK") || d.includes("RİSK")) 
+                return { label: item.durum, class: "status-warning", textCol: "text-amber-600" };
+            
+            if (d.includes("KRITIK") || d.includes("KRİTİK")) 
+                return { label: item.durum, class: "status-extreme", textCol: "text-white" };
 
-            if (gun > 14) return { label: "KRİTİK İMHA", class: "status-extreme", textCol: "text-white" };
-
-            if (tip === 'S') { // Sütlü Tatlı Kuralları
-                if (gun >= 4) return { label: "İADE EDİLECEK", class: "status-danger", textCol: "text-red-600" };
-                if (gun === 3) return { label: "SON SATIŞ GÜNÜ", class: "status-warning", textCol: "text-amber-600" };
-            } else { // Pasta Kuralları
-                if (gun >= 5) return { label: "İADE EDİLECEK", class: "status-danger", textCol: "text-red-600" };
-                if (gun === 4) return { label: "SON SATIŞ GÜNÜ", class: "status-warning", textCol: "text-amber-600" };
-            }
-
-            return { label: "STANDART UYGUN", class: "status-suit", textCol: "text-emerald-600" };
+            // Hiçbiri değilse standart taze ürün
+            return { label: item.durum || "STANDART UYGUN", class: "status-suit", textCol: "text-emerald-600" };
         }
 
         function renderCards() {
@@ -125,7 +125,6 @@
                 if (timeFilter === "bugun") timeMatch = (itemDate === todayStr);
                 if (timeFilter === "dun") timeMatch = (itemDate === yesterdayStr);
 
-                // Sadece bugün veya düne ait verileri göster
                 return subeMatch && timeMatch && (itemDate === todayStr || itemDate === yesterdayStr);
             });
 
@@ -141,7 +140,7 @@
             container.innerHTML = '';
             filtered.forEach(item => {
                 const status = getStatusInfo(item);
-                if (status.label !== "STANDART UYGUN") iadeTotal++;
+                if (status.class === "status-danger" || status.class === "status-extreme") iadeTotal++;
 
                 const scanTime = new Date(item.timestamp).toLocaleTimeString('tr-TR', {hour: '2-digit', minute:'2-digit'});
                 const isExtreme = status.class === "status-extreme";
