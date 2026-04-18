@@ -1,5 +1,16 @@
 [
   {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 4,
+    "ip": "88.247.207.247",
+    "kod": "P498327",
+    "personel": "Aslı Özveren",
+    "sube": "Konacık Şube",
+    "uretim": "14.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-18T17:40:32.847Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
     "ip": "78.189.186.231",
@@ -3698,71 +3709,5 @@
     "uretim": "16.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-16T17:40:50.667Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 1,
-    "ip": "178.240.139.19",
-    "kod": "S124333",
-    "personel": "Aslı",
-    "sube": "Kumbahçe Şube",
-    "uretim": "15.04.2026",
-    "urun_turu": "SUTLU TATLI",
-    "timestamp": "2026-04-16T17:40:24.983Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 0,
-    "ip": "178.240.139.19",
-    "kod": "S218344",
-    "personel": "Aslı",
-    "sube": "Kumbahçe Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "SUTLU TATLI",
-    "timestamp": "2026-04-16T17:38:49.193Z"
-  },
-  {
-    "durum": "BUGUN SON SATIS GUNU",
-    "gun_farki": 3,
-    "ip": "178.240.139.19",
-    "kod": "S215314",
-    "personel": "Aslı",
-    "sube": "Kumbahçe Şube",
-    "uretim": "13.04.2026",
-    "urun_turu": "SUTLU TATLI",
-    "timestamp": "2026-04-16T17:38:18.894Z"
-  },
-  {
-    "durum": "BUGUN SON SATIS GUNU",
-    "gun_farki": 3,
-    "ip": "178.240.139.19",
-    "kod": "S215314",
-    "personel": "Aslı",
-    "sube": "Kumbahçe Şube",
-    "uretim": "13.04.2026",
-    "urun_turu": "SUTLU TATLI",
-    "timestamp": "2026-04-16T17:37:44.710Z"
-  },
-  {
-    "durum": "BUGUN SON SATIS GUNU",
-    "gun_farki": 3,
-    "ip": "178.240.139.19",
-    "kod": "S215314",
-    "personel": "Aslı",
-    "sube": "Kumbahçe Şube",
-    "uretim": "13.04.2026",
-    "urun_turu": "SUTLU TATLI",
-    "timestamp": "2026-04-16T17:37:12.457Z"
-  },
-  {
-    "durum": "BUGUN SON SATIS GUNU",
-    "gun_farki": 3,
-    "ip": "178.240.139.19",
-    "kod": "S215314",
-    "personel": "Aslı",
-    "sube": "Kumbahçe Şube",
-    "uretim": "13.04.2026",
-    "urun_turu": "SUTLU TATLI",
-    "timestamp": "2026-04-16T17:36:43.190Z"
   }
 ]
