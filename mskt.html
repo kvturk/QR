@@ -10,36 +10,20 @@
         body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; }
         .bg-royal { background-color: #3b1c7a; }
         
-        /* --- DİNAMİK DURUM EFEKTLERİ --- */
-        
-        /* STANDART (TAZE) */
-        .status-suit { 
-            background: #ffffff; 
-            border-left: 6px solid #22c55e; 
-        } 
-
-        /* SON GÜN (SARI UYARI) */
+        /* --- DURUM EFEKTLERİ --- */
+        .status-suit { background: #ffffff; border-left: 6px solid #22c55e; } 
         .status-warning { 
             background: #fffbeb; 
             border-left: 6px solid #f59e0b;
             box-shadow: 0 0 15px rgba(245, 158, 11, 0.1);
         } 
-
-        /* İADE (KIRMIZI YANIP SÖNEN) */
         .status-danger { 
             background: #fef2f2; 
             border-left: 6px solid #ef4444;
             animation: iade-pulse 2s infinite;
         } 
+        .status-extreme { background: #111827; color: #ffffff; border-left: 6px solid #ef4444; }
 
-        /* KRİTİK (SİYAH) */
-        .status-extreme { 
-            background: #111827; 
-            color: #ffffff; 
-            border-left: 6px solid #ef4444; 
-        }
-
-        /* ANIMASYON: İADE PARLAMA */
         @keyframes iade-pulse {
             0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
             70% { box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); }
@@ -67,7 +51,7 @@
         
         <div class="flex gap-3">
             <div class="bg-white/10 flex-1 p-3 rounded-2xl text-center border border-white/5">
-                <div class="text-[9px] uppercase font-black opacity-50 mb-1">Toplam Tarama</div>
+                <div class="text-[9px] uppercase font-black opacity-50 mb-1">2 Günlük Toplam</div>
                 <div id="totalCount" class="text-2xl font-black">-</div>
             </div>
             <div class="bg-red-500/30 flex-1 p-3 rounded-2xl text-center border border-red-500/20">
@@ -88,12 +72,10 @@
         <select id="timeFilter" onchange="renderCards()" class="bg-white border-none rounded-xl px-4 py-2.5 text-[11px] font-black shadow-sm outline-none text-slate-600 uppercase">
             <option value="bugun">Bugün</option>
             <option value="dun">Dün</option>
-            <option value="7">7 Gün</option>
         </select>
     </div>
 
-    <div id="cardContainer" class="px-4 space-y-4">
-        </div>
+    <div id="cardContainer" class="px-4 space-y-4"></div>
 
     <script>
         let allData = [];
@@ -108,11 +90,21 @@
             }
         }
 
-        function getStatusInfo(durum) {
-            const d = durum.toUpperCase();
-            if (d.includes("IADE") || d.includes("DOLDU")) return { label: "İADE EDİLECEK", class: "status-danger", textCol: "text-red-600" };
-            if (d.includes("SON SATIS") || d.includes("BUGUN SON")) return { label: "SON SATIŞ GÜNÜ", class: "status-warning", textCol: "text-amber-600" };
-            if (d.includes("KRITIK")) return { label: "KRİTİK İMHA", class: "status-extreme", textCol: "text-white" };
+        // 🧠 Akıllı Durum Belirleyici (P ve S Kuralları)
+        function getStatusInfo(item) {
+            const gun = parseInt(item.gun_farki);
+            const tip = item.kod ? item.kod.charAt(0).toUpperCase() : 'P';
+
+            if (gun > 14) return { label: "KRİTİK İMHA", class: "status-extreme", textCol: "text-white" };
+
+            if (tip === 'S') { // Sütlü Tatlı Kuralları
+                if (gun >= 4) return { label: "İADE EDİLECEK", class: "status-danger", textCol: "text-red-600" };
+                if (gun === 3) return { label: "SON SATIŞ GÜNÜ", class: "status-warning", textCol: "text-amber-600" };
+            } else { // Pasta Kuralları
+                if (gun >= 5) return { label: "İADE EDİLECEK", class: "status-danger", textCol: "text-red-600" };
+                if (gun === 4) return { label: "SON SATIŞ GÜNÜ", class: "status-warning", textCol: "text-amber-600" };
+            }
+
             return { label: "STANDART UYGUN", class: "status-suit", textCol: "text-emerald-600" };
         }
 
@@ -123,17 +115,18 @@
             
             const now = new Date();
             const todayStr = now.toLocaleDateString('tr-TR');
-            const yesterdayStr = new Date(now.setDate(now.getDate() - 1)).toLocaleDateString('tr-TR');
-            // now objesini bozmamak için tekrar düzeltelim (opsiyonel ama sağlıklı)
-            const resetNow = new Date();
+            const yesterdayStr = new Date(Date.now() - 86400000).toLocaleDateString('tr-TR');
 
             const filtered = allData.filter(item => {
                 const subeMatch = (subeFilter === "Tümü" || item.sube === subeFilter);
                 const itemDate = new Date(item.timestamp).toLocaleDateString('tr-TR');
-                let timeMatch = true;
+                
+                let timeMatch = false;
                 if (timeFilter === "bugun") timeMatch = (itemDate === todayStr);
                 if (timeFilter === "dun") timeMatch = (itemDate === yesterdayStr);
-                return subeMatch && timeMatch;
+
+                // Sadece bugün veya düne ait verileri göster
+                return subeMatch && timeMatch && (itemDate === todayStr || itemDate === yesterdayStr);
             });
 
             document.getElementById('totalCount').textContent = filtered.length;
@@ -147,7 +140,7 @@
 
             container.innerHTML = '';
             filtered.forEach(item => {
-                const status = getStatusInfo(item.durum);
+                const status = getStatusInfo(item);
                 if (status.label !== "STANDART UYGUN") iadeTotal++;
 
                 const scanTime = new Date(item.timestamp).toLocaleTimeString('tr-TR', {hour: '2-digit', minute:'2-digit'});
