@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royapp | QC Denetim Paneli v1.8.2</title>
+    <title>Royapp | QC Denetim Paneli v1.8.3</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -19,17 +19,17 @@
 
         .badge { padding: 6px 14px; border-radius: 10px; font-weight: 800; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
         
-        /* Pulse Efektleri */
+        /* Pulse Efekti (Apple Tarzı Akışkanlık) */
         .iade-alert-box { animation: iade-pulse 2s infinite; }
         @keyframes iade-pulse { 
             0% { transform: scale(1); } 
-            50% { transform: scale(1.03); } 
+            50% { transform: scale(1.02); } 
             100% { transform: scale(1); } 
         }
 
-        .action-btn { transition: all 0.2s ease; cursor: pointer; user-select: none; }
-        .action-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
-        .action-btn:active { transform: scale(0.95); }
+        .action-btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; user-select: none; }
+        .action-btn:hover { transform: translateY(-3px); filter: brightness(1.1); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .action-btn:active { transform: scale(0.96); }
         
         .refreshing { animation: spin 0.8s linear; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
@@ -68,10 +68,6 @@
                         <div class="w-2 h-2 rounded-full bg-red-600"></div>
                         <span class="text-[9px] font-black text-slate-500 uppercase tracking-tighter">İade: Reyondan Çek</span>
                     </div>
-                    <div class="flex items-center gap-2 px-3 py-1.5 bg-white rounded-full shadow-sm border border-slate-50">
-                        <div class="w-2 h-2 rounded-full bg-gray-900"></div>
-                        <span class="text-[9px] font-black text-slate-500 uppercase tracking-tighter">İmha: Satış Yasak</span>
-                    </div>
                 </div>
             </div>
 
@@ -103,14 +99,14 @@
                     </button>
 
                     <div class="flex gap-2 self-end h-[48px]">
-                        <div id="riskBtn" onclick="toggleStatusFilter('risk')" class="action-btn bg-orange-500 text-white px-6 rounded-full flex items-center shadow-lg hidden">
-                            <span class="text-[10px] font-black uppercase tracking-tighter flex items-center gap-2">
-                                <span class="text-base">⚠️</span> <span id="riskCountLabel">0</span> RİSKLİ
+                        <div id="riskBtn" onclick="toggleStatusFilter('risk')" class="action-btn bg-orange-500 text-white px-8 rounded-full flex items-center shadow-lg hidden">
+                            <span class="text-[11px] font-[900] uppercase tracking-wider flex items-center gap-2">
+                                <span class="text-lg">⚠️</span> <span id="riskCountLabel">0</span> RİSKLİ
                             </span>
                         </div>
-                        <div id="iadeBtn" onclick="toggleStatusFilter('iade')" class="action-btn iade-alert-box bg-red-600 text-white px-6 rounded-full flex items-center shadow-lg hidden">
-                            <span class="text-[10px] font-black uppercase tracking-tighter flex items-center gap-2">
-                                <span class="text-base">🚨</span> <span id="iadeCountLabel">0</span> İADE
+                        <div id="iadeBtn" onclick="toggleStatusFilter('iade')" class="action-btn iade-alert-box bg-red-600 text-white px-8 rounded-full flex items-center shadow-lg hidden">
+                            <span class="text-[11px] font-[900] uppercase tracking-wider flex items-center gap-2">
+                                <span class="text-lg">🚨</span> <span id="iadeCountLabel">0</span> İADE
                             </span>
                         </div>
                     </div>
@@ -136,7 +132,7 @@
             </table>
         </div>
         
-        <p class="mt-10 text-center text-slate-400 text-[11px] tracking-[0.4em] uppercase font-black italic">Royapp | Operational Terminal v1.8.2</p>
+        <p class="mt-10 text-center text-slate-400 text-[11px] tracking-[0.4em] uppercase font-black italic">Royapp | QC Denetim Paneli v1.8.3</p>
     </div>
 
     <script>
@@ -227,8 +223,8 @@
             iadeBtn.classList.toggle('hidden', iadeCount === 0);
             riskBtn.classList.toggle('hidden', riskCount === 0);
             
-            iadeBtn.className = `action-btn iade-alert-box bg-red-600 text-white px-6 rounded-full flex items-center shadow-lg ${iadeCount === 0 ? 'hidden' : ''} ${currentStatusFilter === 'iade' ? 'ring-4 ring-red-300' : ''}`;
-            riskBtn.className = `action-btn bg-orange-500 text-white px-6 rounded-full flex items-center shadow-lg ${riskCount === 0 ? 'hidden' : ''} ${currentStatusFilter === 'risk' ? 'ring-4 ring-orange-200' : ''}`;
+            iadeBtn.className = `action-btn iade-alert-box bg-red-600 text-white px-8 rounded-full flex items-center shadow-lg ${iadeCount === 0 ? 'hidden' : ''} ${currentStatusFilter === 'iade' ? 'ring-4 ring-red-300' : ''}`;
+            riskBtn.className = `action-btn bg-orange-500 text-white px-8 rounded-full flex items-center shadow-lg ${riskCount === 0 ? 'hidden' : ''} ${currentStatusFilter === 'risk' ? 'ring-4 ring-orange-200' : ''}`;
 
             let finalData = baseFiltered.filter(item => {
                 const s = getStatusInfo(item);
