@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royapp | QC Denetim Paneli v1.7</title>
+    <title>Royapp | QC Denetim Paneli v1.8</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -12,7 +12,6 @@
         .bg-royal-purple { background-color: #3b1c7a; }
         .table-shadow { box-shadow: 0 4px 25px rgba(0,0,0,0.06); }
         
-        /* Ciddi Durum Renkleri */
         .status-suit { background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; } 
         .status-warning { background-color: #fef3c7; color: #92400e; border: 1px solid #fde68a; } 
         .status-danger { background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca; } 
@@ -20,19 +19,18 @@
 
         .badge { padding: 6px 14px; border-radius: 10px; font-weight: 800; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
         
-        /* Premium İade Alarmı */
-        .iade-alert-box { 
-            animation: iade-pulse 2s infinite;
-            box-shadow: 0 0 15px rgba(220, 38, 38, 0.2);
-        }
+        /* Pulse Efektleri */
+        .iade-alert-box { animation: iade-pulse 2s infinite; }
         @keyframes iade-pulse { 
-            0% { transform: scale(1); box-shadow: 0 0 15px rgba(220, 38, 38, 0.2); } 
-            50% { transform: scale(1.02); box-shadow: 0 0 25px rgba(220, 38, 38, 0.4); } 
-            100% { transform: scale(1); box-shadow: 0 0 15px rgba(220, 38, 38, 0.2); } 
+            0% { transform: scale(1); } 
+            50% { transform: scale(1.05); } 
+            100% { transform: scale(1); } 
         }
 
-        .day-card { transition: all 0.2s ease; border: 1px solid #f1f5f9; }
-        .day-card:hover { transform: translateY(-2px); border-color: #e2e8f0; }
+        .action-btn { transition: all 0.2s ease; cursor: pointer; user-select: none; }
+        .action-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .action-btn:active { transform: scale(0.95); }
+        .btn-active { ring: 3px; ring-offset: 2px; }
     </style>
 </head>
 <body class="p-4 md:p-8">
@@ -58,7 +56,7 @@
                 <div class="flex flex-wrap items-center gap-3 bg-white p-4 rounded-[2.5rem] shadow-sm border border-gray-100">
                     <div class="flex flex-col">
                         <label class="text-[9px] font-black text-slate-400 ml-3 mb-1 uppercase tracking-widest">Birim</label>
-                        <select id="subeFilter" onchange="renderTable()" class="border-0 bg-slate-50 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-purple-200 text-sm font-bold text-slate-700 cursor-pointer">
+                        <select id="subeFilter" onchange="resetStatusFilter(); renderTable()" class="border-0 bg-slate-50 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-purple-200 text-sm font-bold text-slate-700 cursor-pointer">
                             <option value="Tümü">Tüm Birimler</option>
                             <option value="Gümbet Şube">Gümbet Şube</option>
                             <option value="Gümbet 2 Şube">Gümbet 2 Şube</option>
@@ -69,7 +67,7 @@
 
                     <div class="flex flex-col">
                         <label class="text-[9px] font-black text-slate-400 ml-3 mb-1 uppercase tracking-widest">Periyot</label>
-                        <select id="timeFilter" onchange="renderTable()" class="border-0 bg-slate-50 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-purple-200 text-sm font-bold text-slate-700 cursor-pointer">
+                        <select id="timeFilter" onchange="resetStatusFilter(); renderTable()" class="border-0 bg-slate-50 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-purple-200 text-sm font-bold text-slate-700 cursor-pointer">
                             <option value="bugun" selected>Bugün</option>
                             <option value="dun">Dün</option>
                         </select>
@@ -81,17 +79,21 @@
                         </svg>
                     </button>
 
-                    <div id="iadeAlertBox" class="hidden h-[48px] self-end">
-                        <div class="iade-alert-box bg-red-600 text-white px-6 rounded-2xl flex items-center h-full shadow-lg">
-                            <span class="text-xs font-black uppercase tracking-tighter flex items-center gap-2">
-                                <span class="text-lg">⚠️</span> <span id="iadeCountLabel">0</span> İADE BEKLİYOR
+                    <div class="flex gap-2 self-end h-[48px]">
+                        <div id="riskBtn" onclick="toggleStatusFilter('risk')" class="action-btn bg-orange-500 text-white px-5 rounded-2xl flex items-center shadow-lg hidden">
+                            <span class="text-[10px] font-black uppercase tracking-tighter flex items-center gap-2">
+                                <span class="text-base">⚠️</span> <span id="riskCountLabel">0</span> RİSKLİ
+                            </span>
+                        </div>
+                        <div id="iadeBtn" onclick="toggleStatusFilter('iade')" class="action-btn iade-alert-box bg-red-600 text-white px-5 rounded-2xl flex items-center shadow-lg hidden">
+                            <span class="text-[10px] font-black uppercase tracking-tighter flex items-center gap-2">
+                                <span class="text-base">🚨</span> <span id="iadeCountLabel">0</span> İADE
                             </span>
                         </div>
                     </div>
                 </div>
 
-                <div id="daySummary" class="hidden flex flex-wrap gap-2 animate-in fade-in slide-in-from-top-1">
-                </div>
+                <div id="daySummary" class="hidden flex flex-wrap gap-2 animate-in fade-in slide-in-from-top-1"></div>
             </div>
         </div>
 
@@ -107,16 +109,16 @@
                         <th class="px-8 py-7 text-right">Seri No</th>
                     </tr>
                 </thead>
-                <tbody id="sktTable" class="divide-y divide-slate-50 text-slate-600 text-sm">
-                </tbody>
+                <tbody id="sktTable" class="divide-y divide-slate-50 text-slate-600 text-sm"></tbody>
             </table>
         </div>
         
-        <p class="mt-10 text-center text-slate-400 text-[11px] tracking-[0.4em] uppercase font-black italic">Royapp | QC Denetim Paneli v1.7.0</p>
+        <p class="mt-10 text-center text-slate-400 text-[11px] tracking-[0.4em] uppercase font-black italic">Royapp | Operational Terminal v1.8.0</p>
     </div>
 
     <script>
         let allData = [];
+        let currentStatusFilter = 'all'; // all, risk, iade
 
         async function fetchData() {
             try {
@@ -125,8 +127,21 @@
                 calculateLider();
                 renderTable();
             } catch (err) {
-                document.getElementById('sktTable').innerHTML = '<tr><td colspan="6" class="p-20 text-center text-slate-300 font-bold italic">SİSTEM ÇEVRİMDIŞI</td></tr>';
+                document.getElementById('sktTable').innerHTML = '<tr><td colspan="6" class="p-20 text-center text-slate-300 font-bold italic uppercase tracking-widest">SİSTEM ÇEVRİMDIŞI</td></tr>';
             }
+        }
+
+        function toggleStatusFilter(type) {
+            if (currentStatusFilter === type) {
+                currentStatusFilter = 'all';
+            } else {
+                currentStatusFilter = type;
+            }
+            renderTable();
+        }
+
+        function resetStatusFilter() {
+            currentStatusFilter = 'all';
         }
 
         function calculateLider() {
@@ -140,15 +155,18 @@
         function getStatusInfo(item) {
             const gun = parseInt(item.gun_farki);
             const tip = item.kod ? item.kod.charAt(0).toUpperCase() : 'P';
-            if (gun > 14) return { label: "KRİTİK (İMHA)", class: "status-extreme", isIade: true };
+            
+            // KRITIK IMHA
+            if (gun > 14) return { label: "KRİTİK (İMHA)", class: "status-extreme", isIade: true, isRisk: false };
+            
             if (tip === 'S') {
-                if (gun >= 4) return { label: "TERMİN SONU", class: "status-danger", isIade: true };
-                if (gun === 3) return { label: "RİSKLİ (SON)", class: "status-warning", isIade: false };
+                if (gun >= 4) return { label: "TERMİN SONU", class: "status-danger", isIade: true, isRisk: false };
+                if (gun === 3) return { label: "RİSKLİ (SON)", class: "status-warning", isIade: false, isRisk: true };
             } else {
-                if (gun >= 5) return { label: "TERMİN SONU", class: "status-danger", isIade: true };
-                if (gun === 4) return { label: "RİSKLİ (SON)", class: "status-warning", isIade: false };
+                if (gun >= 5) return { label: "TERMİN SONU", class: "status-danger", isIade: true, isRisk: false };
+                if (gun === 4) return { label: "RİSKLİ (SON)", class: "status-warning", isIade: false, isRisk: true };
             }
-            return { label: "UYGUN", class: "status-suit", isIade: false };
+            return { label: "UYGUN", class: "status-suit", isIade: false, isRisk: false };
         }
 
         function renderTable() {
@@ -163,24 +181,55 @@
             const yesterdayStr = new Date(Date.now() - 86400000).toLocaleDateString('tr-TR');
             
             let iadeCount = 0;
+            let riskCount = 0;
             let dayCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
 
-            const filteredData = allData.filter(item => {
+            // Önce temel filtrelemeyi yap (Şube ve Zaman)
+            let baseFiltered = allData.filter(item => {
                 const subeMatch = (subeFilter === "Tümü" || item.sube === subeFilter);
                 const itemDate = new Date(item.timestamp).toLocaleDateString('tr-TR');
                 let timeMatch = true;
                 if (timeFilter === "bugun") timeMatch = (itemDate === todayStr);
                 if (timeFilter === "dun") timeMatch = (itemDate === yesterdayStr);
+                return subeMatch && timeMatch;
+            });
 
-                const isMatch = subeMatch && timeMatch;
-                if (isMatch && timeFilter === "bugun") {
+            // Sayıları hesapla
+            baseFiltered.forEach(item => {
+                const s = getStatusInfo(item);
+                if (s.isIade) iadeCount++;
+                if (s.isRisk) riskCount++;
+                
+                if (timeFilter === "bugun") {
                     const gun = parseInt(item.gun_farki);
                     if (gun >= 1 && gun <= 6) dayCounts[gun]++;
                 }
-                return isMatch;
             });
 
-            if (timeFilter === "bugun" && filteredData.length > 0) {
+            // Butonları güncelle
+            const iadeBtn = document.getElementById('iadeBtn');
+            const riskBtn = document.getElementById('riskBtn');
+            
+            document.getElementById('iadeCountLabel').textContent = iadeCount;
+            document.getElementById('riskCountLabel').textContent = riskCount;
+
+            iadeBtn.classList.toggle('hidden', iadeCount === 0);
+            riskBtn.classList.toggle('hidden', riskCount === 0);
+            
+            // Aktif filtre görseli
+            iadeBtn.style.border = currentStatusFilter === 'iade' ? '3px solid white' : 'none';
+            riskBtn.style.border = currentStatusFilter === 'risk' ? '3px solid white' : 'none';
+
+            // Şimdi Durum Filtresini uygula
+            let finalData = baseFiltered.filter(item => {
+                const s = getStatusInfo(item);
+                if (currentStatusFilter === 'iade') return s.isIade;
+                if (currentStatusFilter === 'risk') return s.isRisk;
+                return true;
+            });
+
+            // Günlük özet panelini göster
+            if (timeFilter === "bugun" && baseFiltered.length > 0) {
                 daySummaryDiv.classList.remove('hidden');
                 daySummaryDiv.innerHTML = Object.keys(dayCounts).map(day => `
                     <div class="day-card bg-white px-5 py-2.5 rounded-2xl shadow-sm flex items-center gap-3">
@@ -192,23 +241,20 @@
                 daySummaryDiv.classList.add('hidden');
             }
 
-            document.getElementById('filteredCount').textContent = filteredData.length;
+            document.getElementById('filteredCount').textContent = finalData.length;
 
-            if (filteredData.length === 0) {
-                document.getElementById('iadeAlertBox').classList.add('hidden');
+            if (finalData.length === 0) {
                 tableBody.innerHTML = '<tr><td colspan="6" class="p-20 text-center text-slate-300 font-bold italic tracking-widest uppercase opacity-40">Kayıt Bulunamadı</td></tr>';
                 return;
             }
 
-            filteredData.forEach(item => {
+            finalData.forEach(item => {
                 const status = getStatusInfo(item);
-                if (status.isIade) iadeCount++;
                 const scanDate = new Date(item.timestamp).toLocaleString('tr-TR');
-                
                 tableBody.innerHTML += `
                     <tr class="hover:bg-slate-50/50 transition-all">
                         <td class="px-8 py-7 whitespace-nowrap text-[11px] font-mono text-slate-800 font-black italic">🕒 ${scanDate}</td>
-                        <td class="px-8 py-7">
+                        <td class="px-8 py-7 leading-tight">
                             <div class="font-[900] text-slate-900 tracking-tight text-md">${item.sube}</div>
                             <div class="flex items-center gap-2 mt-1.5">
                                 <span class="text-[10px] text-purple-700 font-black uppercase tracking-tighter">${item.personel}</span>
@@ -224,13 +270,6 @@
                         <td class="px-8 py-7 text-right font-mono text-sm font-black text-slate-900 tracking-widest bg-slate-50/30">${item.kod}</td>
                     </tr>`;
             });
-
-            if (iadeCount > 0) {
-                document.getElementById('iadeCountLabel').textContent = iadeCount;
-                document.getElementById('iadeAlertBox').classList.remove('hidden');
-            } else {
-                document.getElementById('iadeAlertBox').classList.add('hidden');
-            }
         }
         fetchData();
         setInterval(fetchData, 60000);
