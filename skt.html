@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royapp | QC Denetim Paneli v1.8.1</title>
+    <title>Royapp | QC Denetim Paneli v1.8.2</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -19,7 +19,7 @@
 
         .badge { padding: 6px 14px; border-radius: 10px; font-weight: 800; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
         
-        /* Animasyonlar */
+        /* Pulse Efektleri */
         .iade-alert-box { animation: iade-pulse 2s infinite; }
         @keyframes iade-pulse { 
             0% { transform: scale(1); } 
@@ -31,7 +31,6 @@
         .action-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
         .action-btn:active { transform: scale(0.95); }
         
-        /* Buton Dönme Efekti */
         .refreshing { animation: spin 0.8s linear; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
     </style>
@@ -40,17 +39,38 @@
 
     <div class="max-w-7xl mx-auto">
         <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 gap-6">
-            <div class="flex items-center gap-5">
-                <div class="bg-royal-purple p-5 rounded-[2rem] text-white shadow-2xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
+            <div class="flex flex-col gap-4">
+                <div class="flex items-center gap-5">
+                    <div class="bg-royal-purple p-5 rounded-[2rem] text-white shadow-2xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-4xl font-[900] text-gray-900 tracking-tight leading-none">Kalite Kontrol</h1>
+                        <div id="statsContainer" class="flex flex-wrap gap-2 mt-3">
+                            <span class="bg-slate-200 text-slate-700 text-[10px] font-black px-4 py-2 rounded-xl uppercase tracking-wider">🏆 Lider: <span id="topBranchName">-</span></span>
+                            <span class="bg-blue-100 text-blue-700 text-[10px] font-black px-4 py-2 rounded-xl uppercase tracking-wider">📊 İşlem: <span id="filteredCount">0</span></span>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h1 class="text-4xl font-[900] text-gray-900 tracking-tight leading-none">Kalite Kontrol</h1>
-                    <div id="statsContainer" class="flex flex-wrap gap-2 mt-3">
-                        <span class="bg-slate-200 text-slate-700 text-[10px] font-black px-4 py-2 rounded-xl uppercase tracking-wider">🏆 Lider: <span id="topBranchName">-</span></span>
-                        <span class="bg-blue-100 text-blue-700 text-[10px] font-black px-4 py-2 rounded-xl uppercase tracking-wider">📊 İşlem: <span id="filteredCount">0</span></span>
+
+                <div class="flex flex-wrap gap-2 pt-2 border-t border-slate-100">
+                    <div class="flex items-center gap-2 px-3 py-1.5 bg-white rounded-full shadow-sm border border-slate-50">
+                        <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+                        <span class="text-[9px] font-black text-slate-500 uppercase tracking-tighter">Taze: Satışa Devam</span>
+                    </div>
+                    <div class="flex items-center gap-2 px-3 py-1.5 bg-white rounded-full shadow-sm border border-slate-50">
+                        <div class="w-2 h-2 rounded-full bg-orange-500"></div>
+                        <span class="text-[9px] font-black text-slate-500 uppercase tracking-tighter">Riskli: Öncelikli Sat</span>
+                    </div>
+                    <div class="flex items-center gap-2 px-3 py-1.5 bg-white rounded-full shadow-sm border border-slate-50">
+                        <div class="w-2 h-2 rounded-full bg-red-600"></div>
+                        <span class="text-[9px] font-black text-slate-500 uppercase tracking-tighter">İade: Reyondan Çek</span>
+                    </div>
+                    <div class="flex items-center gap-2 px-3 py-1.5 bg-white rounded-full shadow-sm border border-slate-50">
+                        <div class="w-2 h-2 rounded-full bg-gray-900"></div>
+                        <span class="text-[9px] font-black text-slate-500 uppercase tracking-tighter">İmha: Satış Yasak</span>
                     </div>
                 </div>
             </div>
@@ -115,6 +135,8 @@
                 <tbody id="sktTable" class="divide-y divide-slate-50 text-slate-600 text-sm"></tbody>
             </table>
         </div>
+        
+        <p class="mt-10 text-center text-slate-400 text-[11px] tracking-[0.4em] uppercase font-black italic">Royapp | Operational Terminal v1.8.2</p>
     </div>
 
     <script>
@@ -123,19 +145,14 @@
 
         async function fetchData() {
             const icon = document.getElementById('refreshIcon');
-            icon.classList.add('refreshing'); // Görsel geri bildirim
-            
+            icon.classList.add('refreshing');
             try {
                 const response = await fetch('hamobus.json?t=' + new Date().getTime());
                 allData = await response.json();
-                
-                // Veri gelince her şeyi sıfırdan hesapla ve çiz
                 calculateLider();
                 renderTable();
-                
                 setTimeout(() => icon.classList.remove('refreshing'), 800);
             } catch (err) {
-                console.error(err);
                 document.getElementById('sktTable').innerHTML = '<tr><td colspan="6" class="p-20 text-center text-slate-300 font-bold italic uppercase">SİSTEM ÇEVRİMDIŞI</td></tr>';
                 icon.classList.remove('refreshing');
             }
@@ -146,9 +163,7 @@
             renderTable();
         }
 
-        function resetStatusFilter() {
-            currentStatusFilter = 'all';
-        }
+        function resetStatusFilter() { currentStatusFilter = 'all'; }
 
         function calculateLider() {
             if (allData.length === 0) return;
@@ -212,7 +227,6 @@
             iadeBtn.classList.toggle('hidden', iadeCount === 0);
             riskBtn.classList.toggle('hidden', riskCount === 0);
             
-            // Aktif buton görsel efekti (Ring/Çerçeve)
             iadeBtn.className = `action-btn iade-alert-box bg-red-600 text-white px-6 rounded-full flex items-center shadow-lg ${iadeCount === 0 ? 'hidden' : ''} ${currentStatusFilter === 'iade' ? 'ring-4 ring-red-300' : ''}`;
             riskBtn.className = `action-btn bg-orange-500 text-white px-6 rounded-full flex items-center shadow-lg ${riskCount === 0 ? 'hidden' : ''} ${currentStatusFilter === 'risk' ? 'ring-4 ring-orange-200' : ''}`;
 
