@@ -3,6 +3,17 @@
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "88.247.207.247",
+    "kod": "P315352",
+    "personel": "Kivsnc deneme",
+    "sube": "Konacık Şube",
+    "uretim": "17.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-18T12:34:02.637Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "88.247.207.247",
     "kod": "P761356",
     "personel": "Kivsnc deneme",
     "sube": "Konacık Şube",
