@@ -3,24 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royapp | QC Denetim Paneli</title>
+    <title>Royapp | QC Denetim Paneli v1.6</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; }
-        .royal-purple { color: #8e44ad; }
-        .bg-royal-purple { background-color: #8e44ad; }
+        .royal-purple { color: #3b1c7a; }
+        .bg-royal-purple { background-color: #3b1c7a; }
         .table-shadow { box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
         
-        /* Yeni Ciddi Durum Renkleri */
-        .status-suit { background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; } /* Taze */
-        .status-warning { background-color: #fef3c7; color: #92400e; border: 1px solid #fde68a; } /* Son Gün */
-        .status-danger { background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca; } /* İade */
-        .status-extreme { background-color: #111827; color: #ffffff; } /* Kritik */
+        /* Ciddi Durum Renkleri */
+        .status-suit { background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; } 
+        .status-warning { background-color: #fef3c7; color: #92400e; border: 1px solid #fde68a; } 
+        .status-danger { background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca; } 
+        .status-extreme { background-color: #111827; color: #ffffff; } 
 
         .badge { padding: 6px 14px; border-radius: 10px; font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
         .iade-alert { animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
+
+        .day-card { transition: all 0.2s ease; }
+        .day-card:hover { transform: translateY(-2px); }
     </style>
 </head>
 <body class="p-4 md:p-8">
@@ -47,34 +50,39 @@
                 </div>
             </div>
 
-            <div class="flex flex-wrap gap-3 bg-white p-4 rounded-[2rem] shadow-sm border border-gray-100 w-full lg:w-auto">
-                <div class="flex flex-col flex-1 lg:flex-none">
-                    <label class="text-[10px] font-black text-slate-400 ml-2 mb-1 uppercase tracking-widest">Denetim Birimi</label>
-                    <select id="subeFilter" onchange="renderTable()" class="border-0 bg-slate-50 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-purple-200 transition-all text-sm font-bold text-slate-700 cursor-pointer">
-                        <option value="Tümü">Tüm Birimler</option>
-                        <option value="Gümbet Şube">Gümbet Şube</option>
-                        <option value="Gümbet 2 Şube">Gümbet 2 Şube</option>
-                        <option value="Konacık Şube">Konacık Şube</option>
-                        <option value="Kumbahçe Şube">Kumbahçe Şube</option>
-                    </select>
+            <div class="flex flex-col gap-4 w-full lg:w-auto">
+                <div class="flex flex-wrap gap-3 bg-white p-4 rounded-[2rem] shadow-sm border border-gray-100">
+                    <div class="flex flex-col flex-1 lg:flex-none">
+                        <label class="text-[10px] font-black text-slate-400 ml-2 mb-1 uppercase tracking-widest">Birim</label>
+                        <select id="subeFilter" onchange="renderTable()" class="border-0 bg-slate-50 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-purple-200 text-sm font-bold text-slate-700 cursor-pointer">
+                            <option value="Tümü">Tüm Birimler</option>
+                            <option value="Gümbet Şube">Gümbet Şube</option>
+                            <option value="Gümbet 2 Şube">Gümbet 2 Şube</option>
+                            <option value="Konacık Şube">Konacık Şube</option>
+                            <option value="Kumbahçe Şube">Kumbahçe Şube</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col flex-1 lg:flex-none">
+                        <label class="text-[10px] font-black text-slate-400 ml-2 mb-1 uppercase tracking-widest">Periyot</label>
+                        <select id="timeFilter" onchange="renderTable()" class="border-0 bg-slate-50 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-purple-200 text-sm font-bold text-slate-700 cursor-pointer">
+                            <option value="bugun" selected>Bugün</option>
+                            <option value="dun">Dün</option>
+                            <option value="7">Son 7 Gün</option>
+                        </select>
+                    </div>
+                    
+                    <div class="flex items-end">
+                        <button onclick="fetchData()" class="bg-royal-purple hover:scale-105 active:scale-95 text-white p-3.5 rounded-2xl transition-all shadow-lg shadow-purple-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
 
-                <div class="flex flex-col flex-1 lg:flex-none">
-                    <label class="text-[10px] font-black text-slate-400 ml-2 mb-1 uppercase tracking-widest">Periyot</label>
-                    <select id="timeFilter" onchange="renderTable()" class="border-0 bg-slate-50 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-purple-200 transition-all text-sm font-bold text-slate-700 cursor-pointer">
-                        <option value="bugun" selected>Bugün (Güncel)</option>
-                        <option value="dun">Dün</option>
-                        <option value="7">Son 7 Gün</option>
-                    </select>
-                </div>
-                
-                <div class="flex items-end">
-                    <button onclick="fetchData()" class="bg-royal-purple hover:scale-105 active:scale-95 text-white p-3.5 rounded-2xl transition-all shadow-lg shadow-purple-200">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                        </svg>
-                    </button>
-                </div>
+                <div id="daySummary" class="hidden flex flex-wrap gap-2 animate-in fade-in slide-in-from-top-1 duration-300">
+                    </div>
             </div>
         </div>
 
@@ -86,8 +94,8 @@
                         <th class="px-8 py-6">Denetim Lokasyonu</th>
                         <th class="px-8 py-6">Ürün Grubu</th>
                         <th class="px-8 py-6">Üretim Tarihi</th>
-                        <th class="px-8 py-6 text-center">Denetim Sonucu</th>
-                        <th class="px-8 py-6 text-right">Takip No (S/N)</th>
+                        <th class="px-8 py-6 text-center">Sonuç</th>
+                        <th class="px-8 py-6 text-right">Seri No</th>
                     </tr>
                 </thead>
                 <tbody id="sktTable" class="divide-y divide-slate-50 text-slate-600 text-sm">
@@ -95,8 +103,7 @@
             </table>
         </div>
         
-        <p class="mt-10 text-center text-slate-400 text-[10px] tracking-[0.3em] uppercase font-bold">RR Kalite Kontrol v1.4.0</p>
-        
+        <p class="mt-10 text-center text-slate-400 text-[10px] tracking-[0.3em] uppercase font-bold italic">RR Kalite Kontrol Terminali v1.6.0</p>
     </div>
 
     <script>
@@ -109,8 +116,7 @@
                 calculateLider();
                 renderTable();
             } catch (err) {
-                console.error("Hata:", err);
-                document.getElementById('sktTable').innerHTML = '<tr><td colspan="6" class="p-20 text-center text-slate-300 font-black italic">VERİ BAĞLANTISI KESİLDİ</td></tr>';
+                document.getElementById('sktTable').innerHTML = '<tr><td colspan="6" class="p-20 text-center text-slate-300 font-black italic italic">VERİ BAĞLANTISI KESİLDİ</td></tr>';
             }
         }
 
@@ -122,17 +128,22 @@
             document.getElementById('topBranchName').textContent = top;
         }
 
-        // Ciddi Terminoloji Eşleştirmesi
-        function getStatusInfo(durum) {
-            if (durum.includes("IADE") || durum.includes("DOLDU")) {
-                return { label: "TERMİN SONU (İADE)", class: "status-danger", isIade: true };
+        // 🧠 AKILLI DURUM HESAPLAYICI (P-S Hassasiyeti)
+        function getStatusInfo(item) {
+            const gun = parseInt(item.gun_farki);
+            const tip = item.kod ? item.kod.charAt(0).toUpperCase() : 'P';
+
+            // 14 Günü geçen ürünler her durumda KRİTİK
+            if (gun > 14) return { label: "KRİTİK (İMHA)", class: "status-extreme", isIade: true };
+
+            if (tip === 'S') { // Sütlü Tatlı Kuralları
+                if (gun >= 4) return { label: "TERMİN SONU (İADE)", class: "status-danger", isIade: true };
+                if (gun === 3) return { label: "RİSKLİ (SON GÜN)", class: "status-warning", isIade: false };
+            } else { // Pasta (P) Kuralları
+                if (gun >= 5) return { label: "TERMİN SONU (İADE)", class: "status-danger", isIade: true };
+                if (gun === 4) return { label: "RİSKLİ (SON GÜN)", class: "status-warning", isIade: false };
             }
-            if (durum.includes("SON SATIS")) {
-                return { label: "RİSKLİ (SON GÜN)", class: "status-warning", isIade: false };
-            }
-            if (durum.includes("KRITIK")) {
-                return { label: "KRİTİK (İMHA)", class: "status-extreme", isIade: true };
-            }
+
             return { label: "STANDARTLARA UYGUN", class: "status-suit", isIade: false };
         }
 
@@ -140,15 +151,15 @@
             const tableBody = document.getElementById('sktTable');
             const subeFilter = document.getElementById('subeFilter').value;
             const timeFilter = document.getElementById('timeFilter').value;
+            const daySummaryDiv = document.getElementById('daySummary');
             tableBody.innerHTML = '';
 
             const now = new Date();
             const todayStr = now.toLocaleDateString('tr-TR');
-            const yesterday = new Date();
-            yesterday.setDate(now.getDate() - 1);
-            const yesterdayStr = yesterday.toLocaleDateString('tr-TR');
-
+            const yesterdayStr = new Date(now.setDate(now.getDate() - 1)).toLocaleDateString('tr-TR');
+            
             let iadeCount = 0;
+            let dayCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
 
             const filteredData = allData.filter(item => {
                 const subeMatch = (subeFilter === "Tümü" || item.sube === subeFilter);
@@ -157,39 +168,57 @@
                 if (timeFilter === "bugun") timeMatch = (itemDate === todayStr);
                 if (timeFilter === "dun") timeMatch = (itemDate === yesterdayStr);
 
-                return subeMatch && timeMatch;
+                const isMatch = subeMatch && timeMatch;
+
+                // Sadece BUGÜN filtresinde günlük dağılımı hesapla
+                if (isMatch && timeFilter === "bugun") {
+                    const gun = parseInt(item.gun_farki);
+                    if (gun >= 1 && gun <= 6) dayCounts[gun]++;
+                }
+
+                return isMatch;
             });
 
-            // Seçilen filtredeki toplam ve iade sayısını hesapla
+            // GÜNLÜK ÖZET PANELİNİ GÖSTER/GİZLE
+            if (timeFilter === "bugun" && filteredData.length > 0) {
+                daySummaryDiv.classList.remove('hidden');
+                daySummaryDiv.innerHTML = Object.keys(dayCounts).map(day => `
+                    <div class="day-card bg-white px-4 py-2.5 rounded-2xl shadow-sm flex items-center gap-3 border border-slate-100">
+                        <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest">${day}. GÜN</span>
+                        <span class="text-sm font-black ${dayCounts[day] > 0 ? 'text-purple-600' : 'text-slate-200'}">${dayCounts[day]}</span>
+                    </div>
+                `).join('');
+            } else {
+                daySummaryDiv.classList.add('hidden');
+            }
+
             document.getElementById('filteredCount').textContent = filteredData.length;
 
             if (filteredData.length === 0) {
                 document.getElementById('iadeAlertBox').classList.add('hidden');
-                tableBody.innerHTML = '<tr><td colspan="6" class="p-20 text-center text-slate-400 font-medium italic italic">Seçili kriterde kayıt bulunamadı.</td></tr>';
+                tableBody.innerHTML = '<tr><td colspan="6" class="p-20 text-center text-slate-300 font-bold italic italic">Kayıt bulunamadı.</td></tr>';
                 return;
             }
 
             filteredData.forEach(item => {
-                const status = getStatusInfo(item.durum);
+                const status = getStatusInfo(item); // Akıllı hesaplama
                 if (status.isIade) iadeCount++;
 
                 const scanDate = new Date(item.timestamp).toLocaleString('tr-TR');
                 const urunTuru = item.urun_turu || "BELİRTİLMEMİŞ";
 
                 tableBody.innerHTML += `
-                    <tr class="hover:bg-slate-50/80 transition-all">
+                    <tr class="hover:bg-slate-50/50 transition-all">
                         <td class="px-8 py-6 whitespace-nowrap text-[11px] font-mono text-slate-800 font-black italic">🕒 ${scanDate}</td>
                         <td class="px-8 py-6">
                             <div class="font-extrabold text-slate-900 tracking-tight">${item.sube}</div>
-                            <div class="text-[10px] text-purple-500 font-black uppercase tracking-tighter">DENETÇİ: ${item.personel}</div>
+                            <div class="text-[10px] text-purple-600 font-black uppercase tracking-tighter">DNTC: ${item.personel}</div>
                         </td>
                         <td class="px-8 py-6">
                             <div class="font-bold text-slate-800">${urunTuru}</div>
-                            <div class="text-[10px] text-slate-400 font-bold uppercase underline decoration-purple-200">KONTROL: ${item.gun_farki}. GÜN</div>
+                            <div class="text-[10px] text-slate-400 font-bold uppercase underline decoration-purple-100">ÖMÜR: ${item.gun_farki}. GÜN</div>
                         </td>
-                        <td class="px-8 py-6 text-slate-700 font-black font-mono text-xs">
-                            ${item.uretim}
-                        </td>
+                        <td class="px-8 py-6 text-slate-700 font-black font-mono text-xs">${item.uretim}</td>
                         <td class="px-8 py-6 text-center">
                             <span class="badge ${status.class}">${status.label}</span>
                         </td>
@@ -200,7 +229,6 @@
                 `;
             });
 
-            // Header İade Uyarı Güncelleme
             if (iadeCount > 0) {
                 document.getElementById('iadeCountLabel').textContent = iadeCount;
                 document.getElementById('iadeAlertBox').classList.remove('hidden');
@@ -210,7 +238,7 @@
         }
 
         fetchData();
-        setInterval(fetchData, 120000);
+        setInterval(fetchData, 60000); // 1 dakikada bir otomatik yenile
     </script>
 </body>
 </html>
