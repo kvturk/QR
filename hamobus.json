@@ -8,6 +8,17 @@
     "sube": "Gümbet 2 Şube",
     "uretim": "18.04.2026",
     "urun_turu": "PASTA",
+    "timestamp": "2026-04-18T15:03:59.611Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 0,
+    "ip": "78.189.186.231",
+    "kod": "P147363",
+    "personel": "Basak",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "18.04.2026",
+    "urun_turu": "PASTA",
     "timestamp": "2026-04-18T15:02:22.406Z"
   },
   {
@@ -3786,16 +3797,5 @@
     "uretim": "14.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-16T15:04:56.657Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 2,
-    "ip": "176.54.253.134",
-    "kod": "P498327",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "14.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-16T15:03:56.754Z"
   }
 ]
