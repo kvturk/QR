@@ -10,7 +10,6 @@
         body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; }
         .bg-royal { background-color: #3b1c7a; }
         
-        /* --- DURUM EFEKTLERİ --- */
         .status-suit { background: #ffffff; border-left: 6px solid #22c55e; } 
         .status-warning { 
             background: #fffbeb; 
@@ -51,11 +50,11 @@
         
         <div class="flex gap-3">
             <div class="bg-white/10 flex-1 p-3 rounded-2xl text-center border border-white/5">
-                <div class="text-[9px] uppercase font-black opacity-50 mb-1">2 Günlük Kayıt</div>
+                <div class="text-[9px] uppercase font-black opacity-50 mb-1">Seçili Gün İşlemi</div>
                 <div id="totalCount" class="text-2xl font-black">-</div>
             </div>
             <div class="bg-red-500/30 flex-1 p-3 rounded-2xl text-center border border-red-500/20">
-                <div class="text-[9px] uppercase font-black text-red-200 mb-1">Sistemdeki İadeler</div>
+                <div class="text-[9px] uppercase font-black text-red-200 mb-1">Kayıtlı İade</div>
                 <div id="iadeCount" class="text-2xl font-black text-red-100">-</div>
             </div>
         </div>
@@ -90,22 +89,17 @@
             }
         }
 
-        // 🧠 JSON'daki "Durum" Metnine Göre Renk Belirle
+        // 🧠 DURUMU JSON'DAN OKU VE GÖRSELLEŞTİR
         function getStatusInfo(item) {
             const d = item.durum ? item.durum.toUpperCase() : "";
-            
-            // Renkleri metne göre otomatik seçiyoruz ki görsel uyarı çalışsın
             if (d.includes("IADE") || d.includes("DOLDU") || d.includes("SONU")) 
-                return { label: item.durum, class: "status-danger", textCol: "text-red-600" };
-            
+                return { label: item.durum, class: "status-danger", textCol: "text-red-600", type: "iade" };
             if (d.includes("SON") || d.includes("RISK") || d.includes("RİSK")) 
-                return { label: item.durum, class: "status-warning", textCol: "text-amber-600" };
-            
+                return { label: item.durum, class: "status-warning", textCol: "text-amber-600", type: "uyari" };
             if (d.includes("KRITIK") || d.includes("KRİTİK")) 
-                return { label: item.durum, class: "status-extreme", textCol: "text-white" };
+                return { label: item.durum, class: "status-extreme", textCol: "text-white", type: "iade" };
 
-            // Hiçbiri değilse standart taze ürün
-            return { label: item.durum || "STANDART UYGUN", class: "status-suit", textCol: "text-emerald-600" };
+            return { label: item.durum || "STANDART UYGUN", class: "status-suit", textCol: "text-emerald-600", type: "normal" };
         }
 
         function renderCards() {
@@ -115,21 +109,27 @@
             
             const now = new Date();
             const todayStr = now.toLocaleDateString('tr-TR');
-            const yesterdayStr = new Date(Date.now() - 86400000).toLocaleDateString('tr-TR');
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const yesterdayStr = yesterday.toLocaleDateString('tr-TR');
 
+            // 1. ADIM: JSON'daki tüm verileri seçilen tarih ve şubeye göre süz
             const filtered = allData.filter(item => {
                 const subeMatch = (subeFilter === "Tümü" || item.sube === subeFilter);
                 const itemDate = new Date(item.timestamp).toLocaleDateString('tr-TR');
                 
                 let timeMatch = false;
                 if (timeFilter === "bugun") timeMatch = (itemDate === todayStr);
-                if (timeFilter === "dun") timeMatch = (itemDate === yesterdayStr);
+                else if (timeFilter === "dun") timeMatch = (itemDate === yesterdayStr);
 
-                return subeMatch && timeMatch && (itemDate === todayStr || itemDate === yesterdayStr);
+                return subeMatch && timeMatch;
             });
 
-            document.getElementById('totalCount').textContent = filtered.length;
+            // 2. ADIM: Sayıları doğrudan süzülen (filtered) listeden al
+            document.getElementById('totalCount').textContent = filtered.length; // Toplam işlem
+
             let iadeTotal = 0;
+            container.innerHTML = '';
 
             if (filtered.length === 0) {
                 container.innerHTML = '<div class="text-center py-20 opacity-20 font-black tracking-widest uppercase">Kayıt Yok</div>';
@@ -137,10 +137,10 @@
                 return;
             }
 
-            container.innerHTML = '';
+            // 3. ADIM: Her kartı oluştururken JSON'daki durumuna bak ve iadeleri say
             filtered.forEach(item => {
                 const status = getStatusInfo(item);
-                if (status.class === "status-danger" || status.class === "status-extreme") iadeTotal++;
+                if (status.type === "iade") iadeTotal++; // Eğer JSON'daki metin iade diyorsa sayacı artır
 
                 const scanTime = new Date(item.timestamp).toLocaleTimeString('tr-TR', {hour: '2-digit', minute:'2-digit'});
                 const isExtreme = status.class === "status-extreme";
@@ -158,7 +158,6 @@
                                 ${status.label}
                             </span>
                         </div>
-                        
                         <div class="grid grid-cols-2 gap-4 pt-4 border-t ${isExtreme ? 'border-white/10' : 'border-slate-100'}">
                             <div>
                                 <p class="text-[9px] uppercase font-bold opacity-50 mb-0.5">Ürün Grubu</p>
@@ -177,7 +176,6 @@
                                 <p class="text-[13px] font-black text-purple-500">${item.gun_farki}. GÜN</p>
                             </div>
                         </div>
-
                         <div class="mt-4 pt-3 border-t border-dashed ${isExtreme ? 'border-white/5' : 'border-slate-200'} flex justify-between items-center opacity-60">
                              <span class="text-[8px] font-black uppercase tracking-[0.2em]">Safety Protocol v9</span>
                              <span class="text-[10px] font-mono font-bold italic">IP: ${item.ip || "0.0.0.0"}</span>
@@ -186,6 +184,7 @@
                 `;
             });
 
+            // Sonucu yukarıdaki kırmızı kutuya bas
             document.getElementById('iadeCount').textContent = iadeTotal;
         }
 
