@@ -3,6 +3,17 @@
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 3,
     "ip": "85.98.42.98",
+    "kod": "P805344",
+    "personel": "Ayşegül",
+    "sube": "Gümbet Şube",
+    "uretim": "16.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-19T07:58:15.600Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 3,
+    "ip": "85.98.42.98",
     "kod": "P490345",
     "personel": "Ayşegül",
     "sube": "Gümbet Şube",
@@ -3566,16 +3577,5 @@
     "uretim": "16.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-17T07:58:20.124Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 1,
-    "ip": "88.247.207.247",
-    "kod": "P805344",
-    "personel": "Helin dağgezen",
-    "sube": "Konacık Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-17T07:58:07.428Z"
   }
 ]
