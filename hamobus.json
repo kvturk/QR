@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 3,
+    "ip": "88.247.207.247",
+    "kod": "P805344",
+    "personel": "Aslı Özveren",
+    "sube": "Konacık Şube",
+    "uretim": "16.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-19T11:05:56.328Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "85.98.42.98",
     "kod": "P147363",
@@ -3588,115 +3599,5 @@
     "uretim": "16.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-17T11:21:53.042Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 2,
-    "ip": "31.142.22.233",
-    "kod": "P530334",
-    "personel": "Selma Doğan",
-    "sube": "Gümbet Şube",
-    "uretim": "15.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-17T10:43:32.454Z"
-  },
-  {
-    "durum": "RAF OMRU DOLDU (IADE!)",
-    "gun_farki": 6,
-    "ip": "37.155.21.190",
-    "kod": "P163265",
-    "personel": "Deryaövet",
-    "sube": "Gümbet Şube",
-    "uretim": "11.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-17T10:25:14.115Z"
-  },
-  {
-    "durum": "RAF OMRU DOLDU (IADE!)",
-    "gun_farki": 5,
-    "ip": "37.155.21.190",
-    "kod": "P229273",
-    "personel": "Deryaövet",
-    "sube": "Gümbet Şube",
-    "uretim": "12.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-17T10:24:40.247Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 1,
-    "ip": "31.142.22.233",
-    "kod": "P490345",
-    "personel": "Selma Doğan",
-    "sube": "Gümbet Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-17T10:22:46.923Z"
-  },
-  {
-    "durum": "BUGUN SON SATIS GUNU",
-    "gun_farki": 4,
-    "ip": "37.155.21.190",
-    "kod": "P367313",
-    "personel": "Deryaövet",
-    "sube": "Gümbet Şube",
-    "uretim": "13.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-17T10:22:19.045Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 0,
-    "ip": "31.142.22.233",
-    "kod": "P761356",
-    "personel": "Selma Doğan",
-    "sube": "Gümbet Şube",
-    "uretim": "17.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-17T10:22:09.320Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 1,
-    "ip": "37.155.21.190",
-    "kod": "P490345",
-    "personel": "Deryaövet",
-    "sube": "Gümbet Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-17T10:22:00.760Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 3,
-    "ip": "37.155.21.190",
-    "kod": "P498327",
-    "personel": "Deryaövet",
-    "sube": "Gümbet Şube",
-    "uretim": "14.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-17T10:21:51.937Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 1,
-    "ip": "31.142.22.233",
-    "kod": "P490345",
-    "personel": "Selma Doğan",
-    "sube": "Gümbet Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-17T10:21:40.217Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 2,
-    "ip": "37.155.21.190",
-    "kod": "P530334",
-    "personel": "Deryaövet",
-    "sube": "Gümbet Şube",
-    "uretim": "15.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-17T10:21:32.366Z"
   }
 ]
