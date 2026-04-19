@@ -1,5 +1,16 @@
 [
   {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 3,
+    "ip": "176.54.253.221",
+    "kod": "S218344",
+    "personel": "Tülay",
+    "sube": "Gümbet Şube",
+    "uretim": "16.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-04-19T19:26:10.282Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 0,
     "ip": "176.54.253.221",
@@ -3511,27 +3522,5 @@
     "uretim": "16.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-17T19:48:21.579Z"
-  },
-  {
-    "auth_key": "2026royal",
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "kod": "S218344",
-    "personel": "Rukiye vapur",
-    "sube": "Gümbet Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-17T19:24:38.972Z"
-  },
-  {
-    "auth_key": "2026royal",
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "kod": "S124333",
-    "personel": "Rukiye vapur",
-    "sube": "Gümbet Şube",
-    "uretim": "15.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-17T19:22:03.547Z"
   }
 ]
