@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "88.248.55.80",
+    "kod": "P147363",
+    "personel": "Demet",
+    "sube": "Kumbahçe Şube",
+    "uretim": "18.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-19T06:22:44.628Z"
+  },
+  {
     "durum": "TERMİN SONU (İADE)",
     "gun_farki": 4,
     "ip": "85.98.42.98",
@@ -3698,27 +3709,5 @@
     "uretim": "14.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-17T07:29:52.826Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 0,
-    "ip": "5.229.176.157",
-    "kod": "S532351",
-    "personel": "Merve",
-    "sube": "Gümbet Şube",
-    "uretim": "17.04.2026",
-    "urun_turu": "SUTLU TATLI",
-    "timestamp": "2026-04-17T06:19:44.253Z"
-  },
-  {
-    "durum": "URUN TAZE",
-    "gun_farki": 0,
-    "ip": "5.229.176.157",
-    "kod": "P761356",
-    "personel": "Merve",
-    "sube": "Gümbet Şube",
-    "uretim": "17.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-17T06:16:16.604Z"
   }
 ]
