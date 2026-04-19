@@ -1,5 +1,16 @@
 [
   {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 4,
+    "ip": "2a00:1880:a20d:529:1870:94ff:fe03:c378",
+    "kod": "P530334",
+    "personel": "Oktay",
+    "sube": "Gümbet Şube",
+    "uretim": "15.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-19T12:55:17.703Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 0,
     "ip": "2a00:1880:a20d:529:1870:94ff:fe03:c378",
