@@ -2,6 +2,17 @@
   {
     "durum": "TERMİN SONU (İADE)",
     "gun_farki": 9,
+    "ip": "2a00:1880:a2ca:b643:18a7:f9d7:5b96:2b9b",
+    "kod": "P185261",
+    "personel": "Merve",
+    "sube": "Gümbet Şube",
+    "uretim": "11.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-20T10:47:15.517Z"
+  },
+  {
+    "durum": "TERMİN SONU (İADE)",
+    "gun_farki": 9,
     "ip": "37.155.2.183",
     "kod": "P185261",
     "personel": "Ceylan",
@@ -3918,49 +3929,5 @@
     "uretim": "16.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-18T10:47:19.299Z"
-  },
-  {
-    "auth_key": "2026royal",
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "kod": "P761356",
-    "personel": "Özlem",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "17.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-18T10:47:10.106Z"
-  },
-  {
-    "auth_key": "2026royal",
-    "durum": "TERMİN SONU (İADE)",
-    "gun_farki": 5,
-    "kod": "P367313",
-    "personel": "Deryaövet",
-    "sube": "Gümbet Şube",
-    "uretim": "13.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-18T10:46:54.275Z"
-  },
-  {
-    "auth_key": "2026royal",
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "kod": "P490345",
-    "personel": "Özlem",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-18T10:46:31.288Z"
-  },
-  {
-    "auth_key": "2026royal",
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "kod": "P490345",
-    "personel": "Özlem",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-18T10:46:09.895Z"
   }
 ]
