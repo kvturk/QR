@@ -1,5 +1,16 @@
 [
   {
+    "durum": "TERMİN SONU (İADE)",
+    "gun_farki": 4,
+    "ip": "176.55.198.34",
+    "kod": "S218344",
+    "personel": "Hatice",
+    "sube": "Konacık Şube",
+    "uretim": "16.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-04-20T12:22:31.387Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "78.189.186.231",
@@ -3790,67 +3801,5 @@
     "uretim": "15.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-18T12:27:14.926Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "kod": "P805344",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-18T12:21:19.294Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "kod": "P490345",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-18T12:20:59.399Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "kod": "P761356",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "17.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-18T12:20:41.737Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "kod": "P761356",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "17.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-18T12:20:30.027Z"
-  },
-  {
-    "auth_key": "2026royal",
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "kod": "P315352",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "17.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-18T12:20:07.760Z"
-  },
-  {
-    "auth_key": "2026royal",
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "kod": "P147363",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-18T12:19:49.839Z"
   }
 ]
