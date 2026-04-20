@@ -2,6 +2,17 @@
   {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
+    "ip": "37.155.2.183",
+    "kod": "P147363",
+    "personel": "Ceylan",
+    "sube": "Gümbet Şube",
+    "uretim": "18.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-20T10:44:09.630Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
     "ip": "85.98.42.98",
     "kod": "S515365",
     "personel": "Ayşegül",
