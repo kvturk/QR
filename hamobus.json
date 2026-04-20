@@ -1,5 +1,16 @@
 [
   {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 4,
+    "ip": "88.247.207.247",
+    "kod": "P805344",
+    "personel": "Dilan culduz",
+    "sube": "Konacık Şube",
+    "uretim": "16.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-20T09:24:48.389Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 3,
     "ip": "88.247.207.247",
