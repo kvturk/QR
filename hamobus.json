@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 3,
+    "ip": "176.55.198.34",
+    "kod": "P315352",
+    "personel": "Hatice",
+    "sube": "Konacık Şube",
+    "uretim": "17.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-20T12:26:31.904Z"
+  },
+  {
     "durum": "RİSKLİ (SON GÜN)",
     "gun_farki": 4,
     "ip": "176.55.198.34",
