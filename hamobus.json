@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "176.55.198.34",
+    "kod": "P118378",
+    "personel": "Hatice",
+    "sube": "Konacık Şube",
+    "uretim": "19.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-20T18:20:53.221Z"
+  },
+  {
     "durum": "TERMİN SONU (İADE)",
     "gun_farki": 4,
     "ip": "88.248.55.80",
