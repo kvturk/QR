@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "78.189.186.231",
+    "kod": "P147363",
+    "personel": "Basak",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "18.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-20T11:28:08.745Z"
+  },
+  {
     "durum": "RİSKLİ (SON GÜN)",
     "gun_farki": 4,
     "ip": "85.98.42.98",
@@ -3687,126 +3698,5 @@
     "uretim": "13.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-18T11:31:48.626Z"
-  },
-  {
-    "auth_key": "2026royal",
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "kod": "S218344",
-    "personel": "Selma Doğan",
-    "sube": "Gümbet Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-18T11:18:21.830Z"
-  },
-  {
-    "auth_key": "2026royal",
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 3,
-    "kod": "S124333",
-    "personel": "Selma Doğan",
-    "sube": "Gümbet Şube",
-    "uretim": "15.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-18T11:17:45.153Z"
-  },
-  {
-    "auth_key": "2026royal",
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 3,
-    "kod": "S124333",
-    "personel": "Selma Doğan",
-    "sube": "Gümbet Şube",
-    "uretim": "15.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-18T11:17:21.230Z"
-  },
-  {
-    "auth_key": "2026royal",
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "kod": "S218344",
-    "personel": "Selma Doğan",
-    "sube": "Gümbet Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-18T11:17:05.797Z"
-  },
-  {
-    "auth_key": "2026royal",
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 3,
-    "kod": "S124333",
-    "personel": "Selma Doğan",
-    "sube": "Gümbet Şube",
-    "uretim": "15.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-18T11:16:30.877Z"
-  },
-  {
-    "auth_key": "2026royal",
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "kod": "P805344",
-    "personel": "Selma Doğan",
-    "sube": "Gümbet Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-18T11:15:08.933Z"
-  },
-  {
-    "auth_key": "2026royal",
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "kod": "P490345",
-    "personel": "Selma Doğan",
-    "sube": "Gümbet Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-18T11:14:59.879Z"
-  },
-  {
-    "auth_key": "2026royal",
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "kod": "P315352",
-    "personel": "Selma Doğan",
-    "sube": "Gümbet Şube",
-    "uretim": "17.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-18T11:14:16.814Z"
-  },
-  {
-    "auth_key": "2026royal",
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "kod": "P761356",
-    "personel": "Selma Doğan",
-    "sube": "Gümbet Şube",
-    "uretim": "17.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-18T11:14:06.497Z"
-  },
-  {
-    "auth_key": "2026royal",
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "kod": "P315352",
-    "personel": "Selma Doğan",
-    "sube": "Gümbet Şube",
-    "uretim": "17.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-18T11:13:41.413Z"
-  },
-  {
-    "auth_key": "2026royal",
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "kod": "P498327",
-    "personel": "Dilan culduz",
-    "sube": "Konacık Şube",
-    "uretim": "14.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-18T11:11:12.422Z"
   }
 ]
