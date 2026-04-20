@@ -1,5 +1,16 @@
 [
   {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 4,
+    "ip": "176.55.198.34",
+    "kod": "P805344",
+    "personel": "Hatice",
+    "sube": "Konacık Şube",
+    "uretim": "16.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-20T12:26:01.199Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 0,
     "ip": "176.55.198.34",
