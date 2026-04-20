@@ -8,6 +8,17 @@
     "sube": "Gümbet Şube",
     "uretim": "15.04.2026",
     "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-04-20T10:01:23.558Z"
+  },
+  {
+    "durum": "TERMİN SONU (İADE)",
+    "gun_farki": 5,
+    "ip": "85.98.42.98",
+    "kod": "S124333",
+    "personel": "Ayşegül",
+    "sube": "Gümbet Şube",
+    "uretim": "15.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
     "timestamp": "2026-04-20T10:01:07.960Z"
   },
   {
