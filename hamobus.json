@@ -3,6 +3,17 @@
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 3,
     "ip": "88.248.55.80",
+    "kod": "P761356",
+    "personel": "Aslı Özveren",
+    "sube": "Kumbahçe Şube",
+    "uretim": "17.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-20T17:39:44.819Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 3,
+    "ip": "88.248.55.80",
     "kod": "P315352",
     "personel": "Aslı Özveren",
     "sube": "Kumbahçe Şube",
