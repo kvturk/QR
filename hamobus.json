@@ -1,6 +1,17 @@
 [
   {
     "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 3,
+    "ip": "176.54.253.209",
+    "kod": "S532351",
+    "personel": "Tülay",
+    "sube": "Gümbet Şube",
+    "uretim": "17.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-04-20T17:14:31.639Z"
+  },
+  {
+    "durum": "RİSKLİ (SON GÜN)",
     "gun_farki": 4,
     "ip": "88.248.55.80",
     "kod": "P490345",
@@ -3342,16 +3353,5 @@
     "uretim": "14.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-18T17:40:32.847Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "78.189.186.231",
-    "kod": "P490345",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-18T17:14:17.515Z"
   }
 ]
