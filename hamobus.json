@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 0,
+    "ip": "176.54.253.209",
+    "kod": "P585418",
+    "personel": "Tülay",
+    "sube": "Gümbet Şube",
+    "uretim": "20.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-20T18:49:56.312Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 3,
     "ip": "176.54.253.209",
     "kod": "P315352",
