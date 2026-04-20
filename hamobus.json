@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "176.54.253.209",
+    "kod": "P118378",
+    "personel": "Tülay",
+    "sube": "Gümbet Şube",
+    "uretim": "19.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-20T13:16:30.399Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 0,
     "ip": "176.54.253.209",
     "kod": "P585418",
@@ -3452,27 +3463,5 @@
     "uretim": "16.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-18T13:16:42.632Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "2a00:1880:a20d:458a:4cf4:64ff:fee0:bae0",
-    "kod": "P147363",
-    "personel": "Oktay",
-    "sube": "Gümbet Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-18T13:16:28.855Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "2a00:1880:a20d:458a:4cf4:64ff:fee0:bae0",
-    "kod": "P147363",
-    "personel": "Oktay",
-    "sube": "Gümbet Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-18T13:15:59.153Z"
   }
 ]
