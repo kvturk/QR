@@ -1,5 +1,16 @@
 [
   {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 4,
+    "ip": "88.248.55.80",
+    "kod": "P805344",
+    "personel": "Aslı Özveren",
+    "sube": "Kumbahçe Şube",
+    "uretim": "16.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-20T17:41:07.796Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
     "ip": "88.248.55.80",
@@ -3540,16 +3551,5 @@
     "uretim": "18.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-18T17:42:16.563Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "88.247.207.247",
-    "kod": "P498327",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "14.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-18T17:40:32.847Z"
   }
 ]
