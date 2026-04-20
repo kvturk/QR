@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "78.189.186.231",
+    "kod": "S584373",
+    "personel": "Basak",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "19.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-04-20T11:34:42.668Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
     "ip": "78.189.186.231",
     "kod": "P147363",
@@ -3786,16 +3797,5 @@
     "uretim": "18.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-18T12:19:49.839Z"
-  },
-  {
-    "auth_key": "2026royal",
-    "durum": "TERMİN SONU (İADE)",
-    "gun_farki": 5,
-    "kod": "P367313",
-    "personel": "Kivanc Tesy",
-    "sube": "Konacık Şube",
-    "uretim": "13.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-18T11:31:48.626Z"
   }
 ]
