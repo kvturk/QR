@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "46.154.192.169",
+    "kod": "P585418",
+    "personel": "Tülay",
+    "sube": "Gümbet Şube",
+    "uretim": "20.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-21T18:35:28.312Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 0,
     "ip": "78.189.186.231",
     "kod": "P984421",
@@ -4013,93 +4024,5 @@
     "uretim": "19.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-19T19:20:42.168Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.247.207.247",
-    "kod": "S515365",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-19T18:24:15.948Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.247.207.247",
-    "kod": "S515365",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-19T18:23:55.771Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.247.207.247",
-    "kod": "S515365",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-19T18:23:33.590Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.247.207.247",
-    "kod": "S515365",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-19T18:23:16.380Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.247.207.247",
-    "kod": "S532351",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "17.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-19T18:23:00.233Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.247.207.247",
-    "kod": "S515365",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-19T18:22:46.496Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.247.207.247",
-    "kod": "S532351",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "17.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-19T18:22:31.220Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "88.247.207.247",
-    "kod": "P490345",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-19T18:12:09.355Z"
   }
 ]
