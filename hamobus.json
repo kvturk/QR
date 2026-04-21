@@ -3,6 +3,17 @@
     "durum": "RİSKLİ (SON GÜN)",
     "gun_farki": 4,
     "ip": "85.98.42.98",
+    "kod": "P761356",
+    "personel": "Ayşegül",
+    "sube": "Gümbet Şube",
+    "uretim": "17.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-21T06:11:38.531Z"
+  },
+  {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 4,
+    "ip": "85.98.42.98",
     "kod": "P315352",
     "personel": "Ayşegül",
     "sube": "Gümbet Şube",
