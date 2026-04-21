@@ -1,5 +1,16 @@
 [
   {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 4,
+    "ip": "46.154.192.169",
+    "kod": "P761356",
+    "personel": "Tülay",
+    "sube": "Gümbet Şube",
+    "uretim": "17.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-21T19:12:17.481Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 0,
     "ip": "46.154.192.169",
