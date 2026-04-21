@@ -8,6 +8,17 @@
     "sube": "Gümbet Şube",
     "uretim": "20.04.2026",
     "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-04-21T08:01:33.910Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "5.24.165.211",
+    "kod": "S508411",
+    "personel": "Şevval",
+    "sube": "Gümbet Şube",
+    "uretim": "20.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
     "timestamp": "2026-04-21T08:01:21.891Z"
   },
   {
@@ -3969,16 +3980,5 @@
     "uretim": "18.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-19T08:02:34.871Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "85.98.42.98",
-    "kod": "P147363",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-19T08:01:30.613Z"
   }
 ]
