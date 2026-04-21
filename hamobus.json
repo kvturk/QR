@@ -3,6 +3,17 @@
     "durum": "RİSKLİ (SON GÜN)",
     "gun_farki": 4,
     "ip": "176.55.198.34",
+    "kod": "P315352",
+    "personel": "Hatice",
+    "sube": "Konacık Şube",
+    "uretim": "17.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-21T04:20:21.273Z"
+  },
+  {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 4,
+    "ip": "176.55.198.34",
     "kod": "P761356",
     "personel": "Hatice",
     "sube": "Konacık Şube",
