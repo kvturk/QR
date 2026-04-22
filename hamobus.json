@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "5.24.165.211",
+    "kod": "S896427",
+    "personel": "Şevval",
+    "sube": "Gümbet Şube",
+    "uretim": "21.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-04-22T12:36:17.623Z"
+  },
+  {
     "durum": "TERMİN SONU (İADE)",
     "gun_farki": 6,
     "ip": "88.247.207.247",
@@ -4145,93 +4156,5 @@
     "uretim": "20.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-20T13:08:04.044Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "176.55.198.34",
-    "kod": "P761356",
-    "personel": "Hatice",
-    "sube": "Konacık Şube",
-    "uretim": "17.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T12:27:55.378Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "176.55.198.34",
-    "kod": "P490345",
-    "personel": "Hatice",
-    "sube": "Konacık Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T12:26:55.191Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "176.55.198.34",
-    "kod": "P315352",
-    "personel": "Hatice",
-    "sube": "Konacık Şube",
-    "uretim": "17.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T12:26:31.904Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "176.55.198.34",
-    "kod": "P805344",
-    "personel": "Hatice",
-    "sube": "Konacık Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T12:26:01.199Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "176.55.198.34",
-    "kod": "P585418",
-    "personel": "Hatice",
-    "sube": "Konacık Şube",
-    "uretim": "20.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T12:25:46.430Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "176.55.198.34",
-    "kod": "P147363",
-    "personel": "Hatice",
-    "sube": "Konacık Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T12:25:27.918Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "176.55.198.34",
-    "kod": "S515365",
-    "personel": "Hatice",
-    "sube": "Konacık Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T12:23:03.149Z"
-  },
-  {
-    "durum": "TERMİN SONU (İADE)",
-    "gun_farki": 4,
-    "ip": "176.55.198.34",
-    "kod": "S218344",
-    "personel": "Hatice",
-    "sube": "Konacık Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T12:22:31.387Z"
   }
 ]
