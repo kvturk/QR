@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "88.247.207.247",
+    "kod": "P585418",
+    "personel": "Dilan culduz",
+    "sube": "Konacık Şube",
+    "uretim": "20.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-22T11:12:39.822Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "78.189.186.231",
     "kod": "S896427",
@@ -4343,16 +4354,5 @@
     "uretim": "18.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-20T11:28:08.745Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "85.98.42.98",
-    "kod": "P805344",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T10:54:57.220Z"
   }
 ]
