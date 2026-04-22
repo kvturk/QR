@@ -1,5 +1,16 @@
 [
   {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 3,
+    "ip": "85.98.42.98",
+    "kod": "S584373",
+    "personel": "Naz",
+    "sube": "Gümbet Şube",
+    "uretim": "19.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-04-22T17:20:37.228Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "85.98.42.98",
@@ -3650,148 +3661,5 @@
     "uretim": "18.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-20T17:20:57.419Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 3,
-    "ip": "176.54.253.209",
-    "kod": "S532351",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "17.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T17:18:47.766Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "176.54.253.209",
-    "kod": "P147363",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T17:18:39.343Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "176.54.253.209",
-    "kod": "P147363",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T17:18:25.950Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "176.54.253.209",
-    "kod": "P147363",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T17:18:10.976Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "176.54.253.209",
-    "kod": "P147363",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T17:17:59.026Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "176.54.253.209",
-    "kod": "P118378",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T17:16:53.808Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "176.54.253.209",
-    "kod": "S515365",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T17:16:36.326Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "176.54.253.209",
-    "kod": "S515365",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T17:16:19.360Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "176.54.253.209",
-    "kod": "S584373",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T17:15:52.863Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "176.54.253.209",
-    "kod": "S584373",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T17:15:36.361Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "176.54.253.209",
-    "kod": "S584373",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T17:15:18.679Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 3,
-    "ip": "176.54.253.209",
-    "kod": "S532351",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "17.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T17:14:31.639Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "88.248.55.80",
-    "kod": "P490345",
-    "personel": "Aslı Özveren",
-    "sube": "Kumbahçe Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T17:09:17.362Z"
   }
 ]
