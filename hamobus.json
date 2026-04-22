@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "37.155.28.10",
+    "kod": "P984421",
+    "personel": "Ceylan",
+    "sube": "Gümbet Şube",
+    "uretim": "21.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-22T08:46:15.391Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 3,
     "ip": "37.155.28.10",
     "kod": "P118378",
