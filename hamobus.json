@@ -8,6 +8,17 @@
     "sube": "Gümbet Şube",
     "uretim": "17.04.2026",
     "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-04-22T09:26:56.656Z"
+  },
+  {
+    "durum": "TERMİN SONU (İADE)",
+    "gun_farki": 5,
+    "ip": "85.98.42.98",
+    "kod": "S532351",
+    "personel": "Ayşegül",
+    "sube": "Gümbet Şube",
+    "uretim": "17.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
     "timestamp": "2026-04-22T09:12:17.688Z"
   },
   {
@@ -4761,60 +4772,5 @@
     "uretim": "18.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-20T09:35:36.026Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.247.207.247",
-    "kod": "P147363",
-    "personel": "Dilan culduz",
-    "sube": "Konacık Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T09:26:27.594Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "88.247.207.247",
-    "kod": "P490345",
-    "personel": "Dilan culduz",
-    "sube": "Konacık Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T09:25:42.261Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.247.207.247",
-    "kod": "P147363",
-    "personel": "Dilan culduz",
-    "sube": "Konacık Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T09:25:24.737Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "88.247.207.247",
-    "kod": "P805344",
-    "personel": "Dilan culduz",
-    "sube": "Konacık Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T09:24:48.389Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "88.247.207.247",
-    "kod": "P761356",
-    "personel": "Dilan culduz",
-    "sube": "Konacık Şube",
-    "uretim": "17.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T09:24:25.979Z"
   }
 ]
