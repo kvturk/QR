@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "31.142.21.93",
+    "kod": "P984421",
+    "personel": "Kkk",
+    "sube": "Gümbet Şube",
+    "uretim": "21.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-22T14:50:29.189Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 0,
     "ip": "78.189.186.231",
     "kod": "S957434",
@@ -3980,27 +3991,5 @@
     "uretim": "17.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-20T15:06:56.563Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "78.189.186.231",
-    "kod": "P118378",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T14:49:08.111Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "78.189.186.231",
-    "kod": "P118378",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T14:48:59.877Z"
   }
 ]
