@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 3,
+    "ip": "37.155.28.10",
+    "kod": "P118378",
+    "personel": "Ceylan",
+    "sube": "Gümbet Şube",
+    "uretim": "19.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-22T08:44:59.213Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "88.248.55.80",
     "kod": "P984421",
@@ -4706,93 +4717,5 @@
     "uretim": "17.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-20T09:24:25.979Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.248.55.80",
-    "kod": "P118378",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T08:38:29.568Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.248.55.80",
-    "kod": "P147363",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T08:37:36.044Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "88.248.55.80",
-    "kod": "P805344",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T08:36:33.125Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "88.248.55.80",
-    "kod": "P490345",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T08:33:50.476Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.248.55.80",
-    "kod": "P118378",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T08:33:17.723Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.248.55.80",
-    "kod": "P118378",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T08:33:07.839Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.248.55.80",
-    "kod": "P147363",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T08:31:53.504Z"
-  },
-  {
-    "durum": "TERMİN SONU (İADE)",
-    "gun_farki": 5,
-    "ip": "88.248.55.80",
-    "kod": "P530334",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "15.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T08:31:20.200Z"
   }
 ]
