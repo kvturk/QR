@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 0,
+    "ip": "78.189.186.231",
+    "kod": "S231433",
+    "personel": "Basak",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "22.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-04-22T14:43:21.611Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "5.24.165.211",
     "kod": "S896427",
@@ -3947,214 +3958,5 @@
     "uretim": "19.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-20T14:48:59.877Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "2a00:1880:a2ca:b643:18a7:f9d7:5b96:2b9b",
-    "kod": "S584373",
-    "personel": "Merve",
-    "sube": "Gümbet Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T13:45:01.101Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "2a00:1880:a2ca:b643:18a7:f9d7:5b96:2b9b",
-    "kod": "S515365",
-    "personel": "Merve",
-    "sube": "Gümbet Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T13:44:40.446Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "176.54.253.209",
-    "kod": "S515365",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T13:28:51.700Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "176.54.253.209",
-    "kod": "S584373",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T13:28:29.923Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "176.54.253.209",
-    "kod": "S515365",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T13:28:09.926Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "176.54.253.209",
-    "kod": "S584373",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T13:19:43.539Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 3,
-    "ip": "176.54.253.209",
-    "kod": "S532351",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "17.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T13:19:24.268Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "176.54.253.209",
-    "kod": "S515365",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T13:19:05.418Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "176.54.253.209",
-    "kod": "S584373",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T13:18:39.823Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "176.54.253.209",
-    "kod": "S515365",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T13:18:19.247Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "176.54.253.209",
-    "kod": "S508411",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "20.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T13:17:57.179Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "176.54.253.209",
-    "kod": "S508411",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "20.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T13:17:38.567Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "176.54.253.209",
-    "kod": "P147363",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T13:17:06.991Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "176.54.253.209",
-    "kod": "P585418",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "20.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T13:16:51.598Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "176.54.253.209",
-    "kod": "P118378",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T13:16:30.399Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "176.54.253.209",
-    "kod": "P585418",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "20.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T13:15:50.271Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "176.54.253.209",
-    "kod": "P490345",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "16.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T13:15:18.180Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "176.54.253.209",
-    "kod": "P118378",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T13:08:27.828Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "176.54.253.209",
-    "kod": "P585418",
-    "personel": "Tülay",
-    "sube": "Gümbet Şube",
-    "uretim": "20.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T13:08:04.044Z"
   }
 ]
