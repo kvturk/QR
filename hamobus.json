@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "88.247.207.247",
+    "kod": "S508411",
+    "personel": "Dilan culduz",
+    "sube": "Konacık Şube",
+    "uretim": "20.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-04-22T11:45:43.008Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "88.247.207.247",
     "kod": "P984421",
@@ -4200,181 +4211,5 @@
     "uretim": "16.04.2026",
     "urun_turu": "SÜTLÜ TATLI",
     "timestamp": "2026-04-20T12:22:31.387Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "78.189.186.231",
-    "kod": "S584373",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T11:38:15.806Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "78.189.186.231",
-    "kod": "S515365",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T11:37:53.550Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 3,
-    "ip": "78.189.186.231",
-    "kod": "S532351",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "17.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T11:35:29.159Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "78.189.186.231",
-    "kod": "S584373",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T11:35:13.392Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "78.189.186.231",
-    "kod": "S584373",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T11:34:55.377Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "78.189.186.231",
-    "kod": "S584373",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-20T11:34:42.668Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "78.189.186.231",
-    "kod": "P147363",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T11:30:18.199Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "78.189.186.231",
-    "kod": "P147363",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T11:30:09.926Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "78.189.186.231",
-    "kod": "P147363",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T11:30:02.011Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "78.189.186.231",
-    "kod": "P147363",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T11:29:51.867Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "78.189.186.231",
-    "kod": "P118378",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T11:29:36.154Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "78.189.186.231",
-    "kod": "P118378",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T11:29:23.986Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "78.189.186.231",
-    "kod": "P118378",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T11:28:58.423Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "78.189.186.231",
-    "kod": "P118378",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T11:28:48.068Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "78.189.186.231",
-    "kod": "P118378",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T11:28:30.795Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "78.189.186.231",
-    "kod": "P147363",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "18.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-20T11:28:08.745Z"
   }
 ]
