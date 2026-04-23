@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "85.98.42.98",
+    "kod": "P984421",
+    "personel": "Ayşegül",
+    "sube": "Gümbet Şube",
+    "uretim": "21.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-23T06:26:01.511Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "85.98.42.98",
     "kod": "S245430",
@@ -3705,16 +3716,5 @@
     "uretim": "20.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-21T06:48:01.396Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "78.189.186.231",
-    "kod": "S584373",
-    "personel": "Özlem",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "19.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-21T06:25:46.291Z"
   }
 ]
