@@ -3,6 +3,17 @@
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "85.98.42.98",
+    "kod": "P771438",
+    "personel": "Ayşegül",
+    "sube": "Gümbet Şube",
+    "uretim": "22.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-23T06:24:18.791Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "85.98.42.98",
     "kod": "P749432",
     "personel": "Ayşegül",
     "sube": "Gümbet Şube",
