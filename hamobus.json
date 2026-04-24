@@ -2,6 +2,17 @@
   {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
+    "ip": "88.248.55.80",
+    "kod": "S462441",
+    "personel": "Demet",
+    "sube": "Kumbahçe Şube",
+    "uretim": "23.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-04-24T06:33:52.330Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
     "ip": "78.189.186.231",
     "kod": "P872440",
     "personel": "Özlem",
