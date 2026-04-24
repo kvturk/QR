@@ -1,5 +1,16 @@
 [
   {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 4,
+    "ip": "88.248.55.80",
+    "kod": "P585418",
+    "personel": "Damla",
+    "sube": "Kumbahçe Şube",
+    "uretim": "20.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-24T18:16:10.042Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "88.248.55.80",
