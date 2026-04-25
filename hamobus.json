@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "85.98.42.98",
+    "kod": "P139442",
+    "personel": "Ayşegül",
+    "sube": "Gümbet Şube",
+    "uretim": "23.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-25T04:58:33.081Z"
+  },
+  {
     "durum": "TERMİN SONU (İADE)",
     "gun_farki": 6,
     "ip": "85.98.42.98",
