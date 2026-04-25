@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "85.98.42.98",
+    "kod": "S322450",
+    "personel": "Ayşegül",
+    "sube": "Gümbet Şube",
+    "uretim": "24.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-04-25T04:51:12.045Z"
+  },
+  {
     "durum": "TERMİN SONU (İADE)",
     "gun_farki": 4,
     "ip": "85.98.42.98",
