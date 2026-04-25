@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 0,
+    "ip": "85.98.42.98",
+    "kod": "P486466",
+    "personel": "Naz",
+    "sube": "Gümbet Şube",
+    "uretim": "25.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-25T18:47:01.968Z"
+  },
+  {
     "durum": "RİSKLİ (SON GÜN)",
     "gun_farki": 4,
     "ip": "85.98.42.98",
