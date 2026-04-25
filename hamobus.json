@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 3,
+    "ip": "85.98.42.98",
+    "kod": "P455438",
+    "personel": "Selma Doğan",
+    "sube": "Gümbet Şube",
+    "uretim": "22.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-25T11:03:35.141Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
     "ip": "88.248.55.80",
     "kod": "P872440",
