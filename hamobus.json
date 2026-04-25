@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "85.98.42.98",
+    "kod": "P247450",
+    "personel": "Naz",
+    "sube": "Gümbet Şube",
+    "uretim": "24.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-25T13:00:10.966Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
     "ip": "88.247.207.247",
     "kod": "S462441",
@@ -2748,27 +2759,5 @@
     "uretim": "23.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-23T13:01:54.061Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "2a00:1880:a2c9:ba88:18a8:e55e:6084:1d0a",
-    "kod": "P872440",
-    "personel": "Merve",
-    "sube": "Gümbet Şube",
-    "uretim": "23.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-23T12:53:27.752Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "85.98.42.98",
-    "kod": "P984421",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "21.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-23T12:33:40.631Z"
   }
 ]
