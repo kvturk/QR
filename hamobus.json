@@ -2,6 +2,17 @@
   {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
+    "ip": "85.98.42.98",
+    "kod": "S462441",
+    "personel": "Naz",
+    "sube": "Gümbet Şube",
+    "uretim": "23.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-04-25T18:23:53.741Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
     "ip": "88.247.207.247",
     "kod": "P139442",
     "personel": "Aslı Özveren",
@@ -2902,71 +2913,5 @@
     "uretim": "21.04.2026",
     "urun_turu": "SÜTLÜ TATLI",
     "timestamp": "2026-04-23T18:24:14.370Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "178.240.139.19",
-    "kod": "S638432",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "22.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-23T18:23:46.572Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 3,
-    "ip": "178.240.139.19",
-    "kod": "S508411",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "20.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-23T18:12:51.361Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "178.240.139.19",
-    "kod": "P984421",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "21.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-23T18:12:37.391Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "178.240.139.19",
-    "kod": "P984421",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "21.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-23T18:12:03.949Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "178.240.139.19",
-    "kod": "P585418",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "20.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-23T18:11:11.683Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "178.240.139.19",
-    "kod": "P984421",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "21.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-23T18:10:49.099Z"
   }
 ]
