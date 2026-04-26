@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "31.143.69.222",
+    "kod": "P486466",
+    "personel": "Demet",
+    "sube": "Kumbahçe Şube",
+    "uretim": "25.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-26T18:17:42.741Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 0,
     "ip": "31.143.69.222",
     "kod": "S561477",
@@ -2825,82 +2836,5 @@
     "uretim": "24.04.2026",
     "urun_turu": "SÜTLÜ TATLI",
     "timestamp": "2026-04-24T18:17:51.161Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.248.55.80",
-    "kod": "P139442",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "23.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-24T18:16:55.506Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "88.248.55.80",
-    "kod": "P984421",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "21.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-24T18:16:41.292Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "88.248.55.80",
-    "kod": "P585418",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "20.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-24T18:16:10.042Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.248.55.80",
-    "kod": "P139442",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "23.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-24T18:15:44.201Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.248.55.80",
-    "kod": "S462441",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "23.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-24T18:15:34.513Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.248.55.80",
-    "kod": "S462441",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "23.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-24T18:15:07.385Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.248.55.80",
-    "kod": "S462441",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "23.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-24T18:14:57.227Z"
   }
 ]
