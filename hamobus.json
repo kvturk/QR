@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 3,
+    "ip": "31.143.69.222",
+    "kod": "P139442",
+    "personel": "Demet",
+    "sube": "Kumbahçe Şube",
+    "uretim": "23.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-26T18:18:29.314Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "31.143.69.222",
     "kod": "P486466",
@@ -2814,16 +2825,5 @@
     "uretim": "20.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-24T18:22:58.041Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "88.248.55.80",
-    "kod": "P984421",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "21.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-24T18:18:21.754Z"
   }
 ]
