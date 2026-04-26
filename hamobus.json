@@ -8,6 +8,17 @@
     "sube": "Kumbahçe Şube",
     "uretim": "25.04.2026",
     "urun_turu": "PASTA",
+    "timestamp": "2026-04-26T18:18:16.436Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "31.143.69.222",
+    "kod": "P486466",
+    "personel": "Demet",
+    "sube": "Kumbahçe Şube",
+    "uretim": "25.04.2026",
+    "urun_turu": "PASTA",
     "timestamp": "2026-04-26T18:17:42.741Z"
   },
   {
@@ -2814,27 +2825,5 @@
     "uretim": "21.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-24T18:18:21.754Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.248.55.80",
-    "kod": "P139442",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "23.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-24T18:17:59.180Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "2a00:1880:a207:2a5e:3484:1e7d:133e:ec43",
-    "kod": "S322450",
-    "personel": "RR",
-    "sube": "Gümbet Şube",
-    "uretim": "24.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-24T18:17:51.161Z"
   }
 ]
