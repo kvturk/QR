@@ -2,6 +2,17 @@
   {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 3,
+    "ip": "88.247.207.247",
+    "kod": "P139442",
+    "personel": "Aslı Özveren",
+    "sube": "Konacık Şube",
+    "uretim": "23.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-26T05:20:22.554Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 3,
     "ip": "88.248.55.80",
     "kod": "P872440",
     "personel": "Demet",
