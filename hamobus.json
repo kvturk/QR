@@ -4,6 +4,17 @@
     "gun_farki": 4,
     "ip": "85.98.42.98",
     "kod": "P139442",
+    "personel": "Ayşegül",
+    "sube": "Gümbet Şube",
+    "uretim": "23.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-27T11:59:30.300Z"
+  },
+  {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 4,
+    "ip": "85.98.42.98",
+    "kod": "P139442",
     "personel": "Aliş",
     "sube": "Gümbet Şube",
     "uretim": "23.04.2026",
