@@ -8,6 +8,17 @@
     "sube": "Gümbet 2 Şube",
     "uretim": "27.04.2026",
     "urun_turu": "PASTA",
+    "timestamp": "2026-04-27T13:01:08.219Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 0,
+    "ip": "176.89.8.20",
+    "kod": "P501513",
+    "personel": "Basak",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "27.04.2026",
+    "urun_turu": "PASTA",
     "timestamp": "2026-04-27T13:00:54.887Z"
   },
   {
@@ -2814,16 +2825,5 @@
     "uretim": "24.04.2026",
     "urun_turu": "SÜTLÜ TATLI",
     "timestamp": "2026-04-25T13:07:44.738Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "85.98.42.98",
-    "kod": "P486466",
-    "personel": "Naz",
-    "sube": "Gümbet Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-25T13:01:04.635Z"
   }
 ]
