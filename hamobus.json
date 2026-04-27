@@ -1,5 +1,16 @@
 [
   {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 4,
+    "ip": "88.248.55.80",
+    "kod": "P139442",
+    "personel": "Demet",
+    "sube": "Kumbahçe Şube",
+    "uretim": "23.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-27T05:47:12.922Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
     "ip": "88.248.55.80",
