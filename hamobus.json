@@ -1,6 +1,17 @@
 [
   {
     "durum": "TERMİN SONU (İADE)",
+    "gun_farki": 6,
+    "ip": "37.155.19.120",
+    "kod": "S896427",
+    "personel": "Aslı Özveren",
+    "sube": "Konacık Şube",
+    "uretim": "21.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-04-27T04:26:42.605Z"
+  },
+  {
+    "durum": "TERMİN SONU (İADE)",
     "gun_farki": 4,
     "ip": "37.155.19.120",
     "kod": "S462441",
