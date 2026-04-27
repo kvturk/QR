@@ -3,6 +3,17 @@
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
     "ip": "88.230.54.224",
+    "kod": "S472467",
+    "personel": "Selma Doğan",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "25.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-04-27T08:53:17.197Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "88.230.54.224",
     "kod": "P486466",
     "personel": "Selma Doğan",
     "sube": "Gümbet 2 Şube",
