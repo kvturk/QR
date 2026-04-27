@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "88.248.55.80",
+    "kod": "P486466",
+    "personel": "Demet",
+    "sube": "Kumbahçe Şube",
+    "uretim": "25.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-27T05:46:57.698Z"
+  },
+  {
     "durum": "TERMİN SONU (İADE)",
     "gun_farki": 4,
     "ip": "88.248.55.80",
