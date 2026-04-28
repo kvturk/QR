@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 3,
+    "ip": "85.98.42.98",
+    "kod": "P486466",
+    "personel": "Ayşegül",
+    "sube": "Gümbet Şube",
+    "uretim": "25.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-28T05:59:42.873Z"
+  },
+  {
     "durum": "TERMİN SONU (İADE)",
     "gun_farki": 5,
     "ip": "85.98.42.98",
@@ -3276,203 +3287,5 @@
     "uretim": "26.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-26T06:17:31.559Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "88.247.207.247",
-    "kod": "P139442",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "23.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-26T05:24:21.438Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.247.207.247",
-    "kod": "P247450",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "24.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-26T05:24:11.851Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.247.207.247",
-    "kod": "P247450",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "24.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-26T05:24:02.780Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "88.247.207.247",
-    "kod": "P139442",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "23.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-26T05:23:51.108Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.247.207.247",
-    "kod": "P486466",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-26T05:23:39.810Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 3,
-    "ip": "88.247.207.247",
-    "kod": "S462441",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "23.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-26T05:23:07.072Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.247.207.247",
-    "kod": "P486466",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-26T05:22:58.176Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.247.207.247",
-    "kod": "P247450",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "24.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-26T05:22:43.649Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.247.207.247",
-    "kod": "P486466",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-26T05:21:31.565Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.247.207.247",
-    "kod": "P486466",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-26T05:21:21.312Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.247.207.247",
-    "kod": "P486466",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-26T05:21:10.404Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.247.207.247",
-    "kod": "P486466",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-26T05:21:01.566Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "88.247.207.247",
-    "kod": "P139442",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "23.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-26T05:20:22.554Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "88.248.55.80",
-    "kod": "P872440",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "23.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-26T04:59:54.517Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.248.55.80",
-    "kod": "P486466",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-26T04:59:06.012Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.248.55.80",
-    "kod": "S322450",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "24.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-26T04:58:49.534Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.248.55.80",
-    "kod": "S472467",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-26T04:58:36.785Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 3,
-    "ip": "88.248.55.80",
-    "kod": "S462441",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "23.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-26T04:58:24.094Z"
   }
 ]
