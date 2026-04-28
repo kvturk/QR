@@ -3,6 +3,17 @@
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "176.89.8.20",
+    "kod": "S108512",
+    "personel": "Özlem",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "27.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-04-28T08:09:19.156Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "176.89.8.20",
     "kod": "P501513",
     "personel": "Özlem",
     "sube": "Gümbet 2 Şube",
