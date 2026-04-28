@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 0,
+    "ip": "2a00:1880:a2c5:abc:18aa:6ed4:c0ac:97d7",
+    "kod": "P510528",
+    "personel": "Merve",
+    "sube": "Gümbet Şube",
+    "uretim": "28.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-28T14:19:42.975Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
     "ip": "88.247.207.247",
     "kod": "P145478",
