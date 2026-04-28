@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "37.155.14.156",
+    "kod": "P501513",
+    "personel": "Ceylan",
+    "sube": "Gümbet Şube",
+    "uretim": "27.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-28T11:11:26.610Z"
+  },
+  {
     "durum": "RİSKLİ (SON GÜN)",
     "gun_farki": 4,
     "ip": "37.155.14.156",
