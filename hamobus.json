@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "31.143.69.222",
+    "kod": "P145478",
+    "personel": "Aliş",
+    "sube": "Kumbahçe Şube",
+    "uretim": "26.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-28T18:21:56.719Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "31.143.69.222",
     "kod": "P501513",
