@@ -2,6 +2,17 @@
   {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
+    "ip": "88.248.55.80",
+    "kod": "P266526",
+    "personel": "Damla",
+    "sube": "Kumbahçe Şube",
+    "uretim": "28.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-29T17:37:46.901Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
     "ip": "85.98.42.98",
     "kod": "P266526",
     "personel": "Ayşegül",
@@ -2803,192 +2814,5 @@
     "uretim": "25.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-27T19:07:49.200Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 3,
-    "ip": "88.248.55.80",
-    "kod": "S322450",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "24.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-27T17:01:27.284Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.248.55.80",
-    "kod": "S472467",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-27T17:01:11.342Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.248.55.80",
-    "kod": "P486466",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-27T17:00:04.443Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "88.248.55.80",
-    "kod": "P139442",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "23.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-27T16:59:39.594Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.248.55.80",
-    "kod": "P486466",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-27T16:59:25.883Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.248.55.80",
-    "kod": "S472467",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-27T16:59:00.244Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 3,
-    "ip": "88.248.55.80",
-    "kod": "S322450",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "24.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-27T16:58:44.219Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.248.55.80",
-    "kod": "S561477",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "26.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-27T16:58:34.369Z"
-  },
-  {
-    "durum": "TERMİN SONU (İADE)",
-    "gun_farki": 4,
-    "ip": "88.248.55.80",
-    "kod": "S462441",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "23.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-27T16:58:01.917Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.248.55.80",
-    "kod": "S561477",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "26.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-27T16:57:51.406Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.248.55.80",
-    "kod": "P486466",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-27T16:57:30.971Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "88.248.55.80",
-    "kod": "P247450",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "24.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-27T16:57:19.453Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.248.55.80",
-    "kod": "P486466",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-27T16:57:03.307Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "88.248.55.80",
-    "kod": "P139442",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "23.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-27T16:56:53.907Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.248.55.80",
-    "kod": "P145478",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "26.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-27T16:56:31.443Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "88.248.55.80",
-    "kod": "P501513",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "27.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-27T16:56:20.723Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "88.248.55.80",
-    "kod": "P872440",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "23.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-27T16:56:10.342Z"
   }
 ]
