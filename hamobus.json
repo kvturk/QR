@@ -3,6 +3,17 @@
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
     "ip": "88.247.207.247",
+    "kod": "P501513",
+    "personel": "Helin dağgezen",
+    "sube": "Konacık Şube",
+    "uretim": "27.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-29T14:27:38.963Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "88.247.207.247",
     "kod": "S108512",
     "personel": "Helin dağgezen",
     "sube": "Konacık Şube",
@@ -2693,27 +2704,5 @@
     "uretim": "26.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-27T15:11:03.506Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.247.207.247",
-    "kod": "P145478",
-    "personel": "Helin dağgezen",
-    "sube": "Konacık Şube",
-    "uretim": "26.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-27T14:26:20.805Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.247.207.247",
-    "kod": "P145478",
-    "personel": "Helin dağgezen",
-    "sube": "Konacık Şube",
-    "uretim": "26.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-27T14:26:01.590Z"
   }
 ]
