@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 0,
+    "ip": "88.248.55.80",
+    "kod": "S829533",
+    "personel": "Damla",
+    "sube": "Kumbahçe Şube",
+    "uretim": "29.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-04-29T17:42:04.570Z"
+  },
+  {
     "durum": "RİSKLİ (SON GÜN)",
     "gun_farki": 3,
     "ip": "88.248.55.80",
