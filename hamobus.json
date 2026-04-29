@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "176.89.8.20",
+    "kod": "S108512",
+    "personel": "Basak",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "27.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-04-29T11:21:15.506Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "31.142.13.26",
     "kod": "P266526",
@@ -3386,49 +3397,5 @@
     "uretim": "23.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-27T11:34:36.474Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "88.247.207.247",
-    "kod": "P247450",
-    "personel": "Hatice",
-    "sube": "Konacık Şube",
-    "uretim": "24.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-27T11:10:46.014Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.247.207.247",
-    "kod": "P145478",
-    "personel": "Hatice",
-    "sube": "Konacık Şube",
-    "uretim": "26.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-27T11:10:27.930Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.247.207.247",
-    "kod": "P486466",
-    "personel": "Hatice",
-    "sube": "Konacık Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-27T11:10:11.133Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "88.247.207.247",
-    "kod": "P872440",
-    "personel": "Hatice",
-    "sube": "Konacık Şube",
-    "uretim": "23.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-27T11:09:51.535Z"
   }
 ]
