@@ -4,6 +4,17 @@
     "gun_farki": 3,
     "ip": "88.247.207.247",
     "kod": "P145478",
+    "personel": "Hatice",
+    "sube": "Konacık Şube",
+    "uretim": "26.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-29T07:36:17.511Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 3,
+    "ip": "88.247.207.247",
+    "kod": "P145478",
     "personel": "Dilan culduz",
     "sube": "Konacık Şube",
     "uretim": "26.04.2026",
