@@ -1,5 +1,16 @@
 [
   {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 4,
+    "ip": "31.142.119.165",
+    "kod": "P486466",
+    "personel": "Emirhan",
+    "sube": "Kumbahçe Şube",
+    "uretim": "25.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-29T07:26:33.638Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "31.142.119.165",
