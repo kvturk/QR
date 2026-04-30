@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "85.98.42.98",
+    "kod": "P266526",
+    "personel": "Ayşegül",
+    "sube": "Gümbet Şube",
+    "uretim": "28.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-30T09:03:02.378Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "85.98.42.98",
     "kod": "P712538",
@@ -2748,181 +2759,5 @@
     "uretim": "25.04.2026",
     "urun_turu": "SÜTLÜ TATLI",
     "timestamp": "2026-04-28T09:50:30.669Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "178.240.147.23",
-    "kod": "P247450",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "24.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-28T08:52:08.390Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "88.248.55.80",
-    "kod": "P486466",
-    "personel": "Münevver",
-    "sube": "Kumbahçe Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-28T08:39:23.273Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "88.248.55.80",
-    "kod": "P486466",
-    "personel": "Münevver",
-    "sube": "Kumbahçe Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-28T08:38:23.690Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "88.248.55.80",
-    "kod": "P486466",
-    "personel": "Münevver",
-    "sube": "Kumbahçe Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-28T08:37:50.314Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "88.248.55.80",
-    "kod": "P486466",
-    "personel": "Münevver",
-    "sube": "Kumbahçe Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-28T08:36:00.966Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "88.248.55.80",
-    "kod": "P486466",
-    "personel": "Münevver",
-    "sube": "Kumbahçe Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-28T08:34:54.551Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "176.89.8.20",
-    "kod": "S108512",
-    "personel": "Özlem",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "27.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-28T08:09:46.341Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "176.89.8.20",
-    "kod": "S108512",
-    "personel": "Özlem",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "27.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-28T08:09:19.156Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "176.89.8.20",
-    "kod": "P501513",
-    "personel": "Özlem",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "27.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-28T08:09:05.012Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "176.89.8.20",
-    "kod": "P501513",
-    "personel": "Özlem",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "27.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-28T08:08:52.615Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "176.89.8.20",
-    "kod": "P486466",
-    "personel": "Özlem",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-28T08:08:40.509Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "176.89.8.20",
-    "kod": "P501513",
-    "personel": "Özlem",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "27.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-28T08:08:28.302Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "176.89.8.20",
-    "kod": "P501513",
-    "personel": "Özlem",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "27.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-28T08:08:17.501Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "176.89.8.20",
-    "kod": "P486466",
-    "personel": "Özlem",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-28T08:08:03.719Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "176.89.8.20",
-    "kod": "P501513",
-    "personel": "Özlem",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "27.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-28T08:07:45.734Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "176.89.8.20",
-    "kod": "P501513",
-    "personel": "Özlem",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "27.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-28T08:07:31.035Z"
   }
 ]
