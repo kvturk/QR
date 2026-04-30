@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "88.248.55.80",
+    "kod": "P266526",
+    "personel": "Demet",
+    "sube": "Kumbahçe Şube",
+    "uretim": "28.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-04-30T06:36:09.540Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 3,
     "ip": "176.89.8.20",
     "kod": "P501513",
