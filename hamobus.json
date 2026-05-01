@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 0,
+    "ip": "176.89.8.20",
+    "kod": "P974155",
+    "personel": "Basak",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "01.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-01T14:41:37.621Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 3,
     "ip": "176.89.8.20",
     "kod": "P266526",
