@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "85.98.42.98",
+    "kod": "P420544",
+    "personel": "Ayşegül",
+    "sube": "Gümbet Şube",
+    "uretim": "30.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-01T19:46:33.550Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
     "ip": "31.143.69.222",
     "kod": "S710538",
@@ -3221,71 +3232,5 @@
     "uretim": "24.04.2026",
     "urun_turu": "SÜTLÜ TATLI",
     "timestamp": "2026-04-30T04:14:14.064Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "85.98.42.98",
-    "kod": "P501513",
-    "personel": "Naz",
-    "sube": "Gümbet Şube",
-    "uretim": "27.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-29T19:27:47.912Z"
-  },
-  {
-    "durum": "TERMİN SONU (İADE)",
-    "gun_farki": 5,
-    "ip": "85.98.42.98",
-    "kod": "P247450",
-    "personel": "Naz",
-    "sube": "Gümbet Şube",
-    "uretim": "24.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-29T19:18:55.303Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.248.55.80",
-    "kod": "P266526",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "28.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-29T18:55:09.438Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.248.55.80",
-    "kod": "P266526",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "28.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-29T18:54:53.180Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.248.55.80",
-    "kod": "P266526",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "28.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-29T18:54:35.452Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.248.55.80",
-    "kod": "P266526",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "28.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-29T18:54:24.983Z"
   }
 ]
