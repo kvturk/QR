@@ -1,5 +1,16 @@
 [
   {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 3,
+    "ip": "88.248.55.80",
+    "kod": "S466524",
+    "personel": "Demet",
+    "sube": "Kumbahçe Şube",
+    "uretim": "28.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-01T05:49:13.098Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "88.247.207.247",
@@ -2957,159 +2968,5 @@
     "uretim": "26.04.2026",
     "urun_turu": "SÜTLÜ TATLI",
     "timestamp": "2026-04-29T07:02:01.973Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "85.98.42.98",
-    "kod": "P486466",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-29T05:12:39.368Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "85.98.42.98",
-    "kod": "P486466",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-29T05:12:15.393Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "85.98.42.98",
-    "kod": "P486466",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-29T05:11:58.630Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "85.98.42.98",
-    "kod": "P501513",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "27.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-29T05:11:43.917Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "85.98.42.98",
-    "kod": "P266526",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "28.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-29T05:11:34.535Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "85.98.42.98",
-    "kod": "P486466",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-29T05:10:57.062Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "85.98.42.98",
-    "kod": "P501513",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "27.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-29T05:09:09.328Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "85.98.42.98",
-    "kod": "P145478",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "26.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-29T05:08:54.915Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "85.98.42.98",
-    "kod": "P486466",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-29T05:08:06.389Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "85.98.42.98",
-    "kod": "P486466",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "25.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-29T05:07:45.386Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "85.98.42.98",
-    "kod": "P145478",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "26.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-29T05:07:23.822Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "85.98.42.98",
-    "kod": "P266526",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "28.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-29T05:07:04.714Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "85.98.42.98",
-    "kod": "P266526",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "28.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-29T05:06:42.523Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "85.98.42.98",
-    "kod": "P266526",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "28.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-29T05:06:26.901Z"
   }
 ]
