@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "31.143.69.222",
+    "kod": "S710538",
+    "personel": "Aslı",
+    "sube": "Kumbahçe Şube",
+    "uretim": "29.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-01T18:27:58.351Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "31.143.69.222",
     "kod": "P123547",
