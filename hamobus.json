@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "85.98.42.98",
+    "kod": "S199532",
+    "personel": "Rukiye vapur",
+    "sube": "Gümbet Şube",
+    "uretim": "29.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-01T11:37:49.186Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 0,
     "ip": "88.247.207.247",
     "kod": "S204151",
@@ -2858,27 +2869,5 @@
     "uretim": "27.04.2026",
     "urun_turu": "SÜTLÜ TATLI",
     "timestamp": "2026-04-29T12:00:18.211Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "176.89.8.20",
-    "kod": "S108512",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "27.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-29T11:21:26.140Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "176.89.8.20",
-    "kod": "S108512",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "27.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-29T11:21:15.506Z"
   }
 ]
