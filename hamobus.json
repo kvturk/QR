@@ -3,6 +3,17 @@
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
     "ip": "88.247.207.247",
+    "kod": "S220535",
+    "personel": "Aslı Özveren",
+    "sube": "Konacık Şube",
+    "uretim": "29.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-01T16:53:18.121Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "88.247.207.247",
     "kod": "S781535",
     "personel": "Aslı Özveren",
     "sube": "Konacık Şube",
