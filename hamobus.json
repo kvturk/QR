@@ -8,6 +8,17 @@
     "sube": "Kumbahçe Şube",
     "uretim": "1.05.2026",
     "urun_turu": "PASTA",
+    "timestamp": "2026-05-02T06:36:16.159Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "88.248.55.80",
+    "kod": "P974155",
+    "personel": "Damla",
+    "sube": "Kumbahçe Şube",
+    "uretim": "1.05.2026",
+    "urun_turu": "PASTA",
     "timestamp": "2026-05-02T06:36:06.075Z"
   },
   {
@@ -3144,16 +3155,5 @@
     "uretim": "28.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-30T06:37:02.903Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.248.55.80",
-    "kod": "P266526",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "28.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-30T06:36:09.540Z"
   }
 ]
