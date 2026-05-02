@@ -2,6 +2,17 @@
   {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 0,
+    "ip": "85.98.42.98",
+    "kod": "S243168",
+    "personel": "Naz",
+    "sube": "Gümbet Şube",
+    "uretim": "2.05.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-02T15:40:45.146Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 0,
     "ip": "178.240.130.154",
     "kod": "S243168",
     "personel": "Basak",
