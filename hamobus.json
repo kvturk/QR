@@ -2,6 +2,17 @@
   {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
+    "ip": "85.98.42.98",
+    "kod": "P420544",
+    "personel": "Naz",
+    "sube": "Gümbet Şube",
+    "uretim": "30.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-02T14:45:29.163Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
     "ip": "88.247.207.247",
     "kod": "P123547",
     "personel": "Aslı Özveren",
@@ -3496,49 +3507,5 @@
     "uretim": "30.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-30T14:56:34.605Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "176.89.8.20",
-    "kod": "P420544",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "30.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-30T14:38:46.582Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "176.89.8.20",
-    "kod": "P123547",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "30.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-30T14:38:25.005Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "176.89.8.20",
-    "kod": "P123547",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "30.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-30T14:38:09.222Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "176.89.8.20",
-    "kod": "S128531",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "29.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-30T14:30:05.157Z"
   }
 ]
