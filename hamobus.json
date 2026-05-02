@@ -2,6 +2,17 @@
   {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
+    "ip": "88.247.207.247",
+    "kod": "P123547",
+    "personel": "Aslı Özveren",
+    "sube": "Konacık Şube",
+    "uretim": "30.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-02T11:53:02.373Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
     "ip": "31.142.45.69",
     "kod": "P420544",
     "personel": "Selma Doğan",
@@ -3265,60 +3276,5 @@
     "uretim": "30.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-30T13:14:21.970Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "31.143.69.222",
-    "kod": "S597535",
-    "personel": "Aslı",
-    "sube": "Kumbahçe Şube",
-    "uretim": "29.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-30T11:41:31.329Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "31.143.69.222",
-    "kod": "S466524",
-    "personel": "Aslı",
-    "sube": "Kumbahçe Şube",
-    "uretim": "28.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-30T11:41:21.441Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "31.143.69.222",
-    "kod": "S466524",
-    "personel": "Aslı",
-    "sube": "Kumbahçe Şube",
-    "uretim": "28.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-30T11:37:15.391Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "178.240.154.47",
-    "kod": "P123547",
-    "personel": "Şevval",
-    "sube": "Gümbet Şube",
-    "uretim": "30.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-30T11:17:48.351Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "178.240.154.47",
-    "kod": "P420544",
-    "personel": "Şevval",
-    "sube": "Gümbet Şube",
-    "uretim": "30.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-30T11:17:36.315Z"
   }
 ]
