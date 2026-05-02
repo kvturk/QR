@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 3,
+    "ip": "176.89.8.20",
+    "kod": "P171535",
+    "personel": "Özlem",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "29.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-02T08:08:24.086Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "176.89.8.20",
     "kod": "P974155",
