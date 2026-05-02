@@ -1,5 +1,16 @@
 [
   {
+    "durum": "TERMİN SONU (İADE)",
+    "gun_farki": 5,
+    "ip": "88.247.207.247",
+    "kod": "P501513",
+    "personel": "Hatice",
+    "sube": "Konacık Şube",
+    "uretim": "27.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-02T03:36:12.567Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "88.247.207.247",
