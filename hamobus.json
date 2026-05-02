@@ -3,6 +3,17 @@
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 0,
     "ip": "2a00:1880:a2d7:1951:18ab:a8ba:de38:ed50",
+    "kod": "S243168",
+    "personel": "Merve",
+    "sube": "Gümbet Şube",
+    "uretim": "02.05.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-02T06:08:57.983Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 0,
+    "ip": "2a00:1880:a2d7:1951:18ab:a8ba:de38:ed50",
     "kod": "P171167",
     "personel": "Merve",
     "sube": "Gümbet Şube",
