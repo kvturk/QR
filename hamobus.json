@@ -1,5 +1,16 @@
 [
   {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 4,
+    "ip": "88.248.55.80",
+    "kod": "P266526",
+    "personel": "Damla",
+    "sube": "Kumbahçe Şube",
+    "uretim": "28.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-02T06:33:08.315Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
     "ip": "88.248.55.80",
@@ -3188,16 +3199,5 @@
     "uretim": "29.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-30T06:33:34.138Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "88.248.55.80",
-    "kod": "P501513",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "27.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-30T06:32:58.183Z"
   }
 ]
