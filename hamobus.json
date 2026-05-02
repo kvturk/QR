@@ -1,5 +1,16 @@
 [
   {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 4,
+    "ip": "31.142.45.69",
+    "kod": "P266526",
+    "personel": "Selma Doğan",
+    "sube": "Gümbet Şube",
+    "uretim": "28.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-02T10:23:19.817Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
     "ip": "85.98.42.98",
@@ -3254,71 +3265,5 @@
     "uretim": "30.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-30T11:17:36.315Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "77.67.137.86",
-    "kod": "P635537",
-    "personel": "Selma Doğan",
-    "sube": "Gümbet Şube",
-    "uretim": "29.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-30T09:55:26.401Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "77.67.137.86",
-    "kod": "P501513",
-    "personel": "Selma Doğan",
-    "sube": "Gümbet Şube",
-    "uretim": "27.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-30T09:54:48.771Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "77.67.137.86",
-    "kod": "P214532",
-    "personel": "Selma Doğan",
-    "sube": "Gümbet Şube",
-    "uretim": "29.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-30T09:54:28.262Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "77.67.137.86",
-    "kod": "P266526",
-    "personel": "Selma Doğan",
-    "sube": "Gümbet Şube",
-    "uretim": "28.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-30T09:54:17.284Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "77.67.137.86",
-    "kod": "P432532",
-    "personel": "Selma Doğan",
-    "sube": "Gümbet Şube",
-    "uretim": "29.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-30T09:54:07.370Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "77.67.137.86",
-    "kod": "P266526",
-    "personel": "Selma Doğan",
-    "sube": "Gümbet Şube",
-    "uretim": "28.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-04-30T09:53:46.808Z"
   }
 ]
