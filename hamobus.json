@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "85.98.42.98",
+    "kod": "P371541",
+    "personel": "Aliş",
+    "sube": "Gümbet Şube",
+    "uretim": "30.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-02T09:31:52.169Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "85.98.42.98",
     "kod": "P974155",
