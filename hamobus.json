@@ -1,5 +1,16 @@
 [
   {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 3,
+    "ip": "85.98.42.98",
+    "kod": "S591530",
+    "personel": "Naz",
+    "sube": "Gümbet Şube",
+    "uretim": "29.04.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-02T19:11:14.747Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 0,
     "ip": "85.98.42.98",
@@ -3705,49 +3716,5 @@
     "uretim": "26.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-30T19:13:19.164Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 3,
-    "ip": "85.98.42.98",
-    "kod": "S108512",
-    "personel": "Naz",
-    "sube": "Gümbet Şube",
-    "uretim": "27.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-30T19:10:10.013Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "85.98.42.98",
-    "kod": "S790535",
-    "personel": "Naz",
-    "sube": "Gümbet Şube",
-    "uretim": "29.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-30T19:09:51.389Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "85.98.42.98",
-    "kod": "S736547",
-    "personel": "Naz",
-    "sube": "Gümbet Şube",
-    "uretim": "30.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-30T19:09:40.855Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "85.98.42.98",
-    "kod": "S591530",
-    "personel": "Naz",
-    "sube": "Gümbet Şube",
-    "uretim": "29.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-30T19:09:23.177Z"
   }
 ]
