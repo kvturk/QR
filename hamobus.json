@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "88.248.55.80",
+    "kod": "P420544",
+    "personel": "Damla",
+    "sube": "Kumbahçe Şube",
+    "uretim": "30.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-02T06:30:54.505Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 0,
     "ip": "2a00:1880:a2d7:1951:18ab:a8ba:de38:ed50",
     "kod": "S243168",
@@ -3133,38 +3144,5 @@
     "uretim": "27.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-04-30T06:32:58.183Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 3,
-    "ip": "88.248.55.80",
-    "kod": "S108512",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "27.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-30T06:20:21.111Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.248.55.80",
-    "kod": "S466524",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "28.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-30T06:20:12.996Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.248.55.80",
-    "kod": "S597535",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "29.04.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-04-30T06:20:02.178Z"
   }
 ]
