@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "88.247.207.247",
+    "kod": "S204151",
+    "personel": "Hatice",
+    "sube": "Konacık Şube",
+    "uretim": "01.05.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-02T03:36:59.208Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
     "ip": "88.247.207.247",
     "kod": "P123547",
