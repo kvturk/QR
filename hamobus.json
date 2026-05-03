@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "88.247.207.247",
+    "kod": "P171167",
+    "personel": "Aslı Özveren",
+    "sube": "Konacık Şube",
+    "uretim": "02.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-03T17:26:54.293Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 3,
     "ip": "88.247.207.247",
     "kod": "P420544",
