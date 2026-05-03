@@ -2,6 +2,17 @@
   {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 3,
+    "ip": "88.248.55.80",
+    "kod": "P123547",
+    "personel": "Demet",
+    "sube": "Kumbahçe Şube",
+    "uretim": "30.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-03T05:12:48.351Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 3,
     "ip": "88.247.207.247",
     "kod": "P123547",
     "personel": "Aslı Özveren",
