@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "178.240.130.154",
+    "kod": "P171167",
+    "personel": "Özlem",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "02.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-03T09:33:25.990Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
     "ip": "178.240.130.154",
     "kod": "P974155",
@@ -4321,16 +4332,5 @@
     "uretim": "29.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-05-01T09:33:31.507Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "176.89.8.20",
-    "kod": "P420544",
-    "personel": "Özlem",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "30.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-01T09:33:16.054Z"
   }
 ]
