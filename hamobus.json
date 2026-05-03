@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "31.143.69.222",
+    "kod": "P171167",
+    "personel": "Aslı",
+    "sube": "Kumbahçe Şube",
+    "uretim": "02.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-03T16:27:43.695Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 0,
     "ip": "31.143.69.222",
     "kod": "P485176",
