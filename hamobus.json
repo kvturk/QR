@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "88.247.207.247",
+    "kod": "P974155",
+    "personel": "Dilan culduz",
+    "sube": "Konacık Şube",
+    "uretim": "1.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-03T04:16:14.656Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 3,
     "ip": "88.247.207.247",
     "kod": "P420544",
