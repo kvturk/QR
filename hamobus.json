@@ -1,5 +1,16 @@
 [
   {
+    "durum": "TERMİN SONU (İADE)",
+    "gun_farki": 6,
+    "ip": "2a00:1880:a2d4:16ec:18ab:f84c:bcf5:32fb",
+    "kod": "P501513",
+    "personel": "Merve",
+    "sube": "Gümbet Şube",
+    "uretim": "27.04.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-03T08:04:38.917Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 3,
     "ip": "2a00:1880:a2d4:16ec:18ab:f84c:bcf5:32fb",
