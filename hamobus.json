@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 3,
+    "ip": "88.247.207.247",
+    "kod": "P974155",
+    "personel": "Hatice",
+    "sube": "Konacık Şube",
+    "uretim": "01.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-04T17:49:33.427Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
     "ip": "88.247.207.247",
     "kod": "P942168",
