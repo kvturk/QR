@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "178.240.130.154",
+    "kod": "P485176",
+    "personel": "Basak",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "03.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-04T11:23:35.501Z"
+  },
+  {
     "durum": "TERMİN SONU (İADE)",
     "gun_farki": 4,
     "ip": "85.98.42.98",
