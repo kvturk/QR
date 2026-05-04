@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "85.98.42.98",
+    "kod": "P171167",
+    "personel": "Naz",
+    "sube": "Gümbet Şube",
+    "uretim": "2.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-04T15:29:31.648Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 0,
     "ip": "178.240.130.154",
     "kod": "S756212",
