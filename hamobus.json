@@ -3,6 +3,17 @@
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "178.240.130.154",
+    "kod": "P485176",
+    "personel": "Basak",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "03.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-04T11:25:41.278Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "178.240.130.154",
     "kod": "S127174",
     "personel": "Basak",
     "sube": "Gümbet 2 Şube",
