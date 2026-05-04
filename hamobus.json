@@ -8,6 +8,17 @@
     "sube": "Konacık Şube",
     "uretim": "29.04.2026",
     "urun_turu": "PASTA",
+    "timestamp": "2026-05-04T04:18:37.078Z"
+  },
+  {
+    "durum": "TERMİN SONU (İADE)",
+    "gun_farki": 5,
+    "ip": "37.155.26.89",
+    "kod": "P214532",
+    "personel": "Zenfira",
+    "sube": "Konacık Şube",
+    "uretim": "29.04.2026",
+    "urun_turu": "PASTA",
     "timestamp": "2026-05-04T04:18:27.386Z"
   },
   {
