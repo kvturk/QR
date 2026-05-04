@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "88.248.55.80",
+    "kod": "P485176",
+    "personel": "Damla",
+    "sube": "Kumbahçe Şube",
+    "uretim": "3.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-04T16:56:12.868Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 3,
     "ip": "88.248.55.80",
     "kod": "P974155",
