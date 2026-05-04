@@ -3,6 +3,17 @@
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
     "ip": "88.247.207.247",
+    "kod": "S243168",
+    "personel": "Dilan culduz",
+    "sube": "Konacık Şube",
+    "uretim": "2.05.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-04T11:58:10.293Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "88.247.207.247",
     "kod": "P171167",
     "personel": "Hatice",
     "sube": "Konacık Şube",
