@@ -8,6 +8,17 @@
     "sube": "Gümbet 2 Şube",
     "uretim": "04.05.2026",
     "urun_turu": "PASTA",
+    "timestamp": "2026-05-04T15:16:45.904Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 0,
+    "ip": "178.240.130.154",
+    "kod": "P207214",
+    "personel": "Basak",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "04.05.2026",
+    "urun_turu": "PASTA",
     "timestamp": "2026-05-04T15:12:23.331Z"
   },
   {
@@ -3661,82 +3672,5 @@
     "uretim": "02.05.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-05-02T15:18:00.329Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "178.240.130.154",
-    "kod": "P171167",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "02.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-02T15:15:13.338Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "178.240.130.154",
-    "kod": "P942168",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "02.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-02T15:14:50.601Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "178.240.130.154",
-    "kod": "P942168",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "02.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-02T15:14:42.989Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "178.240.130.154",
-    "kod": "P171167",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "02.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-02T15:13:50.723Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "178.240.130.154",
-    "kod": "P171167",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "02.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-02T15:13:36.752Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "178.240.130.154",
-    "kod": "P171167",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "02.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-02T15:13:18.237Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "178.240.130.154",
-    "kod": "P171167",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "02.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-02T15:12:29.222Z"
   }
 ]
