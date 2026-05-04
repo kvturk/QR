@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "85.98.42.98",
+    "kod": "P171167",
+    "personel": "Aliş",
+    "sube": "Gümbet Şube",
+    "uretim": "2.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-04T05:29:31.686Z"
+  },
+  {
     "durum": "TERMİN SONU (İADE)",
     "gun_farki": 5,
     "ip": "85.98.42.98",
