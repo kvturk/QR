@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "77.67.146.74",
+    "kod": "S243168",
+    "personel": "Selma Doğan",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "02.05.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-04T09:59:56.643Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "77.67.146.74",
     "kod": "S127174",
