@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "85.98.42.98",
+    "kod": "P207214",
+    "personel": "Ayşegül",
+    "sube": "Gümbet Şube",
+    "uretim": "04.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-05T08:39:03.828Z"
+  },
+  {
     "durum": "TERMİN SONU (İADE)",
     "gun_farki": 5,
     "ip": "85.98.42.98",
