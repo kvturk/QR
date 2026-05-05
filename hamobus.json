@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "88.248.55.80",
+    "kod": "P207214",
+    "personel": "Demet",
+    "sube": "Kumbahçe Şube",
+    "uretim": "4.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-05T06:51:07.623Z"
+  },
+  {
     "durum": "RİSKLİ (SON GÜN)",
     "gun_farki": 4,
     "ip": "88.248.55.80",
