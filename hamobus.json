@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "88.248.55.80",
+    "kod": "S127174",
+    "personel": "Demet",
+    "sube": "Kumbahçe Şube",
+    "uretim": "3.05.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-05T06:34:00.375Z"
+  },
+  {
     "durum": "RİSKLİ (SON GÜN)",
     "gun_farki": 3,
     "ip": "88.248.55.80",
