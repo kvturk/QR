@@ -3,6 +3,17 @@
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "88.247.207.247",
+    "kod": "S756212",
+    "personel": "Dilan culduz",
+    "sube": "Konacık Şube",
+    "uretim": "4.05.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-05T10:59:14.186Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "88.247.207.247",
     "kod": "P207214",
     "personel": "Aslı Özveren",
     "sube": "Konacık Şube",
@@ -3562,16 +3573,5 @@
     "uretim": "02.05.2026",
     "urun_turu": "SÜTLÜ TATLI",
     "timestamp": "2026-05-03T12:01:19.422Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "85.98.42.98",
-    "kod": "P420544",
-    "personel": "Ayşegül",
-    "sube": "Gümbet Şube",
-    "uretim": "30.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-03T10:33:16.990Z"
   }
 ]
