@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "85.98.42.98",
+    "kod": "S127174",
+    "personel": "Naz",
+    "sube": "Gümbet Şube",
+    "uretim": "3.05.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-05T17:35:19.544Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "88.247.207.247",
     "kod": "S756212",
@@ -3100,82 +3111,5 @@
     "uretim": "30.04.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-05-03T19:23:27.924Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "88.247.207.247",
-    "kod": "P420544",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "30.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-03T17:33:45.042Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.247.207.247",
-    "kod": "P974155",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "01.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-03T17:30:02.941Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.247.207.247",
-    "kod": "P171167",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "02.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-03T17:29:52.527Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.247.207.247",
-    "kod": "P974155",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "01.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-03T17:29:42.242Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.247.207.247",
-    "kod": "P974155",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "01.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-03T17:27:36.960Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "88.247.207.247",
-    "kod": "P171167",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "02.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-03T17:26:54.293Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "88.247.207.247",
-    "kod": "P420544",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "30.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-03T17:26:41.177Z"
   }
 ]
