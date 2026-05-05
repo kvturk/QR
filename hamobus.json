@@ -2,6 +2,17 @@
   {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
+    "ip": "85.98.42.98",
+    "kod": "S756212",
+    "personel": "Ayşegül",
+    "sube": "Gümbet Şube",
+    "uretim": "04.05.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-05T11:19:26.944Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
     "ip": "88.247.207.247",
     "kod": "P207214",
     "personel": "Dilan culduz",
