@@ -1,5 +1,16 @@
 [
   {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 4,
+    "ip": "88.248.55.80",
+    "kod": "P942168",
+    "personel": "Demet",
+    "sube": "Kumbahçe Şube",
+    "uretim": "2.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-06T08:53:43.133Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 0,
     "ip": "85.98.42.98",
