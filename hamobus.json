@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 0,
+    "ip": "178.240.130.154",
+    "kod": "S488235",
+    "personel": "Basak",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "06.05.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-06T12:59:22.549Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "178.240.130.154",
     "kod": "P554221",
