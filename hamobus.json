@@ -2,6 +2,17 @@
   {
     "durum": "RİSKLİ (SON GÜN)",
     "gun_farki": 4,
+    "ip": "88.248.55.80",
+    "kod": "P942168",
+    "personel": "Demet",
+    "sube": "Kumbahçe Şube",
+    "uretim": "2.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-06T04:23:36.222Z"
+  },
+  {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 4,
     "ip": "88.247.207.247",
     "kod": "P171167",
     "personel": "Helin dağgezen",
@@ -3309,137 +3320,5 @@
     "uretim": "2.05.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-05-04T05:25:42.016Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "37.155.26.89",
-    "kod": "S243168",
-    "personel": "Zenfira",
-    "sube": "Konacık Şube",
-    "uretim": "2.05.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-05-04T04:21:32.259Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "37.155.26.89",
-    "kod": "S243168",
-    "personel": "Zenfira",
-    "sube": "Konacık Şube",
-    "uretim": "2.05.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-05-04T04:21:21.304Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "37.155.26.89",
-    "kod": "S127174",
-    "personel": "Zenfira",
-    "sube": "Konacık Şube",
-    "uretim": "3.05.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-05-04T04:21:11.218Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "37.155.26.89",
-    "kod": "S243168",
-    "personel": "Zenfira",
-    "sube": "Konacık Şube",
-    "uretim": "2.05.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-05-04T04:21:02.855Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 3,
-    "ip": "37.155.26.89",
-    "kod": "S204151",
-    "personel": "Zenfira",
-    "sube": "Konacık Şube",
-    "uretim": "1.05.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-05-04T04:20:45.431Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 3,
-    "ip": "37.155.26.89",
-    "kod": "S204151",
-    "personel": "Zenfira",
-    "sube": "Konacık Şube",
-    "uretim": "1.05.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-05-04T04:20:32.286Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "37.155.26.89",
-    "kod": "P171167",
-    "personel": "Zenfira",
-    "sube": "Konacık Şube",
-    "uretim": "2.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-04T04:18:47.384Z"
-  },
-  {
-    "durum": "TERMİN SONU (İADE)",
-    "gun_farki": 5,
-    "ip": "37.155.26.89",
-    "kod": "P214532",
-    "personel": "Zenfira",
-    "sube": "Konacık Şube",
-    "uretim": "29.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-04T04:18:37.078Z"
-  },
-  {
-    "durum": "TERMİN SONU (İADE)",
-    "gun_farki": 5,
-    "ip": "37.155.26.89",
-    "kod": "P214532",
-    "personel": "Zenfira",
-    "sube": "Konacık Şube",
-    "uretim": "29.04.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-04T04:18:27.386Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "37.155.26.89",
-    "kod": "P942168",
-    "personel": "Zenfira",
-    "sube": "Konacık Şube",
-    "uretim": "2.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-04T04:18:13.407Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "37.155.26.89",
-    "kod": "P942168",
-    "personel": "Zenfira",
-    "sube": "Konacık Şube",
-    "uretim": "2.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-04T04:18:00.812Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "37.155.26.89",
-    "kod": "P171167",
-    "personel": "Zenfira",
-    "sube": "Konacık Şube",
-    "uretim": "2.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-04T04:17:44.884Z"
   }
 ]
