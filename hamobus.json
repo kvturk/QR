@@ -2,6 +2,17 @@
   {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
+    "ip": "178.240.130.154",
+    "kod": "P207214",
+    "personel": "Özlem",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "04.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-06T07:06:49.154Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
     "ip": "85.98.42.98",
     "kod": "S756212",
     "personel": "Ayşegül",
@@ -3463,27 +3474,5 @@
     "uretim": "2.05.2026",
     "urun_turu": "SÜTLÜ TATLI",
     "timestamp": "2026-05-04T07:33:05.413Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "2a00:1880:a2d4:1958:18ac:4534:bc90:c8a",
-    "kod": "S756212",
-    "personel": "Merve",
-    "sube": "Gümbet Şube",
-    "uretim": "04.05.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-05-04T06:32:43.413Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "2a00:1880:a2d4:1958:18ac:4534:bc90:c8a",
-    "kod": "P207214",
-    "personel": "Merve",
-    "sube": "Gümbet Şube",
-    "uretim": "04.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-04T06:31:26.162Z"
   }
 ]
