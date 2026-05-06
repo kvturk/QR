@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "178.240.130.154",
+    "kod": "S627225",
+    "personel": "Özlem",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "05.05.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-06T07:09:23.357Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
     "ip": "178.240.130.154",
     "kod": "S756212",
