@@ -1,5 +1,16 @@
 [
   {
+    "durum": "TERMİN SONU (İADE)",
+    "gun_farki": 5,
+    "ip": "88.247.207.247",
+    "kod": "P974155",
+    "personel": "Helin dağgezen",
+    "sube": "Konacık Şube",
+    "uretim": "01.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-06T04:13:00.699Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "88.247.207.247",
@@ -3474,16 +3485,5 @@
     "uretim": "01.05.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-05-04T04:13:10.077Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "88.247.207.247",
-    "kod": "P974155",
-    "personel": "Helin dağgezen",
-    "sube": "Konacık Şube",
-    "uretim": "01.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-04T04:12:54.462Z"
   }
 ]
