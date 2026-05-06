@@ -1,5 +1,16 @@
 [
   {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 4,
+    "ip": "88.248.55.80",
+    "kod": "P171167",
+    "personel": "Demet",
+    "sube": "Kumbahçe Şube",
+    "uretim": "2.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-06T07:31:11.548Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "88.248.55.80",
