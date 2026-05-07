@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "37.155.7.203",
+    "kod": "P371237",
+    "personel": "Zenfira",
+    "sube": "Konacık Şube",
+    "uretim": "6.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-07T07:58:14.690Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
     "ip": "37.155.7.203",
     "kod": "P554221",
