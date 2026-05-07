@@ -1,5 +1,16 @@
 [
   {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 4,
+    "ip": "85.98.42.98",
+    "kod": "P485176",
+    "personel": "Ayşegül",
+    "sube": "Gümbet Şube",
+    "uretim": "03.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-07T04:24:46.815Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 3,
     "ip": "85.98.42.98",
@@ -3716,27 +3727,5 @@
     "uretim": "01.05.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-05-05T04:24:56.616Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "88.247.207.247",
-    "kod": "P974155",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "01.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-05T04:24:45.523Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "88.247.207.247",
-    "kod": "P171167",
-    "personel": "Aslı Özveren",
-    "sube": "Konacık Şube",
-    "uretim": "02.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-05T04:24:35.753Z"
   }
 ]
