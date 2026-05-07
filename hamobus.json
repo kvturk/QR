@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 0,
+    "ip": "178.240.130.154",
+    "kod": "P917247",
+    "personel": "Basak",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "07.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-07T14:44:04.929Z"
+  },
+  {
     "durum": "TERMİN SONU (İADE)",
     "gun_farki": 4,
     "ip": "85.98.42.98",
@@ -3485,60 +3496,5 @@
     "uretim": "4.05.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-05-05T15:03:14.884Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "85.98.42.98",
-    "kod": "P207214",
-    "personel": "Naz",
-    "sube": "Gümbet Şube",
-    "uretim": "4.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-05T14:18:06.999Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "85.98.42.98",
-    "kod": "P554221",
-    "personel": "Naz",
-    "sube": "Gümbet Şube",
-    "uretim": "5.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-05T14:16:50.300Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "85.98.42.98",
-    "kod": "P554221",
-    "personel": "Naz",
-    "sube": "Gümbet Şube",
-    "uretim": "5.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-05T14:16:33.063Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "85.98.42.98",
-    "kod": "P554221",
-    "personel": "Naz",
-    "sube": "Gümbet Şube",
-    "uretim": "5.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-05T14:16:13.396Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 1,
-    "ip": "85.98.42.98",
-    "kod": "P207214",
-    "personel": "Naz",
-    "sube": "Gümbet Şube",
-    "uretim": "4.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-05T14:15:52.007Z"
   }
 ]
