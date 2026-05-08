@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "2a00:1880:a21a:a8d8:5c55:a487:af12:cf44",
+    "kod": "P846236",
+    "personel": "RR",
+    "sube": "Gümbet Şube",
+    "uretim": "6.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-08T15:08:09.930Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 0,
     "ip": "178.240.130.154",
     "kod": "P191254",
