@@ -1,5 +1,16 @@
 [
   {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 4,
+    "ip": "5.24.101.86",
+    "kod": "P207214",
+    "personel": "Damla",
+    "sube": "Kumbahçe Şube",
+    "uretim": "4.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-08T17:33:01.902Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 3,
     "ip": "88.247.207.247",
@@ -3628,16 +3639,5 @@
     "uretim": "4.05.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-05-06T17:56:03.960Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "88.247.207.247",
-    "kod": "S756212",
-    "personel": "Dilan culduz",
-    "sube": "Konacık Şube",
-    "uretim": "4.05.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-05-06T17:12:54.218Z"
   }
 ]
