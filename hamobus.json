@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 0,
+    "ip": "88.247.207.247",
+    "kod": "P351250",
+    "personel": "Hatice",
+    "sube": "Konacık Şube",
+    "uretim": "08.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-08T12:59:35.627Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 3,
     "ip": "88.247.207.247",
     "kod": "P554221",
@@ -3749,16 +3760,5 @@
     "uretim": "2.05.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-05-06T16:26:24.010Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "178.240.130.154",
-    "kod": "S488235",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "06.05.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-05-06T12:59:22.549Z"
   }
 ]
