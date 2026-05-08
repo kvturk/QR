@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "85.98.42.98",
+    "kod": "S313232",
+    "personel": "Naz",
+    "sube": "Gümbet Şube",
+    "uretim": "6.05.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-08T19:15:45.131Z"
+  },
+  {
     "durum": "TERMİN SONU (İADE)",
     "gun_farki": 6,
     "ip": "85.98.42.98",
