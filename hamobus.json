@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 3,
+    "ip": "78.189.186.231",
+    "kod": "P554221",
+    "personel": "Selma Doğan",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "05.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-08T08:39:49.256Z"
+  },
+  {
     "durum": "TERMİN SONU (İADE)",
     "gun_farki": 4,
     "ip": "88.248.55.80",
@@ -3793,16 +3804,5 @@
     "uretim": "2.05.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-05-06T08:53:43.133Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "85.98.42.98",
-    "kod": "P947230",
-    "personel": "Serdar",
-    "sube": "Gümbet Şube",
-    "uretim": "06.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-06T08:23:20.394Z"
   }
 ]
