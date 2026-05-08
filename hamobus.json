@@ -1,5 +1,16 @@
 [
   {
+    "durum": "TERMİN SONU (İADE)",
+    "gun_farki": 4,
+    "ip": "88.248.55.80",
+    "kod": "S756212",
+    "personel": "Demet",
+    "sube": "Kumbahçe Şube",
+    "uretim": "4.05.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-08T08:13:41.264Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 3,
     "ip": "88.248.55.80",
