@@ -3,6 +3,17 @@
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
     "ip": "88.248.55.80",
+    "kod": "S609231",
+    "personel": "Demet",
+    "sube": "Kumbahçe Şube",
+    "uretim": "6.05.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-08T07:41:32.785Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "88.248.55.80",
     "kod": "S607233",
     "personel": "Demet",
     "sube": "Kumbahçe Şube",
