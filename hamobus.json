@@ -2,6 +2,17 @@
   {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
+    "ip": "88.247.207.247",
+    "kod": "P917247",
+    "personel": "Hatice",
+    "sube": "Konacık Şube",
+    "uretim": "07.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-09T11:05:39.763Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
     "ip": "85.98.42.98",
     "kod": "P917247",
     "personel": "Ayşegül",
@@ -3551,16 +3562,5 @@
     "uretim": "07.05.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-05-07T11:14:55.965Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 3,
-    "ip": "5.27.208.15",
-    "kod": "P207214",
-    "personel": "Selma Doğan",
-    "sube": "Gümbet Şube",
-    "uretim": "04.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-07T10:40:29.420Z"
   }
 ]
