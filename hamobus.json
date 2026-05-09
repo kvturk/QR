@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "88.247.207.247",
+    "kod": "P917247",
+    "personel": "Dilan culduz",
+    "sube": "Konacık Şube",
+    "uretim": "7.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-09T15:24:39.652Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 1,
     "ip": "37.155.42.119",
     "kod": "P351250",
@@ -3639,71 +3650,5 @@
     "uretim": "4.05.2026",
     "urun_turu": "SÜTLÜ TATLI",
     "timestamp": "2026-05-07T15:48:10.903Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "178.240.130.154",
-    "kod": "S764241",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "07.05.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-05-07T15:07:43.787Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "178.240.130.154",
-    "kod": "S764241",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "07.05.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-05-07T15:07:33.129Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "178.240.130.154",
-    "kod": "S764241",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "07.05.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-05-07T15:07:02.336Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "178.240.130.154",
-    "kod": "S764241",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "07.05.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-05-07T15:06:32.397Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "178.240.130.154",
-    "kod": "S764241",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "07.05.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-05-07T15:06:09.526Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 0,
-    "ip": "178.240.130.154",
-    "kod": "P917247",
-    "personel": "Basak",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "07.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-07T15:05:04.336Z"
   }
 ]
