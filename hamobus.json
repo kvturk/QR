@@ -1,5 +1,16 @@
 [
   {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 3,
+    "ip": "88.248.55.80",
+    "kod": "S609231",
+    "personel": "Damla",
+    "sube": "Kumbahçe Şube",
+    "uretim": "6.05.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-09T08:30:20.723Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
     "ip": "88.248.55.80",
