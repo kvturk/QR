@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 1,
+    "ip": "37.155.42.119",
+    "kod": "P351250",
+    "personel": "Elvan",
+    "sube": "Gümbet Şube",
+    "uretim": "8.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-09T13:34:44.716Z"
+  },
+  {
     "durum": "RİSKLİ (SON GÜN)",
     "gun_farki": 4,
     "ip": "85.98.42.98",
