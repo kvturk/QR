@@ -1,6 +1,17 @@
 [
   {
     "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 2,
+    "ip": "178.240.130.154",
+    "kod": "S801256",
+    "personel": "Özlem",
+    "sube": "Gümbet 2 Şube",
+    "uretim": "08.05.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-10T09:23:13.163Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
     "gun_farki": 3,
     "ip": "2a00:1880:a207:9c67:f94d:5ee2:c4c1:1424",
     "kod": "P917247",
@@ -2704,16 +2715,5 @@
     "uretim": "4.05.2026",
     "urun_turu": "SÜTLÜ TATLI",
     "timestamp": "2026-05-08T12:35:03.348Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "78.189.186.231",
-    "kod": "P104232",
-    "personel": "Selma Doğan",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "06.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-08T08:58:39.402Z"
   }
 ]
