@@ -1,5 +1,16 @@
 [
   {
+    "durum": "TERMİN SONU (İADE)",
+    "gun_farki": 5,
+    "ip": "88.247.207.247",
+    "kod": "P554221",
+    "personel": "Helin dağgezen",
+    "sube": "Konacık Şube",
+    "uretim": "05.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-10T04:55:23.238Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 3,
     "ip": "88.247.207.247",
