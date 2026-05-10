@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 3,
+    "ip": "88.247.207.247",
+    "kod": "P917247",
+    "personel": "Helin dağgezen",
+    "sube": "Konacık Şube",
+    "uretim": "07.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-10T04:55:55.331Z"
+  },
+  {
     "durum": "TERMİN SONU (İADE)",
     "gun_farki": 5,
     "ip": "88.247.207.247",
