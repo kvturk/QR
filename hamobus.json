@@ -1,5 +1,16 @@
 [
   {
+    "durum": "TERMİN SONU (İADE)",
+    "gun_farki": 5,
+    "ip": "85.98.42.98",
+    "kod": "P554221",
+    "personel": "Naz",
+    "sube": "Gümbet Şube",
+    "uretim": "5.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-10T12:45:35.975Z"
+  },
+  {
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 2,
     "ip": "85.98.42.98",
