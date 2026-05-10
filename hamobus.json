@@ -3,6 +3,17 @@
     "durum": "RİSKLİ (SON GÜN)",
     "gun_farki": 4,
     "ip": "2a00:1880:a207:9c67:f94d:5ee2:c4c1:1424",
+    "kod": "P378238",
+    "personel": "Demet",
+    "sube": "Kumbahçe Şube",
+    "uretim": "6.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-10T08:53:39.600Z"
+  },
+  {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 4,
+    "ip": "2a00:1880:a207:9c67:f94d:5ee2:c4c1:1424",
     "kod": "P768237",
     "personel": "Demet",
     "sube": "Kumbahçe Şube",
