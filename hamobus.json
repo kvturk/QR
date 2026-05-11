@@ -3,6 +3,17 @@
     "durum": "STANDARTLARA UYGUN",
     "gun_farki": 3,
     "ip": "88.248.55.80",
+    "kod": "P689254",
+    "personel": "Demet",
+    "sube": "Kumbahçe Şube",
+    "uretim": "8.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-11T07:36:47.466Z"
+  },
+  {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 3,
+    "ip": "88.248.55.80",
     "kod": "P351250",
     "personel": "Demet",
     "sube": "Kumbahçe Şube",
