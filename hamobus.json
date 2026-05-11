@@ -1,5 +1,16 @@
 [
   {
+    "durum": "STANDARTLARA UYGUN",
+    "gun_farki": 3,
+    "ip": "85.98.42.98",
+    "kod": "P191254",
+    "personel": "Ayşegül",
+    "sube": "Gümbet Şube",
+    "uretim": "08.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-11T12:22:49.734Z"
+  },
+  {
     "durum": "RİSKLİ (SON GÜN)",
     "gun_farki": 3,
     "ip": "85.98.42.98",
