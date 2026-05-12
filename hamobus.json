@@ -3,6 +3,17 @@
     "durum": "RİSKLİ (SON GÜN)",
     "gun_farki": 4,
     "ip": "31.142.40.96",
+    "kod": "P191254",
+    "personel": "Emirhan",
+    "sube": "Kumbahçe Şube",
+    "uretim": "8.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-12T04:24:02.611Z"
+  },
+  {
+    "durum": "RİSKLİ (SON GÜN)",
+    "gun_farki": 4,
+    "ip": "31.142.40.96",
     "kod": "P351250",
     "personel": "Emirhan",
     "sube": "Kumbahçe Şube",
