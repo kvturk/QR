@@ -1,5 +1,16 @@
 [
   {
+    "durum": "TERMİN SONU (İADE)",
+    "gun_farki": 10,
+    "ip": "85.98.42.98",
+    "kod": "S243168",
+    "personel": "Ayşegül",
+    "sube": "Gümbet Şube",
+    "uretim": "02.05.2026",
+    "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-12T10:55:50.391Z"
+  },
+  {
     "durum": "RİSKLİ (SON GÜN)",
     "gun_farki": 4,
     "ip": "88.248.55.80",
@@ -1010,49 +1021,5 @@
     "uretim": "7.05.2026",
     "urun_turu": "PASTA",
     "timestamp": "2026-05-10T11:01:34.651Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "85.98.42.98",
-    "kod": "P351250",
-    "personel": "Aliş",
-    "sube": "Gümbet Şube",
-    "uretim": "8.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-10T10:55:14.042Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "178.240.130.154",
-    "kod": "S801256",
-    "personel": "Özlem",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "08.05.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-05-10T09:23:54.171Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "178.240.130.154",
-    "kod": "S801256",
-    "personel": "Özlem",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "08.05.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-05-10T09:23:32.960Z"
-  },
-  {
-    "durum": "STANDARTLARA UYGUN",
-    "gun_farki": 2,
-    "ip": "178.240.130.154",
-    "kod": "S801256",
-    "personel": "Özlem",
-    "sube": "Gümbet 2 Şube",
-    "uretim": "08.05.2026",
-    "urun_turu": "SÜTLÜ TATLI",
-    "timestamp": "2026-05-10T09:23:13.163Z"
   }
 ]
