@@ -8,6 +8,17 @@
     "sube": "Konacık Şube",
     "uretim": "07.05.2026",
     "urun_turu": "SÜTLÜ TATLI",
+    "timestamp": "2026-05-12T18:21:05.312Z"
+  },
+  {
+    "durum": "TERMİN SONU (İADE)",
+    "gun_farki": 5,
+    "ip": "88.247.207.247",
+    "kod": "S764241",
+    "personel": "Aslı Özveren",
+    "sube": "Konacık Şube",
+    "uretim": "07.05.2026",
+    "urun_turu": "SÜTLÜ TATLI",
     "timestamp": "2026-05-12T18:20:44.296Z"
   },
   {
