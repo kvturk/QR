@@ -1,6 +1,17 @@
 [
   {
     "durum": "TERMİN SONU (İADE)",
+    "gun_farki": 8,
+    "ip": "88.247.207.247",
+    "kod": "P208238",
+    "personel": "Dilan culduz",
+    "sube": "Konacık Şube",
+    "uretim": "6.05.2026",
+    "urun_turu": "PASTA",
+    "timestamp": "2026-05-14T10:22:02.954Z"
+  },
+  {
+    "durum": "TERMİN SONU (İADE)",
     "gun_farki": 6,
     "ip": "5.176.7.52",
     "kod": "P351250",
@@ -53,49 +64,5 @@
     "uretim": "02.05.2026",
     "urun_turu": "SÜTLÜ TATLI",
     "timestamp": "2026-05-12T10:55:50.391Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "88.248.55.80",
-    "kod": "P191254",
-    "personel": "Damla",
-    "sube": "Kumbahçe Şube",
-    "uretim": "8.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-12T09:21:27.919Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "88.248.55.80",
-    "kod": "P351250",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "8.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-12T07:36:13.652Z"
-  },
-  {
-    "durum": "RİSKLİ (SON GÜN)",
-    "gun_farki": 4,
-    "ip": "88.248.55.80",
-    "kod": "P191254",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "8.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-12T07:26:18.712Z"
-  },
-  {
-    "durum": "TERMİN SONU (İADE)",
-    "gun_farki": 5,
-    "ip": "88.248.55.80",
-    "kod": "P948245",
-    "personel": "Demet",
-    "sube": "Kumbahçe Şube",
-    "uretim": "7.05.2026",
-    "urun_turu": "PASTA",
-    "timestamp": "2026-05-12T07:26:06.609Z"
   }
 ]
